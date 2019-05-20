@@ -16,6 +16,8 @@ import MoreIcon from '@material-ui/icons/MoreVert';
 import logo from '../assets/images/logo.png';
 import MobileLogo from '../assets/images/app_icon.png';
 import Button from '@material-ui/core/Button';
+import { connect } from 'react-redux'
+import { withRouter, Link } from 'react-router-dom'
 
 const styles = theme => ({
   root: {
@@ -131,8 +133,12 @@ class PrimaryAppBar extends React.Component {
         open={isMenuOpen}
         onClose={this.handleMenuClose}
       >
-        <MenuItem onClick={this.handleMenuClose}>Profile</MenuItem>
-        <MenuItem onClick={this.handleMenuClose}>My account</MenuItem>
+        {/* if user logged in */}
+        {this.props.authStat.isLogin && <MenuItem onClick={this.handleMenuClose}><Link to="/myProfile" >Profile</Link></MenuItem>}
+        {this.props.authStat.isLogin && <MenuItem onClick={this.handleMenuClose}><Link to="/signout">Sign Out</Link></MenuItem>}
+        {/* if user logged out */}
+        {!this.props.authStat.isLogin && <MenuItem onClick={this.handleMenuClose}><Link to="/signin">Sign In</Link></MenuItem>}
+
       </Menu>
     );
 
@@ -161,9 +167,9 @@ class PrimaryAppBar extends React.Component {
               <MenuIcon />
             </IconButton> 
             <Typography className={classes.title} variant="h6" color="inherit" noWrap>
-              <a href="/"> 
+              <Link to="/"> 
               <img src={logo} alt="logo"/>
-              </a>
+              </Link>
               <Button className={classes.button} color="inherit">Chefs</Button>
               <Button className={classes.button} disabled>Classes</Button>
             </Typography>
@@ -205,8 +211,14 @@ class PrimaryAppBar extends React.Component {
   }
 }
 
+const mapStateToProps = (state, ownProps) => {
+  return {
+    ...state.user
+  }
+}
+
 PrimaryAppBar.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(PrimaryAppBar);
+export default withRouter(connect(mapStateToProps)(withStyles(styles)(PrimaryAppBar)));

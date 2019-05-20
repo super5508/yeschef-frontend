@@ -42,9 +42,6 @@
         firebase.initializeApp(config);
 
         firebaseAuth = firebase.auth();
-        firebaseAuth.onAuthStateChanged((user) => {
-          
-        });
       } catch (e) {
         console.log(e);
       }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -19,7 +19,7 @@ const styles = theme => ({
     }
 });
 
-class ChefHomePage extends React.Component {
+class ChefHomePage extends Component {
     render() {
         const { classes } = this.props;
 
