@@ -27,6 +27,7 @@
   <title>YesChef</title>
   <script defer src="https://www.gstatic.com/firebasejs/5.11.1/firebase-app.js"></script>
   <script defer src="https://www.gstatic.com/firebasejs/5.11.1/firebase-auth.js"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/6.0.2/firebase-firestore.js"></script>
   <script type="text/javascript">
     window.onload = () => {
       try {
@@ -42,6 +43,7 @@
         firebase.initializeApp(config);
 
         firebaseAuth = firebase.auth();
+        firebaseDB = firebase.firestore();
       } catch (e) {
         console.log(e);
       }

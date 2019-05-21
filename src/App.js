@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PrimaryAppBar from './components/PrimaryAppBar';
-import ChefHomePage from './components/ChefHomePage';
+import ChefHomePage from './pages/ChefHomePage';
 import SignIn from './components/SignIn';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import './assets/site.scss';
@@ -38,7 +38,12 @@ class App extends Component {
   render() {
     const chefsData = {
       chefsName: "Edward Lee",
-      chefsDesc: "Authentic southern cooking with Korean twist"
+      chefsDesc: "Authentic southern cooking with Korean twist",
+      restaurants:[
+        {"name":"Terrace 5's Bus Boy", "id":"1234"},
+        {"name":"Clay Opens", "id":"1234"},
+        {"name":"Wine Studio Opens", "id":"1234"}
+      ]
     }
 
     return (

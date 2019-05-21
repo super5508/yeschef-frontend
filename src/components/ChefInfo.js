@@ -19,7 +19,7 @@ const styles = theme => ({
     }
 });
 
-class ChefHomePage extends Component {
+class ChefInfo extends Component {
     render() {
         const { classes } = this.props;
 
@@ -37,6 +37,11 @@ class ChefHomePage extends Component {
                 />
 
                 <CardContent>
+                    {this.props.restaurants && this.props.restaurants.length > 0 && 
+                    <Typography variant="body1">
+                        {this.props.restaurants.length} Restaurants
+                    </Typography>
+                    }
                     <Typography variant="body1">
                         A Class with 10 lessons
                     </Typography>
@@ -47,4 +52,4 @@ class ChefHomePage extends Component {
     }
 }
 
-export default withStyles(styles)(ChefHomePage);
+export default withStyles(styles)(ChefInfo);
