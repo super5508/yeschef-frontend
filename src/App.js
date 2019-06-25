@@ -10,6 +10,7 @@ import SignOut from './components/SignOut';
 import PlayerPage from './pages/PlayerPage';
 import Axios from 'axios';
 import BottomBar from './components/BottomBar';
+import HomePage from './pages/HomePage';
 
 const theme = createMuiTheme({
   overrides: {
@@ -21,6 +22,8 @@ const theme = createMuiTheme({
   },
   typography: {
     useNextVariants: true,
+    fontFamily: "Open Sans",
+    fontWeightBold: 600
   },
   palette: {
     type: 'dark',
@@ -28,21 +31,21 @@ const theme = createMuiTheme({
     // background:{paper:'#000'},
     // action: { disabled: '#fff5' },
     // secondary: { main: '#ff007f', contrastText: '#fff' },
-    //  text:{ 
-    //    primary:'#fff',
-    //    secondary:'#fff',
-    //    disabled:'#fff',
-    //    hint:'#fff'
-    //  }
+    text: {
+      primary: '#fff',
+      secondary: '#fff',
+      disabled: '#fff',
+      hint: '#fff'
+    }
   }
 });
 
 class App extends Component {
   componentDidMount() {
     Axios.get('/api/chef/edward_lee/info').then(chefInfoResponse => {
-      this.setState( chefInfoResponse.data);
-    }) 
-    
+      this.setState(chefInfoResponse.data);
+    })
+
   }
 
   render() {
@@ -51,14 +54,15 @@ class App extends Component {
     return (
       <BrowserRouter>
         <MuiThemeProvider theme={theme}>
-        <CssBaseline />
+          <CssBaseline />
           <div className="App">
             {/* <PrimaryAppBar></PrimaryAppBar> */}
-            
-            <Route exact path="/" render={(routeProps) => (<ChefHomePage {...routeProps} {...chefsData}></ChefHomePage>)}></Route>
+
+            <Route exact path="/" render={(routeProps) => (<HomePage />)}></Route>
+            {/* <Route exact path="/" render={(routeProps) => (<ChefHomePage {...routeProps} {...chefsData}></ChefHomePage>)}></Route> */}
             <Route exact path="/signin" component={SignIn}></Route>
             <Route exact path="/signout" component={SignOut}></Route>
-            <Route path="/class/:id" render={(routeProps) => (<PlayerPage {...routeProps} mode='class'/>)}></Route>
+            <Route path="/class/:id" render={(routeProps) => (<PlayerPage {...routeProps} mode='class' />)}></Route>
             <BottomBar></BottomBar>
           </div>
         </MuiThemeProvider>
