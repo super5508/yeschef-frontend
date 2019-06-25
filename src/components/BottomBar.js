@@ -5,9 +5,9 @@ import { withStyles } from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import store from '../store/Store'
-import HomeIcon from '@material-ui/icons/Home'
-import PersonIcon from '@material-ui/icons/Person'
-import FeedbackIcon from '@material-ui/icons/Feedback'
+import HomeIcon from '@material-ui/icons/HomeRounded'
+import PersonIcon from '@material-ui/icons/PersonRounded'
+import FeedbackIcon from '@material-ui/icons/FeedbackRounded'
 import * as MainMenuActionCreator from './../store/actionCreators/MainMenuActionCtrators';
 
 
