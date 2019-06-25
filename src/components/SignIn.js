@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/core/styles';
-import Store from '../store/Store'
+import store from '../store/Store'
 import { signin } from './../store/actionCreators/UserActionCtrators';
 import { Button } from '@material-ui/core';
 
@@ -27,7 +27,6 @@ const styles = theme => ({
 class SignIn extends Component {
     constructor(props) {
         super(props);
-        this.store = Store();
         this.state = {
             email: '',
             password: ''
@@ -62,7 +61,7 @@ class SignIn extends Component {
                 //     name: response.user.displayName
                 // });
                 //window.setTimeout(function(){
-                this.store.dispatch(signin(response.user));
+               store.dispatch(signin(response.user));
                 //}, 1000);
 
             }

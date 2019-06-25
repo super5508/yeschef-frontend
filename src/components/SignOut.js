@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Store from '../store/Store'
+import store from '../store/Store'
 import { signout } from '../store/actionCreators/UserActionCtrators';
 
 const styles = theme => ({
@@ -25,7 +25,6 @@ const styles = theme => ({
 class SignOut extends Component {
     constructor(props, context) {
         super(props);
-        this.store = Store();
 
         if (window.firebaseAuth) {
             //in case we're already laded in the browser (SPA)
@@ -41,7 +40,7 @@ class SignOut extends Component {
 
     signOut() {
         window.firebaseAuth.signOut();
-        this.store.dispatch(signout());
+        store.dispatch(signout());
 
         window.setTimeout(() => {
             this.props.history.push('/');

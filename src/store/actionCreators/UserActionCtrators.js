@@ -5,7 +5,6 @@ export const signin = (user) => ({
     user: user
 });
 
-
 export const signout = () => ({
     type: ActionTypes.USER_SIGNOUT
 });
