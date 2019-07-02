@@ -15,9 +15,9 @@ const styles = theme => ({
     root: {
         bottom: 0,
         width: '100%',
-        position: 'fixed'
+        position: 'fixed',
+        fontSize: '2rem'
     }
-
 });
 
 class BottomBar extends Component {
@@ -53,7 +53,7 @@ class BottomBar extends Component {
                     <BottomNavigationAction
                         label="Home"
                         value='home'
-                        icon={<HomeIcon />}
+                        icon={<HomeIcon />}                        
                         component={Link}
                         to="/" />
                     <BottomNavigationAction

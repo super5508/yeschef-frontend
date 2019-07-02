@@ -1,0 +1,61 @@
+[debug] [2019-07-02T08:48:04.524Z] ----------------------------------------------------------------------
+[debug] [2019-07-02T08:48:04.526Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Tal\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js serve
+[debug] [2019-07-02T08:48:04.527Z] CLI Version:   7.0.2
+[debug] [2019-07-02T08:48:04.527Z] Platform:      win32
+[debug] [2019-07-02T08:48:04.527Z] Node Version:  v10.15.3
+[debug] [2019-07-02T08:48:04.528Z] Time:          Tue Jul 02 2019 11:48:04 GMT+0300 (Israel Daylight Time)
+[debug] [2019-07-02T08:48:04.528Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-07-02T08:48:04.537Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-07-02T08:48:04.538Z] > authorizing via signed-in user
+[debug] [2019-07-02T08:48:04.538Z] [iam] checking project yeschef-7b155 for permissions ["firebase.projects.get"]
+[debug] [2019-07-02T08:48:04.539Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/yeschef-7b155:testIamPermissions  
+
+[debug] [2019-07-02T08:48:05.454Z] <<< HTTP RESPONSE 200
+[debug] [2019-07-02T08:48:05.456Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/yeschef-7b155  
+ 
+[debug] [2019-07-02T08:48:06.290Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from 'C:\dev\YesChef\web-app'...
+[info] 
+[debug] [2019-07-02T08:48:06.294Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/230662376972/clients/_:getWebAppConfig  
+ 
+[debug] [2019-07-02T08:48:06.771Z] <<< HTTP RESPONSE 200
+[info] i  hosting: Serving hosting files from: build
+[info] +  hosting: Local server: http://localhost:5000
+[info] [hosting] Rewriting /api/classes to https://us-central1-yeschef-7b155.cloudfunctions.net// for live Function /
+[info] [hosting] Rewriting /api/classes to https://us-central1-yeschef-7b155.cloudfunctions.net// for live Function /
+[info] [hosting] Rewriting /api/classes to https://us-central1-yeschef-7b155.cloudfunctions.net// for live Function /
+[info] [hosting] Rewriting /api/classes to https://us-central1-yeschef-7b155.cloudfunctions.net// for live Function /
+[info] [hosting] Rewriting /api/classes to https://us-central1-yeschef-7b155.cloudfunctions.net// for live Function /
+[info] [hosting] Rewriting /api/classes to https://us-central1-yeschef-7b155.cloudfunctions.net// for live Function /
+[info] [hosting] Rewriting /api/classes to https://us-central1-yeschef-7b155.cloudfunctions.net// for live Function /
+[info] [hosting] Rewriting /api/classes to https://us-central1-yeschef-7b155.cloudfunctions.net// for live Function /
+[info] [hosting] Rewriting /api/classes to https://us-central1-yeschef-7b155.cloudfunctions.net// for live Function /
+[info] [hosting] Rewriting /api/classes to https://us-central1-yeschef-7b155.cloudfunctions.net// for live Function /
+[info] [hosting] Rewriting /api/classes to https://us-central1-yeschef-7b155.cloudfunctions.net// for live Function /
+[info] [hosting] Rewriting /api/classes to https://us-central1-yeschef-7b155.cloudfunctions.net// for live Function /
+[info] [hosting] Rewriting /api/classes to https://us-central1-yeschef-7b155.cloudfunctions.net// for live Function /
+[info] [hosting] Rewriting /api/classes to https://us-central1-yeschef-7b155.cloudfunctions.net// for live Function /
+[info] [hosting] Rewriting /api/classes to https://us-central1-yeschef-7b155.cloudfunctions.net// for live Function /
+[info] [hosting] Rewriting /api/classes to https://us-central1-yeschef-7b155.cloudfunctions.net// for live Function /
+[info] [hosting] Rewriting /api/classes to https://us-central1-yeschef-7b155.cloudfunctions.net// for live Function /
+[info] [hosting] Rewriting /api/classes to https://us-central1-yeschef-7b155.cloudfunctions.net// for live Function /
+[info] [hosting] Rewriting /api/classes to https://us-central1-yeschef-7b155.cloudfunctions.net// for live Function /
+[info] [hosting] Rewriting /api/classes to https://us-central1-yeschef-7b155.cloudfunctions.net// for live Function /
+[info] [hosting] Rewriting /api/classes to https://us-central1-yeschef-7b155.cloudfunctions.net// for live Function /
+[info] [hosting] Rewriting /api/classes to https://us-central1-yeschef-7b155.cloudfunctions.net// for live Function /
+[info] [hosting] Rewriting /api/classes to https://us-central1-yeschef-7b155.cloudfunctions.net// for live Function /
+[info] [hosting] Rewriting /api/classes to https://us-central1-yeschef-7b155.cloudfunctions.net// for live Function /
+[info] [hosting] Rewriting /api/classes to https://us-central1-yeschef-7b155.cloudfunctions.net// for live Function /
+[info] [hosting] Rewriting /api/classes to https://us-central1-yeschef-7b155.cloudfunctions.net// for live Function /
+[info] [hosting] Rewriting /api/classes to https://us-central1-yeschef-7b155.cloudfunctions.net// for live Function /
+[info] [hosting] Rewriting /api/classes to https://us-central1-yeschef-7b155.cloudfunctions.net// for live Function /
+[info] [hosting] Rewriting /api/classes to https://us-central1-yeschef-7b155.cloudfunctions.net// for live Function /
+[info] [hosting] Rewriting /api/classes to https://us-central1-yeschef-7b155.cloudfunctions.net// for live Function /
+[info] [hosting] Rewriting /api/classes to https://us-central1-yeschef-7b155.cloudfunctions.net// for live Function /
+[info] [hosting] Rewriting /api/classes to https://us-central1-yeschef-7b155.cloudfunctions.net// for live Function /
+[info] [hosting] Rewriting /api/classes to https://us-central1-yeschef-7b155.cloudfunctions.net// for live Function /
+[info] [hosting] Rewriting /api/classes to https://us-central1-yeschef-7b155.cloudfunctions.net// for live Function /
+[info] [hosting] Rewriting /api/classes to https://us-central1-yeschef-7b155.cloudfunctions.net// for live Function /
+[info] [hosting] Rewriting /api/class/c01?prefetch=true to https://us-central1-yeschef-7b155.cloudfunctions.net// for live Function /

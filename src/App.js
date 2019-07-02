@@ -23,11 +23,18 @@ const theme = createMuiTheme({
   typography: {
     useNextVariants: true,
     fontFamily: "Open Sans",
-    fontWeightBold: 600
+    fontWeightBold: 600,
+    htmlFontSize:10
   },
   palette: {
     type: 'dark',
-    primary: { main: '#ff007f', contrastText: '#fff' },
+    background: {
+      default: '#000'
+    },
+    primary: {
+      main: '#ff007f', 
+      contrastText: '#fff'
+    },
     // background:{paper:'#000'},
     // action: { disabled: '#fff5' },
     // secondary: { main: '#ff007f', contrastText: '#fff' },
@@ -41,15 +48,15 @@ const theme = createMuiTheme({
 });
 
 class App extends Component {
-  componentDidMount() {
-    Axios.get('/api/chef/edward_lee/info').then(chefInfoResponse => {
-      this.setState(chefInfoResponse.data);
-    })
+  // componentDidMount() {
+  //   Axios.get('/api/chef/edward_lee/info').then(chefInfoResponse => {
+  //     this.setState(chefInfoResponse.data);
+  //   })
 
-  }
+  // }
 
   render() {
-    const chefsData = this.state || {};
+    //const chefsData = this.state || {};
 
     return (
       <BrowserRouter>
