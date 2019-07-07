@@ -12,7 +12,10 @@ import Axios from 'axios';
 import BottomBar from './components/BottomBar';
 import HomePage from './pages/HomePage';
 import MyProfilePage from './pages/MyProfilePage';
+<<<<<<< HEAD
+=======
 import PrivacyPolicy from './pages/PrivacyPolicy';
+>>>>>>> master
 
 const theme = createMuiTheme({
   overrides: {
@@ -26,7 +29,13 @@ const theme = createMuiTheme({
     useNextVariants: true,
     fontFamily: "Open Sans",
     fontWeightBold: 600,
-    htmlFontSize:10
+    htmlFontSize:10,
+    h1:{
+      '@media (max-width:600px)': {
+        fontSize:"1.8rem",
+      },
+      fontWeight: 600
+    }
   },
   palette: {
     type: 'dark',
@@ -69,10 +78,10 @@ class App extends Component {
 
             <Route exact path="/" render={(routeProps) => (<HomePage />)}></Route>
             {/* <Route exact path="/" render={(routeProps) => (<ChefHomePage {...routeProps} {...chefsData}></ChefHomePage>)}></Route> */}
-            <Route exact path="/myProfile" component={MyProfilePage}></Route>
             <Route exact path="/privacy-policy" component={PrivacyPolicy}></Route>
             <Route exact path="/signin" component={SignIn}></Route>
             <Route exact path="/signout" component={SignOut}></Route>
+            <Route exact path="/myProfile" component={MyProfilePage}></Route>
             <Route path="/class/:id" render={(routeProps) => (<PlayerPage {...routeProps} mode='class' />)}></Route>
             <BottomBar> </BottomBar>
           </div>
@@ -83,4 +92,3 @@ class App extends Component {
 }
 
 export default App;
-
