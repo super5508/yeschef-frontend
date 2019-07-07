@@ -10,7 +10,6 @@ const styles = theme => ({
 class MyProfilePage extends Component {
     render() {
         const { classes } = this.props;
-
         return (
             <Box>
                 {/* if user logged in */}
