@@ -14,7 +14,6 @@ import HomePage from './pages/HomePage';
 import MyProfilePage from './pages/MyProfilePage';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
-import PrivacyPolicy from './pages/PrivacyPolicy';
 
 const theme = createMuiTheme({
   overrides: {
