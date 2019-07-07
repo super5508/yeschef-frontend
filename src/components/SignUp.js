@@ -8,9 +8,7 @@ import { Divider, Button } from '@material-ui/core';
 import { withRouter, Link } from 'react-router-dom';
 import fbLogo from '../assets/images/fbLogo.svg';
 import googleLogo from '../assets/images/googleLogo.svg';
-import store from '../store/Store'
-import { signin } from './../store/actionCreators/UserActionCtrators';
-import auth from './../common/auth'
+import auth from './../common/auth';
 
 
 const CssTextField = withStyles({
@@ -229,7 +227,7 @@ class SignUp extends Component {
                     </Button>
                 </form>
                 <Box className={classes.tos_ppContainer}>
-                    By signing up, you agree to our &nbsp;<Link to='/privacy-policy' underline="always" className={classes.grayText}> Privacy Policy </Link>&nbsp; and &nbsp;<Link to="/tos" underline="always" className={classes.grayText}>Terms Of Service</Link>.
+                    By signing up, you agree to our &nbsp;<Link to='/privacy-policy' underline="always" className={classes.grayText}> Privacy Policy </Link>&nbsp; and &nbsp;<Link to="/terms-of-service" underline="always" className={classes.grayText}>Terms Of Service</Link>.
                 </Box>
             </Box>
         );
