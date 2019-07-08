@@ -182,7 +182,7 @@ class SignUp extends Component {
                 <Box flexDirection="row" display="flex" justifyContent="space-between" alignItems="center" fontWeight="600" mb="1.9rem">
                     <Divider width="40%" className={classes.boldDivider} />
                     OR
-                    <Divider width="40%" />
+                    <Divider width="40%" className={classes.boldDivider} />
                 </Box>
                 <form className={classes.container} autoComplete="on" onSubmit={this.submitSignUp}>
                     <CssTextField

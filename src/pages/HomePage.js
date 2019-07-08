@@ -4,8 +4,9 @@ import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
 import { Link } from 'react-router-dom';
 import ClassInfo from '../components/ClassInfo';
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 import Axios from '../common/AxiosMiddleware';
-
 
 const styles = theme => ({
     container: {
@@ -35,10 +36,10 @@ class HomePage extends Component {
     }
     render() {
         const { classes } = this.props;
-
         return (
-            <Box >
-                <Box display="flex" flexDirection="column" className={`${classes.margins} ${classes.cta_wrapper}`} p={2}>
+            <Box > 
+                {/* //if user is not loged in */}
+                {!this.props.authStat.isLogin &&  <Box display="flex" flexDirection="column" className={`${classes.margins} ${classes.cta_wrapper}`} p={2}>
                     <Box fontWeight="fontWeightBold" fontSize="1.8rem" pb={1}>Access the knowledge, secrets and tricks of the world’s best chefs</Box>
                     <Box fontWeight="fontWeightLight" fontSize="1.6rem" pb={1.6}>Get unlimited access to an ever-growing library of exclusive classes</Box>
                     {/* <Link to="/signup" underline="none"> */}
@@ -48,7 +49,7 @@ class HomePage extends Component {
                         </Box>
                     </Button>
                     {/* </Link> */}
-                </Box>
+                </Box>}
                 <Box fontWeight="fontWeightBold" fontSize="1.8rem" pb={1.4} className={`${classes.margins}`}>
                     OUR CLASSES
                 </Box>
@@ -58,4 +59,9 @@ class HomePage extends Component {
     };
 }
 
-export default withStyles(styles)(HomePage);
+const mapStateToProps = (state, ownProps) => {
+    return {
+      ...state.user
+    }
+  }
+export default withRouter(connect(mapStateToProps)(withStyles(styles)(HomePage)));
