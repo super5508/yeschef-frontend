@@ -79,7 +79,7 @@ class Settings extends Component {
             </div>
           </Box>
         )}
-        <SignOut history={this.props.history} />
+        <SignOut />
       </Box>
     );
   }

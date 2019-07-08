@@ -36,10 +36,6 @@ class SignOut extends Component {
   signOut = () => {
     window.firebaseAuth.signOut();
     store.dispatch(signout());
-
-    window.setTimeout(() => {
-      this.props.history.push("/myProfile");
-    }, 1000);
   };
 
   render() {
