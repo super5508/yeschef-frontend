@@ -10,8 +10,8 @@ const Store = preloadedState => {
     preloadedState,
     compose(
       applyMiddleware(thunk, createLogger()),
-      //DevTools.instrument(),
-      window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+      DevTools.instrument()
+      // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
     )
   )
 

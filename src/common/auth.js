@@ -1,4 +1,4 @@
-import { Axios } from 'axios';
+import Axios  from '../common/AxiosMiddleware';
 
 const doPopLoginWith = (provider) => {
     return window.firebaseAuth.signInWithPopup(provider).then(function (result) {
@@ -31,10 +31,11 @@ const doPopLoginWith = (provider) => {
             }
 
             Axios.post("https://hooks.zapier.com/hooks/catch/3515015/vubj7o/", zapierData, function () {
-                window.firebaseAuth.currentUser.getIdToken().then(function (token) {
-                    zapierData.authToken = token;
-                    Axios.post(" https://us-central1-yeschef-7b155.cloudfunctions.net/api/user", zapierData, function () {
-                    });
+            });
+
+            window.firebaseAuth.currentUser.getIdToken().then(function (token) {
+                zapierData.authToken = token;
+                Axios.post(" https://us-central1-yeschef-7b155.cloudfunctions.net/api/user", zapierData, function () {
                 });
             });
         }

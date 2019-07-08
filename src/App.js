@@ -8,7 +8,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import SignIn from './components/SignIn';
 import SignOut from './components/SignOut';
 import PlayerPage from './pages/PlayerPage';
-import Axios from 'axios';
+//import Axios from 'axios';
 import BottomBar from './components/BottomBar';
 import HomePage from './pages/HomePage';
 import MyProfilePage from './pages/MyProfilePage';
