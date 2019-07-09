@@ -14,6 +14,7 @@ import HomePage from './pages/HomePage';
 import MyProfilePage from './pages/MyProfilePage';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
+import ChangePassword from './pages/ChangePassword';
 
 const theme = createMuiTheme({
   overrides: {
@@ -81,6 +82,7 @@ class App extends Component {
             <Route exact path="/signin" component={SignIn}></Route>
             <Route exact path="/signout" component={SignOut}></Route>
             <Route exact path="/myProfile" component={MyProfilePage}></Route>
+            <Route exact path="/change-password" component={ChangePassword}></Route>
             <Route path="/class/:id" render={(routeProps) => (<PlayerPage {...routeProps} mode='class' />)}></Route>
             <BottomBar> </BottomBar>
           </div>
