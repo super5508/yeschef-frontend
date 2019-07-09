@@ -62,15 +62,14 @@ const styles = theme => ({
     paddingRight: "1.5rem",
     paddingLeft: "1.5rem"
   },
-  signUpBtn: {
+  signInBtn: {
     marginTop: "1.6rem",
     width: "100%"
   },
-  tos_ppContainer: {
+  bottomText: {
     marginTop: "1.6rem",
     fontSize: "1.4rem",
     color: "#929292",
-    flexWrap: "wrap",
     textDecoration: "underline"
   },
   grayText: {
@@ -123,7 +122,7 @@ class SignIn extends Component {
     event.preventDefault();
   };
 
-  signUpWith = provider => {
+  signInWith = provider => {
     let signInPromise;
     switch (provider) {
       case "google":
@@ -164,7 +163,7 @@ class SignIn extends Component {
             variant="contained"
             className={classes.fbButton}
             size="large"
-            onClick={() => this.signUpWith("facebook")}
+            onClick={() => this.signInWith("facebook")}
           >
             <Box pr="0.7rem" display="flex">
               <img src={fbLogo} alt="Facebook Logo" />
@@ -178,7 +177,7 @@ class SignIn extends Component {
             variant="contained"
             className={classes.googleButton}
             size="large"
-            onClick={() => this.signUpWith("google")}
+            onClick={() => this.signInWith("google")}
           >
             <Box pr="0.7rem" display="flex">
               <img src={googleLogo} alt="Google Logo" />
@@ -232,7 +231,7 @@ class SignIn extends Component {
           <Button
             variant="contained"
             color="primary"
-            className={classes.signUpBtn}
+            className={classes.signInBtn}
             onClick={this.submitLogin}
           >
             <Box fontWeight="600" fontSize="1.4rem">
@@ -240,7 +239,7 @@ class SignIn extends Component {
             </Box>
           </Button>
         </form>
-        <Box className={classes.tos_ppContainer}>
+        <Box className={classes.bottomText}>
           <Link to="/" underline="always" className={classes.grayText}>
             Forgot password?
           </Link>

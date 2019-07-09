@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import Axios from 'axios';
+import Axios from '../common/AxiosMiddleware';
 import videojs from 'video.js';
 
 const styles = theme => ({

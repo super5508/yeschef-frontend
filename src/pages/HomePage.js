@@ -4,10 +4,9 @@ import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
 import { Link } from 'react-router-dom';
 import ClassInfo from '../components/ClassInfo';
-import Axios from 'axios';
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-
+import Axios from '../common/AxiosMiddleware';
 
 const styles = theme => ({
     container: {
@@ -26,7 +25,7 @@ class HomePage extends Component {
     state = { chefsDataArray: [] };
     constructor(props) {
         super(props);
-
+        
         Axios.get('/api/classes').then(chefInfoResponse => {
             console.log(chefInfoResponse);
             this.setState({

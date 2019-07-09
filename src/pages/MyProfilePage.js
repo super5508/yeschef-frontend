@@ -66,7 +66,7 @@ class MyProfilePage extends Component {
         )}
 
         {/* if user logged in */}
-        {this.props.authStat.isLogin && <Settings history={this.props.history}/>}
+        {this.props.authStat.isLogin && <div>settings component</div>}
       </Box>
     );
   }

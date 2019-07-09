@@ -16,6 +16,7 @@ config.entry = entry;
 config.plugins = plugins;
 
 webpack(config).watch({}, (err, stats) => {
+    console.log("start " + (new Date()).toLocaleTimeString());
     if (err) {
         console.error(err);
     } else {
@@ -27,7 +28,7 @@ webpack(config).watch({}, (err, stats) => {
             colors: true
         }));
     }
-    console.log((new Date()).toLocaleTimeString());
+    console.log("end " +(new Date()).toLocaleTimeString());
 });
 
 function copyPublicFolder() {
