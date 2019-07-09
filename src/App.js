@@ -46,7 +46,7 @@ const theme = createMuiTheme({
     },
     // background:{paper:'#000'},
     // action: { disabled: '#fff5' },
-    // secondary: { main: '#ff007f', contrastText: '#fff' },
+    //secondary: { main: '#ff007f', contrastText: '#fff' },
     text: {
       primary: '#fff',
       secondary: '#fff',

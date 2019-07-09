@@ -9,6 +9,7 @@ import { Paper } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import SignIn from "../components/SignIn";
 import SignUp from "../components/SignUp";
+import Settings from '../components/Settings';
 
 const styles = theme => ({
   signin_out_tabs: {

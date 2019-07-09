@@ -1,62 +1,61 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import store from '../store/Store'
-import { signout } from '../store/actionCreators/UserActionCtrators';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { withStyles } from "@material-ui/core/styles";
+import store from "../store/Store";
+import { signout } from "../store/actionCreators/UserActionCtrators";
+import Button from "@material-ui/core/Button";
+import Box from "@material-ui/core/Box";
 
 const styles = theme => ({
-    container: {
-        display: 'flex',
-        flexWrap: 'wrap',
-    },
-    textField: {
-        marginLeft: theme.spacing.unit,
-        marginRight: theme.spacing.unit,
-        width: 200,
-    },
-    dense: {
-        marginTop: 19,
-    },
-    menu: {
-        width: 200,
-    },
+  btncon: {
+    marginBottom: "5rem",
+    position: "fixed",
+    left: 0,
+    right: 0,
+    bottom: 30,
+    marginLeft: "auto",
+    marginRight: "auto",
+    textAlign: "center",
+  },
+  signOutBtn: {
+    backgroundColor: "#373737",
+    color: "#ffffff",
+    height: "4.4rem",
+    borderRadius: "0.6rem",
+    width: "32.7rem",
+    fontSize: "1.4rem",
+    fontWeight: 600
+  }
 });
 
 class SignOut extends Component {
-    constructor(props, context) {
-        super(props);
+  constructor(props, context) {
+    super(props);
+  }
 
-        if (window.firebaseAuth) {
-            //in case we're already laded in the browser (SPA)
-            this.signOut()
-        } else {
-            window.addEventListener("load", () => {
-                debugger;
-                this.signOut()
-            });
-        }
-    }
+  signOut = () => {
+    window.firebaseAuth.signOut();
+    store.dispatch(signout());
+  };
 
-
-    signOut() {
-        window.firebaseAuth.signOut();
-        store.dispatch(signout());
-
-        window.setTimeout(() => {
-            this.props.history.push('/');
-        }, 2000)
-    }
-
-    render() {
-        return (
-            <div>
-                <h1>Signing Out...</h1>
-            </div>
-        );
-    }
+  render() {
+    const { classes } = this.props;
+    return (
+      <Box className={classes.btncon}>
+        <Button
+          variant="contained"
+          className={classes.signOutBtn}
+          color="primary"
+          onClick={this.signOut}
+        >
+          SIGN OUT
+        </Button>
+      </Box>
+    );
+  }
 }
 
 SignOut.propTypes = {
-    classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
 export default withStyles(styles)(SignOut);
