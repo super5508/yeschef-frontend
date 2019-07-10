@@ -102,7 +102,7 @@ class SignIn extends Component {
       // Handle Errors here.
       //var errorCode = error.code;
       var errorMessage = error.message;
-
+				// #Todo change the alert to a real error message popup
       alert(errorMessage);
     });
 
@@ -140,6 +140,7 @@ class SignIn extends Component {
         this.props.history.push("/");
       },
       msg => {
+				// @Todo change the alert to a real error message popup
         alert(msg);
       }
     );
