@@ -27,7 +27,7 @@ const CssTextField = withStyles({
 const styles = theme => ({
     container: {
         '& button': {
-            height: '4.4rem'
+            height: '5.8rem'
         },
         '& .Mui-focused fieldset': {
             borderColor: 'white',
@@ -71,7 +71,6 @@ const styles = theme => ({
     signUpBtn: {
         marginTop: '1.6rem',
         width: '100%',
-        height: '5.5rem !important'
     },
     tos_ppContainer: {
         marginTop: "2.6rem",
