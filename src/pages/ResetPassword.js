@@ -168,12 +168,11 @@ class ResetPassword extends Component {
 
 	resetPassword = () => {
 		//reset password
-		let that = this;
 		var auth = window.firebase.auth();
-		auth.sendPasswordResetEmail(that.state.Email)
-			.then(function(response) {
+		auth.sendPasswordResetEmail(this.state.Email)
+			.then((response) => {
 				// Update successful.
-				that.handleClickOpen();
+				this.handleClickOpen();
 			})
 			.catch(function(error) {
 				// An error happened.
