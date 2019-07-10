@@ -80,7 +80,11 @@ function PasswordResetDialog(props) {
 	return (
 		<Dialog onClose={handleClose} aria-labelledby="alertDialog" {...other}>
 			<Box className={classes.dialogCon}>
-				<IconButton aria-label="Close" size="small" onClick={handleClose}>
+				<IconButton
+					aria-label="Close"
+					size="small"
+					onClick={handleClose}
+				>
 					<CloseIcon className={classes.closeIcon} />
 				</IconButton>
 				<div className={classes.dialogContent}>
@@ -157,11 +161,26 @@ class ResetPassword extends Component {
 	};
 
 	handleClose = value => {
-		this.setState({ open: false });
+		this.setState({ open: false }, () => {
+			this.props.history.push("/myProfile");
+		});
 	};
 
 	resetPassword = () => {
-		this.handleClickOpen();
+		//reset password
+		let that = this;
+		var auth = window.firebase.auth();
+		auth.sendPasswordResetEmail(that.state.Email)
+			.then(function(response) {
+				// Update successful.
+				that.handleClickOpen();
+			})
+			.catch(function(error) {
+				// An error happened.
+				// @Todo change the alert to a real error message popup
+				alert(error.message);
+			});
+		//
 	};
 
 	render() {
