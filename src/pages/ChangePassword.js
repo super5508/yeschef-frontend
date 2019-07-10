@@ -174,7 +174,7 @@ class ChangePassword extends Component {
 			.then(function(response) {
 				// User re-authenticated.
 				if (that.state.newPassword.length === 0) {
-					//change the alert to a real error message popup
+					// #Todo change the alert to a real error message popup
 					alert("Please enter a valid New Password");
 				} else {
 					//changing Password
@@ -186,14 +186,14 @@ class ChangePassword extends Component {
 						})
 						.catch(function(error) {
 							// An error happened.
-							//change the alert to a real error message popup
+							// #Todo change the alert to a real error message popup
 							alert(error.message);
 						});
 				}
 			})
 			.catch(function(error) {
 				// An error happened.
-				//change the alert to a real error message popup
+				// #Todo change the alert to a real error message popup
 				alert(error.message);
 			});
 	};
