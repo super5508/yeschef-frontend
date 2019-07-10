@@ -24,66 +24,66 @@ const CssTextField = withStyles({
 })(TextField);
 
 const styles = theme => ({
-	container: {
-		"& button": {
-			height: "4.4rem"
-		},
-		"& .Mui-focused fieldset": {
-			borderColor: "white"
-		}
-	},
-	loginWith: {
-		flexDirection: "row",
-		display: "flex",
-		justifyContent: "space-between",
-		alignItems: "center",
-		height: "4.4rem",
-		marginBottom: "3.5rem",
-		"& button": {
-			width: "155px"
-		}
-	},
-	dense: {
-		marginTop: 19
-	},
-	menu: {
-		width: 200
-	},
-	textFieldLabel: {
-		fontSize: "1.4rem",
-		fontWeight: 300
-	},
-	boldDivider: {
-		height: "2px"
-	},
-	fbButton: {
-		backgroundColor: "#4367b2",
-		color: "white",
-		paddingRight: "1.2rem",
-		paddingLeft: "1.2rem"
-	},
-	googleButton: {
-		backgroundColor: "white",
-		paddingRight: "1.5rem",
-		paddingLeft: "1.5rem"
-	},
-	signUpBtn: {
-		marginTop: "1.6rem",
-		width: "100%"
-	},
-	tos_ppContainer: {
-		marginTop: "2.6rem",
-		fontSize: "1.2rem",
-		color: "#929292",
-		display: "flex",
-		justifyContent: "center",
-		flexWrap: "wrap",
-		marginRight: "4rem",
-		marginLeft: "4rem"
-	},
-	grayText: {
-		color: "#929292"
-	}
+    container: {
+        '& button': {
+            height: '5.6rem'
+        },
+        '& .Mui-focused fieldset': {
+            borderColor: 'white',
+        },
+    },
+    loginWith: {
+        flexDirection: "row",
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        height: "4.4rem",
+        marginBottom: "3.5rem",
+        '& button': {
+            width: "155px"
+        }
+    },
+    dense: {
+        marginTop: 19,
+    },
+    menu: {
+        width: 200,
+    },
+    textFieldLabel: {
+        fontSize: '1.4rem',
+        fontWeight: 300
+    },
+    boldDivider: {
+        height: "2px"
+    },
+    fbButton: {
+        backgroundColor: "#4367b2",
+        color: "white",
+        paddingRight: "1.2rem",
+        paddingLeft: "1.2rem"
+    },
+    googleButton: {
+        backgroundColor: "white",
+        paddingRight: "1.5rem",
+        paddingLeft: "1.5rem"
+    },
+    signUpBtn: {
+        marginTop: '1.6rem',
+        width: '100%',
+    },
+    tos_ppContainer: {
+        marginTop: "2.6rem",
+        fontSize: "1.2rem",
+        color: "#929292",
+        display: "flex",
+        justifyContent: "center",
+        flexWrap: "wrap",
+        marginRight: "4rem",
+        marginLeft: "4rem"
+    },
+    grayText: {
+        color: "#929292"
+    }
 });
 
 class SignUp extends Component {
