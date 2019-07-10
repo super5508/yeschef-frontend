@@ -55,7 +55,7 @@ const doPopLoginWith = (provider) => {
         }
         throw error;
     });
-}
+} 
 
 
 const doFacebookSignIn = () => {
