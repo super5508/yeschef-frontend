@@ -13,7 +13,6 @@ import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import CloseIcon from "@material-ui/icons/Close";
 import DoneIcon from "@material-ui/icons/Done";
-import auth from "./../common/auth";
 
 const styles = theme => ({
 	h1: {
@@ -150,7 +149,9 @@ class ChangePassword extends Component {
 	};
 
 	handleClose = value => {
-		this.setState({ open: false });
+		this.setState({ open: false }, () => {
+			this.props.history.push("/myProfile");
+		});
 	};
 
 	handleChange = event => {
@@ -172,24 +173,29 @@ class ChangePassword extends Component {
 			.reauthenticateWithCredential(credentials)
 			.then(function(response) {
 				// User re-authenticated.
-				if(that.state.newPassword.length === 0){
-					alert('Please enter a valid New Password')
-				}else{
+				if (that.state.newPassword.length === 0) {
+					//change the alert to a real error message popup
+					alert("Please enter a valid New Password");
+				} else {
 					//changing Password
-					user.updatePassword(that.state.newPassword).then(function() {
-						// Update successful.
-						that.handleClickOpen();
-					  }).catch(function(error) {
-						// An error happened.
-						alert(error.message)
-					  });
+					user
+						.updatePassword(that.state.newPassword)
+						.then(function() {
+							// Update successful.
+							that.handleClickOpen();
+						})
+						.catch(function(error) {
+							// An error happened.
+							//change the alert to a real error message popup
+							alert(error.message);
+						});
 				}
 			})
 			.catch(function(error) {
 				// An error happened.
-				alert(error.message)
+				//change the alert to a real error message popup
+				alert(error.message);
 			});
-
 	};
 
 	render() {
