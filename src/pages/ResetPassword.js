@@ -9,7 +9,6 @@ import Dialog from "@material-ui/core/Dialog";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import CloseIcon from "@material-ui/icons/Close";
-import DoneIcon from "@material-ui/icons/Done";
 import Typography from "@material-ui/core/Typography";
 
 const CssTextField = withStyles({
@@ -25,8 +24,6 @@ const CssTextField = withStyles({
 	}
 })(TextField);
 
-
-
 const useStyles = makeStyles({
 	//dialog styles come here
 	dialogCon: {
@@ -39,7 +36,7 @@ const useStyles = makeStyles({
 			fontWeight: 300,
 			color: "#333333",
 			textAlign: "center",
-			margin: "0.8rem 0rem 6rem 0rem"
+			margin: "0.8em 0rem 5rem 0rem"
 		}
 	},
 	closeIcon: {
@@ -56,15 +53,19 @@ const useStyles = makeStyles({
 	},
 	dialogContent: {
 		textAlign: "center",
-		marginTop: "5rem"
+		marginTop: "3rem"
 	},
 	circle: {
 		width: "3rem",
 		height: "3rem",
 		borderRadius: "50%",
 		backgroundColor: "#ff007f",
-		margin: "0rem auto",
-		paddingTop: "0.1rem"
+		margin: "0rem auto"
+	},
+	textIcon: {
+		fontSize: "2rem",
+		fontWeight: 600,
+		color: "#ffffff"
 	}
 });
 
@@ -84,11 +85,12 @@ function PasswordResetDialog(props) {
 				</IconButton>
 				<div className={classes.dialogContent}>
 					<div className={classes.circle}>
-						<DoneIcon />
+						<span className={classes.textIcon}>i</span>
 					</div>
 					<h5>
-						Password changed <br />
-						successfuly
+						You'll receive an email shortly. <br />
+						Please check your inbox <br />
+						and follow the instructions.
 					</h5>
 					<Button
 						variant="contained"
@@ -108,7 +110,6 @@ PasswordResetDialog.propTypes = {
 	onClose: PropTypes.func,
 	open: PropTypes.bool
 };
-
 
 const styles = theme => ({
 	h1: {
@@ -151,21 +152,21 @@ class ResetPassword extends Component {
 		});
 	};
 
-    handleClickOpen = () => {
+	handleClickOpen = () => {
 		this.setState({ open: true });
 	};
 
 	handleClose = value => {
 		this.setState({ open: false });
-    };
-    
-    resetPassword = () => {
-        this.handleClickOpen();
-    }
+	};
+
+	resetPassword = () => {
+		this.handleClickOpen();
+	};
 
 	render() {
-        const { classes } = this.props;
-        const labelsProps = {
+		const { classes } = this.props;
+		const labelsProps = {
 			className: classes.textFieldLabel
 		};
 		return (
@@ -206,7 +207,7 @@ class ResetPassword extends Component {
 						</Box>
 					</form>
 				</Box>
-                <PasswordResetDialog
+				<PasswordResetDialog
 					open={this.state.open}
 					onClose={this.handleClose}
 				/>
