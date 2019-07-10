@@ -21,7 +21,12 @@ const useStyles = makeStyles({
       marginBottom: "-0.8rem"
     },
     "& h1": {
-      display:'flex',flexDirection:'row',alignContent:'center',alignItems:'center',marginLeft:'-13px',marginBottom:'5px',
+      display:'flex',
+      flexDirection:'row',
+      alignContent:'center',
+      alignItems:'center',
+      marginLeft:'-13px',
+      marginBottom:'5px',
       fontSize: "1.8rem",
       fontWeight: 600,
     },
