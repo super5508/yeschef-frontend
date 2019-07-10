@@ -70,7 +70,8 @@ const styles = theme => ({
     },
     signUpBtn: {
         marginTop: '1.6rem',
-        width: '100%'
+        width: '100%',
+        height: '5.5rem !important'
     },
     tos_ppContainer: {
         marginTop: "2.6rem",

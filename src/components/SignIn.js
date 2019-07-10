@@ -10,7 +10,6 @@ import googleLogo from "../assets/images/googleLogo.svg";
 import Box from "@material-ui/core/Box";
 import auth from "./../common/auth";
 import { Link } from "react-router-dom";
-
 const CssTextField = withStyles({
   root: {
     "& .MuiOutlinedInput-root": {
@@ -64,7 +63,9 @@ const styles = theme => ({
   },
   signInBtn: {
     marginTop: "1.6rem",
-    width: "100%"
+    width: "100%",
+    height:'30px',
+    height: '5.5rem !important'
   },
   bottomText: {
     marginTop: "1.6rem",
