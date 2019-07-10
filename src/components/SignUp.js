@@ -27,7 +27,7 @@ const CssTextField = withStyles({
 const styles = theme => ({
     container: {
         '& button': {
-            height: '5.8rem'
+            height: '5.5rem'
         },
         '& .Mui-focused fieldset': {
             borderColor: 'white',
