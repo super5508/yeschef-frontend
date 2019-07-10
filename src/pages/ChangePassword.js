@@ -163,7 +163,6 @@ class ChangePassword extends Component {
 
 	submitPassword = () => {
 		//change password
-		let that = this;
 		var user = window.firebase.auth().currentUser;
 		var credentials = window.firebase.auth.EmailAuthProvider.credential(
 			user.email,
@@ -171,18 +170,18 @@ class ChangePassword extends Component {
 		);
 		user
 			.reauthenticateWithCredential(credentials)
-			.then(function(response) {
+			.then((response) => {
 				// User re-authenticated.
-				if (that.state.newPassword.length === 0) {
+				if (this.state.newPassword.length === 0) {
 					// #Todo change the alert to a real error message popup
 					alert("Please enter a valid New Password");
 				} else {
 					//changing Password
 					user
-						.updatePassword(that.state.newPassword)
-						.then(function() {
+						.updatePassword(this.state.newPassword)
+						.then(() => {
 							// Update successful.
-							that.handleClickOpen();
+							this.handleClickOpen();
 						})
 						.catch(function(error) {
 							// An error happened.
