@@ -241,7 +241,7 @@ class SignIn extends Component {
           </Button>
         </form>
         <Box className={classes.bottomText}>
-          <Link to="/" underline="always" className={classes.grayText}>
+          <Link to="/reset-password" underline="always" className={classes.grayText}>
             Forgot password?
           </Link>
         </Box>
