@@ -140,7 +140,7 @@ class SignIn extends Component {
         this.props.history.push("/");
       },
       msg => {
-				// #Todo change the alert to a real error message popup
+				// @Todo change the alert to a real error message popup
         alert(msg);
       }
     );
