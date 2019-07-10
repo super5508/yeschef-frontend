@@ -101,7 +101,7 @@ class SignIn extends Component {
       // Handle Errors here.
       //var errorCode = error.code;
       var errorMessage = error.message;
-
+				// #Todo change the alert to a real error message popup
       alert(errorMessage);
     });
 
@@ -139,6 +139,7 @@ class SignIn extends Component {
         this.props.history.push("/");
       },
       msg => {
+				// @Todo change the alert to a real error message popup
         alert(msg);
       }
     );
@@ -239,7 +240,7 @@ class SignIn extends Component {
           </Button>
         </form>
         <Box className={classes.bottomText}>
-          <Link to="/" underline="always" className={classes.grayText}>
+          <Link to="/reset-password" underline="always" className={classes.grayText}>
             Forgot password?
           </Link>
         </Box>
