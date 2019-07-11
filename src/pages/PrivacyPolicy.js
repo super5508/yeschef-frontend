@@ -1,5 +1,4 @@
 import React from "react";
-import {Link} from 'react-router-dom';
 import { makeStyles } from "@material-ui/styles";
 import IconButton from '@material-ui/core/IconButton';
 import LeftArrowIcon from '@material-ui/icons/KeyboardArrowLeft';
@@ -48,16 +47,19 @@ const useStyles = makeStyles({
   }
 });
 
-function PrivacyPolicy() {
+function PrivacyPolicy(props) {
   const classes = useStyles();
   return (
     //ppc => privacyPolicyComponent
     <div className={classes.ppcCon}>
       
       <h1>
-        <Link to='/signin'>
-        <IconButton><LeftArrowIcon /></IconButton>
-        </Link>
+        <IconButton
+            onClick={() => {
+						  props.history.push("/myProfile");
+						}}>
+          <LeftArrowIcon />
+        </IconButton>
         <span>PRIVACY POLICY</span>
       </h1>
       <p className={classes.ppcP1}>Date of Last Revision: July 15, 2018</p>

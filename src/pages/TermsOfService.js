@@ -1,5 +1,4 @@
 import React from "react";
-import {Link} from 'react-router-dom';
 import { makeStyles } from "@material-ui/styles";
 import IconButton from '@material-ui/core/IconButton';
 import LeftArrowIcon from '@material-ui/icons/KeyboardArrowLeft';
@@ -47,15 +46,18 @@ const useStyles = makeStyles({
   }
 });
 
-function TermsOfService() {
+function TermsOfService(props) {
   const classes = useStyles();
   return (
     //tos => termsOfService
     <div className={classes.tosCon}>
       <h1>
-        <Link to='/signin'>
-          <IconButton><LeftArrowIcon /></IconButton>
-        </Link>
+          <IconButton
+          onClick={() => {
+            props.history.push("/myProfile");
+          }}>
+            <LeftArrowIcon />
+          </IconButton>
         <span>TERMS OF SERVICE</span>
       </h1>
       <p className={classes.tosP2}>Date of Last Revision: July 15, 2018</p>
