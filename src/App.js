@@ -3,7 +3,7 @@ import PrimaryAppBar from './components/PrimaryAppBar';
 import ChefHomePage from './pages/ChefHomePage';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import './assets/site.scss';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route ,withRouter} from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import SignIn from './components/SignIn';
 import SignOut from './components/SignOut';
@@ -68,6 +68,7 @@ class App extends Component {
 
   render() {
     //const chefsData = this.state || {};
+ 
 
     return (
       <BrowserRouter>
@@ -76,7 +77,8 @@ class App extends Component {
           <div className="App">
             {/* <PrimaryAppBar></PrimaryAppBar> */}
 
-            <Route exact path="/" render={(routeProps) => (<HomePage />)}></Route>
+            <Route exact path="/" render={(routeProps) => (<HomePage />)}>{   console.log('here')
+   }</Route>
             {/* <Route exact path="/" render={(routeProps) => (<ChefHomePage {...routeProps} {...chefsData}></ChefHomePage>)}></Route> */}
             <Route exact path="/terms-of-service" component={TermsOfService}></Route>
             <Route exact path="/privacy-policy" component={PrivacyPolicy}></Route>
@@ -86,7 +88,7 @@ class App extends Component {
             <Route exact path="/reset-password" component={ResetPassword}></Route>
             <Route exact path="/change-password" component={ChangePassword}></Route>
             <Route path="/class/:id" render={(routeProps) => (<PlayerPage {...routeProps} mode='class' />)}></Route>
-            <BottomBar> </BottomBar>
+            <BottomBar ></BottomBar>
           </div>
         </MuiThemeProvider>
       </BrowserRouter>
