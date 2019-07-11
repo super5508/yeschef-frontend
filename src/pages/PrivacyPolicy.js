@@ -55,12 +55,12 @@ function PrivacyPolicy(props) {
       
       <h1>
         <IconButton
-            onClick={() => {
-						  props.history.push("/myProfile");
-						}}>
-          <LeftArrowIcon />
-        </IconButton>
-        <span>PRIVACY POLICY</span>
+          onClick={() => {
+          props.history.push("/myProfile");
+          }}>
+        <LeftArrowIcon />
+      </IconButton>
+      <span>PRIVACY POLICY</span>
       </h1>
       <p className={classes.ppcP1}>Date of Last Revision: July 15, 2018</p>
 
