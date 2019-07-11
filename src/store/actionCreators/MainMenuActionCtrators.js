@@ -5,14 +5,19 @@ export const gotoHome = () => ({
     selected:'home'
 });
 
-export const gotoFeedback = () => ({
-    type: ActionTypes.UPDATE_SELECTED,
-    selected:'feedback'
-});
-
 export const gotoMyProfile = () => ({
     type: ActionTypes.UPDATE_SELECTED,
     selected:'myProfile'
+});
+
+export const gotoCommunity = () => ({
+    type: ActionTypes.UPDATE_SELECTED,
+    selected:'community'
+});
+
+export const gotoBeta = () => ({
+    type: ActionTypes.UPDATE_SELECTED,
+    selected:'beta'
 });
 
 export const hideMainMenu = () => ({

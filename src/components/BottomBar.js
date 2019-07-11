@@ -8,6 +8,8 @@ import store from '../store/Store'
 import HomeIcon from '@material-ui/icons/HomeRounded'
 import PersonIcon from '@material-ui/icons/PersonRounded'
 import FeedbackIcon from '@material-ui/icons/FeedbackRounded'
+import CommunityIcon from '@material-ui/icons/Forum'
+import BetaIcon from '@material-ui/icons/ChatBubble'
 import * as MainMenuActionCreator from './../store/actionCreators/MainMenuActionCtrators';
 
 
@@ -35,11 +37,14 @@ class BottomBar extends Component {
                     onChange={(event, newValue) => {
                         let action;
                         switch (newValue) {
-                            case "feedback":
-                                action = MainMenuActionCreator.gotoFeedback();
-                                break;
                             case "myProfile":
                                 action = MainMenuActionCreator.gotoMyProfile();
+                                break;
+                            case "community":
+                                action = MainMenuActionCreator.gotoCommunity();
+                                break;
+                            case "beta":
+                                action = MainMenuActionCreator.gotoBeta();
                                 break;
                             default:
                                 action = MainMenuActionCreator.gotoHome();
@@ -56,12 +61,21 @@ class BottomBar extends Component {
                         icon={<HomeIcon />}                        
                         component={Link}
                         to="/" />
+
                     <BottomNavigationAction
-                        label="Feedback"
-                        value='feedback'
-                        icon={<FeedbackIcon />}
+                        label="Community"
+                        value='community'
+                        icon={<CommunityIcon />}
                         component={Link}
-                        to="/feedback" />
+                        to="/community" />
+                    
+                    <BottomNavigationAction
+                        label="Beta"
+                        value='beta'
+                        icon={<BetaIcon />}
+                        component={Link}
+                        to="/beta" />
+
                     <BottomNavigationAction
                         label="My Profile"
                         value='myProfile'
