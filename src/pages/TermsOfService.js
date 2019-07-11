@@ -24,13 +24,13 @@ const useStyles = makeStyles({
       flexDirection:'row',
       alignContent:'center',
       alignItems:'center',
-      marginLeft:'-13px',
-      marginBottom:'5px',
+      marginLeft:'-1.5rem',
+      marginBottom:'0.5rem',
       fontSize: "1.8rem",
       fontWeight: 600,
     },
     "& span": {
-      marginLeft:'-5px'
+      marginLeft:'-0.5rem'
     }
   },
   tosHead1: {
