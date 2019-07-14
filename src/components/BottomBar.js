@@ -30,28 +30,13 @@ class BottomBar extends Component {
     render() {
         const { classes } = this.props;
         let dom;
+        console.log(window.location.pathname)
+        const path = window.location.pathname;
+        let navValue = path === '/' ? 'home' : path.slice(1)
         if (this.props.mainMenu.visible) {
             dom = (
                 <BottomNavigation
-                    value={this.props.mainMenu.selected}
-                    onChange={(event, newValue) => {
-                        let action;
-                        switch (newValue) {
-                            case "myProfile":
-                                action = MainMenuActionCreator.gotoMyProfile();
-                                break;
-                            case "community":
-                                action = MainMenuActionCreator.gotoCommunity();
-                                break;
-                            case "beta":
-                                action = MainMenuActionCreator.gotoBeta();
-                                break;
-                            default:
-                                action = MainMenuActionCreator.gotoHome();
-                                break;
-                        }
-                        store.dispatch(action);
-                    }}
+                    value={navValue}
                     showLabels
                     className={classes.root}
                 >
@@ -77,7 +62,7 @@ class BottomBar extends Component {
                         to="/beta" />
 
                     <BottomNavigationAction
-                        label="My Profile"
+                        label="Me"
                         value='myProfile'
                         icon={<PersonIcon />} 
                         component={Link}
