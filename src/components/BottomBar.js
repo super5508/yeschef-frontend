@@ -30,7 +30,6 @@ class BottomBar extends Component {
     render() {
         const { classes } = this.props;
         let dom;
-        console.log(window.location.pathname)
         const path = window.location.pathname;
         let navValue = path === '/' ? 'home' : path.slice(1)
         if (this.props.mainMenu.visible) {
