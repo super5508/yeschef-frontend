@@ -119,7 +119,7 @@ class Settings extends Component {
 						</IconButton>
 					</div>
           <div className={clsx(classes.lstItem,classes.bottomBorder)}>
-						<h4>Help</h4>
+						<h4 className='my_custom_link'>Help</h4>
 						<IconButton
 							aria-label="forward"
 							size="small"
