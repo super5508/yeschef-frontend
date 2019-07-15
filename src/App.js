@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PrimaryAppBar from './components/PrimaryAppBar';
 import ChefHomePage from './pages/ChefHomePage';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { connect } from "react-redux";
 import './assets/site.scss';
 import { BrowserRouter, Route } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -18,7 +19,7 @@ import ResetPassword from './pages/ResetPassword';
 import ChangePassword from './pages/ChangePassword';
 import BetaPage from './pages/Beta';
 import CommunityPage from './pages/CommunityPage';
-
+const APP_ID = 'h6twy30k'
 
 const theme = createMuiTheme({
   overrides: {
@@ -62,14 +63,28 @@ const theme = createMuiTheme({
 });
 
 class App extends Component {
-  // componentDidMount() {
-  //   Axios.get('/api/chef/edward_lee/info').then(chefInfoResponse => {
-  //     this.setState(chefInfoResponse.data);
-  //   })
-
-  // }
-
+  constructor(props) {
+    super(props);
+    this.state= {}
+  }
+  componentDidMount() {
+    // Axios.get('/api/chef/edward_lee/info').then(chefInfoResponse => {
+    //   this.setState(chefInfoResponse.data);
+    // })
+  }
+  
   render() {
+    if(this.props.authStat.userProfile) {
+      console.log(this.props.authStat.userProfile.uid)
+      window.Intercom('update', {
+        app_id: APP_ID,
+        user_id : this.props.authStat.userProfile.uid,
+        name : this.props.authStat.userProfile.name,
+        email : this.props.authStat.userProfile.email,
+        created_at : Date.now()
+         //Website visitor so may not have any user related info
+       });
+    }
     //const chefsData = this.state || {};
 
     return (
@@ -99,4 +114,10 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = (state, ownProps) => {
+	return {
+		...state.user
+	};
+};
+
+export default connect(mapStateToProps)(App);
