@@ -65,7 +65,7 @@ class BottomBar extends Component {
                         value='myProfile'
                         icon={<PersonIcon />} 
                         component={Link}
-                        to="/myProfile" />/>
+                        to="/myProfile" />
                 </BottomNavigation>
             )
         } else {
