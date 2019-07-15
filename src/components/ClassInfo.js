@@ -63,7 +63,7 @@ class ClassInfo extends Component {
     render() {
         const { classes } = this.props;
         return (
-            <Link to={"/class/" + this.props.key} style={{ textDecoration: 'none' }}>
+            <Link to={"/class/" + this.props.id} style={{ textDecoration: 'none' }}>
                 <Paper className={classes.container} style={{ backgroundImage: 'url(' + this.props.chefImg + ')'}}>
                     <Box className={classes.mask_container} style={this.comingSoonOpacityStyle }>
                         < Box className={classes.info_container} style={this.comingSoonTextStyle}>
