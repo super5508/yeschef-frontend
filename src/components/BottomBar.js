@@ -28,7 +28,8 @@ class BottomBar extends Component {
     render() {
         const { classes } = this.props;
         let dom;
-        if (this.props.mainMenu.visible) {
+        //hided navbar in chef homepage
+        if (this.props.mainMenu.visible && this.props.location.pathname.slice(0, 6) !== '/class') {
             dom = (
                 <BottomNavigation
                     value={this.props.mainMenu.selected}

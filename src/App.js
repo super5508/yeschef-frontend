@@ -77,10 +77,10 @@ class App extends Component {
           <div className="App">
             {/* <PrimaryAppBar></PrimaryAppBar> */}
 
-            <Route exact path="/" render={(routeProps) => (<HomePage />)}>{   console.log('here')
-   }</Route>
+            <Route exact path="/" render={(routeProps) => (<HomePage />)}></Route>
             {/* <Route exact path="/" render={(routeProps) => (<ChefHomePage {...routeProps} {...chefsData}></ChefHomePage>)}></Route> */}
             <Route exact path="/terms-of-service" component={TermsOfService}></Route>
+            <Route exact path="/chef-home-page" component={ChefHomePage}></Route>
             <Route exact path="/privacy-policy" component={PrivacyPolicy}></Route>
             <Route exact path="/signin" component={SignIn}></Route>
             <Route exact path="/signout" component={SignOut}></Route>

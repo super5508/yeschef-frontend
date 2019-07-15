@@ -4,6 +4,8 @@ import Card from "@material-ui/core/Card";
 import Box from "@material-ui/core/Box";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/CloseRounded";
+import { Link } from "react-router-dom";
+
 
 const styles = theme => ({
 	container: {
@@ -46,11 +48,16 @@ class ClassInfo extends Component {
 					className={classes.background_img}
 					alt="Class thumbnail"
 				/>
+				{/* //if user is in chefHomePage */}
+				{this.props.showCross && (
 				<div className={classes.iconBox}>
+					<Link to="/" underline="none">
 					<IconButton aria-label="Close">
 						<CloseIcon className={classes.closeIcon} />
 					</IconButton>
+					</Link>
 				</div>
+				)}
 				<Box
 					display="flex"
 					alignItems="center"
