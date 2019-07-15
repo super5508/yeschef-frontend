@@ -12,6 +12,7 @@ import { withRouter } from "react-router-dom";
 import clsx from "clsx";
 import IconButton from "@material-ui/core/IconButton";
 import ForwardIcon from "@material-ui/icons/ArrowForwardIosRounded";
+const APP_ID = 'h6twy30k'
 
 const styles = theme => ({
 	setCon: {
@@ -70,6 +71,21 @@ class Settings extends Component {
 		this.state = {};
 	}
 
+
+	openChat = () => {
+		window.Intercom('show')
+
+		window.Intercom('update', {
+			app_id: APP_ID,
+			user_id : this.props.authStat.userProfile.uid,
+			name : this.props.authStat.userProfile.name,
+			email : this.props.authStat.userProfile.email,
+			created_at : Date.now()
+		   //Website visitor so may not have any user related info
+		 });
+		 
+	}
+
 	render() {
 		const { classes } = this.props;
 		console.log("name");
@@ -119,7 +135,7 @@ class Settings extends Component {
 						</IconButton>
 					</div>
           <div className={clsx(classes.lstItem,classes.bottomBorder)}>
-						<h4 className='my_custom_link'>Help</h4>
+						<h4 className='my_custom_link' onClick={this.openChat}>Help</h4>
 						<IconButton
 							aria-label="forward"
 							size="small"
