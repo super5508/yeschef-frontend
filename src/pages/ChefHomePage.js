@@ -76,10 +76,13 @@ class ChefHomePage extends Component {
 	constructor(props, context) {
 		super(props);
         this.state = {
-            chefsData: {}
+            chefsData: {
+                lessons:[],
+                skills:[],
+            }
         };
-		Axios.get(`api/class/${this.props.match.params.id}?prefetch=true`).then(
-			chefInfoResponse => {
+		Axios.get(`api/class/${this.props.match.params.id}`).then(
+			chefInfoResponse => {           
 				this.setState({
 					...this.state,
 					chefsData: chefInfoResponse.data
@@ -88,7 +91,6 @@ class ChefHomePage extends Component {
         
 	render() {
 		const { classes } = this.props;
-
 		return (
 			<div>
 				<ClassInfo {...this.state.chefsData} />
@@ -125,11 +127,11 @@ class ChefHomePage extends Component {
 						}}
 					>
 						<WatchLaterIcon className={classes.icon} />
-						<p>3 hours</p>
+						<p>{this.state.chefsData.duration} hours</p>
 					</div>
 					<div className={classes.alignCenter}>
 						<PlayIcon className={classes.icon} />
-						<p>10 lessons</p>
+						<p>{this.state.chefsData.lessons.length} lessons</p>
 					</div>
 					<div
 						className={classes.alignRight}
@@ -139,18 +141,14 @@ class ChefHomePage extends Component {
 						}}
 					>
 						<CheckIcon className={classes.icon} />
-						<p>5 skills</p>
+						<p>{this.state.chefsData.skills.length} skills</p>
 					</div>
 				</div>
 
 				{/* //Class description */}
 				<Box className={classes.classDesc}>
 					<p>
-						Bourbon was always a working man’s drink and I want to
-						always respect that when I cook with bourbon. Every sip
-						of bourbon I take transports me to another time and
-						place kind of like this distillery. We are really
-						drinking history and that’s why I love it so much.{" "}
+                    {this.state.chefsData.description}
 					</p>
 				</Box>
 			</div>
