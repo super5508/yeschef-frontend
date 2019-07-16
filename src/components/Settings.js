@@ -13,6 +13,7 @@ import clsx from "clsx";
 import IconButton from "@material-ui/core/IconButton";
 import ForwardIcon from "@material-ui/icons/ArrowForwardIosRounded";
 
+
 const styles = theme => ({
 	setCon: {
 		display: "flex",
@@ -70,10 +71,14 @@ class Settings extends Component {
 		this.state = {};
 	}
 
+
+	openChat = () => {
+		window.Intercom('show')
+	}
+
 	render() {
 		const { classes } = this.props;
 		console.log("name");
-		console.log(this.props.authStat);
 		return (
 			<Box>
 				{this.props.authStat && this.props.authStat.userProfile && (
@@ -118,7 +123,7 @@ class Settings extends Component {
 							<ForwardIcon className={classes.forwardIcon} />
 						</IconButton>
 					</div>
-          <div className={clsx(classes.lstItem,classes.bottomBorder)}>
+          <div onClick={this.openChat} className={clsx(classes.lstItem,classes.bottomBorder)}>
 						<h4>Help</h4>
 						<IconButton
 							aria-label="forward"

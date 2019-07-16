@@ -36,6 +36,7 @@ class SignOut extends Component {
   signOut = () => {
     window.firebaseAuth.signOut();
     store.dispatch(signout());
+    window.Intercom('shutdown')
   };
 
   render() {
