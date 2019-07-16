@@ -83,7 +83,7 @@ class App extends Component {
     const { classes } = this.props;
 
     if(this.props.authStat.userProfile) {
-      console.log(this.props.authStat.userProfile.uid)
+
       window.Intercom('update', {
         app_id: APP_ID,
         user_id : this.props.authStat.userProfile.uid,

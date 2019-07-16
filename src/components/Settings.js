@@ -78,7 +78,7 @@ class Settings extends Component {
 
 	render() {
 		const { classes } = this.props;
-		console.log("name");
+		
 		return (
 			<Box>
 				{this.props.authStat && this.props.authStat.userProfile && (
@@ -114,6 +114,7 @@ class Settings extends Component {
 				)}
 				{/* //list */}
 				<Box className={classes.listCon}>
+					{this.props.authStat && this.props.authStat.userProfile && this.props.authStat.userProfile.providerData[0].providerId === 'password' && 
 					<div className={classes.lstItem} onClick={()=>{this.props.history.push('/change-password')}}>
 						<h4>Change password</h4>
 						<IconButton
@@ -123,6 +124,7 @@ class Settings extends Component {
 							<ForwardIcon className={classes.forwardIcon} />
 						</IconButton>
 					</div>
+					}
           <div onClick={this.openChat} className={clsx(classes.lstItem,classes.bottomBorder)}>
 						<h4>Help</h4>
 						<IconButton
