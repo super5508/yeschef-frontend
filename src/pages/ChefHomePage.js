@@ -10,6 +10,23 @@ import ClassInfo from "../components/ClassInfo";
 import { Link } from "react-router-dom";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/CloseRounded";
+import SwipeableViews from "react-swipeable-views";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
+import PropTypes from "prop-types";
+
+function TabContainer({ children, dir }) {
+	return (
+		<div component="div" dir={dir}>
+			{children}
+		</div>
+	);
+}
+
+TabContainer.propTypes = {
+	children: PropTypes.node.isRequired,
+	dir: PropTypes.string.isRequired
+};
 
 const styles = theme => ({
 	iconsContainer: {
@@ -42,7 +59,7 @@ const styles = theme => ({
 		fontWeight: 600
 	},
 	btncon: {
-		margin: "2.5rem 0rem 0.2rem 0rem",
+		margin: "2.5rem 0rem 0.8rem 0rem",
 		textAlign: "center"
 	},
 	classDesc: {
@@ -50,6 +67,10 @@ const styles = theme => ({
 			fontSize: "1.6rem",
 			fontWeight: 300,
 			margin: "2rem 2.4rem"
+		},
+		"& span": {
+			fontSize: "1.8rem",
+			fontWeight: 600
 		}
 	},
 	icon: {
@@ -70,7 +91,21 @@ const styles = theme => ({
 		position: "absolute",
 		top: "1.2rem",
 		left: "1.2rem"
-	}
+	},
+	tabsRoot: {
+        borderBottom: "0.01rem solid #929292",
+    },
+    tabRoot: {
+        color: '#929292',
+        fontWeight: 600,
+        paddingBottom:'0rem',
+
+		"&$tabSelected": {
+            color: "#ffffff",
+            fontSize: "1.4rem",
+		}
+    },
+    tabSelected: {},
 });
 class ChefHomePage extends Component {
 	constructor(props, context) {
@@ -79,7 +114,8 @@ class ChefHomePage extends Component {
 			chefsData: {
 				lessons: [],
 				skills: []
-			}
+			},
+			value: 0
 		};
 		Axios.get(`api/class/${this.props.match.params.id}`).then(
 			chefInfoResponse => {
@@ -91,8 +127,16 @@ class ChefHomePage extends Component {
 		);
 	}
 
+	handleChange = (event, value) => {
+		this.setState({ value });
+	};
+
+	handleChangeIndex = index => {
+		this.setState({ value: index });
+	};
+
 	render() {
-		const { classes } = this.props;
+		const { classes, theme } = this.props;
 		return (
 			<div>
 				<ClassInfo {...this.state.chefsData} />
@@ -120,40 +164,100 @@ class ChefHomePage extends Component {
 					</Link>
 				</Box>
 
-				{/* //hour-lesson-skill bar */}
-				<div className={classes.iconsContainer}>
-					<div
-						style={{
-							borderRight: "0.1rem solid #ffffff",
-							paddingRight: "2rem"
-						}}
+				<div>
+					<Tabs
+						value={this.state.value}
+						onChange={this.handleChange}
+						indicatorColor="primary"
+						variant="fullWidth"
+						classes={{ root: classes.tabsRoot }}
 					>
-						<WatchLaterIcon className={classes.icon} />
-						<p>{this.state.chefsData.duration} hours</p>
-					</div>
-					<div className={classes.alignCenter}>
-						<PlayIcon className={classes.icon} />
-						<p>{this.state.chefsData.lessons.length} lessons</p>
-					</div>
-					<div
-						className={classes.alignRight}
-						style={{
-							borderLeft: "0.1rem solid #ffffff",
-							paddingLeft: "2rem"
-						}}
-					>
-						<CheckIcon className={classes.icon} />
-						<p>{this.state.chefsData.skills.length} skills</p>
-					</div>
-				</div>
+						<Tab
+							classes={{
+								root: classes.tabRoot,
+								selected: classes.tabSelected
+							}}
+							label="CLASS"
+						/>
+						<Tab
+							classes={{
+								root: classes.tabRoot,
+								selected: classes.tabSelected
+							}}
+							label="ABOUT"
+						/>
+					</Tabs>
 
-				{/* //Class description */}
-				<Box className={classes.classDesc}>
-					<p>{this.state.chefsData.description}</p>
-				</Box>
+					<SwipeableViews
+						axis={theme.direction === "rtl" ? "x-reverse" : "x"}
+						index={this.state.value}
+						onChangeIndex={this.handleChangeIndex}
+					>
+						<TabContainer dir={theme.direction}>
+							{/* //class tab */}
+							{/* //Class description */}
+							<Box className={classes.classDesc}>
+								<p>{this.state.chefsData.description}</p>
+							</Box>
+							{/* //hour-lesson-skill bar */}
+							<div className={classes.iconsContainer}>
+								<div
+									style={{
+										borderRight: "0.1rem solid #ffffff",
+										paddingRight: "2rem"
+									}}
+								>
+									<WatchLaterIcon className={classes.icon} />
+									<p>{this.state.chefsData.duration} hours</p>
+								</div>
+								<div className={classes.alignCenter}>
+									<PlayIcon className={classes.icon} />
+									<p>
+										{this.state.chefsData.lessons.length}{" "}
+										lessons
+									</p>
+								</div>
+								<div
+									className={classes.alignRight}
+									style={{
+										borderLeft: "0.1rem solid #ffffff",
+										paddingLeft: "2rem"
+									}}
+								>
+									<CheckIcon className={classes.icon} />
+									<p>
+										{this.state.chefsData.skills.length}{" "}
+										skills
+									</p>
+								</div>
+							</div>
+						</TabContainer>
+
+						<TabContainer dir={theme.direction}>
+							{/* //about tab */}
+							{/* //Class description */}
+							<Box className={classes.classDesc}>
+								<p>
+									<span>
+										Chef {this.state.chefsData.chefName}
+									</span>{" "}
+									is the chef/owner of 610 Magnolia, MilkWood,
+									and Whiskey Dry in Louisville, Kentucky.
+									Awarded “Best Book Of Year In Writing” by
+									the James Beard Foundation for "Buttermilk
+									Graffiti". He appears frequently in print
+									and on television, including earning an Emmy
+									nomination for his role in the Emmy
+									Award-winning series The Mind of a Chef.
+								</p>
+							</Box>
+						</TabContainer>
+					
+                    </SwipeableViews>
+				</div>
 			</div>
 		);
 	}
 }
 
-export default withStyles(styles)(ChefHomePage);
+export default withStyles(styles, { withTheme: true })(ChefHomePage);

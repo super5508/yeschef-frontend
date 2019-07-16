@@ -25,7 +25,7 @@ class HomePage extends Component {
         super(props);
 
         Axios.get('/api/classes').then(chefInfoResponse => {
-            console.log(chefInfoResponse);
+            // console.log(chefInfoResponse);
             this.setState({
                 ...this.state,
                 chefsDataArray: chefInfoResponse.data
