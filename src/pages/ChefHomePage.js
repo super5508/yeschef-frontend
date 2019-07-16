@@ -63,8 +63,7 @@ class ChefHomePage extends Component {
             chefsData: {}
         };
 		Axios.get(`api/class/${this.props.match.params.id}?prefetch=true`).then(
-			chefInfoResponse => {            console.log('dd',chefInfoResponse)
-
+			chefInfoResponse => {
 				this.setState({
 					...this.state,
 					chefsData: chefInfoResponse.data
