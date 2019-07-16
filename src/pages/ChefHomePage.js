@@ -93,19 +93,19 @@ const styles = theme => ({
 		left: "1.2rem"
 	},
 	tabsRoot: {
-        borderBottom: "0.01rem solid #929292",
-    },
-    tabRoot: {
-        color: '#929292',
-        fontWeight: 600,
-        paddingBottom:'0rem',
+		borderBottom: "0.01rem solid #929292"
+	},
+	tabRoot: {
+		color: "#929292",
+		fontWeight: 600,
+		paddingBottom: "0rem",
 
 		"&$tabSelected": {
-            color: "#ffffff",
-            fontSize: "1.4rem",
+			color: "#ffffff",
+			fontSize: "1.4rem"
 		}
-    },
-    tabSelected: {},
+	},
+	tabSelected: {}
 });
 class ChefHomePage extends Component {
 	constructor(props, context) {
@@ -241,19 +241,11 @@ class ChefHomePage extends Component {
 									<span>
 										Chef {this.state.chefsData.chefName}
 									</span>{" "}
-									is the chef/owner of 610 Magnolia, MilkWood,
-									and Whiskey Dry in Louisville, Kentucky.
-									Awarded “Best Book Of Year In Writing” by
-									the James Beard Foundation for "Buttermilk
-									Graffiti". He appears frequently in print
-									and on television, including earning an Emmy
-									nomination for his role in the Emmy
-									Award-winning series The Mind of a Chef.
+									{this.state.chefsData.about}
 								</p>
 							</Box>
 						</TabContainer>
-					
-                    </SwipeableViews>
+					</SwipeableViews>
 				</div>
 			</div>
 		);
