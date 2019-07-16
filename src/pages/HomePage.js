@@ -86,7 +86,6 @@ class HomePage extends Component {
 				{this.state.chefsDataArray.map(chefData => (
 					<div>
 						<Link to={"/class/" + chefData.id}>
-							\
 							<ClassInfo
 								key={chefData.id}
 								className={classes.class_info}

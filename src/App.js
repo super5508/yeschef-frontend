@@ -86,7 +86,7 @@ class App extends Component {
             <Route exact path="/myProfile" component={MyProfilePage}></Route>
             <Route exact path="/reset-password" component={ResetPassword}></Route>
             <Route exact path="/change-password" component={ChangePassword}></Route>
-            <Route path="/class/:id" render={(routeProps) => (<PlayerPage {...routeProps} mode='class' />)}></Route>
+            <Route path="/class/:id" render={(routeProps) => (<ChefHomePage {...routeProps} mode='class' />)}></Route>
             <BottomBar ></BottomBar>
           </div>
         </MuiThemeProvider>
