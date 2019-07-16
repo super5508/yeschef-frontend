@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PrimaryAppBar from './components/PrimaryAppBar';
 import ChefHomePage from './pages/ChefHomePage';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { connect } from "react-redux";
 import './assets/site.scss';
 import { BrowserRouter, Route ,withRouter} from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -16,6 +17,9 @@ import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
 import ResetPassword from './pages/ResetPassword';
 import ChangePassword from './pages/ChangePassword';
+import BetaPage from './pages/Beta';
+import CommunityPage from './pages/CommunityPage';
+const APP_ID = 'h6twy30k'
 
 const theme = createMuiTheme({
   overrides: {
@@ -59,14 +63,28 @@ const theme = createMuiTheme({
 });
 
 class App extends Component {
-  // componentDidMount() {
-  //   Axios.get('/api/chef/edward_lee/info').then(chefInfoResponse => {
-  //     this.setState(chefInfoResponse.data);
-  //   })
-
-  // }
-
+  constructor(props) {
+    super(props);
+    this.state= {}
+  }
+  componentDidMount() {
+    // Axios.get('/api/chef/edward_lee/info').then(chefInfoResponse => {
+    //   this.setState(chefInfoResponse.data);
+    // })
+  }
+  
   render() {
+    if(this.props.authStat.userProfile) {
+      console.log(this.props.authStat.userProfile.uid)
+      window.Intercom('update', {
+        app_id: APP_ID,
+        user_id : this.props.authStat.userProfile.uid,
+        name : this.props.authStat.userProfile.name,
+        email : this.props.authStat.userProfile.email,
+        created_at : Date.now()
+         //Website visitor so may not have any user related info
+       });
+    }
     //const chefsData = this.state || {};
  
 
@@ -86,8 +104,10 @@ class App extends Component {
             <Route exact path="/myProfile" component={MyProfilePage}></Route>
             <Route exact path="/reset-password" component={ResetPassword}></Route>
             <Route exact path="/change-password" component={ChangePassword}></Route>
+            <Route exact path="/community" component={CommunityPage}></Route>
+            <Route exact path="/beta" component={BetaPage}></Route>
             <Route path="/class/:id" render={(routeProps) => (<ChefHomePage {...routeProps} mode='class' />)}></Route>
-            <BottomBar ></BottomBar>
+            <BottomBar> </BottomBar>
           </div>
         </MuiThemeProvider>
       </BrowserRouter>
@@ -95,4 +115,10 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = (state, ownProps) => {
+	return {
+		...state.user
+	};
+};
+
+export default connect(mapStateToProps)(App);

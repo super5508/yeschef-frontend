@@ -1,5 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/styles";
+import IconButton from '@material-ui/core/IconButton';
+import LeftArrowIcon from '@material-ui/icons/KeyboardArrowLeft';
 
 const useStyles = makeStyles({
   tosCon: {
@@ -18,9 +20,17 @@ const useStyles = makeStyles({
       marginBottom: "-0.8rem"
     },
     "& h1": {
+      display:'flex',
+      flexDirection:'row',
+      alignContent:'center',
+      alignItems:'center',
+      marginLeft:'-1.5rem',
+      marginBottom:'0.5rem',
       fontSize: "1.8rem",
       fontWeight: 600,
-      margin: "0rem"
+    },
+    "& span": {
+      marginLeft:'-0.5rem'
     }
   },
   tosHead1: {
@@ -36,12 +46,20 @@ const useStyles = makeStyles({
   }
 });
 
-function TermsOfService() {
+function TermsOfService(props) {
   const classes = useStyles();
   return (
     //tos => termsOfService
     <div className={classes.tosCon}>
-      <h1>TERMS OF SERVICE</h1>
+      <h1>
+          <IconButton
+          onClick={() => {
+            props.history.push("/myProfile");
+          }}>
+            <LeftArrowIcon />
+          </IconButton>
+        <span>TERMS OF SERVICE</span>
+      </h1>
       <p className={classes.tosP2}>Date of Last Revision: July 15, 2018</p>
       <h2 className={classes.tosHead1}>WELCOME TO YESCHEF!</h2>
       <p>

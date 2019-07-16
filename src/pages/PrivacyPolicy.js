@@ -1,6 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/styles";
-
+import IconButton from '@material-ui/core/IconButton';
+import LeftArrowIcon from '@material-ui/icons/KeyboardArrowLeft';
 const useStyles = makeStyles({
   ppcCon: {
     padding: "2.4rem 2.4rem 5.0rem 2.4rem",
@@ -18,11 +19,20 @@ const useStyles = makeStyles({
       marginBottom: "-0.8rem"
     },
     "& h1": {
+      display:'flex',
+      flexDirection:'row',
+      alignContent:'center',
+      alignItems:'center',
+      marginLeft:'-1.5rem',
+      marginBottom:'0.5rem',
       fontSize: "1.8rem",
       fontWeight: 600,
-      margin: "0rem"
+    },
+    "& span": {
+      marginLeft:'-0.5rem'
     }
   },
+
   ppcHead1: {
     fontSize: "1.4rem !important",
     margin: "2rem 0rem 1rem 0rem !important"
@@ -37,12 +47,21 @@ const useStyles = makeStyles({
   }
 });
 
-function PrivacyPolicy() {
+function PrivacyPolicy(props) {
   const classes = useStyles();
   return (
     //ppc => privacyPolicyComponent
     <div className={classes.ppcCon}>
-      <h1>PRIVACY POLICY</h1>
+      
+      <h1>
+        <IconButton
+          onClick={() => {
+          props.history.push("/myProfile");
+          }}>
+        <LeftArrowIcon />
+      </IconButton>
+      <span>PRIVACY POLICY</span>
+      </h1>
       <p className={classes.ppcP1}>Date of Last Revision: July 15, 2018</p>
 
       <h2 className={classes.ppcHead1}>
