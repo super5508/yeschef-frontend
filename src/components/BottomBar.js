@@ -19,8 +19,23 @@ const styles = theme => ({
         width: '100%',
         position: 'fixed',
         fontSize: '2rem',
-        height: '4.8rem'
-    }
+        height: '4.8rem',
+
+        '& .MuiSvgIcon-root': {
+            width: '2.4rem',
+            height: '2.62rem',
+        },
+        '& .MuiBottomNavigationAction-label': {
+            fontSize: '1rem',
+            fontWeight: '300',
+        },
+
+        '& .Mui-selected': {
+            fontWeight: '600'
+        } 
+
+    },
+
 });
 
 class BottomBar extends Component {
