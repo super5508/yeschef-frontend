@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import { withRouter, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
@@ -12,7 +13,6 @@ import CommunityIcon from '@material-ui/icons/Forum'
 import BetaIcon from '@material-ui/icons/ChatBubble'
 import * as MainMenuActionCreator from './../store/actionCreators/MainMenuActionCtrators';
 
-
 const styles = theme => ({
     root: {
         bottom: 0,
@@ -24,16 +24,17 @@ const styles = theme => ({
 });
 
 class BottomBar extends Component {
-    constructor(props) {
-        super(props);
-    }
+	constructor(props) {
+		super(props);
+	}
+
 
     render() {
         const { classes } = this.props;
         let dom;
         const path = window.location.pathname;
         let navValue = path === '/' ? 'home' : path.slice(1)
-        if (this.props.mainMenu.visible) {
+        if (this.props.mainMenu.visible && this.props.location.pathname.slice(0, 6) !== "/class") {
             dom = (
                 <BottomNavigation
                     value={navValue}
@@ -77,9 +78,11 @@ class BottomBar extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    return {
-        ...state.mainMenu
-    }
-}
+	return {
+		...state.mainMenu
+	};
+};
 
-export default withRouter(connect(mapStateToProps)(withStyles(styles)(BottomBar)));
+export default withRouter(
+	connect(mapStateToProps)(withStyles(styles)(BottomBar))
+);

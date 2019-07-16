@@ -1,25 +1,23 @@
-import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Box from '@material-ui/core/Box';
-import { Link } from 'react-router-dom';
-import ClassInfo from '../components/ClassInfo';
-import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
-import Axios from '../common/AxiosMiddleware';
+import React, { Component } from "react";
+import { withStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
+import Box from "@material-ui/core/Box";
+import { Link } from "react-router-dom";
+import ClassInfo from "../components/ClassInfo";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+import Axios from "../common/AxiosMiddleware";
 
 const styles = theme => ({
-    container: {
-    },
-    margins: {
-        paddingLeft: '2.4rem',
-        paddingRight: '2.4rem',
-    },
-    cta_wrapper: {
-        paddingTop: '3.4rem',
-        paddingBottom: '3.9rem'
-    }
-
+	container: {},
+	margins: {
+		paddingLeft: "2.4rem",
+		paddingRight: "2.4rem"
+	},
+	cta_wrapper: {
+		paddingTop: "3.4rem",
+		paddingBottom: "3.9rem"
+	}
 });
 class HomePage extends Component {
     state = { chefsDataArray: [] };

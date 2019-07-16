@@ -25,7 +25,7 @@ const styles = theme => ({
 	},
 	backIcon: {
 		fontSize: "2.0rem",
-		margin: "0rem 0.2rem 0.2rem 1rem"
+		margin: "0rem 0rem 0.2rem 0rem"
 	},
 	submitBtn: {
 		height: "4.4rem",
