@@ -18,7 +18,8 @@ const styles = theme => ({
         bottom: 0,
         width: '100%',
         position: 'fixed',
-        fontSize: '2rem'
+        fontSize: '2rem',
+        height: '4.8rem'
     }
 });
 

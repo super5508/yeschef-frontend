@@ -23,7 +23,7 @@ const APP_ID = 'h6twy30k'
 
 const styles = theme => ({
   App: {
-    paddingBottom: '12rem'
+    paddingBottom: '8rem'
   },
 })
 
