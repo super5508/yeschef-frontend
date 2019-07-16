@@ -2,10 +2,6 @@ import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import Box from "@material-ui/core/Box";
-import IconButton from "@material-ui/core/IconButton";
-import CloseIcon from "@material-ui/icons/CloseRounded";
-import { Link } from "react-router-dom";
-
 
 const styles = theme => ({
 	container: {
@@ -22,20 +18,7 @@ const styles = theme => ({
 	chef_name: {
 		textTransform: "uppercase"
 	},
-	closeIcon: {
-		fontSize: "2rem"
-	},
-	iconBox: {
-		width: "2.4rem",
-		height: "2.4rem",
-		backgroundColor: "rgba(0, 0, 0, 0.17)",
-		display: "flex",
-		justifyContent: "center",
-		alignItems: "center",
-		position: "absolute",
-		top: "1.2rem",
-        left: "1.2rem",
-	}
+	
 });
 
 class ClassInfo extends Component {
@@ -48,16 +31,6 @@ class ClassInfo extends Component {
 					className={classes.background_img}
 					alt="Class thumbnail"
 				/>
-				{/* //if user is in chefHomePage */}
-				{this.props.showCross && (
-				<div className={classes.iconBox}>
-					<Link to="/" underline="none">
-					<IconButton aria-label="Close">
-						<CloseIcon className={classes.closeIcon} />
-					</IconButton>
-					</Link>
-				</div>
-				)}
 				<Box
 					display="flex"
 					alignItems="center"

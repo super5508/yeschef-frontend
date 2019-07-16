@@ -8,6 +8,8 @@ import PlayIcon from "@material-ui/icons/PlayCircleFilledRounded";
 import CheckIcon from "@material-ui/icons/CheckCircleRounded";
 import ClassInfo from "../components/ClassInfo";
 import { Link } from "react-router-dom";
+import IconButton from "@material-ui/core/IconButton";
+import CloseIcon from "@material-ui/icons/CloseRounded";
 
 const styles = theme => ({
 	iconsContainer: {
@@ -54,6 +56,20 @@ const styles = theme => ({
 		color: "rgba(255, 255, 255, 0.7)",
 		marginRight: "0.8rem",
 		marginTop: 0
+    },
+    closeIcon: {
+		fontSize: "2rem"
+	},
+	iconBox: {
+		width: "2.4rem",
+		height: "2.4rem",
+		backgroundColor: "rgba(0, 0, 0, 0.17)",
+		display: "flex",
+		justifyContent: "center",
+		alignItems: "center",
+		position: "absolute",
+		top: "1.2rem",
+        left: "1.2rem",
 	}
 });
 class ChefHomePage extends Component {
@@ -75,7 +91,16 @@ class ChefHomePage extends Component {
 
 		return (
 			<div>
-				<ClassInfo {...this.state.chefsData} showCross={true} />
+				<ClassInfo {...this.state.chefsData} />
+
+                {/* //close button */}
+				<div className={classes.iconBox}>
+					<Link to="/" underline="none">
+					<IconButton aria-label="Close">
+						<CloseIcon className={classes.closeIcon} />
+					</IconButton>
+					</Link>
+				</div>
 
 				{/* //'start the class' button  */}
 				<Box className={classes.btncon}>
