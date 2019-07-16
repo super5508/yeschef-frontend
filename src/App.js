@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PrimaryAppBar from './components/PrimaryAppBar';
 import ChefHomePage from './pages/ChefHomePage';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { MuiThemeProvider, createMuiTheme, withStyles } from '@material-ui/core/styles';
 import { connect } from "react-redux";
 import './assets/site.scss';
 import { BrowserRouter, Route ,withRouter} from 'react-router-dom';
@@ -20,6 +20,12 @@ import ChangePassword from './pages/ChangePassword';
 import BetaPage from './pages/Beta';
 import CommunityPage from './pages/CommunityPage';
 const APP_ID = 'h6twy30k'
+
+const styles = theme => ({
+  App: {
+    paddingBottom: '8rem'
+  },
+})
 
 const theme = createMuiTheme({
   overrides: {
@@ -59,7 +65,7 @@ const theme = createMuiTheme({
       disabled: '#fff',
       hint: '#fff'
     }
-  }
+  },
 });
 
 class App extends Component {
@@ -74,6 +80,8 @@ class App extends Component {
   }
   
   render() {
+    const { classes } = this.props;
+
     if(this.props.authStat.userProfile) {
       console.log(this.props.authStat.userProfile.uid)
       window.Intercom('update', {
@@ -92,7 +100,7 @@ class App extends Component {
       <BrowserRouter>
         <MuiThemeProvider theme={theme}>
           <CssBaseline />
-          <div className="App">
+          <div className={classes.App}>
             {/* <PrimaryAppBar></PrimaryAppBar> */}
 
             <Route exact path="/" render={(routeProps) => (<HomePage />)}></Route>
@@ -121,4 +129,4 @@ const mapStateToProps = (state, ownProps) => {
 	};
 };
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps)(withStyles(styles)(App));

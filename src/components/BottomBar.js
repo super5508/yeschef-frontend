@@ -14,12 +14,13 @@ import BetaIcon from '@material-ui/icons/ChatBubble'
 import * as MainMenuActionCreator from './../store/actionCreators/MainMenuActionCtrators';
 
 const styles = theme => ({
-	root: {
-		bottom: 0,
-		width: "100%",
-		position: "fixed",
-		fontSize: "2rem"
-	}
+    root: {
+        bottom: 0,
+        width: '100%',
+        position: 'fixed',
+        fontSize: '2rem',
+        height: '4.8rem'
+    }
 });
 
 class BottomBar extends Component {
