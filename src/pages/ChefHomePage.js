@@ -56,8 +56,8 @@ const styles = theme => ({
 		color: "rgba(255, 255, 255, 0.7)",
 		marginRight: "0.8rem",
 		marginTop: 0
-    },
-    closeIcon: {
+	},
+	closeIcon: {
 		fontSize: "2rem"
 	},
 	iconBox: {
@@ -69,38 +69,40 @@ const styles = theme => ({
 		alignItems: "center",
 		position: "absolute",
 		top: "1.2rem",
-        left: "1.2rem",
+		left: "1.2rem"
 	}
 });
 class ChefHomePage extends Component {
 	constructor(props, context) {
 		super(props);
-        this.state = {
-            chefsData: {
-                lessons:[],
-                skills:[],
-            }
-        };
+		this.state = {
+			chefsData: {
+				lessons: [],
+				skills: []
+			}
+		};
 		Axios.get(`api/class/${this.props.match.params.id}`).then(
-			chefInfoResponse => {           
+			chefInfoResponse => {
 				this.setState({
 					...this.state,
 					chefsData: chefInfoResponse.data
-				});}
-        );}
-        
+				});
+			}
+		);
+	}
+
 	render() {
 		const { classes } = this.props;
 		return (
 			<div>
 				<ClassInfo {...this.state.chefsData} />
 
-                {/* //close button */}
+				{/* //close button */}
 				<div className={classes.iconBox}>
 					<Link to="/" underline="none">
-					<IconButton aria-label="Close">
-						<CloseIcon className={classes.closeIcon} />
-					</IconButton>
+						<IconButton aria-label="Close">
+							<CloseIcon className={classes.closeIcon} />
+						</IconButton>
 					</Link>
 				</div>
 
@@ -147,9 +149,7 @@ class ChefHomePage extends Component {
 
 				{/* //Class description */}
 				<Box className={classes.classDesc}>
-					<p>
-                    {this.state.chefsData.description}
-					</p>
+					<p>{this.state.chefsData.description}</p>
 				</Box>
 			</div>
 		);
