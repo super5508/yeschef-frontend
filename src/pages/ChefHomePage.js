@@ -130,7 +130,7 @@ class ChefHomePage extends Component {
             value: 0,
             
 		};
-		Axios.get(`api/class/${this.props.match.params.id}`).then(
+		Axios.get(`/api/class/${this.props.match.params.id}`).then(
 			chefInfoResponse => {
 				console.log("d2", chefInfoResponse);
 				this.setState({
@@ -263,19 +263,19 @@ class ChefHomePage extends Component {
 							<Box className={classes.socialBtnsCon}>
                                 
                             {this.state.chefsData.social.twitter && (
-								<IconButton aria-label="Twitter" onClick={()=>{window.location.href = this.state.chefsData.social.twitter}}>
+								<IconButton aria-label="Twitter" onClick={()=>{window.open(this.state.chefsData.social.twitter,"_blank")}}>
 									<img src={TwitterIcon} />
 								</IconButton>
                             )}
 
                             {this.state.chefsData.social.instegram && (
-								<IconButton aria-label="Instagram" onClick={()=>{window.location.href = this.state.chefsData.social.instegram}}>
+								<IconButton aria-label="Instagram" onClick={()=>{window.open(this.state.chefsData.social.instegram,"_blank")}}>
 									<img src={InstagramIcon} />
 								</IconButton>
                             )}
 
                              {this.state.chefsData.social.facebook && (
-								<IconButton aria-label="Facebook" onClick={()=>{window.location.href = this.state.chefsData.social.facebook}}>
+								<IconButton aria-label="Facebook" onClick={()=>{window.open(this.state.chefsData.social.facebook,"_blank")}}>
 									<img src={FacebookIcon} />
 								</IconButton>
                             )}
