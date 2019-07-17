@@ -117,7 +117,7 @@ class ChefHomePage extends Component {
 			},
 			value: 0
 		};
-		Axios.get(`api/class/${this.props.match.params.id}`).then(
+		Axios.get(`/api/class/${this.props.match.params.id}`).then(
 			chefInfoResponse => {
 				this.setState({
 					...this.state,
