@@ -14,6 +14,9 @@ import SwipeableViews from "react-swipeable-views";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import PropTypes from "prop-types";
+import InstagramIcon from "../assets/images/instagram-icon.png";
+import FacebookIcon from "../assets/images/facebook-icon.svg";
+import TwitterIcon from "../assets/images/twitter-icon.svg";
 
 function TabContainer({ children, dir }) {
 	return (
@@ -105,7 +108,11 @@ const styles = theme => ({
 			fontSize: "1.4rem"
 		}
 	},
-	tabSelected: {}
+	tabSelected: {},
+	socialBtnsCon: {
+		display: "flex",
+        justifyContent: "center",
+    },
 });
 class ChefHomePage extends Component {
 	constructor(props, context) {
@@ -113,12 +120,19 @@ class ChefHomePage extends Component {
 		this.state = {
 			chefsData: {
 				lessons: [],
-				skills: []
+                skills: [],
+                social:{
+                    facebook: undefined,
+                    instegram: undefined,
+                    twitter: undefined,
+                }
 			},
-			value: 0
+            value: 0,
+            
 		};
 		Axios.get(`api/class/${this.props.match.params.id}`).then(
 			chefInfoResponse => {
+				console.log("d2", chefInfoResponse);
 				this.setState({
 					...this.state,
 					chefsData: chefInfoResponse.data
@@ -243,6 +257,28 @@ class ChefHomePage extends Component {
 									</span>{" "}
 									{this.state.chefsData.about}
 								</p>
+							</Box>
+
+							{/* //social icons */}
+							<Box className={classes.socialBtnsCon}>
+                                
+                            {this.state.chefsData.social.twitter && (
+								<IconButton aria-label="Twitter" onClick={()=>{window.location.href = this.state.chefsData.social.twitter}}>
+									<img src={TwitterIcon} />
+								</IconButton>
+                            )}
+
+                            {this.state.chefsData.social.instegram && (
+								<IconButton aria-label="Instagram" onClick={()=>{window.location.href = this.state.chefsData.social.instegram}}>
+									<img src={InstagramIcon} />
+								</IconButton>
+                            )}
+
+                             {this.state.chefsData.social.facebook && (
+								<IconButton aria-label="Facebook" onClick={()=>{window.location.href = this.state.chefsData.social.facebook}}>
+									<img src={FacebookIcon} />
+								</IconButton>
+                            )}
 							</Box>
 						</TabContainer>
 					</SwipeableViews>
