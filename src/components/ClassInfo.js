@@ -113,7 +113,6 @@ class ClassInfo extends Component {
             autoplay: true,
             controls: false,
             muted: true,
-            loop: true,
             poster : this.state.poster,
             sources: [{
               src: this.state.src,
