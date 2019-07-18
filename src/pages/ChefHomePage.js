@@ -17,6 +17,7 @@ import PropTypes from "prop-types";
 import InstagramIcon from "../assets/images/instagram-icon.png";
 import FacebookIcon from "../assets/images/facebook-icon.svg";
 import TwitterIcon from "../assets/images/twitter-icon.svg";
+import LessonInfo from "../components/LessonInfo";
 
 function TabContainer({ children, dir }) {
 	return (
@@ -47,6 +48,9 @@ const styles = theme => ({
 			display: "inline-block",
 			margin: 0
 		}
+	},
+	lessonsContainer: {
+		margin: "3rem 2.4rem"
 	},
 	alignCenter: {
 		justifyContent: "center"
@@ -111,8 +115,8 @@ const styles = theme => ({
 	tabSelected: {},
 	socialBtnsCon: {
 		display: "flex",
-        justifyContent: "center",
-    },
+		justifyContent: "center"
+	}
 });
 class ChefHomePage extends Component {
 	constructor(props, context) {
@@ -120,25 +124,24 @@ class ChefHomePage extends Component {
 		this.state = {
 			chefsData: {
 				lessons: [],
-                skills: [],
-                social:{
-                    facebook: undefined,
-                    instegram: undefined,
-                    twitter: undefined,
-                }
+				skills: [],
+				social: {
+					facebook: undefined,
+					instegram: undefined,
+					twitter: undefined
+				}
 			},
-            value: 0,
-            
+			value: 0
 		};
-		Axios.get(`/api/class/${this.props.match.params.id}`).then(
-			chefInfoResponse => {
-				console.log("d2", chefInfoResponse);
-				this.setState({
-					...this.state,
-					chefsData: chefInfoResponse.data
-				});
-			}
-		);
+		Axios.get(
+			`/api/class/${this.props.match.params.id}?prefetch=true`
+		).then(chefInfoResponse => {
+			// console.log("d2", chefInfoResponse);
+			this.setState({
+				...this.state,
+				chefsData: chefInfoResponse.data
+			});
+		});
 	}
 
 	handleChange = (event, value) => {
@@ -245,6 +248,25 @@ class ChefHomePage extends Component {
 									</p>
 								</div>
 							</div>
+
+							{/* //lessons list */}
+							<div className={classes.lessonsContainer}>
+								{this.state.chefsData.lessons.map(
+									(lessonData, id) => {
+										return (
+											<LessonInfo
+												key={`lessonNum${id}`}
+												lessonNum={id + 1}
+												duration={lessonData.duration}
+												title={lessonData.title}
+												thumbnail={lessonData.thimbnail}
+                                                commingSoon={lessonData.commingSoon}
+                                                history={this.props.history}
+											/>
+										);
+									}
+								)}
+							</div>
 						</TabContainer>
 
 						<TabContainer dir={theme.direction}>
@@ -261,24 +283,50 @@ class ChefHomePage extends Component {
 
 							{/* //social icons */}
 							<Box className={classes.socialBtnsCon}>
-                                
-                            {this.state.chefsData.social.twitter && (
-								<IconButton aria-label="Twitter" onClick={()=>{window.open(this.state.chefsData.social.twitter,"_blank")}}>
-									<img src={TwitterIcon} />
-								</IconButton>
-                            )}
+								{this.state.chefsData.social.twitter && (
+									<IconButton
+										aria-label="Twitter"
+										onClick={() => {
+											window.open(
+												this.state.chefsData.social
+													.twitter,
+												"_blank"
+											);
+										}}
+									>
+										<img src={TwitterIcon} />
+									</IconButton>
+								)}
 
-                            {this.state.chefsData.social.instegram && (
-								<IconButton aria-label="Instagram" onClick={()=>{window.open(this.state.chefsData.social.instegram,"_blank")}}>
-									<img src={InstagramIcon} />
-								</IconButton>
-                            )}
+								{this.state.chefsData.social.instegram && (
+									<IconButton
+										aria-label="Instagram"
+										onClick={() => {
+											window.open(
+												this.state.chefsData.social
+													.instegram,
+												"_blank"
+											);
+										}}
+									>
+										<img src={InstagramIcon} />
+									</IconButton>
+								)}
 
-                             {this.state.chefsData.social.facebook && (
-								<IconButton aria-label="Facebook" onClick={()=>{window.open(this.state.chefsData.social.facebook,"_blank")}}>
-									<img src={FacebookIcon} />
-								</IconButton>
-                            )}
+								{this.state.chefsData.social.facebook && (
+									<IconButton
+										aria-label="Facebook"
+										onClick={() => {
+											window.open(
+												this.state.chefsData.social
+													.facebook,
+												"_blank"
+											);
+										}}
+									>
+										<img src={FacebookIcon} />
+									</IconButton>
+								)}
 							</Box>
 						</TabContainer>
 					</SwipeableViews>
