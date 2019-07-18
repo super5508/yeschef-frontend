@@ -34,8 +34,11 @@ export default class TrailerVideo extends React.Component {
   render() {
     return (
       <div>	
-        <div data-vjs-player>
-          <video ref={ node => this.videoNode = node } poster={this.state.poster} className="video-js" width='450' height='auto'></video>
+        <div data-vjs-player style={{
+          width: "100%",
+          height:"100%"
+        }}>
+          <video ref={ node => this.videoNode = node } poster={this.state.poster} className="video-js" width='100%' height='auto'></video>
         </div>
       </div>
     )

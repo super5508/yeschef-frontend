@@ -10,7 +10,7 @@ const styles = theme => ({
         position:'fixed',
         top:'0',
         zIndex:'20',
-        height: 212,
+        height: '56vw',
         backgroundSize: 'cover',
         [theme.breakpoints.down('sm')]: {
             width: '100%'
@@ -71,7 +71,7 @@ const styles = theme => ({
     },
     video_container: {
         position:'relative',
-        height:'212'
+        height:'56vw'
     },
     mask_container: {
         width: '100%',
