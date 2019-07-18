@@ -4,8 +4,8 @@ import videojs from 'video.js'
 export default class TrailerVideo extends React.Component {
   constructor(props) {
     super(props);
-    this.state ={
-      poster : null
+    this.state = {
+      poster: null
     }
   }
 
@@ -17,10 +17,10 @@ export default class TrailerVideo extends React.Component {
 
   static getDerivedStateFromProps(props) {
     console.log(props)
-    if(props.poster) {
-        return {
-            poster: props.poster
-        }
+    if (props.poster) {
+      return {
+        poster: props.poster
+      }
     }
   }
 
@@ -30,16 +30,14 @@ export default class TrailerVideo extends React.Component {
       this.player.dispose()
     }
   }
-  
+
   render() {
     return (
-      <div>	
-        <div data-vjs-player style={{
-          width: "100%",
-          height:"100%"
-        }}>
-          <video ref={ node => this.videoNode = node } poster={this.state.poster} className="video-js" width='100%' height='auto'></video>
-        </div>
+      <div data-vjs-player style={{
+        width: "100%",
+        height: "99%"
+      }}>
+        <video ref={node => this.videoNode = node} poster={this.state.poster} className="video-js" width='100%' height='auto'></video>
       </div>
     )
   }
