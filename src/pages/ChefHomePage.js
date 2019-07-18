@@ -59,12 +59,11 @@ const styles = theme => ({
 		justifyContent: "flex-end"
 	},
 	startBtn: {
-		height: "5.6rem",
 		borderRadius: "0.6rem",
 		width: "32.7rem",
 		fontSize: "1.4rem",
 		fontWeight: 600,
-		padding: 0
+		padding: '1.8rem 0rem',
 	},
 	btncon: {
 		margin: "2.4rem 0rem 0.8rem 0rem",
