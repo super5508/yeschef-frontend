@@ -59,7 +59,7 @@ const styles = theme => ({
 		fontWeight: 600
 	},
 	btncon: {
-		margin: "24.5rem 0rem 0.8rem 0rem",
+		margin: "26.5rem 0rem 0.8rem 0rem",
 		textAlign: "center"
 	},
 	classDesc: {

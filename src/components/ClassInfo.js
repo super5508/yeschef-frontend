@@ -26,9 +26,9 @@ const styles = theme => ({
         [theme.breakpoints.down('sm')]: {
             width: '100%'
         },
-        [theme.breakpoints.up('sm')]: {
-            width: '33%'
-        },
+        // [theme.breakpoints.up('sm')]: {
+        //     width: '33%'
+        // },
     },
     background_img: {
         width: '100%'
@@ -113,6 +113,8 @@ class ClassInfo extends Component {
             autoplay: true,
             controls: false,
             muted: true,
+            loadingSpinner: false,
+            errorDisplay: false,
             poster : this.state.poster,
             sources: [{
               src: this.state.src,
