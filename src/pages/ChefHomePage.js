@@ -61,12 +61,11 @@ const styles = theme => ({
 	startBtn: {
 		height: "4.4rem",
 		borderRadius: "0.6rem",
-		width: "32.7rem",
 		fontSize: "1.4rem",
 		fontWeight: 600
 	},
 	btncon: {
-		margin: "26.5rem 0rem 0.8rem 0rem",
+		margin: "26.5rem 2.4rem 0.8rem 2.4rem",
 		textAlign: "center"
 	},
 	classDesc: {
@@ -116,6 +115,11 @@ const styles = theme => ({
 	socialBtnsCon: {
 		display: "flex",
 		justifyContent: "center"
+	},
+	fullWidth_button:{
+		width:'100%',
+		height:'5.6rem',
+		borderRadius:'6px',
 	}
 });
 class ChefHomePage extends Component {
@@ -172,7 +176,7 @@ class ChefHomePage extends Component {
 					<Link to={"/"} style={{ textDecoration: "none" }}>
 						<Button
 							variant="contained"
-							className={classes.startBtn}
+							className={classes.startBtn + ' ' + classes.fullWidth_button}
 							color="primary"
 							// onClick={#}
 						>

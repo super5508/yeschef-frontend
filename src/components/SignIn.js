@@ -25,23 +25,16 @@ const CssTextField = withStyles({
 
 const styles = theme => ({
   container: {
-    "& button": {
-      height: "5.6rem"
-    },
     "& .Mui-focused fieldset": {
       borderColor: "white"
     }
   },
   loginWith: {
-    flexDirection: "row",
+    flexDirection: "column",
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    height: "4.4rem",
-    marginBottom: "3.5rem",
-    "& button": {
-      width: "155px"
-    }
+    marginBottom: "3.5rem"
   },
   textFieldLabel: {
     fontSize: "1.4rem",
@@ -53,13 +46,14 @@ const styles = theme => ({
   fbButton: {
     backgroundColor: "#4367b2",
     color: "white",
-    paddingRight: "1.2rem",
-    paddingLeft: "1.2rem"
+    paddingRight: "1.5rem",
+    paddingLeft: "1.5rem"
   },
   googleButton: {
     backgroundColor: "white",
     paddingRight: "1.5rem",
-    paddingLeft: "1.5rem"
+    paddingLeft: "1.5rem",
+    marginTop: '1.6rem'
   },
   signInBtn: {
     marginTop: "1.6rem",
@@ -73,7 +67,12 @@ const styles = theme => ({
   },
   grayText: {
     color: "#929292"
-  }
+  },
+  fullWidth_button:{
+		width:'100%',
+		height:'5.6rem',
+		borderRadius:'6px'
+	}
 });
 
 class SignIn extends Component {
@@ -161,28 +160,28 @@ class SignIn extends Component {
         <Box className={classes.loginWith}>
           <Button
             variant="contained"
-            className={classes.fbButton}
+            className={classes.fbButton + ' ' + classes.fullWidth_button}
             size="large"
             onClick={() => this.signInWith("facebook")}
           >
             <Box pr="0.7rem" display="flex">
               <img src={fbLogo} alt="Facebook Logo" />
             </Box>
-            <Box fontSize="1.2rem" fontWeight="600">
+            <Box fontSize="1.4rem" fontWeight="600">
               USE FACEBOOK
             </Box>
           </Button>
 
           <Button
             variant="contained"
-            className={classes.googleButton}
+            className={classes.googleButton + ' ' + classes.fullWidth_button}
             size="large"
             onClick={() => this.signInWith("google")}
           >
             <Box pr="0.7rem" display="flex">
               <img src={googleLogo} alt="Google Logo" />
             </Box>
-            <Box fontSize="1.2rem" fontWeight="600">
+            <Box fontSize="1.4rem" fontWeight="600">
               USE GOOGLE
             </Box>
           </Button>
@@ -231,7 +230,7 @@ class SignIn extends Component {
           <Button
             variant="contained"
             color="primary"
-            className={classes.signInBtn}
+            className={classes.signInBtn + ' ' + classes.fullWidth_button}
             onClick={this.submitLogin}
           >
             <Box fontWeight="600" fontSize="1.4rem">

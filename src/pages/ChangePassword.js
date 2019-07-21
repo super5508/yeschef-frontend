@@ -28,14 +28,17 @@ const styles = theme => ({
 		margin: "0rem 0rem 0.2rem 0rem"
 	},
 	submitBtn: {
-		height: "4.4rem",
 		borderRadius: "0.6rem",
-		width: "32.7rem",
 		fontSize: "1.4rem",
 		fontWeight: 600
 	},
 	btncon: {
 		marginTop: "1.5rem"
+	},
+	fullWidth_button:{
+		width:'100%',
+		height:'5.6rem',
+		borderRadius:'6px',
 	}
 });
 
@@ -242,7 +245,7 @@ class ChangePassword extends Component {
 						<Box className={classes.btncon}>
 							<Button
 								variant="contained"
-								className={classes.submitBtn}
+								className={classes.submitBtn + ' ' + classes.fullWidth_button}
 								color="primary"
 								onClick={this.submitPassword}
 							>

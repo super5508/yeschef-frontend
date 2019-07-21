@@ -66,6 +66,11 @@ const useStyles = makeStyles({
 		fontSize: "2rem",
 		fontWeight: 600,
 		color: "#ffffff"
+	},
+	fullWidth_button:{
+		width:'100%',
+		height:'5.6rem',
+		borderRadius:'6px'
 	}
 });
 
@@ -129,14 +134,17 @@ const styles = theme => ({
 		fontWeight: 300
 	},
 	resetBtn: {
-		height: "4.4rem",
 		borderRadius: "0.6rem",
-		width: "32.7rem",
 		fontSize: "1.4rem",
 		fontWeight: 600
 	},
 	btncon: {
 		marginTop: "1.5rem"
+	},
+	fullWidth_button:{
+		width:'100%',
+		height:'5.6rem',
+		borderRadius:'6px'
 	}
 });
 
@@ -216,7 +224,7 @@ class ResetPassword extends Component {
 						<Box className={classes.btncon}>
 							<Button
 								variant="contained"
-								className={classes.resetBtn}
+								className={classes.resetBtn + ' ' + classes.fullWidth_button}
 								color="primary"
 								onClick={this.resetPassword}
 							>

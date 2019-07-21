@@ -25,23 +25,16 @@ const CssTextField = withStyles({
 
 const styles = theme => ({
     container: {
-        '& button': {
-            height: '5.6rem'
-        },
         '& .Mui-focused fieldset': {
             borderColor: 'white',
         },
     },
     loginWith: {
-        flexDirection: "row",
+        flexDirection: "column",
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
-        height: "4.4rem",
         marginBottom: "3.5rem",
-        '& button': {
-            width: "155px"
-        }
     },
     dense: {
         marginTop: 19,
@@ -60,12 +53,13 @@ const styles = theme => ({
         backgroundColor: "#4367b2",
         color: "white",
         paddingRight: "1.2rem",
-        paddingLeft: "1.2rem"
+		paddingLeft: "1.2rem"
     },
     googleButton: {
         backgroundColor: "white",
         paddingRight: "1.5rem",
-        paddingLeft: "1.5rem"
+		paddingLeft: "1.5rem",
+		marginTop:'1.6rem'
     },
     signUpBtn: {
         marginTop: '1.6rem',
@@ -83,7 +77,12 @@ const styles = theme => ({
     },
     grayText: {
         color: "#929292"
-    }
+	},
+	fullWidth_button:{
+		width:'100%',
+		height:'5.6rem',
+		borderRadius:'6px'
+	}
 });
 
 class SignUp extends Component {
@@ -169,28 +168,28 @@ class SignUp extends Component {
 				<Box className={classes.loginWith}>
 					<Button
 						variant="contained"
-						className={classes.fbButton}
+						className={classes.fbButton + ' ' + classes.fullWidth_button}
 						size="large"
 						onClick={() => this.signUpWith("facebook")}
 					>
 						<Box pr="0.7rem" display="flex">
 							<img src={fbLogo} alt="Facebook Logo" />
 						</Box>
-						<Box fontSize="1.2rem" fontWeight="600">
+						<Box fontSize="1.4rem" fontWeight="600">
 							USE FACEBOOK
 						</Box>
 					</Button>
 
 					<Button
 						variant="contained"
-						className={classes.googleButton}
+						className={classes.googleButton + ' ' + classes.fullWidth_button}
 						size="large"
 						onClick={() => this.signUpWith("google")}
 					>
 						<Box pr="0.7rem" display="flex">
 							<img src={googleLogo} alt="Google Logo" />
 						</Box>
-						<Box fontSize="1.2rem" fontWeight="600">
+						<Box fontSize="1.4rem" fontWeight="600">
 							USE GOOGLE
 						</Box>
 					</Button>
@@ -250,7 +249,7 @@ class SignUp extends Component {
 					<Button
 						variant="contained"
 						color="primary"
-						className={classes.signUpBtn}
+						className={classes.signUpBtn + ' ' + classes.fullWidth_button}
 						onClick={this.submitSignUp}
 					>
 						<Box fontWeight="600" fontSize="1.4rem">
