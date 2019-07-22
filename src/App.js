@@ -30,8 +30,10 @@ const styles = theme => ({
 const theme = createMuiTheme({
   overrides: {
     MuiButton: { // Name of the component ⚛️ / style sheet
-      text: { // Name of the rule
-        //color: 'white', // Some CSS
+      root: { // Name of the rule
+        width: '100%',
+        height:'5.6rem',
+        borderRadius:'0.6rem',
       },
     }
   },
