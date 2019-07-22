@@ -59,11 +59,11 @@ const styles = theme => ({
 		justifyContent: "flex-end"
 	},
 	startBtn: {
-		height: "4.4rem",
 		borderRadius: "0.6rem",
 		width: "32.7rem",
 		fontSize: "1.4rem",
-		fontWeight: 600
+		fontWeight: 600,
+		padding: '1.8rem 0rem',
 	},
 	btncon: {
 		margin: "26.5rem 0rem 0.8rem 0rem",
@@ -212,16 +212,13 @@ class ChefHomePage extends Component {
 					>
 						<TabContainer dir={theme.direction}>
 							{/* //class tab */}
-							{/* //Class description */}
-							<Box className={classes.classDesc}>
-								<p>{this.state.chefsData.description}</p>
-							</Box>
+
 							{/* //hour-lesson-skill bar */}
 							<div className={classes.iconsContainer}>
 								<div
 									style={{
 										borderRight: "0.1rem solid #ffffff",
-										paddingRight: "2rem"
+										width:'32%',
 									}}
 								>
 									<WatchLaterIcon className={classes.icon} />
@@ -238,7 +235,7 @@ class ChefHomePage extends Component {
 									className={classes.alignRight}
 									style={{
 										borderLeft: "0.1rem solid #ffffff",
-										paddingLeft: "2rem"
+										width:'32%',
 									}}
 								>
 									<CheckIcon className={classes.icon} />
@@ -248,6 +245,11 @@ class ChefHomePage extends Component {
 									</p>
 								</div>
 							</div>
+
+							{/* //Class description */}
+							<Box className={classes.classDesc}>
+								<p>{this.state.chefsData.description}</p>
+							</Box>
 
 							{/* //lessons list */}
 							<div className={classes.lessonsContainer}>
@@ -260,8 +262,10 @@ class ChefHomePage extends Component {
 												duration={lessonData.duration}
 												title={lessonData.title}
 												thumbnail={lessonData.thimbnail}
-                                                commingSoon={lessonData.commingSoon}
-                                                history={this.props.history}
+												commingSoon={
+													lessonData.commingSoon
+												}
+												history={this.props.history}
 											/>
 										);
 									}
