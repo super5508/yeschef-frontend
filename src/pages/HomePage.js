@@ -17,6 +17,11 @@ const styles = theme => ({
 	cta_wrapper: {
 		paddingTop: "3.4rem",
 		paddingBottom: "3.9rem"
+    },
+    fullWidth_button:{
+		width:'100%',
+		height:'5.6rem',
+		borderRadius:'0.6rem'
 	}
 });
 class HomePage extends Component {
@@ -41,7 +46,7 @@ class HomePage extends Component {
                     <Box fontWeight="fontWeightBold" fontSize="1.8rem" pb={1}>Access the knowledge, secrets and tricks of the world’s best chefs</Box>
                     <Box fontWeight="fontWeightLight" fontSize="1.6rem" pb={1.6}>Get unlimited access to an ever-growing library of exclusive classes</Box>
                     {/* <Link to="/signup" underline="none"> */}
-                    <Button component={Link} to="/signup" size="large" variant="contained" color="primary" className={classes.button} >
+                    <Button component={Link} to="/signup" size="large" variant="contained" color="primary" className={classes.button + ' ' + classes.fullWidth_button} >
                         <Box fontWeight="fontWeightBold" fontSize="1.4rem">
                             GET ACCESS
                         </Box>

@@ -123,7 +123,7 @@ class ClassInfo extends Component {
 
         const { classes } = this.props;
         return (
-            <Link to={"/class/" + this.props.id} style={{ textDecoration: 'none' }}>
+            <Link to={"/class/" + this.props.id} className='link' style={{ textDecoration: 'none' }}>
                 {
                 this.props.showTrailer ?  
                 <Paper className={classes.container2}>
