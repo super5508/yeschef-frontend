@@ -66,7 +66,7 @@ const styles = theme => ({
 		padding: '1.8rem 0rem',
 	},
 	btncon: {
-		margin: "2.4rem 0rem 0.8rem 0rem",
+		margin: "26.5rem 0rem 0.8rem 0rem",
 		textAlign: "center"
 	},
 	classDesc: {
@@ -156,7 +156,7 @@ class ChefHomePage extends Component {
 		const { classes, theme } = this.props;
 		return (
 			<div>
-				<ClassInfo {...this.state.chefsData} />
+				<ClassInfo {...this.state.chefsData} showTrailer={true}/>
 
 				{/* //close button */}
 				<div className={classes.iconBox}>
