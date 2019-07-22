@@ -156,7 +156,8 @@ class ChefHomePage extends Component {
 		const { classes, theme } = this.props;
 		return (
 			<div>
-				<ClassInfo {...this.state.chefsData} showTrailer={true}/>
+				<ClassInfo {...this.state.chefsData} showTrailer={true}  styleContent={{position:'fixed',top:'0',zIndex:'20'}}/>
+
 
 				{/* //close button */}
 				<div className={classes.iconBox}>
