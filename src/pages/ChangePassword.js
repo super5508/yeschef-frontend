@@ -38,7 +38,7 @@ const styles = theme => ({
 	fullWidth_button:{
 		width:'100%',
 		height:'5.6rem',
-		borderRadius:'6px',
+		borderRadius:'0.6rem',
 	}
 });
 
