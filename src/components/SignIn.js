@@ -67,12 +67,7 @@ const styles = theme => ({
   },
   grayText: {
     color: "#929292"
-  },
-  fullWidth_button:{
-		width:'100%',
-		height:'5.6rem',
-		borderRadius:'0.6rem'
-	}
+  }
 });
 
 class SignIn extends Component {
@@ -160,7 +155,7 @@ class SignIn extends Component {
         <Box className={classes.loginWith}>
           <Button
             variant="contained"
-            className={classes.fbButton + ' ' + classes.fullWidth_button}
+            className={classes.fbButton}
             size="large"
             onClick={() => this.signInWith("facebook")}
           >
@@ -174,7 +169,7 @@ class SignIn extends Component {
 
           <Button
             variant="contained"
-            className={classes.googleButton + ' ' + classes.fullWidth_button}
+            className={classes.googleButton}
             size="large"
             onClick={() => this.signInWith("google")}
           >
@@ -230,7 +225,7 @@ class SignIn extends Component {
           <Button
             variant="contained"
             color="primary"
-            className={classes.signInBtn + ' ' + classes.fullWidth_button}
+            className={classes.signInBtn}
             onClick={this.submitLogin}
           >
             <Box fontWeight="600" fontSize="1.4rem">

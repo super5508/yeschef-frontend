@@ -7,6 +7,8 @@ import TrailerVideo from './TrailerVideo';
 
 const styles = theme => ({
     container: {
+        top: '0',
+        zIndex:'20',
         height: '57vw',
         backgroundSize: 'cover',
         [theme.breakpoints.down('sm')]: {
@@ -135,7 +137,7 @@ class ClassInfo extends Component {
                     </div>
                 </Paper>
                 :
-                <Paper className={classes.container} style={{ backgroundImage: 'url(' + this.props.chefImg + ')',...this.props.styleContent}}>
+                <Paper className={classes.container} style={{ backgroundImage: 'url(' + this.props.chefImg + ')', position: this.props.position }}>
                     <Box className={classes.mask_container} style={this.comingSoonOpacityStyle }>
                         < Box className={classes.info_container} style={this.comingSoonTextStyle}>
                             <Box fontWeight="fontWeightBold" className={classes.chef_name}>Chef {this.props.chefName}</Box>
