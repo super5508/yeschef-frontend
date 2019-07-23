@@ -152,4 +152,8 @@ class ClassInfo extends Component {
     }
 }
 
+ClassInfo.defaultProps = {
+    position: 'none'
+}
+
 export default withStyles(styles)(ClassInfo);

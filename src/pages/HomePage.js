@@ -51,7 +51,7 @@ class HomePage extends Component {
                 <Box fontWeight="fontWeightBold" fontSize="1.8rem" pb={1.4} className={`${classes.margins}`}>
                     OUR CLASSES
                 </Box>
-                {this.state.chefsDataArray.map(chefData => <Box pb="2.4rem"><ClassInfo position={'none'} key={chefData.id} className={classes.class_info} {...chefData}></ClassInfo></Box>)}
+                {this.state.chefsDataArray.map(chefData => <Box pb="2.4rem"><ClassInfo key={chefData.id} className={classes.class_info} {...chefData}></ClassInfo></Box>)}
             </Box>
         )
     };
