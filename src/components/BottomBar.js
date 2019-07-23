@@ -49,7 +49,7 @@ class BottomBar extends Component {
         let dom;
         const path = window.location.pathname;
         let navValue = path === '/' ? 'home' : path.slice(1)
-        if (this.props.mainMenu.visible && this.props.location.pathname.slice(0, 6) !== "/class") {
+        if (this.props.mainMenu.visible && this.props.location.pathname.slice(0, 6) !== "/class" && this.props.location.pathname.slice(0, 7) !== "/lesson") {
             dom = (
                 <BottomNavigation
                     value={navValue}

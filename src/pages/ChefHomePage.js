@@ -18,6 +18,7 @@ import InstagramIcon from "../assets/images/instagram-icon.png";
 import FacebookIcon from "../assets/images/facebook-icon.svg";
 import TwitterIcon from "../assets/images/twitter-icon.svg";
 import LessonInfo from "../components/LessonInfo";
+import { Element, animateScroll as scroll, scroller } from "react-scroll";
 
 function TabContainer({ children, dir }) {
 	return (
@@ -62,7 +63,7 @@ const styles = theme => ({
 		borderRadius: "0.6rem",
 		fontSize: "1.4rem",
 		fontWeight: 600,
-		padding: '1.8rem 0rem',
+		padding: "1.8rem 0rem"
 	},
 	btncon: {
 		margin: "26.5rem 2.4rem 0.8rem 2.4rem",
@@ -116,10 +117,10 @@ const styles = theme => ({
 		display: "flex",
 		justifyContent: "center"
 	},
-	fullWidth_button:{
-		width:'100%',
-		height:'5.6rem',
-		borderRadius:'0.6rem',
+	fullWidth_button: {
+		width: "100%",
+		height: "5.6rem",
+		borderRadius: "0.6rem"
 	}
 });
 class ChefHomePage extends Component {
@@ -137,6 +138,7 @@ class ChefHomePage extends Component {
 			},
 			value: 0
 		};
+
 		Axios.get(
 			`/api/class/${this.props.match.params.id}?prefetch=true`
 		).then(chefInfoResponse => {
@@ -145,6 +147,7 @@ class ChefHomePage extends Component {
 				...this.state,
 				chefsData: chefInfoResponse.data
 			});
+			this.scrollToLesson();
 		});
 	}
 
@@ -156,13 +159,23 @@ class ChefHomePage extends Component {
 		this.setState({ value: index });
 	};
 
+	scrollToLesson = () => {
+		// console.log("state", this.props.location.state);
+		if (this.props.location.state) {
+			scroller.scrollTo(`lessonNum${this.props.location.state}`, {
+				duration: 0,
+				delay: 0,
+				smooth: "false",
+				offset: -300, 
+			});
+		}
+	};
+
 	render() {
 		const { classes, theme } = this.props;
 		return (
 			<div>
-				<ClassInfo {...this.state.chefsData} showTrailer={true}/>
-
-				{/* //close button */}
+				<ClassInfo {...this.state.chefsData} showTrailer={true} />
 				<div className={classes.iconBox}>
 					<Link to="/" underline="none">
 						<IconButton aria-label="Close">
@@ -176,7 +189,11 @@ class ChefHomePage extends Component {
 					<Link to={"/"} style={{ textDecoration: "none" }}>
 						<Button
 							variant="contained"
-							className={classes.startBtn + ' ' + classes.fullWidth_button}
+							className={
+								classes.startBtn +
+								" " +
+								classes.fullWidth_button
+							}
 							color="primary"
 							// onClick={#}
 						>
@@ -184,7 +201,6 @@ class ChefHomePage extends Component {
 						</Button>
 					</Link>
 				</Box>
-
 				<div>
 					<Tabs
 						value={this.state.value}
@@ -222,7 +238,7 @@ class ChefHomePage extends Component {
 								<div
 									style={{
 										borderRight: "0.1rem solid #ffffff",
-										width:'32%',
+										width: "32%"
 									}}
 								>
 									<WatchLaterIcon className={classes.icon} />
@@ -239,7 +255,7 @@ class ChefHomePage extends Component {
 									className={classes.alignRight}
 									style={{
 										borderLeft: "0.1rem solid #ffffff",
-										width:'32%',
+										width: "32%"
 									}}
 								>
 									<CheckIcon className={classes.icon} />
@@ -254,23 +270,33 @@ class ChefHomePage extends Component {
 							<Box className={classes.classDesc}>
 								<p>{this.state.chefsData.description}</p>
 							</Box>
-
 							{/* //lessons list */}
 							<div className={classes.lessonsContainer}>
 								{this.state.chefsData.lessons.map(
 									(lessonData, id) => {
 										return (
-											<LessonInfo
+											<Element
 												key={`lessonNum${id}`}
-												lessonNum={id + 1}
-												duration={lessonData.duration}
-												title={lessonData.title}
-												thumbnail={lessonData.thimbnail}
-												commingSoon={
-													lessonData.commingSoon
-												}
-												history={this.props.history}
-											/>
+												name={`lessonNum${id + 1}`}
+												className="element"
+											>
+												<LessonInfo
+													key={`lessonNum${id}`}
+													lessonNum={id + 1}
+													duration={
+														lessonData.duration
+													}
+													title={lessonData.title}
+													thumbnail={
+														lessonData.thimbnail
+													}
+													commingSoon={
+														lessonData.commingSoon
+													}
+													history={this.props.history}
+													match={this.props.match}
+												/>
+											</Element>
 										);
 									}
 								)}

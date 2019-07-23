@@ -8,7 +8,7 @@ import { BrowserRouter, Route ,withRouter} from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import SignIn from './components/SignIn';
 import SignOut from './components/SignOut';
-import PlayerPage from './pages/PlayerPage';
+import LessonPage from './pages/LessonPage';
 //import Axios from 'axios';
 import BottomBar from './components/BottomBar';
 import HomePage from './pages/HomePage';
@@ -19,6 +19,7 @@ import ResetPassword from './pages/ResetPassword';
 import ChangePassword from './pages/ChangePassword';
 import BetaPage from './pages/Beta';
 import CommunityPage from './pages/CommunityPage';
+
 const APP_ID = 'h6twy30k'
 
 const styles = theme => ({
@@ -117,6 +118,7 @@ class App extends Component {
             <Route exact path="/community" component={CommunityPage}></Route>
             <Route exact path="/beta" component={BetaPage}></Route>
             <Route path="/class/:id" render={(routeProps) => (<ChefHomePage {...routeProps} mode='class' />)}></Route>
+            <Route path="/lesson/:id/:id" render={(routeProps) => (<LessonPage {...routeProps} />)}></Route>
             <BottomBar> </BottomBar>
           </div>
         </MuiThemeProvider>
