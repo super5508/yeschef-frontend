@@ -115,11 +115,6 @@ const styles = theme => ({
 	socialBtnsCon: {
 		display: "flex",
 		justifyContent: "center"
-	},
-	fullWidth_button:{
-		width:'100%',
-		height:'5.6rem',
-		borderRadius:'0.6rem',
 	}
 });
 class ChefHomePage extends Component {
@@ -160,7 +155,8 @@ class ChefHomePage extends Component {
 		const { classes, theme } = this.props;
 		return (
 			<div>
-				<ClassInfo {...this.state.chefsData} showTrailer={true}/>
+				<ClassInfo {...this.state.chefsData} showTrailer={false} fixed />
+
 
 				{/* //close button */}
 				<div className={classes.iconBox}>
@@ -176,7 +172,7 @@ class ChefHomePage extends Component {
 					<Link to={"/"} style={{ textDecoration: "none" }}>
 						<Button
 							variant="contained"
-							className={classes.startBtn + ' ' + classes.fullWidth_button}
+							className={classes.startBtn}
 							color="primary"
 							// onClick={#}
 						>
