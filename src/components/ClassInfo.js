@@ -29,6 +29,9 @@ const styles = theme => ({
         //     width: '33%'
         // },
     },
+    fix_position_container:{
+        position: 'fixed'
+    },
     background_img: {
         width: '100%'
 
@@ -137,7 +140,7 @@ class ClassInfo extends Component {
                     </div>
                 </Paper>
                 :
-                <Paper className={classes.container} style={{ backgroundImage: 'url(' + this.props.chefImg + ')', position: this.props.position }}>
+                <Paper className={(this.props.fixed && classes.fix_position_container) + ' ' + classes.container } style={{ backgroundImage: 'url(' + this.props.chefImg + ')' }}>
                     <Box className={classes.mask_container} style={this.comingSoonOpacityStyle }>
                         < Box className={classes.info_container} style={this.comingSoonTextStyle}>
                             <Box fontWeight="fontWeightBold" className={classes.chef_name}>Chef {this.props.chefName}</Box>
@@ -150,10 +153,6 @@ class ClassInfo extends Component {
             </Link>
         );
     }
-}
-
-ClassInfo.defaultProps = {
-    position: 'none'
 }
 
 export default withStyles(styles)(ClassInfo);

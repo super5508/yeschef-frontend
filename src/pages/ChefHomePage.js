@@ -155,7 +155,7 @@ class ChefHomePage extends Component {
 		const { classes, theme } = this.props;
 		return (
 			<div>
-				<ClassInfo {...this.state.chefsData} showTrailer={false} position={'fixed'}/>
+				<ClassInfo {...this.state.chefsData} showTrailer={false} fixed />
 
 
 				{/* //close button */}
