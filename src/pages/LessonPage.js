@@ -166,7 +166,7 @@ class LessonPage extends Component {
 
 		Axios.get(`/api/lesson/l0${this.props.match.params.id}`).then(
 			chefInfoResponse => {
-				console.log("d3", chefInfoResponse);
+				// console.log("d3", chefInfoResponse);
 				this.setState({
 					...this.state,
 					chefsData: chefInfoResponse.data,
@@ -191,14 +191,14 @@ class LessonPage extends Component {
 					let minutes = Number(data[key]) % 60;
 					string =
 						string +
-						key +
+						this.firstLetterToCapital(key) +
 						": " +
 						hours +
 						" hrs " +
 						minutes +
 						" min | ";
 				} else {
-					string = string + key + ": " + data[key] + " min | ";
+					string = string + this.firstLetterToCapital(key) + ": " + data[key] + " min | ";
 				}
 			}
 		}
@@ -222,7 +222,7 @@ class LessonPage extends Component {
 		let data = this.state.chefsData.skils;
 		let string = "";
 		data.map((lessonData, id) => {
-			string = string + lessonData + " | ";
+			string = string + this.firstLetterToCapital(lessonData) + " | ";
 		});
 		string = string.slice(0, string.length - 2);
 		this.setState({
@@ -233,6 +233,44 @@ class LessonPage extends Component {
 	handleChange = (event, value) => {
 		this.setState({ value });
 	};
+
+	decimalToFraction = (amount) =>{
+			// This is a whole number and doesn't need modification.
+	if ( parseFloat( amount ) === parseInt( amount ) ) {
+		return amount;
+	}
+	// Next 12 lines are cribbed from https://stackoverflow.com/a/23575406.
+	var gcd = function(a, b) {
+		if (b < 0.0000001) {
+			return a;
+		}
+		return gcd(b, Math.floor(a % b));
+	};
+	var len = amount.toString().length - 2;
+	var denominator = Math.pow(10, len);
+	var numerator = amount * denominator;
+	var divisor = gcd(numerator, denominator);
+	numerator /= divisor;
+	denominator /= divisor;
+	var base = 0;
+	// In a scenario like 3/2, convert to 1 1/2
+	// by pulling out the base number and reducing the numerator.
+	if ( numerator > denominator ) {
+		base = Math.floor( numerator / denominator );
+		numerator -= base * denominator;
+	}
+	amount = Math.floor(numerator) + '/' + Math.floor(denominator);
+	if ( base ) {
+		amount = base + ' ' + amount;
+	}
+	return amount;
+	}
+
+	firstLetterToCapital = (str) =>{
+		return str.replace(/\w\S*/g, function(txt){
+			return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+		});
+	}
 
 	render() {
 		const { classes, theme } = this.props;
@@ -353,7 +391,7 @@ class LessonPage extends Component {
 															(value, index) => {
 																// console.log('2',this.state.chefsData.ingredients[head][value])
 																let unit =this.state.chefsData.ingredients[head][value].unit;
-																let quantity =this.state.chefsData.ingredients[head][value].quantity;
+																let quantity =this.decimalToFraction(this.state.chefsData.ingredients[head][value].quantity);
 																let comment =this.state.chefsData.ingredients[head][value].comment;
 																if(comment) {comment = '- '+comment}
 																return(
@@ -366,81 +404,17 @@ class LessonPage extends Component {
 												);
 											}
 										)}
-
-										<br />
-										<br />
-										<br />
-										<br />
-										demoDataToCheckTab
-										demoDataToCheckTab
-										demoDataToCheckTab
-										demoDataToCheckTab
-										demoDataToCheckTab
-										demoDataToCheckTab
-										demoDataToCheckTab
-										demoDataToCheckTab
-										demoDataToCheckTab
-										demoDataToCheckTab
-										demoDataToCheckTab
-										demoDataToCheckTab
-										demoDataToCheckTab
-										demoDataToCheckTab
-										demoDataToCheckTab
-										demoDataToCheckTab
-										demoDataToCheckTab
-										demoDataToCheckTab
-										demoDataToCheckTab
-										demoDataToCheckTab
-										demoDataToCheckTab
-										demoDataToCheckTab
-										demoDataToCheckTab
-										demoDataToCheckTab
-										demoDataToCheckTab
-										demoDataToCheckTab
-										demoDataToCheckTab
-										demoDataToCheckTab
-										demoDataToCheckTab
-										demoDataToCheckTab
-										demoDataToCheckTab
-										demoDataToCheckTab
-										demoDataToCheckTab
-										demoDataToCheckTab
-										demoDataToCheckTab
-										demoDataToCheckTab
-										demoDataToCheckTab
-										demoDataToCheckTab
-										demoDataToCheckTab
-										demoDataToCheckTab
-										demoDataToCheckTab
-										demoDataToCheckTab
-										demoDataToCheckTab
-										demoDataToCheckTab
-										demoDataToCheckTab
-										demoDataToCheckTab
-										demoDataToCheckTab
-										demoDataToCheckTabdemoDataToCheckTab
-										demoDataToCheckTab
-										demoDataToCheckTab
-										demoDataToCheckTab
-										demoDataToCheckTab
-										demoDataToCheckTab
-										demoDataToCheckTab
-										demoDataToCheckTab
-										demoDataToCheckTab
-										demoDataToCheckTab
-										demoDataToCheckTab
-										demoDataToCheckTab
-									</Box>
+										</Box>
 								</TabContainer>
 							)}
 							{this.state.chefsData.gear && (
 								<TabContainer dir={theme.direction}>
-									<Box>gear</Box>
+									<Box></Box>
 								</TabContainer>
 							)}
 							{this.state.chefsData.shorthand && (
 								<TabContainer dir={theme.direction}>
-									<Box>shorthand</Box>
+									<Box></Box>
 								</TabContainer>
 							)}
 						</SwipeableViews>
