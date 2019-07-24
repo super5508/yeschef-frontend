@@ -280,9 +280,7 @@ class LessonPage extends Component {
 							<h1>{this.state.chefsData.title.toUpperCase()}</h1>
 						</div>
 						<h2>
-							Grilling is the oldest and simplest of cooking
-							techniques but it takes a lifetime to master the art
-							of live fire.
+							{this.state.chefsData.description}
 						</h2>
 					</div>
 					<div className={classes.iconsCon}>

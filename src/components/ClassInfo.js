@@ -122,7 +122,6 @@ class ClassInfo extends Component {
           }
 
         const { classes } = this.props;
-        console.log('src',this.state.src)
         return (
             <Link to={"/class/" + this.props.id} className='link' style={{ textDecoration: 'none' }}>
                 {
