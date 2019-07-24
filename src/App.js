@@ -34,9 +34,95 @@ const theme = createMuiTheme({
         width: '100%',
         height:'5.6rem',
         borderRadius:'0.6rem',
+        fontFamily: 'Open Sans',
+        fontSize: '1.4rem',
+        fontWeight: '600',
+        fontStyle: 'normal',
+        fontStretch: 'normal',
+        lineHeight: 'normal',
+        letterSpacing: 'normal',
+        textAlign: 'center',
+        color: '#ffffff',
       },
+    },
+
+  // text css
+  MuiTypography: {
+    h1:{
+      fontFamily: 'Open sans',
+      fontSize: '2rem',
+      fontWeight: '600',
+      fontStyle: 'normal',
+      fontStretch: 'normal',
+      lineHeight: 'normal',
+      letterSpacing: 'normal',
+      color: '#ffffff'
+    },
+    h2: {
+      fontFamily: 'Open sans',
+      fontSize: '1.6rem',
+      fontWeight: '600',
+      fontStyle: 'normal',
+      fontStretch: 'normal',
+      lineHeight: 'normal',
+      letterSpacing: 'normal',
+      color: '#ffffff',
+    },
+    h3: {
+      fontFamily: 'Open sans',
+      fontSize: '1.4rem',
+      fontWeight: '600',
+      fontStyle: 'normal',
+      fontStretch: 'normal',
+      lineHeight: 'normal',
+      letterSpacing: 'normal',
+      color: '#ffffff',
     }
   },
+
+  // tab css
+  MuiTab:{
+    root:{
+        fontFamily: 'Open sans',
+        fontSize: '1.4rem',
+        fontWeight: '600',
+        fontStyle: 'normal',
+        fontStretch: 'normal',
+        lineHeight: 'normal',
+        letterSpacing: 'normal',
+        textAlign: 'center',
+        color: '#929292',
+      
+      "&$selected": {
+        fontFamily: "Open sans",
+        fontSize: "1.4rem",
+        fontWeight: "600",
+        fontStyle: "normal",
+        fontStretch: "normal",
+        lineHeight: "normal",
+        letterSpacing: "normal",
+        textAlign: "center",
+        color: "#ffffff"
+      }
+    },
+  },
+
+  // input css
+  MuiInputBase:{
+    input:{
+      fontFamily: 'Open Sans',
+      fontSize: '1.4rem',
+      fontWeight: '300',
+      fontStyle: 'normal',
+      fontStretch: 'normal',
+      lineHeight: '1',
+      letterSpacing: 'normal',
+      color: '#ffffff',
+    }
+  }
+
+  },
+
   typography: {
     useNextVariants: true,
     fontFamily: "Open Sans",
