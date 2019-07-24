@@ -48,7 +48,7 @@ class HomePage extends Component {
                     </Button>
                     {/* </Link> */}
                 </Box>}
-                <Box fontWeight="fontWeightBold" fontSize="1.8rem" pb={1.4} className={`${classes.margins}`}>
+                <Box fontWeight="fontWeightBold" fontSize="1.8rem" pb={1.4} className={`${classes.margins}`} component="h1">
                     OUR CLASSES
                 </Box>
                 {this.state.chefsDataArray.map(chefData => <Box pb="2.4rem"><ClassInfo key={chefData.id} className={classes.class_info} {...chefData}></ClassInfo></Box>)}
