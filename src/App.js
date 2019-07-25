@@ -4,7 +4,7 @@ import ChefHomePage from './pages/ChefHomePage';
 import { MuiThemeProvider, createMuiTheme, withStyles } from '@material-ui/core/styles';
 import { connect } from "react-redux";
 import './assets/site.scss';
-import { BrowserRouter, Route ,withRouter} from 'react-router-dom';
+import { BrowserRouter, Route ,withRouter,Switch} from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import SignIn from './components/SignIn';
 import SignOut from './components/SignOut';
@@ -105,6 +105,10 @@ class App extends Component {
           <CssBaseline />
           <div className={classes.App}>
             {/* <PrimaryAppBar></PrimaryAppBar> */}
+            <Switch>
+            <Route path="/class/:id/lesson/:id" render={(routeProps) => (<LessonPage {...routeProps} />)}></Route>
+            <Route path="/class/:id" render={(routeProps) => (<ChefHomePage {...routeProps} mode='class' />)}></Route>
+            </Switch>
 
             <Route exact path="/" render={(routeProps) => (<HomePage />)}></Route>
             {/* <Route exact path="/" render={(routeProps) => (<ChefHomePage {...routeProps} {...chefsData}></ChefHomePage>)}></Route> */}
@@ -117,8 +121,10 @@ class App extends Component {
             <Route exact path="/change-password" component={ChangePassword}></Route>
             <Route exact path="/community" component={CommunityPage}></Route>
             <Route exact path="/beta" component={BetaPage}></Route>
-            <Route path="/class/:id" render={(routeProps) => (<ChefHomePage {...routeProps} mode='class' />)}></Route>
-            <Route path="/lesson/:id/:id" render={(routeProps) => (<LessonPage {...routeProps} />)}></Route>
+
+            {/* <Route path="/lesson/:id/:id" render={(routeProps) => (<LessonPage {...routeProps} />)}></Route> */}
+
+
             <BottomBar> </BottomBar>
           </div>
         </MuiThemeProvider>

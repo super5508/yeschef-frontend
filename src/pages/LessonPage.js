@@ -13,7 +13,6 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import PropTypes from "prop-types";
 
-
 function TabContainer({ children, dir }) {
 	return (
 		<div component="div" dir={dir}>
@@ -125,24 +124,23 @@ const styles = theme => ({
 		}
 	},
 	tabSelected: {},
-	ingredientsCon:{
+	ingredientsCon: {
 		margin: "0rem 2.3rem",
 		"& h4": {
 			fontSize: "1.6rem",
 			fontWeight: 600,
-			margin:0,
-			marginTop:'1.8rem'
+			margin: 0,
+			marginTop: "1.8rem"
 		},
 		"& ul": {
-			color:'#ff007f',
+			color: "#ff007f",
 			fontSize: "1.6rem",
 			fontWeight: 300,
 			padding: 0,
-			margin: '0rem 0rem 0rem 1.6rem',
-			
+			margin: "0rem 0rem 0rem 1.6rem"
 		},
 		"& li": {
-			marginTop:'0.5rem',
+			marginTop: "0.5rem"
 		}
 	}
 });
@@ -152,65 +150,73 @@ class LessonPage extends Component {
 		super(props);
 		this.state = {
 			chefsData: {
-				title: "",
+				title: {
+					stringValue: ""
+				},
 				times: {},
 				skils: [],
-				ingredients: {}
+				ingredients: {},
+				description: {}
 			},
 			videoSrc: undefined,
-			timesText: "",
 			skillsText: "",
 			value: 0,
-			ingredientsArray: []
+			ingredientsArray: [],
+			handsonText: "",
+			TotalText: "",
+			classId: ""
 		};
-
-		Axios.get(`/api/lesson/l0${this.props.match.params.id}`).then(
-			chefInfoResponse => {
-				// console.log("d3", chefInfoResponse);
-				this.setState({
-					...this.state,
-					chefsData: chefInfoResponse.data,
-					videoSrc: chefInfoResponse.data.video
-				});
-				this.getTimes();
-				this.getSkills();
-				if (this.state.chefsData.ingredients) {
-					this.getIngredients();
-				}
+		// getting class id from url
+		let url = this.props.match.url;
+		let suburl = url.substring(7, url.length);
+		suburl = suburl.indexOf("/");
+		let classId = url.substring(7, 7 + suburl);
+		Axios.get(`/api/class/${classId}/lesson/${this.props.match.params.id - 1}`).then(chefInfoResponse => {
+			// console.log("d3", chefInfoResponse.data._fieldsProto);
+			this.setState({
+				...this.state,
+				chefsData: chefInfoResponse.data._fieldsProto,
+				videoSrc: chefInfoResponse.data._fieldsProto.video.stringValue
+			});
+			this.getTimes();
+			this.getSkills();
+			if (this.state.chefsData.ingredients) {
+				this.getIngredients();
 			}
-		);
+		});
 	}
 
 	getTimes = () => {
-		let data = this.state.chefsData.times;
-		let string = "";
-		for (var key in data) {
-			if (data.hasOwnProperty(key)) {
-				if (Number(data[key]) >= 60) {
-					let hours = Math.floor(Number(data[key]) / 60);
-					let minutes = Number(data[key]) % 60;
-					string =
-						string +
-						this.firstLetterToCapital(key) +
-						": " +
-						hours +
-						" hrs " +
-						minutes +
-						" min | ";
-				} else {
-					string = string + this.firstLetterToCapital(key) + ": " + data[key] + " min | ";
-				}
-			}
+		let data = this.state.chefsData.times.mapValue.fields;
+		let handsonText = Object.values(data.handsOn)[0];
+		let TotalText = Object.values(data.total)[0];
+		handsonText = Number(handsonText);
+		TotalText = Number(TotalText);
+
+		if (handsonText >= 60) {
+			let hours = Math.floor(handsonText / 60);
+			let minutes = handsonText % 60;
+			handsonText = hours + " hrs " + minutes + " min";
+		} else {
+			handsonText = handsonText + " min";
 		}
-		string = string.slice(0, string.length - 2);
+		if (TotalText >= 60) {
+			let hours = Math.floor(TotalText / 60);
+			let minutes = TotalText % 60;
+			TotalText = hours + " hrs " + minutes + " min";
+		} else {
+			TotalText = TotalText + " min";
+		}
+
 		this.setState({
-			timesText: string
+			handsonText: handsonText,
+			TotalText: TotalText
 		});
 	};
 
 	getIngredients = () => {
 		//sorting ingredients
-		let ingredients = this.state.chefsData.ingredients;
+		let ingredients = this.state.chefsData.ingredients.mapValue.fields;
 		let ingredientsArray = [];
 		Object.keys(ingredients).map((value, index) => {
 			ingredientsArray.push(value);
@@ -219,10 +225,10 @@ class LessonPage extends Component {
 	};
 
 	getSkills = () => {
-		let data = this.state.chefsData.skils;
+		let data = this.state.chefsData.skils.arrayValue.values;
 		let string = "";
 		data.map((lessonData, id) => {
-			string = string + this.firstLetterToCapital(lessonData) + " | ";
+			string = string + this.firstLetterToCapital(lessonData.stringValue) + " | ";
 		});
 		string = string.slice(0, string.length - 2);
 		this.setState({
@@ -234,49 +240,46 @@ class LessonPage extends Component {
 		this.setState({ value });
 	};
 
-	decimalToFraction = (amount) =>{
-			// This is a whole number and doesn't need modification.
-	if ( parseFloat( amount ) === parseInt( amount ) ) {
-		return amount;
-	}
-	// Next 12 lines are cribbed from https://stackoverflow.com/a/23575406.
-	var gcd = function(a, b) {
-		if (b < 0.0000001) {
-			return a;
+	decimalToFraction = amount => {
+		// This is a whole number and doesn't need modification.
+		if (parseFloat(amount) === parseInt(amount)) {
+			return amount;
 		}
-		return gcd(b, Math.floor(a % b));
+		// Next 12 lines are cribbed from https://stackoverflow.com/a/23575406.
+		var gcd = function(a, b) {
+			if (b < 0.0000001) {
+				return a;
+			}
+			return gcd(b, Math.floor(a % b));
+		};
+		var len = amount.toString().length - 2;
+		var denominator = Math.pow(10, len);
+		var numerator = amount * denominator;
+		var divisor = gcd(numerator, denominator);
+		numerator /= divisor;
+		denominator /= divisor;
+		var base = 0;
+		// In a scenario like 3/2, convert to 1 1/2
+		// by pulling out the base number and reducing the numerator.
+		if (numerator > denominator) {
+			base = Math.floor(numerator / denominator);
+			numerator -= base * denominator;
+		}
+		amount = Math.floor(numerator) + "/" + Math.floor(denominator);
+		if (base) {
+			amount = base + " " + amount;
+		}
+		return amount;
 	};
-	var len = amount.toString().length - 2;
-	var denominator = Math.pow(10, len);
-	var numerator = amount * denominator;
-	var divisor = gcd(numerator, denominator);
-	numerator /= divisor;
-	denominator /= divisor;
-	var base = 0;
-	// In a scenario like 3/2, convert to 1 1/2
-	// by pulling out the base number and reducing the numerator.
-	if ( numerator > denominator ) {
-		base = Math.floor( numerator / denominator );
-		numerator -= base * denominator;
-	}
-	amount = Math.floor(numerator) + '/' + Math.floor(denominator);
-	if ( base ) {
-		amount = base + ' ' + amount;
-	}
-	return amount;
-	}
 
-	firstLetterToCapital = (str) =>{
-		return str.replace(/\w\S*/g, function(txt){
+	firstLetterToCapital = str => {
+		return str.replace(/\w\S*/g, function(txt) {
 			return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
 		});
-	}
+	};
 
 	render() {
 		const { classes, theme } = this.props;
-		let url = this.props.match.url;
-		let classId = url.substring(8, url.lastIndexOf("/"));
-
 		const videoJsOptions = {
 			autoplay: true,
 			controls: true,
@@ -286,15 +289,15 @@ class LessonPage extends Component {
 				}
 			]
 		};
+		let url = this.props.match.url;
+		let suburl = url.substring(7, url.length);
+		suburl = suburl.indexOf("/");
+		let classId = url.substring(7, 7 + suburl);
 
 		return (
 			<Box>
 				<Paper className={classes.container2}>
-					<div className={classes.video_container}>
-						{this.state.videoSrc && (
-							<VideoPlayer {...videoJsOptions} />
-						)}
-					</div>
+					<div className={classes.video_container}>{this.state.videoSrc && <VideoPlayer {...videoJsOptions} />}</div>
 				</Paper>
 				<div className={classes.lessonContentCon}>
 					<div className={classes.iconBox}>
@@ -315,16 +318,16 @@ class LessonPage extends Component {
 					<div className={classes.contentCon}>
 						<div className={classes.titleCon}>
 							<h3>{this.props.match.params.id}</h3>
-							<h1>{this.state.chefsData.title.toUpperCase()}</h1>
+							<h1>{this.state.chefsData.title.stringValue.toUpperCase()}</h1>
 						</div>
-						<h2>
-							{this.state.chefsData.description}
-						</h2>
+						<h2>{this.state.chefsData.description.stringValue}</h2>
 					</div>
 					<div className={classes.iconsCon}>
 						<div>
 							<WatchLaterIcon className={classes.icon} />
-							<p>{this.state.timesText}</p>
+							<p>
+								Hands-on: {this.state.handsonText} | Total: {this.state.TotalText}
+							</p>
 						</div>
 						<div>
 							<CheckIcon className={classes.icon} />
@@ -340,8 +343,14 @@ class LessonPage extends Component {
 							indicatorColor="primary"
 							variant="fullWidth"
 							classes={{ root: classes.tabsRoot }}
-							style={{position: '-webkit-sticky',position:'sticky',zIndex:20,top:'57vw', backgroundColor:'#000'}}
-									>
+							style={{
+								position: "-webkit-sticky",
+								position: "sticky",
+								zIndex: 20,
+								top: "57vw",
+								backgroundColor: "#000"
+							}}
+						>
 							{/* dynamic tabs */}
 							{this.state.chefsData.ingredients && (
 								<Tab
@@ -350,7 +359,6 @@ class LessonPage extends Component {
 										selected: classes.tabSelected
 									}}
 									label="INGREDIENTS"
-
 								/>
 							)}
 							{this.state.chefsData.gear && (
@@ -380,41 +388,74 @@ class LessonPage extends Component {
 							{this.state.chefsData.ingredients && (
 								<TabContainer dir={theme.direction}>
 									<Box className={classes.ingredientsCon}>
-										{this.state.ingredientsArray.map(
-											(head, id) => {
-												return (
-													<div key={`${head}-${id}`}>
-														<h4>{head.toUpperCase()}</h4>
-														<ul>
-														{Object.keys(this.state.chefsData.ingredients[head]
-														).map(
+										{this.state.ingredientsArray.map((head, id) => {
+											return (
+												<div key={`${head}-${id}`}>
+													<h4>{head.toUpperCase()}</h4>
+													<div>
+														{// console.log(this.state.chefsData.ingredients.mapValue.fields[head])
+														Object.keys(this.state.chefsData.ingredients.mapValue.fields[head].mapValue.fields).map(
 															(value, index) => {
-																// console.log('2',this.state.chefsData.ingredients[head][value])
-																let unit =this.state.chefsData.ingredients[head][value].unit;
-																let quantity =this.decimalToFraction(this.state.chefsData.ingredients[head][value].quantity);
-																let comment =this.state.chefsData.ingredients[head][value].comment;
-																if(comment) {comment = '- '+comment}
-																return(
-																	<li key={`li${value}-${index}`}><span style={{color:'#ffffff'}}>{quantity} {unit} {value} {comment}</span></li>
-																)
+																let comment = "";
+																if (
+																	this.state.chefsData.ingredients.mapValue.fields[head].mapValue.fields[value]
+																		.mapValue.fields.comment
+																) {
+																	comment = this.state.chefsData.ingredients.mapValue.fields[head].mapValue.fields[
+																		value
+																	].mapValue.fields.comment.stringValue;
+																	comment = "- " + comment;
+																}
+
+																let unit = "";
+																if (
+																	this.state.chefsData.ingredients.mapValue.fields[head].mapValue.fields[value]
+																		.mapValue.fields.unit
+																) {
+																	unit = this.state.chefsData.ingredients.mapValue.fields[head].mapValue.fields[
+																		value
+																	].mapValue.fields.unit.stringValue;
+																}
+
+																let quantity = "";
+																if (
+																	this.state.chefsData.ingredients.mapValue.fields[head].mapValue.fields[value]
+																		.mapValue.fields.quantity
+																) {
+																	quantity = Object.values(
+																		this.state.chefsData.ingredients.mapValue.fields[head].mapValue.fields[value]
+																			.mapValue.fields.quantity
+																	)[0];
+																}
+
+																return (
+																	<li key={`li${value}-${index}`}>
+																		<span
+																			style={{
+																				color: "#ffffff"
+																			}}
+																		>
+																			{this.decimalToFraction(quantity)} {unit} {value} {comment}
+																		</span>
+																	</li>
+																);
 															}
 														)}
-														</ul>
 													</div>
-												);
-											}
-										)}
-										</Box>
+												</div>
+											);
+										})}
+									</Box>
 								</TabContainer>
 							)}
 							{this.state.chefsData.gear && (
 								<TabContainer dir={theme.direction}>
-									<Box></Box>
+									<Box />
 								</TabContainer>
 							)}
 							{this.state.chefsData.shorthand && (
 								<TabContainer dir={theme.direction}>
-									<Box></Box>
+									<Box />
 								</TabContainer>
 							)}
 						</SwipeableViews>
