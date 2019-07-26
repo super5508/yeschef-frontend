@@ -80,7 +80,6 @@ const theme = createMuiTheme({
     fontFamily: "Open Sans",
     fontWeightBold: 600,
     htmlFontSize:10,
-    }
   },
   palette: {
     type: 'dark',
