@@ -63,6 +63,7 @@ const styles = theme => ({
     marginTop: "1.6rem",
     fontSize: "1.4rem",
     color: "#929292",
+    textAlign:'center',
     textDecoration: "underline"
   },
   grayText: {
@@ -190,7 +191,7 @@ class SignIn extends Component {
           mb="1.9rem"
         >
           <Divider width="40%" className={classes.boldDivider} />
-          OR
+          <span className='Button-text'>OR</span>
           <Divider width="40%" className={classes.boldDivider} />
         </Box>
         <form

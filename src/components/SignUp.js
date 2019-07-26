@@ -74,7 +74,17 @@ const styles = theme => ({
         flexWrap: "wrap",
         marginRight: "4rem",
         marginLeft: "4rem"
-    },
+	},
+	input:{
+		fontFamily: 'Open Sans',
+		fontSize: '14px',
+		fontWeight: '300',
+		fontStyle: 'normal',
+		fontStretch: 'normal',
+		lineHeight: '1',
+		letterSpacing: 'normal',
+		color: '#ffffff',
+	},
     grayText: {
         color: "#929292"
 	},
@@ -198,7 +208,7 @@ class SignUp extends Component {
 					mb="1.9rem"
 				>
 					<Divider width="40%" className={classes.boldDivider} />
-					OR
+					<span className='Button-text'>OR</span>
 					<Divider width="40%" className={classes.boldDivider} />
 				</Box>
 				<form
@@ -210,7 +220,6 @@ class SignUp extends Component {
 						id="name"
 						label="Name"
 						InputLabelProps={labelsProps}
-						className={classes.textField}
 						margin="normal"
 						variant="outlined"
 						fullWidth={true}

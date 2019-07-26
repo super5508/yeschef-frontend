@@ -36,14 +36,8 @@ const styles = theme => ({
         width: '100%'
 
     },
-    class_title: {
-        fontSize: '1.6rem',
-        color:'#fff'
-    },
     chef_name: {
         textTransform: 'uppercase',
-        fontSize: '1.8rem',
-        color: '#fff'
     },
     coming_soon: {
         fontWeight: 600,
@@ -134,8 +128,8 @@ class ClassInfo extends Component {
                             this.state.src && <TrailerVideo  {...videoJsOptions}/>
                         }
                         <Box className={classes.info_container2} style={this.comingSoonTextStyle}>
-                            <Box fontWeight="fontWeightBold" className={classes.chef_name}>Chef {this.props.chefName}</Box>
-                            <Box className={classes.class_title}>{this.props.classTitle}</Box>
+                            <Box className={classes.chef_name + ' h1center'}>Chef {this.props.chefName}</Box>
+                            <Box className='Sub-h1'>{this.props.classTitle}</Box>
                         </Box>
                     </div>
                 </Paper>
@@ -143,8 +137,8 @@ class ClassInfo extends Component {
                 <Paper className={(this.props.fixed && classes.fix_position_container) + ' ' + classes.container } style={{ backgroundImage: 'url(' + this.props.chefImg + ')' }}>
                     <Box className={classes.mask_container} style={this.comingSoonOpacityStyle }>
                         < Box className={classes.info_container} style={this.comingSoonTextStyle}>
-                            <Box fontWeight="fontWeightBold" className={classes.chef_name}>Chef {this.props.chefName}</Box>
-                            <Box className={classes.class_title}>{this.props.classTitle}</Box>
+                            <Box className={classes.chef_name + ' h1center'}>Chef {this.props.chefName}</Box>
+                            <Box className='Sub-h1'>{this.props.classTitle}</Box>
                             {this.props.isComingSoon && <Box className={classes.coming_soon} color="primary.main">COMING SOON</Box>}
                         </Box>
                     </Box>

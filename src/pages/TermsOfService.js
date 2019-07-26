@@ -7,16 +7,12 @@ const useStyles = makeStyles({
   tosCon: {
     padding: "2.4rem 2.4rem 5.0rem 2.4rem",
     "& p": {
-      fontSize: "1.2rem",
-      fontWeight: 300,
       opacity: 0.75
     },
     "& ol": {
       paddingLeft: "1.8em"
     },
     "& h2": {
-      fontSize: "1.6rem",
-      fontWeight: 600,
       marginBottom: "-0.8rem"
     },
     "& h1": {
@@ -26,19 +22,18 @@ const useStyles = makeStyles({
       alignItems:'center',
       marginLeft:'-1.5rem',
       marginBottom:'0.5rem',
-      fontSize: "1.8rem",
-      fontWeight: 600,
     },
     "& span": {
       marginLeft:'-0.5rem'
     }
   },
   tosHead1: {
-    fontSize: "1.4rem !important",
     margin: "2rem 0rem 1rem 0rem !important"
   },
   tosP2: {
     marginTop: "0rem",
+    fontSize:'1.2rem',
+    fontWeight: 300,
     marginBottom: "1rem"
   },
   boldChr: {
@@ -62,16 +57,16 @@ function TermsOfService(props) {
       </h1>
       <p className={classes.tosP2}>Date of Last Revision: July 15, 2018</p>
       <h2 className={classes.tosHead1}>WELCOME TO YESCHEF!</h2>
-      <p>
+      <p className='body-text'>
         These terms and conditions outline the rules and regulations for the use
         of YesChef Ltd.'s Website.
       </p>
-      <p>
+      <p className='body-text'>
         By accessing this website we assume you accept these terms and
         conditions in full. Do not continue to use YesChef Ltd.'s website if you
         do not accept all of the terms and conditions stated on this page.{" "}
       </p>
-      <p>
+      <p className='body-text'>
         The following terminology applies to these Terms and Conditions, Privacy
         Statement and Disclaimer Notice and any or all Agreements: “Client”,
         “You” and “Your” refers to you, the person accessing this website and
@@ -90,12 +85,12 @@ function TermsOfService(props) {
       </p>
 
       <h2>COOKIES</h2>
-      <p>
+      <p className='body-text'>
         We employ the use of cookies. By using YesChef Ltd.'s website you
         consent to the use of cookies in accordance with YesChef Ltd.’s privacy
         policy.
       </p>
-      <p>
+      <p className='body-text'>
         Most of the modern day interactive web sites use cookies to enable us to
         retrieve user details for each visit. Cookies are used in some areas of
         our site to enable the functionality of this area and ease of use for
@@ -104,14 +99,14 @@ function TermsOfService(props) {
       </p>
 
       <h2>LICENSE</h2>
-      <p>
+      <p className='body-text'>
         Unless otherwise stated, YesChef Ltd. and/or it’s licensors own the
         intellectual property rights for all material on YesChef Ltd.. All
         intellectual property rights are reserved. You may view and/or print
         pages from http://yeschef.me for your own personal use subject to
         restrictions set in these terms and conditions.
       </p>
-      <p>
+      <p className='body-text'>
         You must not:
         <ol>
           <li>Republish material from http://yeschef.me</li>
@@ -119,13 +114,13 @@ function TermsOfService(props) {
           <li>Reproduce, duplicate or copy material from http://yeschef.me</li>
         </ol>
       </p>
-      <p>
+      <p className='body-text'>
         Redistribute content from YesChef Ltd. (unless content is specifically
         made for redistribution).
       </p>
 
       <h2>USER COMMENTS</h2>
-      <p>
+      <p className='body-text'>
         <ol>
           <li>This Agreement shall begin on the date hereof.</li>
           <li>
@@ -180,7 +175,7 @@ function TermsOfService(props) {
       </p>
 
       <h2>HYPERLINKING TO OUR CONTENT</h2>
-      <p>
+      <p className='body-text'>
         <ol>
           <li>
             The following organizations may link to our Web site without prior
@@ -233,7 +228,7 @@ function TermsOfService(props) {
           </li>
         </ol>
       </p>
-      <p>
+      <p className='body-text'>
         We will approve link requests from these organizations if we determine
         that: (a) the link would not reflect unfavorably on us or our accredited
         businesses (for example, trade associations or other organizations
@@ -245,14 +240,14 @@ function TermsOfService(props) {
         or is otherwise consistent with editorial content in a newsletter or
         similar product furthering the mission of the organization.
       </p>
-      <p>
+      <p className='body-text'>
         These organizations may link to our home page, to publications or to
         other Web site information so long as the link: (a) is not in any way
         misleading; (b) does not falsely imply sponsorship, endorsement or
         approval of the linking party and it products or services; and (c) fits
         within the context of the linking party's site.
       </p>
-      <p>
+      <p className='body-text'>
         If you are among the organizations listed in paragraph 2 above and are
         interested in linking to our website, you must notify us by sending an
         e-mail to hi@yeschef.me. Please include your name, your organization
@@ -261,7 +256,7 @@ function TermsOfService(props) {
         intend to link to our Web site, and a list of the URL(s) on our site to
         which you would like to link. Allow 2-3 weeks for a response.
       </p>
-      <p>
+      <p className='body-text'>
         Approved organizations may hyperlink to our Web site as follows:
         <ol>
           <li>By use of our corporate name; or</li>
@@ -276,19 +271,19 @@ function TermsOfService(props) {
           </li>
         </ol>
       </p>
-      <p>
+      <p className='body-text'>
         No use of YesChef Ltd.’s logo or other artwork will be allowed for
         linking absent a trademark license agreement.
       </p>
       <h2>IFRAMES</h2>
-      <p>
+      <p className='body-text'>
         Without prior approval and express written permission, you may not
         create frames around our Web pages or use other techniques that alter in
         any way the visual presentation or appearance of our Web site.
       </p>
 
       <h2>RESERVATION OF RIGHTS</h2>
-      <p>
+      <p className='body-text'>
         We reserve the right at any time and in its sole discretion to request
         that you remove all links or any particular link to our Web site. You
         agree to immediately remove all links to our Web site upon such request.
@@ -298,13 +293,13 @@ function TermsOfService(props) {
       </p>
 
       <h2>REMOVAL OF LINKS FROM OUR WEBSITE</h2>
-      <p>
+      <p className='body-text'>
         If you find any link on our Web site or any linked web site
         objectionable for any reason, you may contact us about this. We will
         consider requests to remove links but will have no obligation to do so
         or to respond directly to you.
       </p>
-      <p>
+      <p className='body-text'>
         Whilst we endeavour to ensure that the information on this website is
         correct, we do not warrant its completeness or accuracy; nor do we
         commit to ensuring that the website remains available or that the
@@ -312,7 +307,7 @@ function TermsOfService(props) {
       </p>
 
       <h2>CONTENT LIABILITY</h2>
-      <p>
+      <p className='body-text'>
         We shall have no responsibility or liability for any content appearing
         on your Web site. You agree to indemnify and defend us against all
         claims arising out of or based upon your Website. No link(s) may appear
@@ -323,7 +318,7 @@ function TermsOfService(props) {
       </p>
 
       <h2>DISCLAIMER</h2>
-      <p>
+      <p className='body-text'>
         To the maximum extent permitted by applicable law, we exclude all
         representations, warranties and conditions relating to our website and
         the use of this website (including, without limitation, any warranties
@@ -349,7 +344,7 @@ function TermsOfService(props) {
           </li>
         </ol>
       </p>
-      <p>
+      <p className='body-text'>
         The limitations and exclusions of liability set out in this Section and
         elsewhere in this disclaimer: (a) are subject to the preceding
         paragraph; and (b) govern all liabilities arising under the disclaimer
@@ -357,18 +352,18 @@ function TermsOfService(props) {
         liabilities arising in contract, in tort (including negligence) and for
         breach of statutory duty.
       </p>
-      <p>
+      <p className='body-text'>
         To the extent that the website and the information and services on the
         website are provided free of charge, we will not be liable for any loss
         or damage of any nature.
       </p>
       <h2>YESCHEF LTD.</h2>
-      <p>
+      <p className='body-text'>
         1 Beit Ha'am St Box 3450
         <br />
         Ramot Hashavim, Israel
       </p>
-      <p>
+      <p className='body-text'>
         <span className={classes.boldChr}>Owner contact email: </span>
         hi@yeschef.me
       </p>

@@ -202,7 +202,7 @@ class ChangePassword extends Component {
 		};
 		return (
 			<Box>
-				<Typography className={classes.h1} variant="h1" component="h1">
+				<h1 className={classes.h1}>
 					<IconButton
 						aria-label="Go Back"
 						onClick={() => {
@@ -212,7 +212,7 @@ class ChangePassword extends Component {
 						<BackIcon className={classes.backIcon} />
 					</IconButton>
 					CHANGE PASSWORD
-				</Typography>
+				</h1>
 				<Box width="100%" pl="2.4rem" pr="2.4rem">
 					<form onSubmit={this.submitPassword}>
 						<CssTextField

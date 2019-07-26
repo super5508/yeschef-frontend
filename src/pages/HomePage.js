@@ -38,8 +38,8 @@ class HomePage extends Component {
             <Box >
                 {/* //if user is not loged in */}
                 {!this.props.authStat.isLogin && <Box display="flex" flexDirection="column" className={`${classes.margins} ${classes.cta_wrapper}`} p={2}>
-                    <Box fontWeight="fontWeightBold" fontSize="1.8rem" pb={1}>Access the knowledge, secrets and tricks of the world’s best chefs</Box>
-                    <Box fontWeight="fontWeightLight" fontSize="1.6rem" pb={1.6}>Get unlimited access to an ever-growing library of exclusive classes</Box>
+                    <Box component='h2' style={{textTransform:'uppercase'}} pb={1}>Access the knowledge, secrets and tricks of the world’s best chefs</Box>
+                    <Box className='body-text' pb={1.6}>Get unlimited access to an ever-growing library of exclusive classes</Box>
                     {/* <Link to="/signup" underline="none"> */}
                     <Button component={Link} to="/signup" size="large" variant="contained" color="primary" className={classes.button} >
                         <Box fontWeight="fontWeightBold" fontSize="1.4rem">
@@ -48,7 +48,7 @@ class HomePage extends Component {
                     </Button>
                     {/* </Link> */}
                 </Box>}
-                <Box fontWeight="fontWeightBold" fontSize="1.8rem" pb={1.4} className={`${classes.margins}`} component="h1">
+                <Box pb={1.4} className={`${classes.margins}`} component="h1">
                     OUR CLASSES
                 </Box>
                 {this.state.chefsDataArray.map(chefData => <Box pb="2.4rem"><ClassInfo key={chefData.id} className={classes.class_info} {...chefData}></ClassInfo></Box>)}

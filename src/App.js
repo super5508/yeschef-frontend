@@ -34,56 +34,22 @@ const theme = createMuiTheme({
         width: '100%',
         height:'5.6rem',
         borderRadius:'0.6rem',
-        fontFamily: 'Open Sans',
-        fontSize: '1.4rem',
-        fontWeight: '600',
-        fontStyle: 'normal',
-        fontStretch: 'normal',
-        lineHeight: 'normal',
-        letterSpacing: 'normal',
-        textAlign: 'center',
-        color: '#ffffff',
+        // fontFamily: 'Open Sans',
+        // fontSize: '1.4rem',
+        // fontWeight: '600',
+        // fontStyle: 'normal',
+        // fontStretch: 'normal',
+        // lineHeight: 'normal',
+        // letterSpacing: 'normal',
+        // textAlign: 'center',
+        // color: '#ffffff',
       },
     },
 
-  // text css
-  MuiTypography: {
-    h1:{
-      fontFamily: 'Open sans',
-      fontSize: '2rem',
-      fontWeight: '600',
-      fontStyle: 'normal',
-      fontStretch: 'normal',
-      lineHeight: 'normal',
-      letterSpacing: 'normal',
-      color: '#ffffff'
-    },
-    h2: {
-      fontFamily: 'Open sans',
-      fontSize: '1.6rem',
-      fontWeight: '600',
-      fontStyle: 'normal',
-      fontStretch: 'normal',
-      lineHeight: 'normal',
-      letterSpacing: 'normal',
-      color: '#ffffff',
-    },
-    h3: {
-      fontFamily: 'Open sans',
-      fontSize: '1.4rem',
-      fontWeight: '600',
-      fontStyle: 'normal',
-      fontStretch: 'normal',
-      lineHeight: 'normal',
-      letterSpacing: 'normal',
-      color: '#ffffff',
-    }
-  },
-
-  // tab css
+  // // tab css
   MuiTab:{
     root:{
-        fontFamily: 'Open sans',
+        fontFamily: 'Open Sans',
         fontSize: '1.4rem',
         fontWeight: '600',
         fontStyle: 'normal',
@@ -94,7 +60,7 @@ const theme = createMuiTheme({
         color: '#929292',
       
       "&$selected": {
-        fontFamily: "Open sans",
+        fontFamily: "Open Sans",
         fontSize: "1.4rem",
         fontWeight: "600",
         fontStyle: "normal",
@@ -107,20 +73,6 @@ const theme = createMuiTheme({
     },
   },
 
-  // input css
-  MuiInputBase:{
-    input:{
-      fontFamily: 'Open Sans',
-      fontSize: '1.4rem',
-      fontWeight: '300',
-      fontStyle: 'normal',
-      fontStretch: 'normal',
-      lineHeight: '1',
-      letterSpacing: 'normal',
-      color: '#ffffff',
-    }
-  }
-
   },
 
   typography: {
@@ -128,11 +80,6 @@ const theme = createMuiTheme({
     fontFamily: "Open Sans",
     fontWeightBold: 600,
     htmlFontSize:10,
-    h1:{
-      '@media (max-width:600px)': {
-        fontSize:"1.8rem",
-      },
-      fontWeight: 600
     }
   },
   palette: {

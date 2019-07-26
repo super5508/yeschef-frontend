@@ -6,16 +6,12 @@ const useStyles = makeStyles({
   ppcCon: {
     padding: "2.4rem 2.4rem 5.0rem 2.4rem",
     "& p": {
-      fontSize: "1.4rem",
-      fontWeight: 300,
       opacity: 0.75
     },
     "& ul": {
       paddingLeft: "1.8em"
     },
     "& h2": {
-      fontSize: "1.6rem",
-      fontWeight: 600,
       marginBottom: "-0.8rem"
     },
     "& h1": {
@@ -25,8 +21,6 @@ const useStyles = makeStyles({
       alignItems:'center',
       marginLeft:'-1.5rem',
       marginBottom:'0.5rem',
-      fontSize: "1.8rem",
-      fontWeight: 600,
     },
     "& span": {
       marginLeft:'-0.5rem'
@@ -34,7 +28,6 @@ const useStyles = makeStyles({
   },
 
   ppcHead1: {
-    fontSize: "1.4rem !important",
     margin: "2rem 0rem 1rem 0rem !important"
   },
   ppcP1: {
@@ -67,28 +60,28 @@ function PrivacyPolicy(props) {
       <h2 className={classes.ppcHead1}>
         YOUR PRIVACY IS CRITICALLY IMPORTANT TO US.
       </h2>
-      <p>This Application collects some Personal Data from its Users.</p>
+      <p className='body-text'>This Application collects some Personal Data from its Users.</p>
 
       <h2>OWNER AND DATA CONTROLLER</h2>
-      <p>
+      <p className='body-text'>
         YesChef Ltd. <br />1 Beit Ha'am St Box 3450
         <br />
         Ramot Hashavim, Israel
       </p>
-      <p>
+      <p className='body-text'>
         <span className={classes.boldChr}>Owner contact email:</span>{" "}
         hi@yeschef.me
       </p>
 
       <h2>TYPES OF DATA COLLECTED</h2>
-      <p>
+      <p className='body-text'>
         Among the types of Personal Data that this Application collects, by
         itself or through third parties, there are: Cookies, Usage Data, email
         address, first name, last name, country, gender, city, various types of
         Data, unique device identifiers for advertising (Google Advertiser ID or
         IDFA, for example), phone number and Twitter handle.
       </p>
-      <p>
+      <p className='body-text'>
         Complete details on each type of Personal Data collected are provided in
         the dedicated sections of this privacy policy or by specific explanation
         texts displayed prior to the Data collection.
@@ -108,7 +101,7 @@ function PrivacyPolicy(props) {
         any other purposes described in the present document and in the Cookie
         Policy, if available.
       </p>
-      <p>
+      <p className='body-text'>
         Users are responsible for any third-party Personal Data obtained,
         published or shared through this Application and confirm that they have
         the third party's consent to provide the Data to the Owner.
@@ -117,7 +110,7 @@ function PrivacyPolicy(props) {
       <h2>MODE AND PLACE OF PROCESSING THE DATA</h2>
       <h2 className={classes.ppcHead1}>METHODS OF PROCESSING</h2>
 
-      <p>
+      <p className='body-text'>
         The Owner takes appropriate security measures to prevent unauthorized
         access, disclosure, modification, or unauthorized destruction of the
         Data. The Data processing is carried out using computers and/or IT
@@ -133,7 +126,7 @@ function PrivacyPolicy(props) {
       </p>
 
       <h2 className={classes.ppcHead1}>LEGAL BASIS OF PROCESSING</h2>
-      <p>
+      <p className='body-text'>
         The Owner may process Personal Data relating to Users if one of the
         following applies:
         <ul>
@@ -165,7 +158,7 @@ function PrivacyPolicy(props) {
           </li>
         </ul>
       </p>
-      <p>
+      <p className='body-text'>
         In any case, the Owner will gladly help to clarify the specific legal
         basis that applies to the processing, and in particular whether the
         provision of Personal Data is a statutory or contractual requirement, or
@@ -173,36 +166,36 @@ function PrivacyPolicy(props) {
       </p>
 
       <h2 className={classes.ppcHead1}>PLACE</h2>
-      <p>
+      <p className='body-text'>
         The Data is processed at the Owner's operating offices and in any other
         places where the parties involved in the processing are located.
       </p>
-      <p>
+      <p className='body-text'>
         Depending on the User's location, data transfers may involve
         transferring the User's Data to a country other than their own. To find
         out more about the place of processing of such transferred Data, Users
         can check the section containing details about the processing of
         Personal Data.
       </p>
-      <p>
+      <p className='body-text'>
         Users are also entitled to learn about the legal basis of Data transfers
         to a country outside the European Union or to any international
         organization governed by public international law or set up by two or
         more countries, such as the UN, and about the security measures taken by
         the Owner to safeguard their Data.
       </p>
-      <p>
+      <p className='body-text'>
         If any such transfer takes place, Users can find out more by checking
         the relevant sections of this document or inquire with the Owner using
         the information provided in the contact section.
       </p>
 
       <h2 className={classes.ppcHead1}>RETENTION TIME</h2>
-      <p>
+      <p className='body-text'>
         Personal Data shall be processed and stored for as long as required by
         the purpose they have been collected for.
       </p>
-      <p>
+      <p className='body-text'>
         Therefore:
         <ul>
           <li>
@@ -219,14 +212,14 @@ function PrivacyPolicy(props) {
           </li>
         </ul>
       </p>
-      <p>
+      <p className='body-text'>
         The Owner may be allowed to retain Personal Data for a longer period
         whenever the User has given consent to such processing, as long as such
         consent is not withdrawn. Furthermore, the Owner may be obliged to
         retain Personal Data for a longer period whenever required to do so for
         the performance of a legal obligation or upon order of an authority.
       </p>
-      <p>
+      <p className='body-text'>
         Once the retention period expires, Personal Data shall be deleted.
         Therefore, the right to access, the right to erasure, the right to
         rectification and the right to data portability cannot be enforced after
@@ -234,7 +227,7 @@ function PrivacyPolicy(props) {
       </p>
 
       <h2>THE PURPOSES OF PROCESSING</h2>
-      <p>
+      <p className='body-text'>
         The Data concerning the User is collected to allow the Owner to provide
         its Services, as well as for the following purposes: Analytics,
         Remarketing and behavioral targeting, Content commenting, Contacting the
@@ -243,19 +236,19 @@ function PrivacyPolicy(props) {
         Interaction with external social networks and platforms, Managing
         landing and invitation pages and Tag Management.
       </p>
-      <p>
+      <p className='body-text'>
         Users can find further detailed information about such purposes of
         processing and about the specific Personal Data used for each purpose in
         the respective sections of this document.
       </p>
 
       <h2>DETAILED INFORMATION ON THE PROCESSING OF PERSONAL DATA</h2>
-      <p>
+      <p className='body-text'>
         Personal Data is collected for the following purposes and using the
         following services:
       </p>
       <h2 className={classes.ppcHead1}>ADVERTISING</h2>
-      <p>
+      <p className='body-text'>
         This type of service allows User Data to be utilized for advertising
         communication purposes displayed in the form of banners and other
         advertisements on this Application, possibly based on User interests.
@@ -274,7 +267,7 @@ function PrivacyPolicy(props) {
       </p>
 
       <h2>Google AdSense (Google Inc.)</h2>
-      <p>
+      <p className='body-text'>
         Google AdSense is an advertising service provided by Google Inc. This
         service uses the \u201cDoubleclick\u201d Cookie, which tracks use of
         this Application and User behavior concerning ads, products and services
@@ -283,14 +276,14 @@ function PrivacyPolicy(props) {
         Users may decide to disable all the Doubleclick Cookies by clicking on:
         google.com/settings/ads/onweb/optout.
       </p>
-      <p>Personal Data collected: Cookies and Usage Data.</p>
-      <p>
+      <p className='body-text'>Personal Data collected: Cookies and Usage Data.</p>
+      <p className='body-text'>
         Place of processing: United States – Privacy Policy – Opt Out. Privacy
         Shield participant.
       </p>
 
       <h2>Facebook Audience Network (Facebook, Inc.)</h2>
-      <p>
+      <p className='body-text'>
         Facebook Audience Network is an advertising service provided by
         Facebook, Inc.{" "}
         <span className={classes.boldChr}>
@@ -298,7 +291,7 @@ function PrivacyPolicy(props) {
           policy.
         </span>
       </p>
-      <p>
+      <p className='body-text'>
         This Application may use identifiers for mobile devices (including
         Android Advertising ID or Advertising Identifier for iOS, respectively)
         and technologies similar to cookies to run the Facebook Audience Network
@@ -306,29 +299,29 @@ function PrivacyPolicy(props) {
         User's ad preferences. The User can control this in the Facebook ad
         settings.
       </p>
-      <p>
+      <p className='body-text'>
         Users may opt-out of certain Audience Network targeting through
         applicable device settings, such as the device advertising settings for
         mobile phones or by following the instructions in other Audience Network
         related sections of this privacy policy, if available.
       </p>
-      <p>
+      <p className='body-text'>
         Personal Data collected: Cookies, unique device identifiers for
         advertising (Google Advertiser ID or IDFA, for example) and Usage Data.
       </p>
-      <p>
+      <p className='body-text'>
         Place of processing: United States – Privacy Policy – Opt Out. Privacy
         Shield participant.
       </p>
 
       <h2 className={classes.ppcHead1}>ANALYTICS</h2>
-      <p>
+      <p className='body-text'>
         The services contained in this section enable the Owner to monitor and
         analyze web traffic and can be used to keep track of User behavior.
       </p>
 
       <h2>Google Analytics (Google Inc.)</h2>
-      <p>
+      <p className='body-text'>
         Google Analytics is a web analysis service provided by Google Inc.
         (\u201cGoogle\u201d). Google utilizes the Data collected to track and
         examine the use of this Application, to prepare reports on its
@@ -337,34 +330,34 @@ function PrivacyPolicy(props) {
         Google may use the Data collected to contextualize and personalize the
         ads of its own advertising network.
       </p>
-      <p>Personal Data collected: Cookies and Usage Data.</p>
-      <p>
+      <p className='body-text'>Personal Data collected: Cookies and Usage Data.</p>
+      <p className='body-text'>
         Place of processing: United States – Privacy Policy – Opt Out. Privacy
         Shield participant.
       </p>
 
       <h2>MixPanel (MixPanel)</h2>
-      <p>MixPanel is an analytics service provided by Mixpanel Inc.</p>
-      <p>Personal Data collected: Cookies and Usage Data.</p>
-      <p>
+      <p className='body-text'>MixPanel is an analytics service provided by Mixpanel Inc.</p>
+      <p className='body-text'>Personal Data collected: Cookies and Usage Data.</p>
+      <p className='body-text'>
         Place of processing: United States – Privacy Policy – Opt Out. Privacy
         Shield participant.
       </p>
 
       <h2>Facebook Ads conversion tracking (Facebook, Inc.)</h2>
-      <p>
+      <p className='body-text'>
         Facebook Ads conversion tracking is an analytics service provided by
         Facebook, Inc. that connects data from the Facebook advertising network
         with actions performed on this Application.
       </p>
-      <p>Personal Data collected: Cookies and Usage Data.</p>
-      <p>
+      <p className='body-text'>Personal Data collected: Cookies and Usage Data.</p>
+      <p className='body-text'>
         Place of processing: United States – Privacy Policy. Privacy Shield
         participant.
       </p>
 
       <h2>Google Analytics with anonymized IP (Google Inc.)</h2>
-      <p>
+      <p className='body-text'>
         Google Analytics is a web analysis service provided by Google Inc.
         (\u201cGoogle\u201d). Google utilizes the Data collected to track and
         examine the use of this Application, to prepare reports on its
@@ -379,15 +372,15 @@ function PrivacyPolicy(props) {
         European Economic Area. Only in exceptional cases will the complete IP
         address be sent to a Google server and shortened within the US.
       </p>
-      <p>Personal Data collected: Cookies and Usage Data.</p>
-      <p>
+      <p className='body-text'>Personal Data collected: Cookies and Usage Data.</p>
+      <p className='body-text'>
         Place of processing: United States – Privacy Policy – Opt Out. Privacy
         Shield participant.
       </p>
 
       <h2 className={classes.ppcHead1}>CONTACTING THE USER</h2>
       <h2>Mailing list or newsletter (this Application)</h2>
-      <p>
+      <p className='body-text'>
         By registering on the mailing list or for the newsletter, the
         User\u2019s email address will be added to the contact list of those who
         may receive email messages containing information of commercial or
@@ -395,30 +388,30 @@ function PrivacyPolicy(props) {
         also be added to this list as a result of signing up to this Application
         or after making a purchase.
       </p>
-      <p>
+      <p className='body-text'>
         Personal Data collected: city, country, email address, first name,
         gender and last name.
       </p>
 
       <h2>Contact form (this Application)</h2>
-      <p>
+      <p className='body-text'>
         By filling in the contact form with their Data, the User authorizes this
         Application to use these details to reply to requests for information,
         quotes or any other kind of request as indicated by the form\u2019s
         header.
       </p>
-      <p>Personal Data collected: email address, first name and last name.</p>
+      <p className='body-text'>Personal Data collected: email address, first name and last name.</p>
 
       <h2>Phone contact (this Application)</h2>
-      <p>
+      <p className='body-text'>
         Users that provided their phone number might be contacted for commercial
         or promotional purposes related to this Application, as well as for
         fulfilling support requests.
       </p>
-      <p>Personal Data collected: phone number.</p>
+      <p className='body-text'>Personal Data collected: phone number.</p>
 
       <h2 className={classes.ppcHead1}>CONTENT COMMENTING</h2>
-      <p>
+      <p className='body-text'>
         Content commenting services allow Users to make and publish their
         comments on the contents of this Application.
         <br />
@@ -435,13 +428,13 @@ function PrivacyPolicy(props) {
       </p>
 
       <h2>Facebook Comments (Facebook, Inc.)</h2>
-      <p>
+      <p className='body-text'>
         Facebook Comments is a content commenting service provided by Facebook,
         Inc. enabling the User to leave comments and share them on the Facebook
         platform.
       </p>
-      <p>Personal Data collected: Cookies and Usage Data.</p>
-      <p>
+      <p className='body-text'>Personal Data collected: Cookies and Usage Data.</p>
+      <p className='body-text'>
         Place of processing: United States – Privacy Policy. Privacy Shield
         participant.
       </p>
@@ -449,7 +442,7 @@ function PrivacyPolicy(props) {
       <h2 className={classes.ppcHead1}>
         CONTENT PERFORMANCE AND FEATURES TESTING (A/B TESTING)
       </h2>
-      <p>
+      <p className='body-text'>
         The services contained in this section allow the Owner to track and
         analyze the User response concerning web traffic or behavior regarding
         changes to the structure, text or any other component of this
@@ -457,12 +450,12 @@ function PrivacyPolicy(props) {
       </p>
 
       <h2>Optimizely (Optimizely, Inc.)</h2>
-      <p>Optimizely is an A/B testing service provided by Optimizely, Inc.</p>
-      <p>Personal Data collected: Cookies and Usage Data.</p>
-      <p>Place of processing: United States – Privacy Policy.</p>
+      <p className='body-text'>Optimizely is an A/B testing service provided by Optimizely, Inc.</p>
+      <p className='body-text'>Personal Data collected: Cookies and Usage Data.</p>
+      <p className='body-text'>Place of processing: United States – Privacy Policy.</p>
 
       <h2 className={classes.ppcHead1}>DATA TRANSFER OUTSIDE THE EU</h2>
-      <p>
+      <p className='body-text'>
         The Owner is allowed to transfer Personal Data collected within the EU
         to third countries (i.e. any country not part of the EU) only pursuant
         to a specific legal basis. Any such Data transfer is based on one of the
@@ -476,7 +469,7 @@ function PrivacyPolicy(props) {
         Data transfer to countries that guarantee European standards (this
         Application)
       </h2>
-      <p>
+      <p className='body-text'>
         If this is the legal basis, the transfer of Personal Data from the EU to
         third countries is carried out according to an adequacy decision of the
         European Commission.
@@ -487,12 +480,12 @@ function PrivacyPolicy(props) {
         legislation. Users can find an updated list of all adequacy decisions
         issued on the European Commission's website.
       </p>
-      <p>Personal Data collected: various types of Data.</p>
+      <p className='body-text'>Personal Data collected: various types of Data.</p>
 
       <h2 className={classes.ppcHead1}>
         INTERACTION WITH EXTERNAL SOCIAL NETWORKS AND PLATFORMS
       </h2>
-      <p>
+      <p className='body-text'>
         This type of service allows interaction with social networks or other
         external platforms directly from the pages of this Application. The
         interaction and information obtained through this Application are always
@@ -503,12 +496,12 @@ function PrivacyPolicy(props) {
       </p>
 
       <h2>Facebook Like button and social widgets (Facebook, Inc.)</h2>
-      <p>
+      <p className='body-text'>
         The Facebook Like button and social widgets are services allowing
         interaction with the Facebook social network provided by Facebook, Inc.
       </p>
-      <p>Personal Data collected: Cookies and Usage Data.</p>
-      <p>
+      <p className='body-text'>Personal Data collected: Cookies and Usage Data.</p>
+      <p className='body-text'>
         Place of processing: United States – Privacy Policy. Privacy Shield
         participant.
       </p>
@@ -516,7 +509,7 @@ function PrivacyPolicy(props) {
       <h2 className={classes.ppcHead1}>
         MANAGING LANDING AND INVITATION PAGES
       </h2>
-      <p>
+      <p className='body-text'>
         This type of service helps with building and managing landing and
         invitation pages, i.e., pages for presenting a product or service, where
         you may add your contact information such as an email address.
@@ -526,7 +519,7 @@ function PrivacyPolicy(props) {
       </p>
 
       <h2>Unbounce (Unbounce Marketing Solutions Inc.)</h2>
-      <p>
+      <p className='body-text'>
         Unbounce is a landing page management service provided by Unbounce
         Marketing Solutions Inc., that allows this Application to collect the
         email addresses of Users interested in its service.
@@ -535,11 +528,11 @@ function PrivacyPolicy(props) {
         concerning web traffic or behavior regarding changes to the structure,
         text or any other component of the created landing pages.
       </p>
-      <p>Personal Data collected: Cookies, email address and Usage Data.</p>
-      <p>Place of processing: Canada – Privacy Policy.</p>
+      <p className='body-text'>Personal Data collected: Cookies, email address and Usage Data.</p>
+      <p className='body-text'>Place of processing: Canada – Privacy Policy.</p>
 
       <h2>Ship by Product Hunt (PRODUCT HUNT, INC.)</h2>
-      <p>
+      <p className='body-text'>
         Ship by Product Hunt is a landing page management service provided by
         PRODUCT HUNT, INC., that allows this Application to collect the email
         addresses of Users interested in its service.
@@ -548,14 +541,14 @@ function PrivacyPolicy(props) {
         response concerning web traffic or behavior regarding changes to the
         structure, text or any other component of the created landing pages.
       </p>
-      <p>
+      <p className='body-text'>
         Personal Data collected: Cookies, email address, first name, last name,
         Twitter handle and Usage Data.
       </p>
-      <p>Place of processing: United States – Privacy Policy.</p>
+      <p className='body-text'>Place of processing: United States – Privacy Policy.</p>
 
       <h2>Leadpages (Avenue 81, Inc.)</h2>
-      <p>
+      <p className='body-text'>
         Leadpages is a landing page management service provided by Avenue 81,
         Inc., that allows this Application to collect the email addresses of
         Users interested in its service.
@@ -564,14 +557,14 @@ function PrivacyPolicy(props) {
         concerning web traffic or behavior regarding changes to the structure,
         text or any other component of the created landing pages.
       </p>
-      <p>
+      <p className='body-text'>
         Personal Data collected: email address, Usage Data and various types of
         Data as specified in the privacy policy of the service.
       </p>
-      <p>Place of processing: United States – Privacy Policy.</p>
+      <p className='body-text'>Place of processing: United States – Privacy Policy.</p>
 
       <h2 className={classes.ppcHead1}>REGISTRATION AND AUTHENTICATION</h2>
-      <p>
+      <p className='body-text'>
         By registering or authenticating, Users allow this Application to
         identify them and give them access to dedicated services.
         <br />
@@ -582,16 +575,16 @@ function PrivacyPolicy(props) {
       </p>
 
       <h2>Direct registration (this Application)</h2>
-      <p>
+      <p className='body-text'>
         The User registers by filling out the registration form and providing
         the Personal Data directly to this Application.
       </p>
-      <p>
+      <p className='body-text'>
         Personal Data collected: city, country, email address, first name,
         gender, last name and various types of Data.
       </p>
       <h2 className={classes.ppcHead1}>REMARKETING AND BEHAVIORAL TARGETING</h2>
-      <p>
+      <p className='body-text'>
         This type of service allows this Application and its partners to inform,
         optimize and serve advertising based on past use of this Application by
         the User.
@@ -607,56 +600,56 @@ function PrivacyPolicy(props) {
       </p>
 
       <h2>Facebook Custom Audience (Facebook, Inc.)</h2>
-      <p>
+      <p className='body-text'>
         Facebook Custom Audience is a remarketing and behavioral targeting
         service provided by Facebook, Inc. that connects the activity of this
         Application with the Facebook advertising network.
       </p>
-      <p>Personal Data collected: Cookies and email address.</p>
-      <p>
+      <p className='body-text'>Personal Data collected: Cookies and email address.</p>
+      <p className='body-text'>
         Place of processing: United States – Privacy Policy – Opt Out. Privacy
         Shield participant.
       </p>
 
       <h2>Facebook Remarketing (Facebook, Inc.)</h2>
-      <p>
+      <p className='body-text'>
         Facebook Remarketing is a remarketing and behavioral targeting service
         provided by Facebook, Inc. that connects the activity of this
         Application with the Facebook advertising network.
       </p>
-      <p>Personal Data collected: Cookies and Usage Data.</p>
-      <p>
+      <p className='body-text'>Personal Data collected: Cookies and Usage Data.</p>
+      <p className='body-text'>
         Place of processing: United States – Privacy Policy – Opt Out. Privacy
         Shield participant.
       </p>
 
       <h2>AdWords Remarketing (Google Inc.)</h2>
-      <p>
+      <p className='body-text'>
         AdWords Remarketing is a remarketing and behavioral targeting service
         provided by Google Inc. that connects the activity of this Application
         with the Adwords advertising network and the Doubleclick Cookie.
       </p>
-      <p>Personal Data collected: Cookies and Usage Data.</p>
-      <p>Place of processing: United States – Privacy Policy – Opt Out.</p>
+      <p className='body-text'>Personal Data collected: Cookies and Usage Data.</p>
+      <p className='body-text'>Place of processing: United States – Privacy Policy – Opt Out.</p>
 
       <h2>
         Remarketing through Google Analytics for Display Advertising (Google
         Inc.)
       </h2>
-      <p>
+      <p className='body-text'>
         Google Analytics for Display Advertising is a remarketing and behavioral
         targeting service provided by Google Inc. that connects the tracking
         activity performed by Google Analytics and its Cookies with the Adwords
         advertising network and the Doubleclick Cookie.
       </p>
-      <p>Personal Data collected: Cookies and Usage Data.</p>
-      <p>
+      <p className='body-text'>Personal Data collected: Cookies and Usage Data.</p>
+      <p className='body-text'>
         Place of processing: United States – Privacy Policy – Opt Out. Privacy
         Shield participant.
       </p>
 
       <h2 className={classes.ppcHead1}>TAG MANAGEMENT</h2>
-      <p>
+      <p className='body-text'>
         This type of service helps the Owner to manage the tags or scripts
         needed on this Application in a centralized fashion.
         <br />
@@ -665,11 +658,11 @@ function PrivacyPolicy(props) {
       </p>
 
       <h2>Google Tag Manager (Google LLC)</h2>
-      <p>
+      <p className='body-text'>
         Google Tag Manager is a tag management service provided by Google LLC.
       </p>
-      <p>Personal Data collected: Cookies and Usage Data.</p>
-      <p>
+      <p className='body-text'>Personal Data collected: Cookies and Usage Data.</p>
+      <p className='body-text'>
         Place of processing: United States – Privacy Policy. Privacy Shield
         participant.
       </p>
@@ -679,7 +672,7 @@ function PrivacyPolicy(props) {
         ANALYSIS AND PREDICTIONS BASED ON THE USER\U2019S DATA
         (\U201CPROFILING\U201D)
       </h2>
-      <p>
+      <p className='body-text'>
         The Owner may use the Personal and Usage Data collected through this
         Application to create or update User profiles. This type of Data
         processing allows the Owner to evaluate User choices, preferences and
@@ -700,7 +693,7 @@ function PrivacyPolicy(props) {
       <h2 className={classes.ppcHead1}>
         PERSONAL DATA COLLECTED THROUGH SOURCES OTHER THAN THE USER
       </h2>
-      <p>
+      <p className='body-text'>
         The Owner of this Application may have legitimately collected Personal
         Data relating to Users without their knowledge by reusing or sourcing
         them from third parties on the grounds mentioned in the section
@@ -714,7 +707,7 @@ function PrivacyPolicy(props) {
       <h2 className={classes.ppcHead1}>
         THE SERVICE IS NOT DIRECTED TO CHILDREN UNDER THE AGE OF 13
       </h2>
-      <p>
+      <p className='body-text'>
         Users declare themselves to be adult according to their applicable
         legislation. Minors may use this Application only with the assistance of
         a parent or guardian. Under no circumstance persons under the age of 13
@@ -722,11 +715,11 @@ function PrivacyPolicy(props) {
       </p>
 
       <h2>THE RIGHTS OF USERS</h2>
-      <p>
+      <p className='body-text'>
         Users may exercise certain rights regarding their Data processed by the
         Owner.
       </p>
-      <p>
+      <p className='body-text'>
         In particular, Users have the right to do the following:
         <ul>
           <li>
@@ -795,14 +788,14 @@ function PrivacyPolicy(props) {
       <h2 className={classes.ppcHead1}>
         DETAILS ABOUT THE RIGHT TO OBJECT TO PROCESSING
       </h2>
-      <p>
+      <p className='body-text'>
         Where Personal Data is processed for a public interest, in the exercise
         of an official authority vested in the Owner or for the purposes of the
         legitimate interests pursued by the Owner, Users may object to such
         processing by providing a ground related to their particular situation
         to justify the objection.
       </p>
-      <p>
+      <p className='body-text'>
         Users must know that, however, should their Personal Data be processed
         for direct marketing purposes, they can object to that processing at any
         time without providing any justification. To learn, whether the Owner is
@@ -811,7 +804,7 @@ function PrivacyPolicy(props) {
       </p>
 
       <h2 className={classes.ppcHead1}>HOW TO EXERCISE THESE RIGHTS</h2>
-      <p>
+      <p className='body-text'>
         Any requests to exercise User rights can be directed to the Owner
         through the contact details provided in this document. These requests
         can be exercised free of charge and will be addressed by the Owner as
@@ -820,7 +813,7 @@ function PrivacyPolicy(props) {
 
       <h2>ADDITIONAL INFORMATION ABOUT DATA COLLECTION AND PROCESSING</h2>
       <h2 className={classes.ppcHead1}>LEGAL ACTION</h2>
-      <p>
+      <p className='body-text'>
         The User's Personal Data may be used for legal purposes by the Owner in
         Court or in the stages leading to possible legal action arising from
         improper use of this Application or the related Services.
@@ -832,7 +825,7 @@ function PrivacyPolicy(props) {
       <h2 className={classes.ppcHead1}>
         ADDITIONAL INFORMATION ABOUT USER'S PERSONAL DATA
       </h2>
-      <p>
+      <p className='body-text'>
         In addition to the information contained in this privacy policy, this
         Application may provide the User with additional and contextual
         information concerning particular Services or the collection and
@@ -840,7 +833,7 @@ function PrivacyPolicy(props) {
       </p>
 
       <h2 className={classes.ppcHead1}>SYSTEM LOGS AND MAINTENANCE</h2>
-      <p>
+      <p className='body-text'>
         For operation and maintenance purposes, this Application and any
         third-party services may collect files that record interaction with this
         Application (System logs) use other Personal Data (such as the IP
@@ -850,7 +843,7 @@ function PrivacyPolicy(props) {
       <h2 className={classes.ppcHead1}>
         INFORMATION NOT CONTAINED IN THIS POLICY
       </h2>
-      <p>
+      <p className='body-text'>
         More details concerning the collection or processing of Personal Data
         may be requested from the Owner at any time. Please see the contact
         information at the beginning of this document.
@@ -859,14 +852,14 @@ function PrivacyPolicy(props) {
       <h2 className={classes.ppcHead1}>
         HOW \U201CDO NOT TRACK\U201D REQUESTS ARE HANDLED
       </h2>
-      <p>
+      <p className='body-text'>
         This Application does not support \u201cDo Not Track\u201d requests. To
         determine whether any of the third-party services it uses honor the
         \u201cDo Not Track\u201d requests, please read their privacy policies.
       </p>
 
       <h2 className={classes.ppcHead1}>CHANGES TO THIS PRIVACY POLICY</h2>
-      <p>
+      <p className='body-text'>
         The Owner reserves the right to make changes to this privacy policy at
         any time by giving notice to its Users on this page and possibly within
         this Application and/or - as far as technically and legally feasible -
@@ -874,7 +867,7 @@ function PrivacyPolicy(props) {
         Owner. It is strongly recommended to check this page often, referring to
         the date of the last modification listed at the bottom.
       </p>
-      <p>
+      <p className='body-text'>
         Should the changes affect processing activities performed on the basis
         of the User\u2019s consent, the Owner shall collect new consent from the
         User, where required.
@@ -883,14 +876,14 @@ function PrivacyPolicy(props) {
       <h2 className={classes.ppcHead1}>DEFINITIONS AND LEGAL REFERENCES</h2>
 
       <h2>Personal Data (or Data)</h2>
-      <p>
+      <p className='body-text'>
         Any information that directly, indirectly, or in connection with other
         information \u2014 including a personal identification number \u2014
         allows for the identification or identifiability of a natural person.
       </p>
 
       <h2>Usage Data</h2>
-      <p>
+      <p className='body-text'>
         Information collected automatically through this Application (or
         third-party services employed in this Application), which can include:
         the IP addresses or domain names of the computers utilized by the Users
@@ -908,23 +901,23 @@ function PrivacyPolicy(props) {
       </p>
 
       <h2>User</h2>
-      <p>
+      <p className='body-text'>
         The individual using this Application who, unless otherwise specified,
         coincides with the Data Subject.
       </p>
 
       <h2>Data Subject</h2>
-      <p>The natural person to whom the Personal Data refers.</p>
+      <p className='body-text'>The natural person to whom the Personal Data refers.</p>
 
       <h2>Data Processor (or Data Supervisor)</h2>
-      <p>
+      <p className='body-text'>
         The natural or legal person, public authority, agency or other body
         which processes Personal Data on behalf of the Controller, as described
         in this privacy policy.
       </p>
 
       <h2>Data Controller (or Owner)</h2>
-      <p>
+      <p className='body-text'>
         The natural or legal person, public authority, agency or other body
         which, alone or jointly with others, determines the purposes and means
         of the processing of Personal Data, including the security measures
@@ -934,34 +927,34 @@ function PrivacyPolicy(props) {
       </p>
 
       <h2>This Application</h2>
-      <p>
+      <p className='body-text'>
         The means by which the Personal Data of the User is collected and
         processed.
       </p>
 
       <h2>Service</h2>
-      <p>
+      <p className='body-text'>
         The service provided by this Application as described in the relative
         terms (if available) and on this site/application.
       </p>
 
       <h2>European Union (or EU)</h2>
-      <p>
+      <p className='body-text'>
         Unless otherwise specified, all references made within this document to
         the European Union include all current member states to the European
         Union and the European Economic Area.
       </p>
 
       <h2>Cookies</h2>
-      <p>Small sets of data stored in the User's device.</p>
+      <p className='body-text'>Small sets of data stored in the User's device.</p>
 
       <h2>Legal information</h2>
-      <p>
+      <p className='body-text'>
         This privacy statement has been prepared based on provisions of multiple
         legislations, including Art. 13/14 of Regulation (EU) 2016/679 (General
         Data Protection Regulation).
       </p>
-      <p>
+      <p className='body-text'>
         This privacy policy relates solely to this Application, if not stated
         otherwise within this document.
       </p>
