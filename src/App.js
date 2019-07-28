@@ -60,14 +60,6 @@ const theme = createMuiTheme({
         color: '#929292',
       
       "&$selected": {
-        fontFamily: "Open Sans",
-        fontSize: "1.4rem",
-        fontWeight: "600",
-        fontStyle: "normal",
-        fontStretch: "normal",
-        lineHeight: "normal",
-        letterSpacing: "normal",
-        textAlign: "center",
         color: "#ffffff"
       }
     },
