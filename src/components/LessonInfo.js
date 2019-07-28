@@ -13,35 +13,25 @@ const styles = theme => ({
 			marginRight: "1.2rem"
 		},
 		"& p": {
-			fontSize: "1.4rem",
-			fontWeight: 300,
 			margin: "0rem",
 			marginBottom: "0.2rem"
 		},
 		"& h3": {
-			fontSize: "1.4rem",
-			fontWeight: 600,
 			margin: "0rem"
 		}
 	},
 	duration: {
-		fontSize: "1rem",
-		fontWeight: 300,
 		position: "relative",
 		bottom: "3rem",
 		left: "12.5rem",
 		width: "3.6rem",
 		height: "1.6rem",
 		backgroundColor: "rgba(0, 0, 0, 0.8)",
-		textAlign: "center"
 	},
 	commingSoonTag: {
-		fontSize: "1rem",
-		fontWeight: 600,
 		position: "relative",
 		bottom: "9.3rem",
 		left: "0.8rem",
-		color: "#ff007f"
 	}
 });
 
@@ -94,19 +84,19 @@ class LessonInfo extends Component {
 					/>
 
 					{!this.props.commingSoon && (
-						<div className={classes.duration}>
+						<div className={classes.duration + ' Tiny-text'}>
 							{this.props.duration}
 						</div>
 					)}
 
 					{this.props.commingSoon && (
-						<div className={classes.commingSoonTag}>
+						<div className={ classes.commingSoonTag + ' Tiny-text-pink'}>
 							COMING SOON
 						</div>
 					)}
 				</div>
 				<div>
-					<p>Lesson {this.props.lessonNum}</p>
+					<p className='Input-text'>Lesson {this.props.lessonNum}</p>
 					<h3>{this.props.title}</h3>
 				</div>
 			</Box>

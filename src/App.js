@@ -34,20 +34,44 @@ const theme = createMuiTheme({
         width: '100%',
         height:'5.6rem',
         borderRadius:'0.6rem',
+        // fontFamily: 'Open Sans',
+        // fontSize: '1.4rem',
+        // fontWeight: '600',
+        // fontStyle: 'normal',
+        // fontStretch: 'normal',
+        // lineHeight: 'normal',
+        // letterSpacing: 'normal',
+        // textAlign: 'center',
+        // color: '#ffffff',
       },
-    }
+    },
+
+  // // tab css
+  MuiTab:{
+    root:{
+        fontFamily: 'Open Sans',
+        fontSize: '1.4rem',
+        fontWeight: '600',
+        fontStyle: 'normal',
+        fontStretch: 'normal',
+        lineHeight: 'normal',
+        letterSpacing: 'normal',
+        textAlign: 'center',
+        color: '#929292',
+      
+      "&$selected": {
+        color: "#ffffff"
+      }
+    },
   },
+
+  },
+
   typography: {
     useNextVariants: true,
     fontFamily: "Open Sans",
     fontWeightBold: 600,
     htmlFontSize:10,
-    h1:{
-      '@media (max-width:600px)': {
-        fontSize:"1.8rem",
-      },
-      fontWeight: 600
-    }
   },
   palette: {
     type: 'dark',
