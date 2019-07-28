@@ -104,14 +104,12 @@ class App extends Component {
         <MuiThemeProvider theme={theme}>
           <CssBaseline />
           <div className={classes.App}>
-            {/* <PrimaryAppBar></PrimaryAppBar> */}
             <Switch>
-            <Route path="/class/:id/lesson/:id" render={(routeProps) => (<LessonPage {...routeProps} />)}></Route>
+            <Route path="/class/:classId/lesson/:lessonId" render={(routeProps) => (<LessonPage {...routeProps} />)}></Route>
             <Route path="/class/:id" render={(routeProps) => (<ChefHomePage {...routeProps} mode='class' />)}></Route>
             </Switch>
 
             <Route exact path="/" render={(routeProps) => (<HomePage />)}></Route>
-            {/* <Route exact path="/" render={(routeProps) => (<ChefHomePage {...routeProps} {...chefsData}></ChefHomePage>)}></Route> */}
             <Route exact path="/terms-of-service" component={TermsOfService}></Route>
             <Route exact path="/privacy-policy" component={PrivacyPolicy}></Route>
             <Route exact path="/signin" component={SignIn}></Route>
@@ -121,9 +119,6 @@ class App extends Component {
             <Route exact path="/change-password" component={ChangePassword}></Route>
             <Route exact path="/community" component={CommunityPage}></Route>
             <Route exact path="/beta" component={BetaPage}></Route>
-
-            {/* <Route path="/lesson/:id/:id" render={(routeProps) => (<LessonPage {...routeProps} />)}></Route> */}
-
 
             <BottomBar> </BottomBar>
           </div>

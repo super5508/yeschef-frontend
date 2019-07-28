@@ -164,14 +164,9 @@ class LessonPage extends Component {
 			ingredientsArray: [],
 			handsonText: "",
 			TotalText: "",
-			classId: ""
 		};
-		// getting class id from url
-		let url = this.props.match.url;
-		let suburl = url.substring(7, url.length);
-		suburl = suburl.indexOf("/");
-		let classId = url.substring(7, 7 + suburl);
-		Axios.get(`/api/class/${classId}/lesson/${this.props.match.params.id - 1}`).then(chefInfoResponse => {
+		
+		Axios.get(`/api/class/${this.props.match.params.classId}/lesson/${this.props.match.params.lessonId - 1}`).then(chefInfoResponse => {
 			// console.log("d3", chefInfoResponse.data._fieldsProto);
 			this.setState({
 				...this.state,
@@ -289,10 +284,6 @@ class LessonPage extends Component {
 				}
 			]
 		};
-		let url = this.props.match.url;
-		let suburl = url.substring(7, url.length);
-		suburl = suburl.indexOf("/");
-		let classId = url.substring(7, 7 + suburl);
 
 		return (
 			<Box>
@@ -305,8 +296,8 @@ class LessonPage extends Component {
 							aria-label="Close"
 							onClick={() => {
 								this.props.history.push({
-									pathname: `/class/${classId}`,
-									state: this.props.match.params.id
+									pathname: `/class/${this.props.match.params.classId}`,
+									state: this.props.match.params.lessonId
 								});
 							}}
 						>
@@ -317,7 +308,7 @@ class LessonPage extends Component {
 					{/* lessonInfo */}
 					<div className={classes.contentCon}>
 						<div className={classes.titleCon}>
-							<h3>{this.props.match.params.id}</h3>
+							<h3>{this.props.match.params.lessonId}</h3>
 							<h1>{this.state.chefsData.title.stringValue.toUpperCase()}</h1>
 						</div>
 						<h2>{this.state.chefsData.description.stringValue}</h2>
