@@ -165,7 +165,7 @@ class LessonPage extends Component {
 			handsonText: "",
 			TotalText: "",
 		};
-		
+
 		Axios.get(`/api/class/${this.props.match.params.classId}/lesson/${this.props.match.params.lessonId - 1}`).then(chefInfoResponse => {
 			// console.log("d3", chefInfoResponse.data._fieldsProto);
 			this.setState({
@@ -220,14 +220,11 @@ class LessonPage extends Component {
 	};
 
 	getSkills = () => {
-		let data = this.state.chefsData.skils.arrayValue.values;
-		let string = "";
-		data.map((lessonData, id) => {
-			string = string + this.firstLetterToCapital(lessonData.stringValue) + " | ";
-		});
-		string = string.slice(0, string.length - 2);
+		let data = this.state.chefsData.skills.arrayValue.values;
+
+		const skillsString = data.map((lessonData, id) => this.firstLetterToCapital(lessonData.stringValue)).join(' | ');
 		this.setState({
-			skillsText: string
+			skillsText: skillsString
 		});
 	};
 
@@ -241,7 +238,7 @@ class LessonPage extends Component {
 			return amount;
 		}
 		// Next 12 lines are cribbed from https://stackoverflow.com/a/23575406.
-		var gcd = function(a, b) {
+		var gcd = function (a, b) {
 			if (b < 0.0000001) {
 				return a;
 			}
@@ -268,7 +265,7 @@ class LessonPage extends Component {
 	};
 
 	firstLetterToCapital = str => {
-		return str.replace(/\w\S*/g, function(txt) {
+		return str.replace(/\w\S*/g, function (txt) {
 			return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
 		});
 	};
@@ -385,53 +382,53 @@ class LessonPage extends Component {
 													<h4>{head.toUpperCase()}</h4>
 													<div>
 														{// console.log(this.state.chefsData.ingredients.mapValue.fields[head])
-														Object.keys(this.state.chefsData.ingredients.mapValue.fields[head].mapValue.fields).map(
-															(value, index) => {
-																let comment = "";
-																if (
-																	this.state.chefsData.ingredients.mapValue.fields[head].mapValue.fields[value]
-																		.mapValue.fields.comment
-																) {
-																	comment = this.state.chefsData.ingredients.mapValue.fields[head].mapValue.fields[
-																		value
-																	].mapValue.fields.comment.stringValue;
-																	comment = "- " + comment;
-																}
+															Object.keys(this.state.chefsData.ingredients.mapValue.fields[head].mapValue.fields).map(
+																(value, index) => {
+																	let comment = "";
+																	if (
+																		this.state.chefsData.ingredients.mapValue.fields[head].mapValue.fields[value]
+																			.mapValue.fields.comment
+																	) {
+																		comment = this.state.chefsData.ingredients.mapValue.fields[head].mapValue.fields[
+																			value
+																		].mapValue.fields.comment.stringValue;
+																		comment = "- " + comment;
+																	}
 
-																let unit = "";
-																if (
-																	this.state.chefsData.ingredients.mapValue.fields[head].mapValue.fields[value]
-																		.mapValue.fields.unit
-																) {
-																	unit = this.state.chefsData.ingredients.mapValue.fields[head].mapValue.fields[
-																		value
-																	].mapValue.fields.unit.stringValue;
-																}
+																	let unit = "";
+																	if (
+																		this.state.chefsData.ingredients.mapValue.fields[head].mapValue.fields[value]
+																			.mapValue.fields.unit
+																	) {
+																		unit = this.state.chefsData.ingredients.mapValue.fields[head].mapValue.fields[
+																			value
+																		].mapValue.fields.unit.stringValue;
+																	}
 
-																let quantity = "";
-																if (
-																	this.state.chefsData.ingredients.mapValue.fields[head].mapValue.fields[value]
-																		.mapValue.fields.quantity
-																) {
-																	quantity = Object.values(
+																	let quantity = "";
+																	if (
 																		this.state.chefsData.ingredients.mapValue.fields[head].mapValue.fields[value]
 																			.mapValue.fields.quantity
-																	)[0];
-																}
+																	) {
+																		quantity = Object.values(
+																			this.state.chefsData.ingredients.mapValue.fields[head].mapValue.fields[value]
+																				.mapValue.fields.quantity
+																		)[0];
+																	}
 
-																return (
-																	<li key={`li${value}-${index}`}>
-																		<span
-																			style={{
-																				color: "#ffffff"
-																			}}
-																		>
-																			{this.decimalToFraction(quantity)} {unit} {value} {comment}
-																		</span>
-																	</li>
-																);
-															}
-														)}
+																	return (
+																		<li key={`li${value}-${index}`}>
+																			<span
+																				style={{
+																					color: "#ffffff"
+																				}}
+																			>
+																				{this.decimalToFraction(quantity)} {unit} {value} {comment}
+																			</span>
+																		</li>
+																	);
+																}
+															)}
 													</div>
 												</div>
 											);
