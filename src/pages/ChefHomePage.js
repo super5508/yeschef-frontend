@@ -63,7 +63,8 @@ const styles = theme => ({
 		padding: '1.8rem 0rem',
 	},
 	btncon: {
-		margin: "26.5rem 2.4rem 0.8rem 2.4rem",
+		margin: "57vw 2.4rem 0.8rem 2.4rem",
+		paddingTop: "2.4rem",
 		textAlign: "center"
 	},
 	classDesc: {
@@ -178,7 +179,7 @@ class ChefHomePage extends Component {
 							variant="contained"
 							className={classes.startBtn}
 							color="primary"
-							// onClick={#}
+						// onClick={#}
 						>
 							START THE CLASS
 						</Button>
@@ -223,7 +224,7 @@ class ChefHomePage extends Component {
 								<div
 									style={{
 										borderRight: "0.1rem solid #ffffff",
-										width:'32%',
+										width: '32%',
 									}}
 								>
 									<WatchLaterIcon className={classes.icon} />
@@ -240,7 +241,7 @@ class ChefHomePage extends Component {
 									className={classes.alignRight}
 									style={{
 										borderLeft: "0.1rem solid #ffffff",
-										width:'32%',
+										width: '32%',
 									}}
 								>
 									<CheckIcon className={classes.icon} />
