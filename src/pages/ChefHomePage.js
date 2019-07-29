@@ -44,8 +44,6 @@ const styles = theme => ({
 			alignItems: "center"
 		},
 		"& p": {
-			fontSize: "1.4rem",
-			fontWeight: 300,
 			display: "inline-block",
 			margin: 0
 		}
@@ -66,18 +64,25 @@ const styles = theme => ({
 		padding: "1.8rem 0rem"
 	},
 	btncon: {
-		margin: "26.5rem 2.4rem 0.8rem 2.4rem",
+		margin: "57vw 2.4rem 0.8rem 2.4rem",
+		paddingTop: "2.4rem",
 		textAlign: "center"
 	},
 	classDesc: {
 		"& p": {
-			fontSize: "1.6rem",
-			fontWeight: 300,
 			margin: "2rem 2.4rem"
 		},
 		"& span": {
-			fontSize: "1.8rem",
-			fontWeight: 600
+			fontFamily: 'Open Sans',
+			fontSize: '16px',
+			fontWeight: '600',
+			fontStyle: 'normal',
+			fontStretch: 'normal',
+			lineHeight: 'normal',
+			letterSpacing: 'normal',
+			color: '#ffffff',
+			// fontSize: "1.6rem",
+			// fontWeight: 600
 		}
 	},
 	icon: {
@@ -116,11 +121,6 @@ const styles = theme => ({
 	socialBtnsCon: {
 		display: "flex",
 		justifyContent: "center"
-	},
-	fullWidth_button: {
-		width: "100%",
-		height: "5.6rem",
-		borderRadius: "0.6rem"
 	}
 });
 class ChefHomePage extends Component {
@@ -175,7 +175,8 @@ class ChefHomePage extends Component {
 		const { classes, theme } = this.props;
 		return (
 			<div>
-				<ClassInfo {...this.state.chefsData} showTrailer={true} />
+				<ClassInfo {...this.state.chefsData} showTrailer={false} fixed />
+				{/* //close button */}
 				<div className={classes.iconBox}>
 					<Link to="/" underline="none">
 						<IconButton aria-label="Close">
@@ -189,13 +190,9 @@ class ChefHomePage extends Component {
 					<Link to={"/"} style={{ textDecoration: "none" }}>
 						<Button
 							variant="contained"
-							className={
-								classes.startBtn +
-								" " +
-								classes.fullWidth_button
-							}
+							className={classes.startBtn}
 							color="primary"
-							// onClick={#}
+						// onClick={#}
 						>
 							START THE CLASS
 						</Button>
@@ -214,6 +211,7 @@ class ChefHomePage extends Component {
 								root: classes.tabRoot,
 								selected: classes.tabSelected
 							}}
+							className='Button-text'
 							label="CLASS"
 						/>
 						<Tab
@@ -242,11 +240,11 @@ class ChefHomePage extends Component {
 									}}
 								>
 									<WatchLaterIcon className={classes.icon} />
-									<p>{this.state.chefsData.duration} hours</p>
+									<p className='Input-text'>{this.state.chefsData.duration} hours</p>
 								</div>
 								<div className={classes.alignCenter}>
 									<PlayIcon className={classes.icon} />
-									<p>
+									<p className='Input-text'>
 										{this.state.chefsData.lessons.length}{" "}
 										lessons
 									</p>
@@ -259,7 +257,7 @@ class ChefHomePage extends Component {
 									}}
 								>
 									<CheckIcon className={classes.icon} />
-									<p>
+									<p className='Input-text'>
 										{this.state.chefsData.skills.length}{" "}
 										skills
 									</p>
@@ -268,7 +266,7 @@ class ChefHomePage extends Component {
 
 							{/* //Class description */}
 							<Box className={classes.classDesc}>
-								<p>{this.state.chefsData.description}</p>
+								<p className='body-text'>{this.state.chefsData.description}</p>
 							</Box>
 							{/* //lessons list */}
 							<div className={classes.lessonsContainer}>
@@ -307,7 +305,7 @@ class ChefHomePage extends Component {
 							{/* //about tab */}
 							{/* //Class description */}
 							<Box className={classes.classDesc}>
-								<p>
+								<p className='body-text'>
 									<span>
 										Chef {this.state.chefsData.chefName}
 									</span>{" "}

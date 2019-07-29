@@ -74,15 +74,20 @@ const styles = theme => ({
         flexWrap: "wrap",
         marginRight: "4rem",
         marginLeft: "4rem"
-    },
+	},
+	input:{
+		fontFamily: 'Open Sans',
+		fontSize: '14px',
+		fontWeight: '300',
+		fontStyle: 'normal',
+		fontStretch: 'normal',
+		lineHeight: '1',
+		letterSpacing: 'normal',
+		color: '#ffffff',
+	},
     grayText: {
         color: "#929292"
 	},
-	fullWidth_button:{
-		width:'100%',
-		height:'5.6rem',
-		borderRadius:'0.6rem'
-	}
 });
 
 class SignUp extends Component {
@@ -168,7 +173,7 @@ class SignUp extends Component {
 				<Box className={classes.loginWith}>
 					<Button
 						variant="contained"
-						className={classes.fbButton + ' ' + classes.fullWidth_button}
+						className={classes.fbButton}
 						size="large"
 						onClick={() => this.signUpWith("facebook")}
 					>
@@ -182,7 +187,7 @@ class SignUp extends Component {
 
 					<Button
 						variant="contained"
-						className={classes.googleButton + ' ' + classes.fullWidth_button}
+						className={classes.googleButton}
 						size="large"
 						onClick={() => this.signUpWith("google")}
 					>
@@ -203,7 +208,7 @@ class SignUp extends Component {
 					mb="1.9rem"
 				>
 					<Divider width="40%" className={classes.boldDivider} />
-					OR
+					<span className='Button-text'>OR</span>
 					<Divider width="40%" className={classes.boldDivider} />
 				</Box>
 				<form
@@ -215,7 +220,6 @@ class SignUp extends Component {
 						id="name"
 						label="Name"
 						InputLabelProps={labelsProps}
-						className={classes.textField}
 						margin="normal"
 						variant="outlined"
 						fullWidth={true}
@@ -249,7 +253,7 @@ class SignUp extends Component {
 					<Button
 						variant="contained"
 						color="primary"
-						className={classes.signUpBtn + ' ' + classes.fullWidth_button}
+						className={classes.signUpBtn}
 						onClick={this.submitSignUp}
 					>
 						<Box fontWeight="600" fontSize="1.4rem">

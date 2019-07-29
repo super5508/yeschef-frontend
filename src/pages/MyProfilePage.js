@@ -43,9 +43,9 @@ class MyProfilePage extends Component {
     const { classes } = this.props;
     return (
       <Box>
-        <Typography className={classes.h1} variant="h1" component="h1">
+        <h1 style={{marginLeft:'24px'}} component="h1">
           MY PROFILE
-        </Typography>
+        </h1>
         {/* if user logged out */}
         {!this.props.authStat.isLogin && (
           <Paper className={classes.signin_out_tabs}>
@@ -58,7 +58,7 @@ class MyProfilePage extends Component {
               className={classes.tabs}
               variant="fullWidth"
             >
-              <Tab value="signup" label="Sign Up" />
+              <Tab value="signup" className='Button-text' label="Sign Up" />
               <Tab value="signin" label="Sign In" />
             </Tabs>
             {this.state.value === "signin" ? <SignIn history={this.props.history} /> : <SignUp history={this.props.history} />}

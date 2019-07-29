@@ -66,11 +66,6 @@ const useStyles = makeStyles({
 		fontSize: "2rem",
 		fontWeight: 600,
 		color: "#ffffff"
-	},
-	fullWidth_button:{
-		width:'100%',
-		height:'5.6rem',
-		borderRadius:'6px'
 	}
 });
 
@@ -140,11 +135,6 @@ const styles = theme => ({
 	},
 	btncon: {
 		marginTop: "1.5rem"
-	},
-	fullWidth_button:{
-		width:'100%',
-		height:'5.6rem',
-		borderRadius:'6px'
 	}
 });
 
@@ -197,7 +187,7 @@ class ResetPassword extends Component {
 		};
 		return (
 			<Box>
-				<Typography className={classes.h1} variant="h1" component="h1">
+				<h1 className={classes.h1}>
 					<IconButton
 						aria-label="Go Back"
 						onClick={() => {
@@ -207,7 +197,7 @@ class ResetPassword extends Component {
 						<BackIcon className={classes.backIcon} />
 					</IconButton>
 					RESET YOUR PASSWORD
-				</Typography>
+				</h1>
 				<Box width="100%" pl="2.4rem" pr="2.4rem">
 					<form onSubmit={this.resetPassword}>
 						<CssTextField
@@ -224,7 +214,7 @@ class ResetPassword extends Component {
 						<Box className={classes.btncon}>
 							<Button
 								variant="contained"
-								className={classes.resetBtn + ' ' + classes.fullWidth_button}
+								className={classes.resetBtn}
 								color="primary"
 								onClick={this.resetPassword}
 							>

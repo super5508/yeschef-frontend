@@ -19,9 +19,8 @@ const styles = theme => ({
 		display: "flex",
 		flexDirection: "row",
 		margin: "2rem 0rem 0rem 2.4rem",
-		"& h3": {
-			fontSize: "1.6rem",
-			fontWeight: 600,
+		"& h2": {
+			textTransform:'uppercase',
 			marginTop: "0.5rem"
 		}
 	},
@@ -33,19 +32,19 @@ const styles = theme => ({
 	pinkBg: {
 		backgroundColor: "#ff007f"
 	},
-	setEmail: {
-		fontSize: "1.4rem",
-		fontWeight: 300
-	},
 	userIcon: {
 		color: "#f2f2f2",
 		fontSize: "3.0rem"
 	},
+	// userName:{
+	// 	textTransform:'uppercase'
+	// },
+	userEmail:{
+		textTransform:'lowercase'
+	},
 	listCon: {
     margin:'2rem 0rem',
 		"& h4": {
-			fontSize: "1.6rem",
-			fontWeight: 300,
 			cursor: "pointer"
 		}
   },
@@ -102,13 +101,13 @@ class Settings extends Component {
 							</Avatar>
 						)}
 						<div>
-							<h3>
+							<h2 className={classes.userName}>
 								{this.props.authStat.userProfile.displayName}
 								<br />
-								<span className={classes.setEmail}>
+								<span className={'body-text ' + classes.userEmail}>
 									{this.props.authStat.userProfile.email}
 								</span>
-							</h3>
+							</h2>
 						</div>
 					</Box>
 				)}
@@ -116,7 +115,7 @@ class Settings extends Component {
 				<Box className={classes.listCon}>
 					{this.props.authStat && this.props.authStat.userProfile && this.props.authStat.userProfile.providerData[0].providerId === 'password' && 
 					<div className={classes.lstItem} onClick={()=>{this.props.history.push('/change-password')}}>
-						<h4>Change password</h4>
+						<h4 className='body-text'>Change password</h4>
 						<IconButton
 							aria-label="forward"
 							size="small"
@@ -126,7 +125,7 @@ class Settings extends Component {
 					</div>
 					}
           <div onClick={this.openChat} className={clsx(classes.lstItem,classes.bottomBorder)}>
-						<h4>Help</h4>
+						<h4 className='body-text'>Help</h4>
 						<IconButton
 							aria-label="forward"
 							size="small"
