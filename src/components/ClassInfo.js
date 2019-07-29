@@ -8,20 +8,21 @@ import TrailerVideo from './TrailerVideo';
 const styles = theme => ({
     container: {
         top: '0',
-        zIndex:'20',
-        height: '57vw',
+        zIndex: '20',
         backgroundSize: 'cover',
         [theme.breakpoints.down('sm')]: {
-            width: '100%'
+            height: '57vw',
+            width: '100%',
         },
         [theme.breakpoints.up('sm')]: {
-            width: '33%'
+            width: '32vw',
+            height: '18vw'
         },
     },
     container2: {
-        position:'fixed',
-        top:'0',
-        zIndex:'20',
+        position: 'fixed',
+        top: '0',
+        zIndex: '20',
         [theme.breakpoints.down('sm')]: {
             width: '100%'
         },
@@ -29,7 +30,7 @@ const styles = theme => ({
         //     width: '33%'
         // },
     },
-    fix_position_container:{
+    fix_position_container: {
         position: 'fixed'
     },
     background_img: {
@@ -51,13 +52,13 @@ const styles = theme => ({
         flexDirection: 'column',
         paddingBottom: '0.8rem',
         paddingTop: '1.2rem',
-        zIndex : '20',
+        zIndex: '20',
         backgroundImage: 'linear-gradient(to top, #1f1e1e, rgba(31, 30, 30, 0))'
     },
     info_container2: {
-        width:'100%',
-        position:'absolute',
-        bottom:'0px',
+        width: '100%',
+        position: 'absolute',
+        bottom: '0px',
         display: 'flex',
         alignItems: 'center',
         flexDirection: 'column',
@@ -66,8 +67,8 @@ const styles = theme => ({
         backgroundImage: 'linear-gradient(to top, #1f1e1e, rgba(31, 30, 30, 0))'
     },
     video_container: {
-        position:'relative',
-        height:'57vw'
+        position: 'relative',
+        height: '57vw'
     },
     mask_container: {
         width: '100%',
@@ -82,15 +83,15 @@ class ClassInfo extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            src : null,
-            poster : null
+            src: null,
+            poster: null
         }
     }
 
     static getDerivedStateFromProps(props) {
-        if(props.trailer) {
+        if (props.trailer) {
             return {
-                src : props.trailer,
+                src: props.trailer,
                 poster: props.chefImg
             }
         }
@@ -111,38 +112,38 @@ class ClassInfo extends Component {
             muted: true,
             loadingSpinner: false,
             errorDisplay: false,
-            poster : this.state.poster,
+            poster: this.state.poster,
             sources: [{
-              src: this.state.src,
+                src: this.state.src,
             }],
-          }
+        }
 
         const { classes } = this.props;
         return (
             <Link to={"/class/" + this.props.id} className='link' style={{ textDecoration: 'none' }}>
                 {
-                this.props.showTrailer ?  
-                <Paper className={classes.container2}>
-                    <div className={classes.video_container}>
-                        {
-                            this.state.src && <TrailerVideo  {...videoJsOptions}/>
-                        }
-                        <Box className={classes.info_container2} style={this.comingSoonTextStyle}>
-                            <Box className={classes.chef_name + ' h1center'}>Chef {this.props.chefName}</Box>
-                            <Box className='Sub-h1'>{this.props.classTitle}</Box>
-                        </Box>
-                    </div>
-                </Paper>
-                :
-                <Paper className={(this.props.fixed && classes.fix_position_container) + ' ' + classes.container } style={{ backgroundImage: 'url(' + this.props.chefImg + ')' }}>
-                    <Box className={classes.mask_container} style={this.comingSoonOpacityStyle }>
-                        < Box className={classes.info_container} style={this.comingSoonTextStyle}>
-                            <Box className={classes.chef_name + ' h1center'}>Chef {this.props.chefName}</Box>
-                            <Box className='Sub-h1'>{this.props.classTitle}</Box>
-                            {this.props.isComingSoon && <Box className={classes.coming_soon} color="primary.main">COMING SOON</Box>}
-                        </Box>
-                    </Box>
-                </Paper >
+                    this.props.showTrailer ?
+                        <Paper className={classes.container2}>
+                            <div className={classes.video_container}>
+                                {
+                                    this.state.src && <TrailerVideo  {...videoJsOptions} />
+                                }
+                                <Box className={classes.info_container2} style={this.comingSoonTextStyle}>
+                                    <Box className={classes.chef_name + ' h1center'}>Chef {this.props.chefName}</Box>
+                                    <Box className='Sub-h1'>{this.props.classTitle}</Box>
+                                </Box>
+                            </div>
+                        </Paper>
+                        :
+                        <Paper className={(this.props.fixed && classes.fix_position_container) + ' ' + classes.container} style={{ backgroundImage: 'url(' + this.props.chefImg + ')' }}>
+                            <Box className={classes.mask_container} style={this.comingSoonOpacityStyle}>
+                                < Box className={classes.info_container} style={this.comingSoonTextStyle}>
+                                    <Box className={classes.chef_name + ' h1center'}>Chef {this.props.chefName}</Box>
+                                    <Box className='Sub-h1'>{this.props.classTitle}</Box>
+                                    {this.props.isComingSoon && <Box className={classes.coming_soon} color="primary.main">COMING SOON</Box>}
+                                </Box>
+                            </Box>
+                        </Paper >
                 }
             </Link>
         );
