@@ -5,13 +5,9 @@ export default class VideoPlayer extends React.Component {
 		// instantiate Video.js
 		this.player = videojs(
 			this.videoNode,
-			this.props,
-			function () {
-				this.addClass('vjs-big-play-centered')
-			this.addClass('vjs-big-play-button')
-			}
+			this.props
 		);
-		
+
 	}
 
 	// destroy player on unmount
@@ -23,15 +19,14 @@ export default class VideoPlayer extends React.Component {
 
 	render() {
 		return (
-			<div data-vjs-player  style={{
-                width: "100%",
-                height: "99%"
-              }}>
-					<video
-					className="vjs-big-play-button"
-						ref={node => (this.videoNode = node)}
-						className="video-js"
-					/>
+			<div data-vjs-player className="vjs-big-play-centered" style={{
+				width: "100%",
+				height: "99%"
+			}}>
+				<video
+					className="video-js vjs-big-play-button vjs-big-play-centered"
+					ref={node => (this.videoNode = node)}
+				/>
 			</div>
 		);
 	}

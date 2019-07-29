@@ -273,7 +273,7 @@ class LessonPage extends Component {
 	render() {
 		const { classes, theme } = this.props;
 		const videoJsOptions = {
-			autoplay: true,
+			autoplay: false,
 			controls: true,
 			sources: [
 				{
