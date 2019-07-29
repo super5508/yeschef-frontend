@@ -16,7 +16,7 @@ export default class TrailerVideo extends React.Component {
   }
 
   static getDerivedStateFromProps(props) {
-    console.log(props)
+    // console.log(props)
     if (props.poster) {
       return {
         poster: props.poster
@@ -37,7 +37,7 @@ export default class TrailerVideo extends React.Component {
         width: "100%",
         height: "99%"
       }}>
-        <video ref={node => this.videoNode = node} poster={this.state.poster} className="video-js" width='100%' height='auto'></video>
+        <video ref={node => this.videoNode = node} poster={this.state.poster} className="video-js" ></video>
       </div>
     )
   }

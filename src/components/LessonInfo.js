@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
-import { Link } from "react-router-dom";
 
 const styles = theme => ({
 	lessonInfoCon: {
@@ -69,7 +68,11 @@ class LessonInfo extends Component {
 				onClick={() => {
 					if (!this.props.commingSoon) {
 						this.props.history.push(
-							"/lesson/" + this.props.lessonNum
+							"/class/"+this.props.match.params.id +"/lesson/"+this.props.lessonNum
+
+						// this.props.history.push("/class/"+this.props.match.params.id+"/lesson/"+this.props.lessonNum
+						// this.props.history.push("/lesson/" + this.props.match.params.id + "/" + this.props.lessonNum
+
 						);
 					}
 				}}

@@ -4,11 +4,11 @@ import ChefHomePage from './pages/ChefHomePage';
 import { MuiThemeProvider, createMuiTheme, withStyles } from '@material-ui/core/styles';
 import { connect } from "react-redux";
 import './assets/site.scss';
-import { BrowserRouter, Route ,withRouter} from 'react-router-dom';
+import { BrowserRouter, Route ,withRouter,Switch} from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import SignIn from './components/SignIn';
 import SignOut from './components/SignOut';
-import PlayerPage from './pages/PlayerPage';
+import LessonPage from './pages/LessonPage';
 //import Axios from 'axios';
 import BottomBar from './components/BottomBar';
 import HomePage from './pages/HomePage';
@@ -19,6 +19,7 @@ import ResetPassword from './pages/ResetPassword';
 import ChangePassword from './pages/ChangePassword';
 import BetaPage from './pages/Beta';
 import CommunityPage from './pages/CommunityPage';
+
 const APP_ID = 'h6twy30k'
 
 const styles = theme => ({
@@ -127,10 +128,12 @@ class App extends Component {
         <MuiThemeProvider theme={theme}>
           <CssBaseline />
           <div className={classes.App}>
-            {/* <PrimaryAppBar></PrimaryAppBar> */}
+            <Switch>
+            <Route path="/class/:classId/lesson/:lessonId" render={(routeProps) => (<LessonPage {...routeProps} />)}></Route>
+            <Route path="/class/:id" render={(routeProps) => (<ChefHomePage {...routeProps} mode='class' />)}></Route>
+            </Switch>
 
             <Route exact path="/" render={(routeProps) => (<HomePage />)}></Route>
-            {/* <Route exact path="/" render={(routeProps) => (<ChefHomePage {...routeProps} {...chefsData}></ChefHomePage>)}></Route> */}
             <Route exact path="/terms-of-service" component={TermsOfService}></Route>
             <Route exact path="/privacy-policy" component={PrivacyPolicy}></Route>
             <Route exact path="/signin" component={SignIn}></Route>
@@ -140,7 +143,7 @@ class App extends Component {
             <Route exact path="/change-password" component={ChangePassword}></Route>
             <Route exact path="/community" component={CommunityPage}></Route>
             <Route exact path="/beta" component={BetaPage}></Route>
-            <Route path="/class/:id" render={(routeProps) => (<ChefHomePage {...routeProps} mode='class' />)}></Route>
+
             <BottomBar> </BottomBar>
           </div>
         </MuiThemeProvider>
