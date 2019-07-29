@@ -124,7 +124,7 @@ const styles = theme => ({
 		}
 	},
 	tabSelected: {},
-	ingredientsCon: {
+	subTabsCon: {
 		margin: "0rem 2.3rem",
 		"& h4": {
 			fontSize: "1.6rem",
@@ -281,7 +281,7 @@ class LessonPage extends Component {
 				}
 			]
 		};
-
+console.log('here',this.state.chefsData)
 		return (
 			<Box>
 				<Paper className={classes.container2}>
@@ -375,7 +375,7 @@ class LessonPage extends Component {
 						>
 							{this.state.chefsData.ingredients && (
 								<TabContainer dir={theme.direction}>
-									<Box className={classes.ingredientsCon}>
+									<Box className={classes.subTabsCon}>
 										{this.state.ingredientsArray.map((head, id) => {
 											return (
 												<div key={`${head}-${id}`}>
@@ -440,7 +440,21 @@ class LessonPage extends Component {
 							)}
 							{this.state.chefsData.gear && (
 								<TabContainer dir={theme.direction}>
-									<Box />
+									<Box className={classes.subTabsCon}>
+
+										{		
+											Object.keys(this.state.chefsData.gear.mapValue.fields).map(
+												(data, index)=>{
+													console.log(data, index)
+													return(
+														<div key={`gear-${index}`}>
+														<h4>{data.toUpperCase()}</h4>
+														</div>
+													)
+												}
+											)
+											}
+									</Box>
 								</TabContainer>
 							)}
 							{this.state.chefsData.shorthand && (
