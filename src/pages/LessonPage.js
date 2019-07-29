@@ -417,15 +417,17 @@ class LessonPage extends Component {
 																	}
 
 																	return (
-																		<li key={`li${value}-${index}`}>
-																			<span
-																				style={{
-																					color: "#ffffff"
-																				}}
-																			>
-																				{this.decimalToFraction(quantity)} {unit} {value} {comment}
-																			</span>
-																		</li>
+																		<ul>
+																			<li key={`li${value}-${index}`}>
+																				<span
+																					style={{
+																						color: "#ffffff"
+																					}}
+																				>
+																					{this.decimalToFraction(quantity)} {unit} {value} {comment}
+																				</span>
+																			</li>
+																		</ul>
 																	);
 																}
 															)}
