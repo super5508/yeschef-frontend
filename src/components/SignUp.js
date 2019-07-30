@@ -24,58 +24,68 @@ const CssTextField = withStyles({
 })(TextField);
 
 const styles = theme => ({
-    container: {
-        '& .Mui-focused fieldset': {
-            borderColor: 'white',
-        },
-    },
-    loginWith: {
-        flexDirection: "column",
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        marginBottom: "3.5rem",
-    },
-    dense: {
-        marginTop: 19,
-    },
-    menu: {
-        width: 200,
-    },
-    textFieldLabel: {
-        fontSize: '1.4rem',
-        fontWeight: 300
-    },
-    boldDivider: {
-        height: "2px"
-    },
-    fbButton: {
-        backgroundColor: "#4367b2",
-        color: "white",
-        paddingRight: "1.2rem",
-		paddingLeft: "1.2rem"
-    },
-    googleButton: {
-        backgroundColor: "white",
-        paddingRight: "1.5rem",
-		paddingLeft: "1.5rem",
-		marginTop:'1.6rem'
-    },
-    signUpBtn: {
-        marginTop: '1.6rem',
-        width: '100%',
-    },
-    tos_ppContainer: {
-        marginTop: "2.6rem",
-        fontSize: "1.2rem",
-        color: "#929292",
-        display: "flex",
-        justifyContent: "center",
-        flexWrap: "wrap",
-        marginRight: "4rem",
-        marginLeft: "4rem"
+	container: {
+		"& .Mui-focused fieldset": {
+			borderColor: "white",
+		},
+		paddingTop: "2.4rem",
+		[theme.breakpoints.down('sm')]: {
+			width: "100%",
+			paddingLeft: "2.4rem",
+			paddingRight: "2.4rem",
+		},
+		[theme.breakpoints.up('sm')]: {
+			width: '400px',
+			margin: 'auto'
+		}
 	},
-	input:{
+	loginWith: {
+		flexDirection: "column",
+		display: "flex",
+		justifyContent: "space-between",
+		alignItems: "center",
+		marginBottom: "3.5rem",
+	},
+	dense: {
+		marginTop: 19,
+	},
+	menu: {
+		width: 200,
+	},
+	textFieldLabel: {
+		fontSize: '1.4rem',
+		fontWeight: 300
+	},
+	boldDivider: {
+		height: "2px"
+	},
+	fbButton: {
+		backgroundColor: "#4367b2",
+		color: "white",
+		paddingRight: "1.2rem",
+		paddingLeft: "1.2rem"
+	},
+	googleButton: {
+		backgroundColor: "white",
+		paddingRight: "1.5rem",
+		paddingLeft: "1.5rem",
+		marginTop: '1.6rem'
+	},
+	signUpBtn: {
+		marginTop: '1.6rem',
+		width: '100%',
+	},
+	tos_ppContainer: {
+		marginTop: "2.6rem",
+		fontSize: "1.2rem",
+		color: "#929292",
+		display: "flex",
+		justifyContent: "center",
+		flexWrap: "wrap",
+		marginRight: "4rem",
+		marginLeft: "4rem"
+	},
+	input: {
 		fontFamily: 'Open Sans',
 		fontSize: '14px',
 		fontWeight: '300',
@@ -85,8 +95,8 @@ const styles = theme => ({
 		letterSpacing: 'normal',
 		color: '#ffffff',
 	},
-    grayText: {
-        color: "#929292"
+	grayText: {
+		color: "#929292"
 	},
 });
 
@@ -115,7 +125,7 @@ class SignUp extends Component {
 			this.state.password
 		);
 
-		firebaseAuthPromise.catch(function(error) {
+		firebaseAuthPromise.catch(function (error) {
 			// Handle Errors here.
 			//var errorCode = error.code;
 			var errorMessage = error.message;
@@ -150,7 +160,7 @@ class SignUp extends Component {
 				this.props.history.push("/");
 			},
 			msg => {
-                // #Todo change the alert to a real error message popup
+				// #Todo change the alert to a real error message popup
 				alert(msg);
 			}
 		);
@@ -164,10 +174,6 @@ class SignUp extends Component {
 
 		return (
 			<Box
-				width="100%"
-				pl="2.4rem"
-				pr="2.4rem"
-				pt="2.4rem"
 				className={classes.container}
 			>
 				<Box className={classes.loginWith}>
