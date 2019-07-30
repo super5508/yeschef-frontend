@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import { Paper } from "@material-ui/core";
-import Typography from "@material-ui/core/Typography";
+import withWidth, { isWidthDown } from '@material-ui/core/withWidth';
 import SignIn from "../components/SignIn";
 import SignUp from "../components/SignUp";
 import Settings from '../components/Settings';
@@ -41,9 +41,16 @@ class MyProfilePage extends Component {
 
   render() {
     const { classes } = this.props;
+    let additionalProps = {};
+    if (isWidthDown('sm', this.props.width)) {
+      additionalProps.variant = "fullWidth";
+    } else {
+      additionalProps.centered = "true";
+    }
+
     return (
       <Box>
-        <h1 style={{marginLeft:'24px'}} component="h1">
+        <h1 style={{ marginLeft: '24px' }} component="h1">
           MY PROFILE
         </h1>
         {/* if user logged out */}
@@ -54,9 +61,9 @@ class MyProfilePage extends Component {
               onChange={this.handleChange}
               indicatorColor="primary"
               textColor="inherit"
-              centered
+              {...additionalProps}
+              // centered
               className={classes.tabs}
-              variant="fullWidth"
             >
               <Tab value="signup" className='Button-text' label="Sign Up" />
               <Tab value="signin" label="Sign In" />
@@ -78,5 +85,4 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 export default withRouter(
-  connect(mapStateToProps)(withStyles(styles)(MyProfilePage))
-);
+  connect(mapStateToProps)(withStyles(styles)(withWidth()(MyProfilePage))));
