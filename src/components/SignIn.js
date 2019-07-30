@@ -26,7 +26,17 @@ const CssTextField = withStyles({
 const styles = theme => ({
   container: {
     "& .Mui-focused fieldset": {
-      borderColor: "white"
+      borderColor: "white",
+    },
+    paddingTop: "2.4rem",
+    [theme.breakpoints.down('sm')]: {
+      width: "100%",
+      paddingLeft: "2.4rem",
+      paddingRight: "2.4rem",
+    },
+    [theme.breakpoints.up('sm')]: {
+      width: '400px',
+      margin: 'auto'
     }
   },
   loginWith: {
@@ -63,7 +73,7 @@ const styles = theme => ({
     marginTop: "1.6rem",
     fontSize: "1.4rem",
     color: "#929292",
-    textAlign:'center',
+    textAlign: 'center',
     textDecoration: "underline"
   },
   grayText: {
@@ -92,11 +102,11 @@ class SignIn extends Component {
       this.state.email,
       this.state.password
     );
-    firebaseAuthPromis.catch(function(error) {
+    firebaseAuthPromis.catch(function (error) {
       // Handle Errors here.
       //var errorCode = error.code;
       var errorMessage = error.message;
-				// #Todo change the alert to a real error message popup
+      // #Todo change the alert to a real error message popup
       alert(errorMessage);
     });
 
@@ -134,7 +144,7 @@ class SignIn extends Component {
         this.props.history.push("/");
       },
       msg => {
-				// @Todo change the alert to a real error message popup
+        // @Todo change the alert to a real error message popup
         alert(msg);
       }
     );
@@ -147,10 +157,6 @@ class SignIn extends Component {
     };
     return (
       <Box
-        width="100%"
-        pl="2.4rem"
-        pr="2.4rem"
-        pt="2.4rem"
         className={classes.container}
       >
         <Box className={classes.loginWith}>
