@@ -142,6 +142,10 @@ const styles = theme => ({
 		"& li": {
 			marginTop: "0.5rem"
 		}
+	},
+	gearul:{
+		margin: "2rem 0rem 0rem 1rem !important"
+
 	}
 });
 
@@ -441,19 +445,26 @@ console.log('here',this.state.chefsData)
 							{this.state.chefsData.gear && (
 								<TabContainer dir={theme.direction}>
 									<Box className={classes.subTabsCon}>
-
+									<ul className={classes.gearul}>
 										{		
 											Object.keys(this.state.chefsData.gear.mapValue.fields).map(
 												(data, index)=>{
 													console.log(data, index)
 													return(
-														<div key={`gear-${index}`}>
-														<h4>{data.toUpperCase()}</h4>
-														</div>
+														
+													<li key={`ligear-${index}`} >
+													<span
+														style={{
+														color: "#ffffff"
+														}}
+													>
+													{this.firstLetterToCapital(data)}																				</span>
+													</li>
 													)
 												}
 											)
 											}
+												</ul>
 									</Box>
 								</TabContainer>
 							)}
