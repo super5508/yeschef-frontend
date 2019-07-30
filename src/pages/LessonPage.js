@@ -171,7 +171,6 @@ class LessonPage extends Component {
 		};
 
 		Axios.get(`/api/class/${this.props.match.params.classId}/lesson/${this.props.match.params.lessonId - 1}`).then(chefInfoResponse => {
-			// console.log("d3", chefInfoResponse.data._fieldsProto);
 			this.setState({
 				...this.state,
 				chefsData: chefInfoResponse.data._fieldsProto,
@@ -285,7 +284,6 @@ class LessonPage extends Component {
 				}
 			]
 		};
-console.log('here',this.state.chefsData)
 		return (
 			<Box>
 				<Paper className={classes.container2}>
@@ -385,7 +383,7 @@ console.log('here',this.state.chefsData)
 												<div key={`${head}-${id}`}>
 													<h4>{head.toUpperCase()}</h4>
 													<div>
-														{// console.log(this.state.chefsData.ingredients.mapValue.fields[head])
+														{
 															Object.keys(this.state.chefsData.ingredients.mapValue.fields[head].mapValue.fields).map(
 																(value, index) => {
 																	let comment = "";
@@ -449,7 +447,6 @@ console.log('here',this.state.chefsData)
 										{		
 											Object.keys(this.state.chefsData.gear.mapValue.fields).map(
 												(data, index)=>{
-													console.log(data, index)
 													return(
 														
 													<li key={`ligear-${index}`} >
