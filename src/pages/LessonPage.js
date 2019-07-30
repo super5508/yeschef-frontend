@@ -124,7 +124,7 @@ const styles = theme => ({
 		}
 	},
 	tabSelected: {},
-	ingredientsCon: {
+	subTabsCon: {
 		margin: "0rem 2.3rem",
 		"& h4": {
 			fontSize: "1.6rem",
@@ -142,6 +142,10 @@ const styles = theme => ({
 		"& li": {
 			marginTop: "0.5rem"
 		}
+	},
+	gearul:{
+		margin: "2rem 0rem 0rem 1rem !important"
+
 	}
 });
 
@@ -167,7 +171,6 @@ class LessonPage extends Component {
 		};
 
 		Axios.get(`/api/class/${this.props.match.params.classId}/lesson/${this.props.match.params.lessonId - 1}`).then(chefInfoResponse => {
-			// console.log("d3", chefInfoResponse.data._fieldsProto);
 			this.setState({
 				...this.state,
 				chefsData: chefInfoResponse.data._fieldsProto,
@@ -281,7 +284,6 @@ class LessonPage extends Component {
 				}
 			]
 		};
-
 		return (
 			<Box>
 				<Paper className={classes.container2}>
@@ -375,13 +377,13 @@ class LessonPage extends Component {
 						>
 							{this.state.chefsData.ingredients && (
 								<TabContainer dir={theme.direction}>
-									<Box className={classes.ingredientsCon}>
+									<Box className={classes.subTabsCon}>
 										{this.state.ingredientsArray.map((head, id) => {
 											return (
 												<div key={`${head}-${id}`}>
 													<h4>{head.toUpperCase()}</h4>
 													<div>
-														{// console.log(this.state.chefsData.ingredients.mapValue.fields[head])
+														{
 															Object.keys(this.state.chefsData.ingredients.mapValue.fields[head].mapValue.fields).map(
 																(value, index) => {
 																	let comment = "";
@@ -440,7 +442,27 @@ class LessonPage extends Component {
 							)}
 							{this.state.chefsData.gear && (
 								<TabContainer dir={theme.direction}>
-									<Box />
+									<Box className={classes.subTabsCon}>
+									<ul className={classes.gearul}>
+										{		
+											Object.keys(this.state.chefsData.gear.mapValue.fields).map(
+												(data, index)=>{
+													return(
+														
+													<li key={`ligear-${index}`} >
+													<span
+														style={{
+														color: "#ffffff"
+														}}
+													>
+													{this.firstLetterToCapital(data)}																				</span>
+													</li>
+													)
+												}
+											)
+											}
+												</ul>
+									</Box>
 								</TabContainer>
 							)}
 							{this.state.chefsData.shorthand && (
