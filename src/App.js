@@ -4,7 +4,7 @@ import ChefHomePage from './pages/ChefHomePage';
 import { MuiThemeProvider, createMuiTheme, withStyles } from '@material-ui/core/styles';
 import { connect } from "react-redux";
 import './assets/site.scss';
-import { BrowserRouter, Route ,withRouter,Switch} from 'react-router-dom';
+import { BrowserRouter, Route, withRouter, Switch } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import SignIn from './components/SignIn';
 import SignOut from './components/SignOut';
@@ -19,6 +19,8 @@ import ResetPassword from './pages/ResetPassword';
 import ChangePassword from './pages/ChangePassword';
 import BetaPage from './pages/Beta';
 import CommunityPage from './pages/CommunityPage';
+import ClosedBetaSignInPage from './pages/ClosedBetaSignInPage'
+import BetaRedirectTOLogin from './pages/BetaRedirectTOLogin'
 
 const APP_ID = 'h6twy30k'
 
@@ -33,8 +35,8 @@ const theme = createMuiTheme({
     MuiButton: { // Name of the component ⚛️ / style sheet
       root: { // Name of the rule
         width: '100%',
-        height:'5.6rem',
-        borderRadius:'0.6rem',
+        height: '5.6rem',
+        borderRadius: '0.6rem',
         // fontFamily: 'Open Sans',
         // fontSize: '1.4rem',
         // fontWeight: '600',
@@ -47,9 +49,9 @@ const theme = createMuiTheme({
       },
     },
 
-  // // tab css
-  MuiTab:{
-    root:{
+    // // tab css
+    MuiTab: {
+      root: {
         fontFamily: 'Open Sans',
         fontSize: '1.4rem',
         fontWeight: '600',
@@ -59,12 +61,12 @@ const theme = createMuiTheme({
         letterSpacing: 'normal',
         textAlign: 'center',
         color: '#929292',
-      
-      "&$selected": {
-        color: "#ffffff"
-      }
+
+        "&$selected": {
+          color: "#ffffff"
+        }
+      },
     },
-  },
 
   },
 
@@ -72,7 +74,7 @@ const theme = createMuiTheme({
     useNextVariants: true,
     fontFamily: "Open Sans",
     fontWeightBold: 600,
-    htmlFontSize:10,
+    htmlFontSize: 10,
   },
   palette: {
     type: 'dark',
@@ -80,7 +82,7 @@ const theme = createMuiTheme({
       default: '#000'
     },
     primary: {
-      main: '#ff007f', 
+      main: '#ff007f',
       contrastText: '#fff'
     },
     // background:{paper:'#000'},
@@ -98,42 +100,57 @@ const theme = createMuiTheme({
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state= {}
+    this.state = {}
   }
   componentDidMount() {
     // Axios.get('/api/chef/edward_lee/info').then(chefInfoResponse => {
     //   this.setState(chefInfoResponse.data);
     // })
   }
-  
+
   render() {
     const { classes } = this.props;
 
-    if(this.props.authStat.userProfile) {
+    if (this.props.authStat.userProfile) {
 
       window.Intercom('update', {
         app_id: APP_ID,
-        user_id : this.props.authStat.userProfile.uid,
-        name : this.props.authStat.userProfile.name,
-        email : this.props.authStat.userProfile.email,
-        created_at : Date.now()
-         //Website visitor so may not have any user related info
-       });
+        user_id: this.props.authStat.userProfile.uid,
+        name: this.props.authStat.userProfile.name,
+        email: this.props.authStat.userProfile.email,
+        created_at: Date.now()
+        //Website visitor so may not have any user related info
+      });
     }
     //const chefsData = this.state || {};
- 
+
+    /********************************************************************************************************
+     * 
+     *              for beta only!
+     * 
+     ********************************************************/
+
+
+
+    /********************************************************************************************************
+    * 
+    *              for beta only!
+    * 
+    ********************************************************/
 
     return (
       <BrowserRouter>
         <MuiThemeProvider theme={theme}>
           <CssBaseline />
           <div className={classes.App}>
-            <Switch>
-            <Route path="/class/:classId/lesson/:lessonId" render={(routeProps) => (<LessonPage {...routeProps} />)}></Route>
-            <Route path="/class/:id" render={(routeProps) => (<ChefHomePage {...routeProps} mode='class' />)}></Route>
-            </Switch>
+            <Route path="/" render={(routerProps) => (<BetaRedirectTOLogin {...routerProps} />)}></Route>
 
-            <Route exact path="/" render={(routeProps) => (<HomePage />)}></Route>
+            <Route exact path="/class/:classId/lesson/:lessonId" render={(routeProps) => (<LessonPage {...routeProps} />)}></Route>
+            <Route exact path="/class/:id" render={(routeProps) => (<ChefHomePage {...routeProps} mode='class' />)}></Route>
+
+
+            <Route exact path="/" render={(routeProps) => (<ClosedBetaSignInPage />)}></Route>
+            <Route exact path="/home" render={(routeProps) => (<HomePage />)}></Route>
             <Route exact path="/terms-of-service" component={TermsOfService}></Route>
             <Route exact path="/privacy-policy" component={PrivacyPolicy}></Route>
             <Route exact path="/signin" component={SignIn}></Route>
@@ -153,9 +170,9 @@ class App extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-	return {
-		...state.user
-	};
+  return {
+    ...state.user
+  };
 };
 
 export default connect(mapStateToProps)(withStyles(styles)(App));
