@@ -32,16 +32,16 @@ const styles = theme => ({
 
         '& .Mui-selected': {
             fontWeight: '600'
-        } 
+        }
 
     },
 
 });
 
 class BottomBar extends Component {
-	constructor(props) {
-		super(props);
-	}
+    constructor(props) {
+        super(props);
+    }
 
 
     render() {
@@ -49,7 +49,7 @@ class BottomBar extends Component {
         let dom;
         const path = window.location.pathname;
         let navValue = path === '/' ? 'home' : path.slice(1)
-        if (this.props.mainMenu.visible && this.props.location.pathname.slice(0, 6) !== "/class" && this.props.location.pathname.slice(0, 7) !== "/lesson") {
+        if (this.props.mainMenu.visible && this.props.location.pathname.slice(0, 6) !== "/class" && this.props.location.pathname.slice(0, 7) !== "/lesson" && this.props.location.pathname !== "/") {
             dom = (
                 <BottomNavigation
                     value={navValue}
@@ -59,7 +59,7 @@ class BottomBar extends Component {
                     <BottomNavigationAction
                         label="Home"
                         value='home'
-                        icon={<HomeIcon />}                        
+                        icon={<HomeIcon />}
                         component={Link}
                         to="/" />
 
@@ -69,7 +69,7 @@ class BottomBar extends Component {
                         icon={<CommunityIcon />}
                         component={Link}
                         to="/community" />
-                    
+
                     <BottomNavigationAction
                         label="Beta"
                         value='beta'
@@ -80,7 +80,7 @@ class BottomBar extends Component {
                     <BottomNavigationAction
                         label="Me"
                         value='myProfile'
-                        icon={<PersonIcon />} 
+                        icon={<PersonIcon />}
                         component={Link}
                         to="/myProfile" />
                 </BottomNavigation>
@@ -93,11 +93,11 @@ class BottomBar extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-	return {
-		...state.mainMenu
-	};
+    return {
+        ...state.mainMenu
+    };
 };
 
 export default withRouter(
-	connect(mapStateToProps)(withStyles(styles)(BottomBar))
+    connect(mapStateToProps)(withStyles(styles)(BottomBar))
 );

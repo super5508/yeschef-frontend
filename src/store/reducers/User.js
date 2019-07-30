@@ -3,7 +3,7 @@ import ActionTypes from '../ActionTypes'
 
 const defaultState = {
     userProfile: null,
-    isLogin: true
+    isLogin: null
 }
 
 const signin = (state = defaultState, action) => {
