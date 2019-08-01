@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import { signout } from "../store/actionCreators/UserActionCreators";
 import Button from "@material-ui/core/Button";
+import { connect } from "react-redux";
 import Box from "@material-ui/core/Box";
 
 const styles = theme => ({
@@ -58,4 +59,4 @@ class SignOut extends Component {
 SignOut.propTypes = {
   classes: PropTypes.object.isRequired
 };
-export default withStyles(styles)(SignOut);
+export default connect()(withStyles(styles)(SignOut));

@@ -40,30 +40,24 @@ const styles = theme => ({
     chef_name: {
         textTransform: 'uppercase',
     },
-    coming_soon: {
-        fontWeight: 600,
-        fontSize: '1rem',
-        marginTop: '1.6rem',
-        marginLeft: '1.6rem'
-    },
     info_container: {
         display: 'flex',
-        alignItems: 'center',
         flexDirection: 'column',
         paddingBottom: '0.8rem',
         paddingTop: '1.2rem',
+        paddingLeft: '2.4rem',
         zIndex: '20',
         backgroundImage: 'linear-gradient(to top, #1f1e1e, rgba(31, 30, 30, 0))'
     },
     info_container2: {
-        width: '100%',
-        position: 'absolute',
-        bottom: '0px',
         display: 'flex',
-        alignItems: 'center',
         flexDirection: 'column',
         paddingBottom: '0.8rem',
         paddingTop: '1.2rem',
+        paddingLeft: '2.4rem',
+        width: '100%',
+        position: 'absolute',
+        bottom: '0px',
         backgroundImage: 'linear-gradient(to top, #1f1e1e, rgba(31, 30, 30, 0))'
     },
     video_container: {
@@ -75,7 +69,7 @@ const styles = theme => ({
         height: '100%',
         display: 'flex',
         flexDirection: 'column-reverse',
-        justifyContent: 'space-between',
+        textTransform: "uppercase"
     },
 });
 
@@ -98,14 +92,6 @@ class ClassInfo extends Component {
         return {};
     }
 
-    comingSoonOpacityStyle = this.props.isComingSoon ? {
-        background: 'rgba(0,0,0,0.6)'
-    } : {};
-
-    comingSoonTextStyle = this.props.isComingSoon ? {
-        color: '#929292'
-    } : {};
-
     render() {
         const videoJsOptions = {
             autoplay: true,
@@ -120,6 +106,14 @@ class ClassInfo extends Component {
         }
 
         const { classes } = this.props;
+
+        const textContent = (
+            <Box className={this.props.showTrailer ? classes.info_container2 : classes.info_container}>
+                <Box component="h1" className={classes.chef_name}>Chef {this.props.chefName}</Box>
+                <Box className='Sub-h1'>{this.props.classTitle}</Box>
+            </Box>
+        );
+
         return (
             <Link to={"/class/" + this.props.id} className='link' style={{ textDecoration: 'none' }}>
                 {
@@ -129,20 +123,13 @@ class ClassInfo extends Component {
                                 {
                                     this.state.src && <TrailerVideo  {...videoJsOptions} />
                                 }
-                                <Box className={classes.info_container2} style={this.comingSoonTextStyle}>
-                                    <Box className={classes.chef_name + ' h1center'}>Chef {this.props.chefName}</Box>
-                                    <Box className='Sub-h1'>{this.props.classTitle}</Box>
-                                </Box>
+                                {textContent}
                             </div>
                         </Paper>
                         :
                         <Paper className={(this.props.fixed && classes.fix_position_container) + ' ' + classes.container} style={{ backgroundImage: 'url(' + this.props.chefImg + ')' }}>
-                            <Box className={classes.mask_container} style={this.comingSoonOpacityStyle}>
-                                < Box className={classes.info_container} style={this.comingSoonTextStyle}>
-                                    <Box className={classes.chef_name + ' h1center'}>Chef {this.props.chefName}</Box>
-                                    <Box className='Sub-h1'>{this.props.classTitle}</Box>
-                                    {this.props.isComingSoon && <Box className={classes.coming_soon} color="primary.main">COMING SOON</Box>}
-                                </Box>
+                            <Box className={classes.mask_container}>
+                                {textContent}
                             </Box>
                         </Paper >
                 }
