@@ -3,11 +3,23 @@ import ActionTypes from '../ActionTypes'
 
 const defaultState = {
     userProfile: null,
-    isLogin: null
+    isLogin: null,
+    userMetadata: null
 }
 
-const signin = (state = defaultState, action) => {
-    if (action.type === ActionTypes.USER_SIGNIN) {
+const receivedUserMetadata = (state = defaultState, action) => {
+    if (action.type === ActionTypes.USER_RECEIVE_METADATA) {
+        return {
+            ...state,
+            userMetadata: action.usersMetadata
+        }
+    } else {
+        return state;
+    }
+}
+
+const updateUser = (state = defaultState, action) => {
+    if (action.type === ActionTypes.USER_UPDATE_PROFILE) {
         return {
             ...state,
             userProfile: action.user,
@@ -24,6 +36,7 @@ const signout = (state = defaultState, action) => {
             ...state,
 
             userProfile: null,
+            userMetadata: null,
             isLogin: false
 
         }
@@ -34,10 +47,13 @@ const signout = (state = defaultState, action) => {
 
 const authStat = (state = defaultState, action) => {
     switch (action.type) {
-        case ActionTypes.USER_SIGNIN:
-            return signin(state, action);
         case ActionTypes.USER_SIGNOUT:
             return signout(state, action);
+        case ActionTypes.USER_UPDATE_PROFILE:
+            return updateUser(state, action);
+        case ActionTypes.USER_RECEIVE_METADATA:
+            return receivedUserMetadata(state, action);
+
         default:
             return state;
     }

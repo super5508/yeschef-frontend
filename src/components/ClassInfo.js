@@ -95,6 +95,7 @@ class ClassInfo extends Component {
                 poster: props.chefImg
             }
         }
+        return {};
     }
 
     comingSoonOpacityStyle = this.props.isComingSoon ? {

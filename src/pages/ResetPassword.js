@@ -9,7 +9,6 @@ import Dialog from "@material-ui/core/Dialog";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import CloseIcon from "@material-ui/icons/Close";
-import Typography from "@material-ui/core/Typography";
 
 const CssTextField = withStyles({
 	root: {
@@ -172,7 +171,7 @@ class ResetPassword extends Component {
 				// Update successful.
 				this.handleClickOpen();
 			})
-			.catch(function(error) {
+			.catch(function (error) {
 				// An error happened.
 				// @Todo change the alert to a real error message popup
 				alert(error.message);
