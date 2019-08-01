@@ -49,6 +49,14 @@ const theme = createMuiTheme({
       },
     },
 
+    MuiPaper: {
+      root: {
+        backgroundColor: 'none'
+      },
+      elevation1: {
+        boxShadow: 'none'
+      }
+    },
     // // tab css
     MuiTab: {
       root: {
