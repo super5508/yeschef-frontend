@@ -3,11 +3,11 @@ import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 import { Link } from "react-router-dom";
-import ClassInfo from "../components/ClassInfo";
+import ClassInfo from "../../components/ClassInfo";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import Axios from "../common/AxiosMiddleware";
-import Header from '../components/Header'
+import Axios from "../../common/AxiosMiddleware";
+import Header from '../../components/Header'
 
 const styles = theme => ({
     container: {},

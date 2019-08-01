@@ -16,6 +16,7 @@ const styles = theme => ({
         width: '100%',
         position: 'fixed',
         fontSize: '2rem',
+        zIndex: 50,
         height: '4.8rem',
 
         '& .MuiSvgIcon-root': {
