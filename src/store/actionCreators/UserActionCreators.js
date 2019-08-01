@@ -9,6 +9,8 @@ export const signin = (user) => {
                 { headers: { authToken: token } }
             ).then(usersMetaData => {
                 dispatch(receivedMetadata(usersMetaData.data));
+            }).catch(() => {
+
             })
         });
     }
