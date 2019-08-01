@@ -1,9 +1,6 @@
 import React, { Component } from "react";
-import { Link } from 'react-router-dom'
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
-import IconButton from '@material-ui/core/IconButton';
-import LeftArrowIcon from '@material-ui/icons/KeyboardArrowLeft';
 
 const styles = theme => ({
     yesWord: {
@@ -28,18 +25,25 @@ const styles = theme => ({
         color: '#ffffff',
         textTransform: 'uppercase'
     },
-    iconBox: {
-        width: "2.4rem",
-        height: "2.4rem",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        position: "absolute",
-        top: "1.2rem",
-        left: "1.2rem"
+    header: {
+        width: '100%',
+        padding: 10,
+        position: "fixed",
+        top: 0,
+        zIndex: 40,
+        transition: "top 0.6s",
+        height: "4.8rem",
+        textAlign: "center",
+        textTransform: "uppercase"
     },
-    leftIcon: {
-        fontSize: '3rem'
+    hiddenHeader: {
+        top: "-50px"
+    },
+    gradientHeader: {
+        backgroundImage: " linear-gradient(to bottom, rgba(51, 51, 51, 0.85), rgba(31, 31, 31, 0.25) 63%, rgba(23, 23, 23, 0))"
+    },
+    colorHeader: {
+        backgroundColor: "#000000"
     }
 });
 
@@ -76,15 +80,14 @@ class Header extends Component {
 
     render() {
         const { classes } = this.props;
+        let className = classes.header + " ";
+        if (this.state.visible) {
+            className += this.props.gradientBackground ? classes.gradientHeader : classes.colorHeader;
+        } else {
+            className += classes.hiddenHeader;
+        }
         return (
-            <Paper className={!this.state.visible ? "header--hidden" : this.props.gradientBackground ? 'gradientHeader header' : 'colorHeader header'}>
-                <div className={classes.iconBox}>
-                    <Link to="/home" underline="none">
-                        <IconButton aria-label="Close">
-                            <LeftArrowIcon className={classes.leftIcon} />
-                        </IconButton>
-                    </Link>
-                </div>
+            <Paper className={className}>
                 <span className={classes.yesWord}>yes</span><span className={classes.chefWord}>Chef</span>
             </Paper>
         );
