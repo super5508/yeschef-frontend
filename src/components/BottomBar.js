@@ -5,13 +5,10 @@ import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-import store from '../store/Store'
 import HomeIcon from '@material-ui/icons/HomeRounded'
 import PersonIcon from '@material-ui/icons/PersonRounded'
-import FeedbackIcon from '@material-ui/icons/FeedbackRounded'
 import CommunityIcon from '@material-ui/icons/Forum'
 import BetaIcon from '@material-ui/icons/ChatBubble'
-import * as MainMenuActionCreator from './../store/actionCreators/MainMenuActionCtrators';
 
 const styles = theme => ({
     root: {

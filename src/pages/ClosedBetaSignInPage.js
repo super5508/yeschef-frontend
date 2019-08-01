@@ -50,14 +50,15 @@ class ClosedBetaSignInPage extends Component {
     if (this.state.value !== "signin") {
       window.location.href = "https://www.yeschef.me";
     }
-
+    const isBetaUserLoggedIn = this.props.authStat.isLogin && this.props.authStat.userMetadata && this.props.authStat.userMetadata.isBeta;
+    
     return (
       <Box>
         <Box display="flex" justifyContent="center" mt="2.4rem">
           <img src={logo} alt="logo"></img>
         </Box>
         {/* if user logged out */}
-        {!this.props.authStat.isLogin && (
+        {!isBetaUserLoggedIn && (
           <Paper className={classes.signin_out_tabs}>
             <Tabs
               value={this.state.value}
@@ -71,12 +72,12 @@ class ClosedBetaSignInPage extends Component {
               <Tab value="signup" className='Button-text' label="Sign Up" />
               <Tab value="signin" label="Sign In" />
             </Tabs>
-            {this.state.value === "signin" ? <SignIn history={this.props.history} /> : "Loading..."}
+            {this.state.value === "signin" ? <SignIn /> : "Loading..."}
           </Paper>
         )}
 
         {/* if user logged in */}
-        {this.props.authStat.isLogin && this.props.history.push("/home")}
+        {isBetaUserLoggedIn && this.props.history.push("/home")}
       </Box>
     );
   }

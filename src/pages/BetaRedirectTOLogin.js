@@ -5,8 +5,14 @@ import { connect } from "react-redux";
 
 class BetaRedirectTOLogin extends Component {
   render() {
-    if (window.location.pathname != "/" && this.props.authStat.isLogin === false) {
-      this.props.history.push("/");
+    if (window.location.pathname !== "/") {
+      if (this.props.authStat.isLogin === false) {
+        this.props.history.push("/");
+      } else {
+        if (this.props.authStat.userMetadata && !this.props.authStat.userMetadata.isBeta) {
+          this.props.history.push("/");
+        }
+      }
     }
 
     return (

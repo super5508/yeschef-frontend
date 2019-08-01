@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import store from "../store/Store";
-import { signout } from "../store/actionCreators/UserActionCtrators";
+import { signout } from "../store/actionCreators/UserActionCreators";
 import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 
@@ -35,7 +34,7 @@ class SignOut extends Component {
 
   signOut = () => {
     window.firebaseAuth.signOut();
-    store.dispatch(signout());
+    this.props.dispatch(signout());
     window.Intercom('shutdown')
   };
 

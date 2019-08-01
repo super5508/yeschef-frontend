@@ -65,7 +65,7 @@ class HomePage extends Component {
                     OUR CLASSES
                 </Box>
                 <Box className={classes.class_infos_wrapper}>
-                    {this.state.chefsDataArray.map(chefData => <Box pb="2.4rem"><ClassInfo key={chefData.id} className={classes.class_info} {...chefData}></ClassInfo></Box>)}
+                    {this.state.chefsDataArray.map(chefData => <Box pb="2.4rem" key={chefData.id}><ClassInfo key={chefData.id} className={classes.class_info} {...chefData}></ClassInfo></Box>)}
                 </Box>
             </Box>
         )

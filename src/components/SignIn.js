@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import TextField from "@material-ui/core/TextField";
 import { withStyles } from "@material-ui/core/styles";
-import store from "../store/Store";
-import { signin } from "./../store/actionCreators/UserActionCtrators";
+import { signin } from "../store/actionCreators/UserActionCreators";
 import { Button, Divider } from "@material-ui/core";
 import fbLogo from "../assets/images/fbLogo.svg";
 import googleLogo from "../assets/images/googleLogo.svg";
@@ -98,11 +97,11 @@ class SignIn extends Component {
   };
 
   submitLogin = event => {
-    var firebaseAuthPromis = window.firebaseAuth.signInWithEmailAndPassword(
+    var firebaseAuthPromise = window.firebaseAuth.signInWithEmailAndPassword(
       this.state.email,
       this.state.password
     );
-    firebaseAuthPromis.catch(function (error) {
+    firebaseAuthPromise.catch(function (error) {
       // Handle Errors here.
       //var errorCode = error.code;
       var errorMessage = error.message;
@@ -110,14 +109,14 @@ class SignIn extends Component {
       alert(errorMessage);
     });
 
-    firebaseAuthPromis.then(response => {
+    firebaseAuthPromise.then(response => {
       if (!response) return;
       // Intercom('update', {
       //     email: response.user.email,
       //     name: response.user.displayName
       // });
       //window.setTimeout(function(){
-      store.dispatch(signin(response.user));
+      this.props.dispatch(signin(response.user));
       //Is success signup, redirect to home
       this.props.history.push("/");
       //}, 1000);

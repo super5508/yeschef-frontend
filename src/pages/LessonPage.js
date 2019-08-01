@@ -417,7 +417,7 @@ class LessonPage extends Component {
 																	}
 
 																	return (
-																		<ul>
+																		<ul key={value}>
 																			<li key={`li${value}-${index}`}>
 																				<span
 																					style={{
