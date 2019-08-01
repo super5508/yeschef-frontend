@@ -8,6 +8,11 @@ const useStyles = makeStyles({
     "& p": {
       opacity: 0.75
     },
+    '& a': {
+      textDecoration: 'none',
+      color: '#fff',
+      fontWeight: '600',
+    },
     "& ul": {
       paddingLeft: "1.8em"
     },
@@ -15,15 +20,15 @@ const useStyles = makeStyles({
       marginBottom: "-0.8rem"
     },
     "& h1": {
-      display:'flex',
-      flexDirection:'row',
-      alignContent:'center',
-      alignItems:'center',
-      marginLeft:'-1.5rem',
-      marginBottom:'0.5rem',
+      display: 'flex',
+      flexDirection: 'row',
+      alignContent: 'center',
+      alignItems: 'center',
+      marginLeft: '-1.5rem',
+      marginBottom: '0.5rem',
     },
     "& span": {
-      marginLeft:'-0.5rem'
+      marginLeft: '-0.5rem'
     }
   },
 
@@ -45,33 +50,21 @@ function PrivacyPolicy(props) {
   return (
     //ppc => privacyPolicyComponent
     <div className={classes.ppcCon}>
-      
+
       <h1>
         <IconButton
           onClick={() => {
-          props.history.push("/myProfile");
+            props.history.push("/myProfile");
           }}>
-        <LeftArrowIcon />
-      </IconButton>
-      <span>PRIVACY POLICY</span>
+          <LeftArrowIcon />
+        </IconButton>
+        <span>PRIVACY POLICY</span>
       </h1>
-      <p className={classes.ppcP1}>Date of Last Revision: July 15, 2018</p>
 
       <h2 className={classes.ppcHead1}>
         YOUR PRIVACY IS CRITICALLY IMPORTANT TO US.
       </h2>
       <p className='body-text'>This Application collects some Personal Data from its Users.</p>
-
-      <h2>OWNER AND DATA CONTROLLER</h2>
-      <p className='body-text'>
-        YesChef Ltd. <br />1 Beit Ha'am St Box 3450
-        <br />
-        Ramot Hashavim, Israel
-      </p>
-      <p className='body-text'>
-        <span className={classes.boldChr}>Owner contact email:</span>{" "}
-        hi@yeschef.me
-      </p>
 
       <h2>TYPES OF DATA COLLECTED</h2>
       <p className='body-text'>
@@ -957,6 +950,13 @@ function PrivacyPolicy(props) {
       <p className='body-text'>
         This privacy policy relates solely to this Application, if not stated
         otherwise within this document.
+      </p>
+      <h2>CONTACT</h2>
+      <p className='body-text'>
+        Questions, comments and requests regarding this privacy policy are welcomed and should be addressed to <a href='mailto:hi@yeschef.me'>hi@yeschef.me</a>
+      </p>
+      <p className='body-text'>
+        This Privacy Policy is effective and was last updated on July 15, 2018. YesChef's physical address is 1 Belt Ha'am St. Box 3450, Ramot Hashavim, Israel.
       </p>
     </div>
   );
