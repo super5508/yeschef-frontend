@@ -19,7 +19,7 @@ import FacebookIcon from "../assets/images/facebook-icon.svg";
 import TwitterIcon from "../assets/images/twitter-icon.svg";
 import LessonInfo from "../components/LessonInfo";
 import { Element, animateScroll as scroll, scroller } from "react-scroll";
-
+import Header from '../components/Header'
 function TabContainer({ children, dir }) {
 	return (
 		<div component="div" dir={dir}>
@@ -166,7 +166,7 @@ class ChefHomePage extends Component {
 				duration: 0,
 				delay: 0,
 				smooth: "false",
-				offset: -300, 
+				offset: -300,
 			});
 		}
 	};
@@ -175,6 +175,7 @@ class ChefHomePage extends Component {
 		const { classes, theme } = this.props;
 		return (
 			<div>
+				<Header gradientBackground/>
 				<ClassInfo {...this.state.chefsData} showTrailer={false} fixed />
 				{/* //close button */}
 				<div className={classes.iconBox}>

@@ -16,7 +16,7 @@ html {
   font-size: 10px !important;
 }
 .h1center {
-  font-family: 'Open Sans';
+  font-family: "Open Sans";
   font-size: 20px;
   font-weight: 600;
   font-style: normal;
@@ -27,7 +27,7 @@ html {
   color: #ffffff;
 }
 h1 {
-  font-family: 'Open Sans';
+  font-family: "Open Sans";
   font-size: 20px;
   font-weight: 600;
   font-style: normal;
@@ -37,7 +37,7 @@ h1 {
   color: #ffffff;
 }
 h2 {
-  font-family: 'Open Sans';
+  font-family: "Open Sans";
   font-size: 16px;
   font-weight: 600;
   font-style: normal;
@@ -47,7 +47,7 @@ h2 {
   color: #ffffff;
 }
 .body-text-black {
-  font-family: 'Open Sans';
+  font-family: "Open Sans";
   font-size: 16px;
   font-weight: 300;
   font-style: normal;
@@ -58,7 +58,7 @@ h2 {
   color: #000000;
 }
 .body-text {
-  font-family: 'Open Sans';
+  font-family: "Open Sans";
   font-size: 16px;
   font-weight: 300;
   font-style: normal;
@@ -68,7 +68,7 @@ h2 {
   color: #ffffff;
 }
 .Sub-h1 {
-  font-family: 'Open Sans';
+  font-family: "Open Sans";
   font-size: 16px;
   font-weight: 300;
   font-style: normal;
@@ -79,7 +79,7 @@ h2 {
   color: #ffffff;
 }
 .Tabs-menu-selected {
-  font-family: 'Open Sans';
+  font-family: "Open Sans";
   font-size: 14px;
   font-weight: 600;
   font-style: normal;
@@ -90,7 +90,7 @@ h2 {
   color: #ffffff;
 }
 .Tabs-menu {
-  font-family: 'Open Sans';
+  font-family: "Open Sans";
   font-size: 14px;
   font-weight: 600;
   font-style: normal;
@@ -101,7 +101,7 @@ h2 {
   color: #929292;
 }
 .Button-text {
-  font-family: 'Open Sans';
+  font-family: "Open Sans";
   font-size: 14px;
   font-weight: 600;
   font-style: normal;
@@ -112,7 +112,7 @@ h2 {
   color: #ffffff;
 }
 h3 {
-  font-family: 'Open Sans';
+  font-family: "Open Sans";
   font-size: 14px;
   font-weight: 600;
   font-style: normal;
@@ -122,7 +122,7 @@ h3 {
   color: #ffffff;
 }
 .Input-text {
-  font-family: 'Open Sans';
+  font-family: "Open Sans";
   font-size: 14px;
   font-weight: 300;
   font-style: normal;
@@ -133,7 +133,7 @@ h3 {
 }
 
 .Tiny-text-pink {
-  font-family: 'Open Sans';
+  font-family: "Open Sans";
   font-size: 10px;
   font-weight: 600;
   font-style: normal;
@@ -143,7 +143,7 @@ h3 {
   color: #ff007f;
 }
 .Tiny-text {
-  font-family: 'Open Sans';
+  font-family: "Open Sans";
   font-size: 10px;
   font-weight: 300;
   font-style: normal;
@@ -159,10 +159,10 @@ ul {
 }
 
 ul li::before {
-  content: "\2022";  /* Add content: \2022 is the CSS Code/unicode for a bullet */
+  content: "\2022"; /* Add content: \2022 is the CSS Code/unicode for a bullet */
   color: #ff007f; /* Change the color */
   font-weight: bold; /* If you want it to be bold */
-  display: inline-block; /* Needed to add space between the bullet and the text */ 
+  display: inline-block; /* Needed to add space between the bullet and the text */
   padding-right: 0.8rem;
   vertical-align: middle;
 }

@@ -20,7 +20,7 @@ const styles = theme => ({
 		flexDirection: "row",
 		margin: "2rem 0rem 0rem 2.4rem",
 		"& h2": {
-			textTransform:'uppercase',
+			textTransform: 'uppercase',
 			marginTop: "0.5rem"
 		}
 	},
@@ -39,29 +39,29 @@ const styles = theme => ({
 	// userName:{
 	// 	textTransform:'uppercase'
 	// },
-	userEmail:{
-		textTransform:'lowercase'
+	userEmail: {
+		textTransform: 'lowercase'
 	},
 	listCon: {
-    margin:'2rem 0rem',
+		margin: '2rem 0rem',
 		"& h4": {
 			cursor: "pointer"
 		}
-  },
-  lstItem:{
-    display:'flex',
-    justifyContent: 'space-between',
-    borderTop:'0.09rem solid #7f7f7f',
-    paddingLeft:'2.4rem',
-    paddingRight:'2.4rem',
+	},
+	lstItem: {
+		display: 'flex',
+		justifyContent: 'space-between',
+		borderTop: '0.09rem solid #7f7f7f',
+		paddingLeft: '2.4rem',
+		paddingRight: '2.4rem',
 
-  },
-  bottomBorder:{
-    borderBottom:'0.09rem solid #7f7f7f',
-  },
-  forwardIcon:{
-    fontSize:'1.2rem'
-  }
+	},
+	bottomBorder: {
+		borderBottom: '0.09rem solid #7f7f7f',
+	},
+	forwardIcon: {
+		fontSize: '1.2rem'
+	}
 });
 
 class Settings extends Component {
@@ -77,7 +77,7 @@ class Settings extends Component {
 
 	render() {
 		const { classes } = this.props;
-		
+
 		return (
 			<Box>
 				{this.props.authStat && this.props.authStat.userProfile && (
@@ -91,15 +91,15 @@ class Settings extends Component {
 								className={classes.setImg}
 							/>
 						) : (
-							<Avatar
-								alt={
-									this.props.authStat.userProfile.displayName
-								}
-								className={clsx(classes.setImg, classes.pinkBg)}
-							>
-								<UserIcon className={classes.userIcon} />
-							</Avatar>
-						)}
+								<Avatar
+									alt={
+										this.props.authStat.userProfile.displayName
+									}
+									className={clsx(classes.setImg, classes.pinkBg)}
+								>
+									<UserIcon className={classes.userIcon} />
+								</Avatar>
+							)}
 						<div>
 							<h2 className={classes.userName}>
 								{this.props.authStat.userProfile.displayName}
@@ -113,18 +113,18 @@ class Settings extends Component {
 				)}
 				{/* //list */}
 				<Box className={classes.listCon}>
-					{this.props.authStat && this.props.authStat.userProfile && this.props.authStat.userProfile.providerData[0].providerId === 'password' && 
-					<div className={classes.lstItem} onClick={()=>{this.props.history.push('/change-password')}}>
-						<h4 className='body-text'>Change password</h4>
-						<IconButton
-							aria-label="forward"
-							size="small"
-						>
-							<ForwardIcon className={classes.forwardIcon} />
-						</IconButton>
-					</div>
+					{this.props.authStat && this.props.authStat.userProfile && this.props.authStat.userProfile.providerData[0].providerId === 'password' &&
+						<div className={classes.lstItem} onClick={() => { this.props.history.push('/change-password') }}>
+							<h4 className='body-text'>Change password</h4>
+							<IconButton
+								aria-label="forward"
+								size="small"
+							>
+								<ForwardIcon className={classes.forwardIcon} />
+							</IconButton>
+						</div>
 					}
-          <div onClick={this.openChat} className={clsx(classes.lstItem,classes.bottomBorder)}>
+					<div onClick={this.openChat} className={clsx(classes.lstItem, classes.bottomBorder)}>
 						<h4 className='body-text'>Help</h4>
 						<IconButton
 							aria-label="forward"
