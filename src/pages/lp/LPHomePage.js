@@ -7,6 +7,7 @@ import ClassInfo from "../../components/ClassInfo";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import Axios from "../../common/AxiosMiddleware";
+import Header from '../../components/Header'
 
 const styles = theme => ({
     container: {},
@@ -95,6 +96,7 @@ class LPHomePage extends Component {
         const { classes } = this.props;
         return (
             <Box >
+                <Header gradientBackground />
                 {/* //if user is not loged in */}
                 <Box display="flex" flexDirection="column" justifyContent="flex-end" className={`${classes.cta_wrapper}`} p={2}>
                     <Box className={classes.cta_content_wrapper} display="flex" flexDirection="column" justifyContent="flex-end" alignItems="center">
