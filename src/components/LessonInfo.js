@@ -68,10 +68,10 @@ class LessonInfo extends Component {
 				onClick={() => {
 					if (!this.props.commingSoon) {
 						this.props.history.push(
-							"/class/"+this.props.match.params.id +"/lesson/"+this.props.lessonNum
+							"/class/" + this.props.match.params.id + "/lesson/" + this.props.lessonNum
 
-						// this.props.history.push("/class/"+this.props.match.params.id+"/lesson/"+this.props.lessonNum
-						// this.props.history.push("/lesson/" + this.props.match.params.id + "/" + this.props.lessonNum
+							// this.props.history.push("/class/"+this.props.match.params.id+"/lesson/"+this.props.lessonNum
+							// this.props.history.push("/lesson/" + this.props.match.params.id + "/" + this.props.lessonNum
 
 						);
 					}
@@ -93,14 +93,14 @@ class LessonInfo extends Component {
 					)}
 
 					{this.props.commingSoon && (
-						<div className={ classes.commingSoonTag + ' Tiny-text-pink'}>
+						<div className={classes.commingSoonTag + ' Tiny-text-pink'}>
 							COMING SOON
 						</div>
 					)}
 				</div>
 				<div>
-					<p className='Input-text'>Lesson {this.props.lessonNum}</p>
-					<h3>{this.props.title}</h3>
+					<p className='lesson-list-label'>Lesson {this.props.lessonNum}</p>
+					<h3 className='lesson-list-heading'>{this.props.title}</h3>
 				</div>
 			</Box>
 		);

@@ -1,5 +1,6 @@
 import React from 'react';
 import videojs from 'video.js'
+import { zIndex } from 'material-ui/styles';
 
 export default class TrailerVideo extends React.Component {
   constructor(props) {
@@ -35,9 +36,13 @@ export default class TrailerVideo extends React.Component {
     return (
       <div data-vjs-player style={{
         width: "100%",
-        height: "99%"
-      }}>
-        <video ref={node => this.videoNode = node} poster={this.state.poster} className="video-js" ></video>
+        height: "99%",
+        }}>
+        <video style={{
+          height: '100%',
+          width: '100%',
+          objectFit: 'fill'
+        }} ref={node => this.videoNode = node} poster={this.state.poster} className="video-js" ></video>
       </div>
     )
   }

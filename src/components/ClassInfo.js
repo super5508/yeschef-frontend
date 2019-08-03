@@ -4,6 +4,9 @@ import Box from '@material-ui/core/Box';
 import { Paper } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import TrailerVideo from './TrailerVideo';
+import IconButton from "@material-ui/core/IconButton";
+import VolumeOff from "@material-ui/icons/VolumeMute";
+import VolumeOn from "@material-ui/icons/VolumeDown";
 
 const styles = theme => ({
     container: {
@@ -62,7 +65,7 @@ const styles = theme => ({
     },
     video_container: {
         position: 'relative',
-        height: '57vw'
+        height: '95vw',
     },
     mask_container: {
         width: '100%',
@@ -71,6 +74,20 @@ const styles = theme => ({
         flexDirection: 'column-reverse',
         textTransform: "uppercase"
     },
+    closeIcon: {
+        fontSize: "2.5rem"
+    },
+    iconBox: {
+        width: "2.4rem",
+        height: "2.4rem",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        position: "absolute",
+        bottom: "2.4rem",
+        right: "2.4rem",
+        zIndex: '60'
+    },
 });
 
 class ClassInfo extends Component {
@@ -78,7 +95,8 @@ class ClassInfo extends Component {
         super(props);
         this.state = {
             src: null,
-            poster: null
+            poster: null,
+            muted: true
         }
     }
 
@@ -96,7 +114,7 @@ class ClassInfo extends Component {
         const videoJsOptions = {
             autoplay: true,
             controls: false,
-            muted: true,
+            muted: this.state.muted,
             loadingSpinner: false,
             errorDisplay: false,
             poster: this.state.poster,
@@ -109,20 +127,36 @@ class ClassInfo extends Component {
 
         const textContent = (
             <Box className={this.props.showTrailer ? classes.info_container2 : classes.info_container}>
-                <Box component="h1" className={classes.chef_name}>Chef {this.props.chefName}</Box>
-                <Box className='Sub-h1'>{this.props.classTitle}</Box>
+                <Box className='Chef-heading'>Chef {this.props.chefName}</Box>
+                <Box className='body-text' style={{ textTransform: 'uppercase' }}>{this.props.classTitle}</Box>
             </Box>
         );
 
+        const volumeControl = (
+            <div className={classes.iconBox}>
+                {this.state.muted ?
+                    <IconButton aria-label="Close" onClick={() => this.setState({ muted: false })}>
+                        <VolumeOff className={classes.closeIcon} />
+                    </IconButton>
+                    :
+                    <IconButton aria-label="Close" onClick={() => this.setState({ muted: true })}>
+                        <VolumeOn className={classes.closeIcon} />
+                    </IconButton>
+
+                }
+            </div>
+        );
+
         return (
-            <Link to={"/class/" + this.props.id} className='link' style={{ textDecoration: 'none' }}>
-                {
-                    this.props.showTrailer ?
+            this.props.noLinkTag ?
+                <div>
+                    {this.props.showTrailer ?
                         <Paper className={classes.container2}>
                             <div className={classes.video_container}>
                                 {
                                     this.state.src && <TrailerVideo  {...videoJsOptions} />
                                 }
+                                {volumeControl}
                                 {textContent}
                             </div>
                         </Paper>
@@ -132,8 +166,29 @@ class ClassInfo extends Component {
                                 {textContent}
                             </Box>
                         </Paper >
-                }
-            </Link>
+                    }
+                </div>
+                :
+                <Link to={"/class/" + this.props.id} className='link' style={{ textDecoration: 'none' }}>
+                    {
+                        this.props.showTrailer ?
+                            <Paper className={classes.container2}>
+                                <div className={classes.video_container}>
+                                    {
+                                        this.state.src && <TrailerVideo  {...videoJsOptions} />
+                                    }
+                                    {textContent}
+                                </div>
+                            </Paper>
+                            :
+                            <Paper className={(this.props.fixed && classes.fix_position_container) + ' ' + classes.container} style={{ backgroundImage: 'url(' + this.props.chefImg + ')' }}>
+                                <Box className={classes.mask_container}>
+                                    {textContent}
+                                </Box>
+                            </Paper >
+                    }
+                </Link>
+
         );
     }
 }

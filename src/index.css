@@ -162,6 +162,18 @@ h3 {
   color: #ffffff;
 }
 
+.Chef-heading {
+  font-family: "Open Sans";
+  font-size: 22px;
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #ffffff;
+  text-transform: uppercase
+}
+
 ul {
   list-style: none; /* Remove default bullets */
 }
@@ -173,4 +185,38 @@ ul li::before {
   display: inline-block; /* Needed to add space between the bullet and the text */
   padding-right: 0.8rem;
   vertical-align: middle;
+}
+
+.lesson-list-label{
+  font-family: "Open Sans";
+  font-size: 14px;
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1;
+  letter-spacing: normal;
+  color: #ffffff;
+}
+
+.lesson-list-heading{
+  font-family: "Open Sans";
+  font-size: 14px;
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #ffffff;
+
+}
+
+.h1-light {
+  font-family: "Open Sans";
+  font-size: 20px;
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #ffffff;
 }
