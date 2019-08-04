@@ -37,9 +37,6 @@ const styles = theme => ({
         width: '100%'
 
     },
-    chef_name: {
-        textTransform: 'uppercase',
-    },
     info_container: {
         display: 'flex',
         flexDirection: 'column',

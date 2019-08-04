@@ -310,7 +310,7 @@ class LessonPage extends Component {
 							<h3>{this.props.match.params.lessonId}</h3>
 							<h1>{this.state.chefsData.title.stringValue.toUpperCase()}</h1>
 						</div>
-						<h2>{this.state.chefsData.description.stringValue}</h2>
+						<p className='body-text'>{this.state.chefsData.description.stringValue}</p>
 					</div>
 					<div className={classes.iconsCon}>
 						<div>
