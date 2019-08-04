@@ -118,7 +118,7 @@ class SignIn extends Component {
       //window.setTimeout(function(){
       this.props.dispatch(signin(response.user));
       //Is success signup, redirect to home
-      this.props.history.push("/");
+      this.props.history.push("/home");
       //}, 1000);
     });
 
@@ -140,7 +140,7 @@ class SignIn extends Component {
     signInPromise.then(
       () => {
         //Is success signup, redirect to home
-        this.props.history.push("/");
+        this.props.history.push("/home");
       },
       msg => {
         // @Todo change the alert to a real error message popup

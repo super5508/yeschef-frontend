@@ -59,7 +59,7 @@ class BottomBar extends Component {
                         value='home'
                         icon={<HomeIcon />}
                         component={Link}
-                        to="/" />
+                        to="/home" />
 
                     <BottomNavigationAction
                         label="Community"

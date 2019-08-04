@@ -157,7 +157,7 @@ class SignUp extends Component {
 		signUpPromise.then(
 			() => {
 				//Is success signup, redirect to home
-				this.props.history.push("/");
+				this.props.history.push("/home");
 			},
 			msg => {
 				// #Todo change the alert to a real error message popup

@@ -175,11 +175,11 @@ class ChefHomePage extends Component {
 		const { classes, theme } = this.props;
 		return (
 			<div>
-				<Header gradientBackground/>
+				<Header gradientBackground />
 				<ClassInfo {...this.state.chefsData} showTrailer={false} fixed />
 				{/* //close button */}
 				<div className={classes.iconBox}>
-					<Link to="/" underline="none">
+					<Link to="/home" underline="none">
 						<IconButton aria-label="Close">
 							<CloseIcon className={classes.closeIcon} />
 						</IconButton>
@@ -188,7 +188,7 @@ class ChefHomePage extends Component {
 
 				{/* //'start the class' button  */}
 				<Box className={classes.btncon}>
-					<Link to={"/"} style={{ textDecoration: "none" }}>
+					<Link to={"lesson/1"} style={{ textDecoration: "none" }}>
 						<Button
 							variant="contained"
 							className={classes.startBtn}
