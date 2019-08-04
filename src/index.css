@@ -100,6 +100,7 @@ h2 {
   letter-spacing: normal;
   text-align: center;
   color: #ffffff;
+  text-transform: uppercase
 }
 .Tabs-menu {
   font-family: "Open Sans";
@@ -182,6 +183,10 @@ ul li::before {
   display: inline-block; /* Needed to add space between the bullet and the text */
   padding-right: 0.8rem;
   vertical-align: middle;
+}
+
+.h2-light {
+  font-weight: 300;
 }
 
 .fixTopCon {

@@ -31,6 +31,27 @@ const styles = theme => ({
 		position: "relative",
 		bottom: "9.3rem",
 		left: "0.8rem",
+	},
+	'lessonListLabel': {
+		fontFamily: "Open Sans",
+		fontSize: '14px',
+		fontWeight: '300',
+		fontStyle: 'normal',
+		fontStretch: 'normal',
+		lineHeight: '1',
+		letterSpacing: 'normal',
+		color: '#ffffff',
+	},
+
+	'lessonListHeading': {
+		fontFamily: "Open Sans",
+		fontSize: '14px',
+		fontWeight: '600',
+		fontStyle: 'normal',
+		fontStretch: 'normal',
+		lineHeight: 'normal',
+		letterSpacing: 'normal',
+		color: '#ffffff',
 	}
 });
 
@@ -45,17 +66,6 @@ class LessonInfo extends Component {
 		};
 	}
 
-	componentDidMount() {
-		if (this.props.commingSoon === true) {
-			this.setState({
-				textColor: "#929292",
-				imgOpacity: 0.4,
-				filter: "alpha(opacity=40)",
-				cursor: "auto"
-			});
-		}
-	}
-
 	render() {
 		const { classes } = this.props;
 		return (
@@ -68,10 +78,10 @@ class LessonInfo extends Component {
 				onClick={() => {
 					if (!this.props.commingSoon) {
 						this.props.history.push(
-							"/class/"+this.props.match.params.id +"/lesson/"+this.props.lessonNum
+							"/class/" + this.props.match.params.id + "/lesson/" + this.props.lessonNum
 
-						// this.props.history.push("/class/"+this.props.match.params.id+"/lesson/"+this.props.lessonNum
-						// this.props.history.push("/lesson/" + this.props.match.params.id + "/" + this.props.lessonNum
+							// this.props.history.push("/class/"+this.props.match.params.id+"/lesson/"+this.props.lessonNum
+							// this.props.history.push("/lesson/" + this.props.match.params.id + "/" + this.props.lessonNum
 
 						);
 					}
@@ -91,16 +101,10 @@ class LessonInfo extends Component {
 							{this.props.duration}
 						</div>
 					)}
-
-					{this.props.commingSoon && (
-						<div className={ classes.commingSoonTag + ' Tiny-text-pink'}>
-							COMING SOON
-						</div>
-					)}
 				</div>
 				<div>
-					<p className='Input-text'>Lesson {this.props.lessonNum}</p>
-					<h3>{this.props.title}</h3>
+					<p className={classes.lessonListLabel}>Lesson {this.props.lessonNum}</p>
+					<h3 className={classes.lessonListHeading}>{this.props.title}</h3>
 				</div>
 			</Box>
 		);

@@ -9,7 +9,7 @@ import CheckIcon from "@material-ui/icons/CheckCircleRounded";
 import ClassInfo from "../components/ClassInfo";
 import { Link } from "react-router-dom";
 import IconButton from "@material-ui/core/IconButton";
-import CloseIcon from "@material-ui/icons/CloseRounded";
+import LeftIcon from "@material-ui/icons/KeyboardArrowLeft";
 import SwipeableViews from "react-swipeable-views";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
@@ -64,7 +64,7 @@ const styles = theme => ({
 		padding: "1.8rem 0rem"
 	},
 	btncon: {
-		margin: "57vw 2.4rem 0.8rem 2.4rem",
+		margin: "100vw 2.4rem 0.8rem 2.4rem",
 		paddingTop: "2.4rem",
 		textAlign: "center"
 	},
@@ -91,18 +91,18 @@ const styles = theme => ({
 		marginTop: 0
 	},
 	closeIcon: {
-		fontSize: "2rem"
+		fontSize: "3.5rem"
 	},
 	iconBox: {
 		width: "2.4rem",
 		height: "2.4rem",
-		backgroundColor: "rgba(0, 0, 0, 0.17)",
 		display: "flex",
 		justifyContent: "center",
 		alignItems: "center",
 		position: "absolute",
 		top: "1.2rem",
-		left: "1.2rem"
+		left: "1.2rem",
+		zIndex: '45'
 	},
 	tabsRoot: {
 		borderBottom: "0.01rem solid #929292"
@@ -136,6 +136,8 @@ class ChefHomePage extends Component {
 					twitter: undefined
 				}
 			},
+			comingSoonLessons: [],
+			lessons: [],
 			value: 0
 		};
 
@@ -143,9 +145,14 @@ class ChefHomePage extends Component {
 			`/api/class/${this.props.match.params.id}?prefetch=true`
 		).then(chefInfoResponse => {
 			// console.log("d2", chefInfoResponse);
+			const availableLessons = chefInfoResponse.data.lessons.filter(classObj => !classObj.commingSoon);
+			const comingSoonLessons = chefInfoResponse.data.lessons.filter(classObj => classObj.commingSoon);
+
 			this.setState({
 				...this.state,
-				chefsData: chefInfoResponse.data
+				chefsData: chefInfoResponse.data,
+				lessons: availableLessons,
+				comingSoonLessons: comingSoonLessons,
 			});
 			this.scrollToLesson();
 		});
@@ -176,12 +183,12 @@ class ChefHomePage extends Component {
 		return (
 			<div>
 				<Header gradientBackground />
-				<ClassInfo {...this.state.chefsData} showTrailer={false} fixed />
+				<ClassInfo {...this.state.chefsData} showTrailer={true} noLinkTag fixed />
 				{/* //close button */}
 				<div className={classes.iconBox}>
 					<Link to="/home" underline="none">
 						<IconButton aria-label="Close">
-							<CloseIcon className={classes.closeIcon} />
+							<LeftIcon className={classes.closeIcon} />
 						</IconButton>
 					</Link>
 				</div>
@@ -271,7 +278,10 @@ class ChefHomePage extends Component {
 							</Box>
 							{/* //lessons list */}
 							<div className={classes.lessonsContainer}>
-								{this.state.chefsData.lessons.map(
+								<Box pb='1.7rem'>
+									<h2>lessons</h2>
+								</Box>
+								{this.state.lessons.map(
 									(lessonData, id) => {
 										return (
 											<Element
@@ -289,9 +299,6 @@ class ChefHomePage extends Component {
 													thumbnail={
 														lessonData.thimbnail
 													}
-													commingSoon={
-														lessonData.commingSoon
-													}
 													history={this.props.history}
 													match={this.props.match}
 												/>
@@ -300,6 +307,44 @@ class ChefHomePage extends Component {
 									}
 								)}
 							</div>
+
+							{/* //commingsoon lessons list */}
+							{this.state.comingSoonLessons.length ?
+								<div className={classes.lessonsContainer}>
+									<Box pb='1.7rem'>
+										<h2 className='h2-light'>coming soon</h2>
+									</Box>
+									{this.state.comingSoonLessons.map(
+										(lessonData, id) => {
+											return (
+												<Element
+													key={`lessonNum${this.state.lessons.length + id}`}
+													name={`lessonNum${this.state.lessons.length + id + 1}`}
+													className="element"
+												>
+													<LessonInfo
+														key={`lessonNum${id}`}
+														lessonNum={this.state.lessons.length + id + 1}
+														duration={
+															lessonData.duration
+														}
+														title={lessonData.title}
+														thumbnail={
+															lessonData.thimbnail
+														}
+														commingSoon={
+															lessonData.commingSoon
+														}
+														history={this.props.history}
+														match={this.props.match}
+													/>
+												</Element>
+											);
+										}
+									)}
+								</div>
+								: ''
+							}
 						</TabContainer>
 
 						<TabContainer dir={theme.direction}>
