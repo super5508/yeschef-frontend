@@ -195,7 +195,7 @@ class ChefHomePage extends Component {
 
 				{/* //'start the class' button  */}
 				<Box className={classes.btncon}>
-					<Link to={"/"} style={{ textDecoration: "none" }}>
+					<Link to={"lesson/1"} style={{ textDecoration: "none" }}>
 						<Button
 							variant="contained"
 							className={classes.startBtn}

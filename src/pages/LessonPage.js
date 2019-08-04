@@ -143,7 +143,7 @@ const styles = theme => ({
 			marginTop: "0.5rem"
 		}
 	},
-	gearul:{
+	gearul: {
 		margin: "2rem 0rem 0rem 1rem !important"
 
 	}
@@ -295,7 +295,7 @@ class LessonPage extends Component {
 							aria-label="Close"
 							onClick={() => {
 								this.props.history.push({
-									pathname: `/class/${this.props.match.params.classId}`,
+									pathname: `/class/${this.props.match.params.classId}/`,
 									state: this.props.match.params.lessonId
 								});
 							}}
@@ -310,7 +310,7 @@ class LessonPage extends Component {
 							<h3>{this.props.match.params.lessonId}</h3>
 							<h1>{this.state.chefsData.title.stringValue.toUpperCase()}</h1>
 						</div>
-						<h2>{this.state.chefsData.description.stringValue}</h2>
+						<p className='body-text'>{this.state.chefsData.description.stringValue}</p>
 					</div>
 					<div className={classes.iconsCon}>
 						<div>
@@ -443,25 +443,25 @@ class LessonPage extends Component {
 							{this.state.chefsData.gear && (
 								<TabContainer dir={theme.direction}>
 									<Box className={classes.subTabsCon}>
-									<ul className={classes.gearul}>
-										{		
-											Object.keys(this.state.chefsData.gear.mapValue.fields).map(
-												(data, index)=>{
-													return(
-														
-													<li key={`ligear-${index}`} >
-													<span
-														style={{
-														color: "#ffffff"
-														}}
-													>
-													{this.firstLetterToCapital(data)}																				</span>
-													</li>
-													)
-												}
-											)
+										<ul className={classes.gearul}>
+											{
+												Object.keys(this.state.chefsData.gear.mapValue.fields).map(
+													(data, index) => {
+														return (
+
+															<li key={`ligear-${index}`} >
+																<span
+																	style={{
+																		color: "#ffffff"
+																	}}
+																>
+																	{this.firstLetterToCapital(data)}																				</span>
+															</li>
+														)
+													}
+												)
 											}
-												</ul>
+										</ul>
 									</Box>
 								</TabContainer>
 							)}

@@ -40,9 +40,6 @@ const styles = theme => ({
         width: '100%'
 
     },
-    chef_name: {
-        textTransform: 'uppercase',
-    },
     info_container: {
         display: 'flex',
         flexDirection: 'column',
@@ -153,7 +150,6 @@ class ClassInfo extends Component {
                     <IconButton aria-label="Close" onClick={() => this.setState({ muted: true })}>
                         <VolumeOn className={classes.closeIcon} />
                     </IconButton>
-
                 }
             </div>
         );
@@ -181,7 +177,7 @@ class ClassInfo extends Component {
             this.props.noLinkTag ?
                 classContent
                 :
-                <Link to={"/class/" + this.props.id} className='link' style={{ textDecoration: 'none' }}>
+                <Link to={"/class/" + this.props.id + "/"} className='link' style={{ textDecoration: 'none' }}>
                     {classContent}
                 </Link>
 

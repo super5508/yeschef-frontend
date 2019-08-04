@@ -85,7 +85,7 @@ class LPHomePage extends Component {
         if (this.props.authStat.isLogin) {
             buttonProp = {
                 text: "START EDWARD LEE'S CLASS",
-                link: "/class/c01"
+                link: "/class/c01/"
             }
         } else {
             buttonProp = {

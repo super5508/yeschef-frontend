@@ -69,12 +69,12 @@ const styles = theme => ({
     paddingRight: theme.spacing.unit,
     paddingBottom: theme.spacing.unit,
     paddingLeft: theme.spacing.unit * 10,
-    transition: theme.transitions.create('width',{duration:300}),
+    transition: theme.transitions.create('width', { duration: 300 }),
     width: '100%',
     [theme.breakpoints.up('md')]: {
       width: 60,
-      "&:focus":{
-        width:182,
+      "&:focus": {
+        width: 182,
       }
     }
   },
@@ -90,9 +90,9 @@ const styles = theme => ({
       display: 'none',
     },
   },
-  mobileLogo:{
-    height:36,
-    marginRight:theme.spacing.unit
+  mobileLogo: {
+    height: 36,
+    marginRight: theme.spacing.unit
   }
 });
 
@@ -163,12 +163,12 @@ class PrimaryAppBar extends React.Component {
       <div className={classes.root}>
         <AppBar position="static">
           <Toolbar>
-            <IconButton className={[classes.menuButton,classes.sectionMobile].join(" ")} color="inherit" aria-label="Open drawer">
+            <IconButton className={[classes.menuButton, classes.sectionMobile].join(" ")} color="inherit" aria-label="Open drawer">
               <MenuIcon />
-            </IconButton> 
+            </IconButton>
             <Typography className={classes.title} variant="h6" color="inherit" noWrap>
-              <Link to="/"> 
-              <img src={logo} alt="logo"/>
+              <Link to="/home">
+                <img src={logo} alt="logo" />
               </Link>
               <Button className={classes.button} color="inherit">Chefs</Button>
               <Button className={classes.button} disabled>Classes</Button>
