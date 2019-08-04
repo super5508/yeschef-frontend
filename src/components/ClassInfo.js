@@ -147,46 +147,31 @@ class ClassInfo extends Component {
             </div>
         );
 
+        const classContent = (
+            this.props.showTrailer ?
+                <Paper className={classes.container2}>
+                    <div className={classes.video_container}>
+                        {
+                            this.state.src && <TrailerVideo  {...videoJsOptions} />
+                        }
+                        {volumeControl}
+                        {textContent}
+                    </div>
+                </Paper>
+                :
+                <Paper className={(this.props.fixed && classes.fix_position_container) + ' ' + classes.container} style={{ backgroundImage: 'url(' + this.props.chefImg + ')' }}>
+                    <Box className={classes.mask_container}>
+                        {textContent}
+                    </Box>
+                </Paper >
+        )
+
         return (
             this.props.noLinkTag ?
-                <div>
-                    {this.props.showTrailer ?
-                        <Paper className={classes.container2}>
-                            <div className={classes.video_container}>
-                                {
-                                    this.state.src && <TrailerVideo  {...videoJsOptions} />
-                                }
-                                {volumeControl}
-                                {textContent}
-                            </div>
-                        </Paper>
-                        :
-                        <Paper className={(this.props.fixed && classes.fix_position_container) + ' ' + classes.container} style={{ backgroundImage: 'url(' + this.props.chefImg + ')' }}>
-                            <Box className={classes.mask_container}>
-                                {textContent}
-                            </Box>
-                        </Paper >
-                    }
-                </div>
+                classContent
                 :
                 <Link to={"/class/" + this.props.id} className='link' style={{ textDecoration: 'none' }}>
-                    {
-                        this.props.showTrailer ?
-                            <Paper className={classes.container2}>
-                                <div className={classes.video_container}>
-                                    {
-                                        this.state.src && <TrailerVideo  {...videoJsOptions} />
-                                    }
-                                    {textContent}
-                                </div>
-                            </Paper>
-                            :
-                            <Paper className={(this.props.fixed && classes.fix_position_container) + ' ' + classes.container} style={{ backgroundImage: 'url(' + this.props.chefImg + ')' }}>
-                                <Box className={classes.mask_container}>
-                                    {textContent}
-                                </Box>
-                            </Paper >
-                    }
+                    {classContent}
                 </Link>
 
         );

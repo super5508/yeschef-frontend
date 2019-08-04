@@ -34,6 +34,7 @@ html {
   letter-spacing: normal;
   text-align: center;
   color: #ffffff;
+  text-transform: uppercase
 }
 h1 {
   font-family: "Open Sans";
@@ -44,6 +45,7 @@ h1 {
   line-height: normal;
   letter-spacing: normal;
   color: #ffffff;
+  text-transform: uppercase
 }
 h2 {
   font-family: "Open Sans";
@@ -54,6 +56,7 @@ h2 {
   line-height: normal;
   letter-spacing: normal;
   color: #ffffff;
+  text-transform: uppercase
 }
 .body-text-black {
   font-family: "Open Sans";
@@ -85,6 +88,7 @@ h2 {
   line-height: 1;
   letter-spacing: normal;
   color: #ffffff;
+  text-transform: uppercase
 }
 .Tabs-menu-selected {
   font-family: "Open Sans";
@@ -96,6 +100,7 @@ h2 {
   letter-spacing: normal;
   text-align: center;
   color: #ffffff;
+  text-transform: uppercase
 }
 .Tabs-menu {
   font-family: "Open Sans";
@@ -107,6 +112,7 @@ h2 {
   letter-spacing: normal;
   text-align: center;
   color: #929292;
+  text-transform: uppercase
 }
 .Button-text {
   font-family: "Open Sans";
@@ -118,6 +124,7 @@ h2 {
   letter-spacing: normal;
   text-align: center;
   color: #ffffff;
+  text-transform: uppercase
 }
 h3 {
   font-family: "Open Sans";
@@ -128,6 +135,7 @@ h3 {
   line-height: normal;
   letter-spacing: normal;
   color: #ffffff;
+  text-transform: uppercase
 }
 .Input-text {
   font-family: "Open Sans";
@@ -187,36 +195,6 @@ ul li::before {
   vertical-align: middle;
 }
 
-.lesson-list-label{
-  font-family: "Open Sans";
-  font-size: 14px;
+.h2-light {
   font-weight: 300;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: 1;
-  letter-spacing: normal;
-  color: #ffffff;
-}
-
-.lesson-list-heading{
-  font-family: "Open Sans";
-  font-size: 14px;
-  font-weight: 600;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  color: #ffffff;
-
-}
-
-.h1-light {
-  font-family: "Open Sans";
-  font-size: 20px;
-  font-weight: 300;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  color: #ffffff;
 }

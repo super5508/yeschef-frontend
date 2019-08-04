@@ -85,9 +85,6 @@ const styles = theme => ({
 			// fontWeight: 600
 		}
 	},
-	comingsoonHead: {
-		textTransform: 'uppercase'
-	},
 	icon: {
 		color: "rgba(255, 255, 255, 0.7)",
 		marginRight: "0.8rem",
@@ -302,9 +299,6 @@ class ChefHomePage extends Component {
 													thumbnail={
 														lessonData.thimbnail
 													}
-													commingSoon={
-														lessonData.commingSoon
-													}
 													history={this.props.history}
 													match={this.props.match}
 												/>
@@ -317,8 +311,8 @@ class ChefHomePage extends Component {
 							{/* //commingsoon lessons list */}
 							{this.state.comingSoonLessons.length ?
 								<div className={classes.lessonsContainer}>
-									<Box>
-										<p className={classes.comingsoonHead + ' h1-light'}>coming soon</p>
+									<Box pb='1.7rem'>
+										<h2 className='h2-light'>coming soon</h2>
 									</Box>
 									{this.state.comingSoonLessons.map(
 										(lessonData, id) => {
