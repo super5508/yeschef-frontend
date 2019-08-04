@@ -20,7 +20,6 @@ const styles = theme => ({
 		flexDirection: "row",
 		margin: "2rem 0rem 0rem 2.4rem",
 		"& h2": {
-			textTransform: 'uppercase',
 			marginTop: "0.5rem"
 		}
 	},
