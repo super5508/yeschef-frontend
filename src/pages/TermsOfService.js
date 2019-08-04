@@ -5,7 +5,7 @@ import CloseIcon from "@material-ui/icons/CloseRounded";
 
 const useStyles = makeStyles({
   tosCon: {
-    padding: "2.4rem 2.4rem 5.0rem 2.4rem",
+    padding: "4.5rem 2.4rem 5.0rem 2.4rem",
     "& p": {
       opacity: 0.75
     },
@@ -38,31 +38,7 @@ const useStyles = makeStyles({
   },
   boldChr: {
     fontWeight: 600
-  },
-  fixTopCon: {
-    backgroundColor: '#000000',
-    position: 'fixed',
-    top: '0px',
-    width: '100%',
-    zIndex: '10',
-    height: '6.6rem',
-    padding: '2.2rem 2.4rem'
-  },
-
-  closeIcon: {
-    fontSize: "2rem"
-  },
-  iconBox: {
-    width: "1.2rem",
-    height: "1.4rem",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    position: "fixed",
-    top: "2.7rem",
-    right: "2.4rem",
-    zIndex: '15'
-  },
+  }
 });
 
 function TermsOfService(props) {
@@ -70,14 +46,14 @@ function TermsOfService(props) {
   return (
     //tos => termsOfService
     <div>
-      <div className={classes.fixTopCon}>
+      <div className='fixTopCon'>
         <h1>
           <span>TERMS OF SERVICE</span>
         </h1>
       </div>
-      <div className={classes.iconBox} onClick={() => props.history.goBack()}>
+      <div className='iconBox' onClick={() => props.history.goBack()}>
         <IconButton aria-label="Close">
-          <CloseIcon className={classes.closeIcon} />
+          <CloseIcon className='closeIcon' />
         </IconButton>
       </div>
 
