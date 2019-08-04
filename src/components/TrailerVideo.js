@@ -33,11 +33,21 @@ export default class TrailerVideo extends React.Component {
   }
 
   render() {
+    if (this.player) {
+
+      if (this.props.muted) {
+        this.player.muted(true)
+      }
+      else {
+        this.player.muted(false)
+      }
+    }
+
     return (
       <div data-vjs-player style={{
         width: "100%",
         height: "99%",
-        }}>
+      }}>
         <video style={{
           height: '100%',
           width: '100%',
