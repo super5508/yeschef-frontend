@@ -34,13 +34,7 @@ export default class TrailerVideo extends React.Component {
 
   render() {
     if (this.player) {
-
-      if (this.props.muted) {
-        this.player.muted(true)
-      }
-      else {
-        this.player.muted(false)
-      }
+      this.player.muted(this.props.muted || false)
     }
 
     return (
