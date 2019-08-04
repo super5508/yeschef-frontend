@@ -65,7 +65,7 @@ const styles = theme => ({
     },
     video_container: {
         position: 'relative',
-        height: '95vw',
+        height: '100vw',
     },
     mask_container: {
         width: '100%',
@@ -88,6 +88,17 @@ const styles = theme => ({
         right: "2.4rem",
         zIndex: '60'
     },
+    'ChefHeading': {
+        fontFamily: "Open Sans",
+        fontSize: '22px',
+        fontWeight: '600',
+        fontStyle: 'normal',
+        fontStretch: 'normal',
+        lineHeight: 'normal',
+        letterSpacing: 'normal',
+        color: '#ffffff',
+        textTransform: 'uppercase'
+    }
 });
 
 class ClassInfo extends Component {
@@ -127,7 +138,7 @@ class ClassInfo extends Component {
 
         const textContent = (
             <Box className={this.props.showTrailer ? classes.info_container2 : classes.info_container}>
-                <Box className='Chef-heading'>Chef {this.props.chefName}</Box>
+                <Box className={classes.ChefHeading}>Chef {this.props.chefName}</Box>
                 <Box className='body-text' style={{ textTransform: 'uppercase' }}>{this.props.classTitle}</Box>
             </Box>
         );

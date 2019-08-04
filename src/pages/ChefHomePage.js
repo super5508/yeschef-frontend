@@ -64,7 +64,7 @@ const styles = theme => ({
 		padding: "1.8rem 0rem"
 	},
 	btncon: {
-		margin: "95vw 2.4rem 0.8rem 2.4rem",
+		margin: "100vw 2.4rem 0.8rem 2.4rem",
 		paddingTop: "2.4rem",
 		textAlign: "center"
 	},
