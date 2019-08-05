@@ -35,9 +35,6 @@ const styles = theme => ({
 		color: "#f2f2f2",
 		fontSize: "3.0rem"
 	},
-	userEmail: {
-		textTransform: 'lowercase'
-	},
 	listCon: {
 		margin: '2rem 0rem',
 		"& h4": {
@@ -105,7 +102,7 @@ class Settings extends Component {
 								</Avatar>
 							)}
 						<div>
-							<h2 className={classes.userName}>
+							<h2 style={{ marginBottom: '2rem' }}>
 								{this.props.authStat.userProfile.displayName}
 							</h2>
 						</div>

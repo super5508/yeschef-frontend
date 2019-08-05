@@ -122,34 +122,15 @@ class AccountComponent extends Component {
                     <h1>Account</h1>
                     <div className={classes.lstItem}>
                         <h4 className='body-text'>Change account email</h4>
-                        <p></p>
-                        <IconButton
-                            aria-label="forward"
-                            size="small"
-                        >
-                            <ForwardIcon className={classes.forwardIcon} />
-                        </IconButton>
                     </div>
 
                     {this.props.authStat && this.props.authStat.userProfile && this.props.authStat.userProfile.providerData[0].providerId === 'password' &&
                         <div className={classes.lstItem} onClick={() => { this.props.history.push('/change-password') }}>
                             <h4 className='body-text'>Change password</h4>
-                            <IconButton
-                                aria-label="forward"
-                                size="small"
-                            >
-                                <ForwardIcon className={classes.forwardIcon} />
-                            </IconButton>
                         </div>
                     }
                     <div className={clsx(classes.lstItem, classes.bottomBorder)}>
                         <h4 className='body-text'>Billing details</h4>
-                        <IconButton
-                            aria-label="forward"
-                            size="small"
-                        >
-                            <ForwardIcon className={classes.forwardIcon} />
-                        </IconButton>
                     </div>
                 </Box>
             </Box>
