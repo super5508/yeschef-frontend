@@ -119,7 +119,7 @@ class Settings extends Component {
 							<ForwardIcon className={classes.forwardIcon} />
 						</IconButton>
 					</div>
-					<div onClick={this.openChat} className={clsx(classes.lstItem, classes.bottomBorder)}>
+					<div onClick={this.openChat} style={{ borderBottom: '0px' }} className={clsx(classes.lstItem, classes.bottomBorder)}>
 						<h4 className='body-text'>Help</h4>
 						<IconButton
 							aria-label="forward"
@@ -128,7 +128,7 @@ class Settings extends Component {
 							<ForwardIcon className={classes.forwardIcon} />
 						</IconButton>
 					</div>
-					<div onClick={this.signOut} style={{ borderBottom: '0px' }} className={clsx(classes.lstItem, classes.bottomBorder)}>
+					<div onClick={this.signOut} className={clsx(classes.lstItem, classes.bottomBorder)}>
 						<h4 className='body-text'>Sign out</h4>
 					</div>
 				</Box>
