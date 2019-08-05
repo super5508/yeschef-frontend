@@ -3,8 +3,7 @@ import PropTypes from "prop-types";
 import TextField from "@material-ui/core/TextField";
 import { withStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
-import { Button } from "@material-ui/core";
-import SignOut from "./SignOut";
+import { signout } from "../store/actionCreators/UserActionCreators";
 import UserIcon from "@material-ui/icons/Person";
 import Avatar from "@material-ui/core/Avatar";
 import { connect } from "react-redux";
@@ -17,16 +16,17 @@ import ForwardIcon from "@material-ui/icons/ArrowForwardIosRounded";
 const styles = theme => ({
 	setCon: {
 		display: "flex",
-		flexDirection: "row",
-		margin: "2rem 0rem 0rem 2.4rem",
+		flexDirection: "column",
+		alignItems: 'center',
+		marginTop: '5rem',
 		"& h2": {
 			marginTop: "0.5rem"
 		}
 	},
 	setImg: {
-		height: "5.7rem",
-		width: "5.7rem",
-		marginRight: "1rem"
+		height: "10rem",
+		width: "10rem",
+		// marginRight: "1rem"
 	},
 	pinkBg: {
 		backgroundColor: "#ff007f"
@@ -35,9 +35,6 @@ const styles = theme => ({
 		color: "#f2f2f2",
 		fontSize: "3.0rem"
 	},
-	// userName:{
-	// 	textTransform:'uppercase'
-	// },
 	userEmail: {
 		textTransform: 'lowercase'
 	},
@@ -53,6 +50,8 @@ const styles = theme => ({
 		borderTop: '0.09rem solid #7f7f7f',
 		paddingLeft: '2.4rem',
 		paddingRight: '2.4rem',
+		paddingTop: '1.56rem',
+		paddingBottom: '1.56rem'
 
 	},
 	bottomBorder: {
@@ -69,6 +68,12 @@ class Settings extends Component {
 		this.state = {};
 	}
 
+
+	signOut = () => {
+		window.firebaseAuth.signOut();
+		this.props.dispatch(signout());
+		window.Intercom('shutdown')
+	};
 
 	openChat = () => {
 		window.Intercom('show')
@@ -102,27 +107,21 @@ class Settings extends Component {
 						<div>
 							<h2 className={classes.userName}>
 								{this.props.authStat.userProfile.displayName}
-								<br />
-								<span className={'body-text ' + classes.userEmail}>
-									{this.props.authStat.userProfile.email}
-								</span>
 							</h2>
 						</div>
 					</Box>
 				)}
 				{/* //list */}
 				<Box className={classes.listCon}>
-					{this.props.authStat && this.props.authStat.userProfile && this.props.authStat.userProfile.providerData[0].providerId === 'password' &&
-						<div className={classes.lstItem} onClick={() => { this.props.history.push('/change-password') }}>
-							<h4 className='body-text'>Change password</h4>
-							<IconButton
-								aria-label="forward"
-								size="small"
-							>
-								<ForwardIcon className={classes.forwardIcon} />
-							</IconButton>
-						</div>
-					}
+					<div className={classes.lstItem} onClick={() => { this.props.history.push('/account') }}>
+						<h4 className='body-text'>Account</h4>
+						<IconButton
+							aria-label="forward"
+							size="small"
+						>
+							<ForwardIcon className={classes.forwardIcon} />
+						</IconButton>
+					</div>
 					<div onClick={this.openChat} className={clsx(classes.lstItem, classes.bottomBorder)}>
 						<h4 className='body-text'>Help</h4>
 						<IconButton
@@ -132,8 +131,16 @@ class Settings extends Component {
 							<ForwardIcon className={classes.forwardIcon} />
 						</IconButton>
 					</div>
+					<div onClick={this.signOut} className={clsx(classes.lstItem, classes.bottomBorder)}>
+						<h4 className='body-text'>Sign out</h4>
+						<IconButton
+							aria-label="forward"
+							size="small"
+						>
+							<ForwardIcon className={classes.forwardIcon} />
+						</IconButton>
+					</div>
 				</Box>
-				<SignOut />
 			</Box>
 		);
 	}

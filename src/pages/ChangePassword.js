@@ -206,7 +206,7 @@ class ChangePassword extends Component {
 					<IconButton
 						aria-label="Go Back"
 						onClick={() => {
-							this.props.history.push("/myProfile");
+							this.props.history.push("/account");
 						}}
 					>
 						<BackIcon className={classes.backIcon} />

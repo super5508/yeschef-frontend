@@ -43,7 +43,7 @@ const styles = theme => ({
         backgroundImage: " linear-gradient(to bottom, rgba(51, 51, 51, 0.85), rgba(31, 31, 31, 0.25) 63%, rgba(23, 23, 23, 0))"
     },
     colorHeader: {
-        backgroundColor: "#000000"
+        backgroundColor: "#171717"
     }
 });
 
