@@ -44,7 +44,7 @@ const styles = theme => ({
 	lstItem: {
 		display: 'flex',
 		justifyContent: 'space-between',
-		borderTop: '0.09rem solid #7f7f7f',
+		borderTop: '1px solid #7f7f7f',
 		paddingLeft: '2.4rem',
 		paddingRight: '2.4rem',
 		paddingTop: '1.56rem',
@@ -128,7 +128,7 @@ class Settings extends Component {
 							<ForwardIcon className={classes.forwardIcon} />
 						</IconButton>
 					</div>
-					<div onClick={this.signOut} className={clsx(classes.lstItem, classes.bottomBorder)}>
+					<div onClick={this.signOut} style={{ borderBottom: '0px' }} className={clsx(classes.lstItem, classes.bottomBorder)}>
 						<h4 className='body-text'>Sign out</h4>
 					</div>
 				</Box>

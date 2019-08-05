@@ -50,7 +50,7 @@ const styles = theme => ({
     lstItem: {
         display: 'flex',
         justifyContent: 'space-between',
-        borderTop: '0.09rem solid #7f7f7f',
+        borderTop: '1px solid #7f7f7f',
         paddingLeft: '2.4rem',
         paddingRight: '2.4rem',
         paddingTop: '1.56rem',
