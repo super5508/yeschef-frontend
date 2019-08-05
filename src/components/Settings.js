@@ -18,7 +18,7 @@ const styles = theme => ({
 		display: "flex",
 		flexDirection: "column",
 		alignItems: 'center',
-		marginTop: '5rem',
+		marginTop: '7.5rem',
 		"& h2": {
 			marginTop: "0.5rem"
 		}
@@ -133,12 +133,6 @@ class Settings extends Component {
 					</div>
 					<div onClick={this.signOut} className={clsx(classes.lstItem, classes.bottomBorder)}>
 						<h4 className='body-text'>Sign out</h4>
-						<IconButton
-							aria-label="forward"
-							size="small"
-						>
-							<ForwardIcon className={classes.forwardIcon} />
-						</IconButton>
 					</div>
 				</Box>
 			</Box>

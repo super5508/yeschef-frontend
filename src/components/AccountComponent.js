@@ -17,7 +17,7 @@ const styles = theme => ({
         display: "flex",
         flexDirection: "column",
         alignItems: 'center',
-        marginTop: '5rem',
+        marginTop: '7.5rem',
         "& h2": {
             marginTop: "0.5rem"
         }
