@@ -10,7 +10,7 @@ import withWidth, { isWidthDown } from '@material-ui/core/withWidth';
 import SignIn from "../components/SignIn";
 import SignUp from "../components/SignUp";
 import Settings from '../components/Settings';
-
+import Header from '../components/Header'
 const styles = theme => ({
   signin_out_tabs: {
     flexGrow: 1,
@@ -50,9 +50,7 @@ class MyProfilePage extends Component {
 
     return (
       <Box>
-        <h1 style={{ marginLeft: '24px' }} component="h1">
-          MY PROFILE
-        </h1>
+        <Header />
         {/* if user logged out */}
         {!this.props.authStat.isLogin && (
           <Paper className={classes.signin_out_tabs}>

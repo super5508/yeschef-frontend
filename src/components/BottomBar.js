@@ -18,6 +18,7 @@ const styles = theme => ({
         fontSize: '2rem',
         zIndex: 50,
         height: '4.8rem',
+        backgroundColor: '#171717',
 
         '& .MuiSvgIcon-root': {
             width: '2.4rem',
@@ -47,6 +48,10 @@ class BottomBar extends Component {
         let dom;
         const path = window.location.pathname;
         let navValue = path === '/' ? 'home' : path.slice(1)
+        if (navValue === 'account') {
+            navValue = 'myProfile'
+        }
+
         if (this.props.mainMenu.visible && this.props.location.pathname.slice(0, 6) !== "/class" && this.props.location.pathname.slice(0, 7) !== "/lesson" && this.props.location.pathname !== "/") {
             dom = (
                 <BottomNavigation
@@ -74,7 +79,6 @@ class BottomBar extends Component {
                         icon={<BetaIcon />}
                         component={Link}
                         to="/beta" />
-
                     <BottomNavigationAction
                         label="Me"
                         value='myProfile'

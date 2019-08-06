@@ -91,7 +91,7 @@ const styles = theme => ({
 		marginTop: 0
 	},
 	closeIcon: {
-		fontSize: "3.5rem"
+		fontSize: "3rem"
 	},
 	iconBox: {
 		width: "2.4rem",
@@ -184,7 +184,7 @@ class ChefHomePage extends Component {
 			<div>
 				<Header gradientBackground />
 				<ClassInfo {...this.state.chefsData} showTrailer={true} noLinkTag fixed />
-				{/* //close button */}
+				{/* //left arrow button */}
 				<div className={classes.iconBox}>
 					<Link to="/home" underline="none">
 						<IconButton aria-label="Close">
