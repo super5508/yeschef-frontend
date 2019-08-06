@@ -19,14 +19,9 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 
 const styles = theme => ({
-	// MuiButton: {
-	// 	"&$buttonDisabled": {
-	// 		color: theme.palette.grey[900]
-	// 	}
-	// },
 	h1: {
-		paddingTop: "2.4rem",
-		paddingBottom: "0.3rem"
+		// paddingTop: "2.4rem",
+		paddingBottom: "2rem"
 	},
 	textFieldLabel: {
 		fontSize: "1.4rem",
@@ -56,12 +51,11 @@ const styles = theme => ({
 	},
 	btncon: {
 		position: 'relative',
-		marginTop: "1.5rem"
+		marginTop: "1rem"
 	},
 	errorSpan: {
 		fontFamily: "Open Sans",
-		fontSize: '12px',
-		fontWeight: 'normal',
+		fontSize: '11px',
 		fontWeight: '600',
 		fontStyle: 'normal',
 		fontStretch: 'normal',
@@ -129,7 +123,7 @@ const useStyles = makeStyles({
 		backgroundColor: "#ff007f",
 		margin: "0rem auto",
 		paddingTop: "0.1rem"
-	}
+	},
 });
 
 function PasswordChangedDialog(props) {
@@ -228,7 +222,7 @@ class ChangePassword extends Component {
 			formIsValid = false
 			this.curPwdRef.current.focus()
 			textFieldColor = color
-			currPwdError = 'current password is required'
+			currPwdError = 'Current password is required'
 		}
 
 		else if (!newPassword) {
@@ -308,7 +302,7 @@ class ChangePassword extends Component {
 					</IconButton>
 				</div>
 				<div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', width: '100%', height: '100vh', alignItems: 'center', alignContent: 'center', paddingLeft: '2.4rem', paddingRight: '2.4rem', }}>
-					<h1 className={classes.h1} style={{ alignSelf: 'flex-start', paddingTop: '0rem' }}>
+					<h1 className={classes.h1} style={{ alignSelf: 'flex-start' }}>
 						CHANGE PASSWORD
 								</h1>
 					<form onSubmit={this.submitPassword}>
@@ -328,7 +322,7 @@ class ChangePassword extends Component {
 							color={textFieldColor}
 							inputRef={this.curPwdRef}
 						/>
-						{currPwdError ? <span className={classes.errorSpan}>{currPwdError}</span> : ''}
+						<span className={classes.errorSpan}>{currPwdError}</span>
 
 
 						<CssTextField
@@ -346,7 +340,8 @@ class ChangePassword extends Component {
 							fullWidth={true}
 							color={textFieldColor}
 						/>
-						{newPwdError ? <span className={classes.errorSpan}>{newPwdError}</span> : ''}
+						{/* {newPwdError ?  */}
+						<span className={classes.errorSpan}>{newPwdError}</span>
 						<Box className={classes.btncon}>
 							<Button
 								variant="contained"

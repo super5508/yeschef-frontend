@@ -34,8 +34,12 @@ const styles = theme => ({
 
 const theme = createMuiTheme({
   overrides: {
-
-
+    MuiFormControl: {
+      marginNormal: {
+        marginTop: '8px',
+        marginBottom: '0px'
+      }
+    },
     MuiSnackbar: {
       anchorOriginBottomCenter: {
         bottom: '60px'
