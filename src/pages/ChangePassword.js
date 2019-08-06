@@ -60,15 +60,15 @@ const styles = theme => ({
 	},
 	errorSpan: {
 		fontFamily: "Open Sans",
-		fontSize: '11px',
+		fontSize: '12px',
 		fontWeight: 'normal',
-		fontWeight: '300',
+		fontWeight: '600',
 		fontStyle: 'normal',
 		fontStretch: 'normal',
 		lineHeight: 'normal',
 		letterSpacing: 'normal',
 		color: '#cf6679',
-		marginLeft: '2rem'
+		marginLeft: '1.2rem',
 	},
 	buttonProgress: {
 		color: '#ff007f',
@@ -183,7 +183,7 @@ class ChangePassword extends Component {
 			open: false,
 			currPwdError: '',
 			newPwdError: '',
-			textFieldColor: 'white',
+			textFieldColor: 'rgba(255, 255, 255, 0.7)',
 			loading: false
 		};
 		this.curPwdRef = React.createRef();
@@ -231,13 +231,19 @@ class ChangePassword extends Component {
 			currPwdError = 'current password is required'
 		}
 
-		if (!newPassword || newPassword.length < 6) {
+		else if (!newPassword) {
+			formIsValid = false
+			textFieldColor = color
+			newPwdError = 'New password is required'
+		}
+
+		else if (newPassword.length < 6) {
 			formIsValid = false
 			textFieldColor = color
 			newPwdError = 'new password must have at least 6 characters'
 		}
 
-		if (currentPassword && currentPassword.toLowerCase() === newPassword.toLowerCase()) {
+		else if (currentPassword && currentPassword.toLowerCase() === newPassword.toLowerCase()) {
 			formIsValid = false
 			textFieldColor = color
 			newPwdError = 'You used this password recently. Please enter different one'
@@ -302,7 +308,7 @@ class ChangePassword extends Component {
 					</IconButton>
 				</div>
 				<div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', width: '100%', height: '100vh', alignItems: 'center', alignContent: 'center', paddingLeft: '2.4rem', paddingRight: '2.4rem', }}>
-					<h1 className={classes.h1} style={{ alignSelf: 'flex-start' }}>
+					<h1 className={classes.h1} style={{ alignSelf: 'flex-start', paddingTop: '0rem' }}>
 						CHANGE PASSWORD
 								</h1>
 					<form onSubmit={this.submitPassword}>
