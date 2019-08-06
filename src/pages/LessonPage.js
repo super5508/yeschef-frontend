@@ -170,7 +170,7 @@ class LessonPage extends Component {
 			TotalText: "",
 		};
 
-		Axios.get(`/api/class/${this.props.match.params.classId}/lesson/${this.props.match.params.lessonId - 1}`).then(chefInfoResponse => {
+		Axios.get(`/api/class/${this.props.match.params.classId}/lesson/${this.props.match.params.lessonNum - 1}`).then(chefInfoResponse => {
 			this.setState({
 				...this.state,
 				chefsData: chefInfoResponse.data._fieldsProto,
@@ -287,7 +287,7 @@ class LessonPage extends Component {
 		return (
 			<Box>
 				<Paper className={classes.container2}>
-					<div className={classes.video_container}>{this.state.videoSrc && <VideoPlayer {...videoJsOptions} />}</div>
+					<div className={classes.video_container}>{this.state.videoSrc && <VideoPlayer {...videoJsOptions} classId={this.props.match.params.classId} lessonNum={this.props.match.params.lessonNum} />}</div>
 				</Paper>
 				<div className={classes.lessonContentCon}>
 					<div className={classes.iconBox}>
@@ -296,7 +296,7 @@ class LessonPage extends Component {
 							onClick={() => {
 								this.props.history.push({
 									pathname: `/class/${this.props.match.params.classId}/`,
-									state: this.props.match.params.lessonId
+									state: this.props.match.params.lessonNum
 								});
 							}}
 						>
@@ -307,7 +307,7 @@ class LessonPage extends Component {
 					{/* lessonInfo */}
 					<div className={classes.contentCon}>
 						<div className={classes.titleCon}>
-							<h3>{this.props.match.params.lessonId}</h3>
+							<h3>{this.props.match.params.lessonNum}</h3>
 							<h1>{this.state.chefsData.title.stringValue.toUpperCase()}</h1>
 						</div>
 						<p className='body-text'>{this.state.chefsData.description.stringValue}</p>

@@ -140,7 +140,7 @@ class App extends Component {
           <div className={classes.App}>
             <Route path="/" render={(routerProps) => (<BetaRedirectTOLogin {...routerProps} />)}></Route>
 
-            <Route exact path="/class/:classId/lesson/:lessonId" render={(routeProps) => (<LessonPage {...routeProps} />)}></Route>
+            <Route exact path="/class/:classId/lesson/:lessonNum" render={(routeProps) => (<LessonPage {...routeProps} />)}></Route>
             <Route exact path="/class/:id" render={(routeProps) => (<ChefHomePage {...routeProps} mode='class' />)}></Route>
 
 

@@ -20,6 +20,9 @@ import TwitterIcon from "../assets/images/twitter-icon.svg";
 import LessonInfo from "../components/LessonInfo";
 import { Element, animateScroll as scroll, scroller } from "react-scroll";
 import Header from '../components/Header'
+import indexeddbTools from "./../common/indexeddbTools";
+
+
 function TabContainer({ children, dir }) {
 	return (
 		<div component="div" dir={dir}>
@@ -138,6 +141,18 @@ class ChefHomePage extends Component {
 			},
 			value: 0
 		};
+		const classId = this.props.match.params.id;
+		indexeddbTools.getYCIndexedDB((event) => {
+			const ycDB = event.target.result;
+			const objectStore = ycDB.transaction(indexeddbTools.constants.PLAYER_STATUS_STORE_NAME).objectStore(indexeddbTools.constants.PLAYER_STATUS_STORE_NAME);
+			objectStore.index("classId").getAll(classId).onsuccess = (event) => {
+				const lastLesson = event.target.result.sort().pop();
+				if (lastLesson) {
+					this.setState({ ...this.state, continueWatching: lastLesson.lessonNum });
+				}
+			};
+		})
+
 
 		Axios.get(
 			`/api/class/${this.props.match.params.id}?prefetch=true`
@@ -188,14 +203,14 @@ class ChefHomePage extends Component {
 
 				{/* //'start the class' button  */}
 				<Box className={classes.btncon}>
-					<Link to={"lesson/1"} style={{ textDecoration: "none" }}>
+					<Link to={this.state.continueWatching ? "lesson/" + this.state.continueWatching : "lesson/1"} style={{ textDecoration: "none" }}>
 						<Button
 							variant="contained"
 							className={classes.startBtn}
 							color="primary"
 						// onClick={#}
 						>
-							START THE CLASS
+							{this.state.continueWatching ? "CONTINUE WATCHING" : "START THE CLASS"}
 						</Button>
 					</Link>
 				</Box>
