@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
+import { message } from "../store/actionCreators/UserActionCreators";
 import BackIcon from "@material-ui/icons/ArrowBackIosRounded";
 import Dialog from "@material-ui/core/Dialog";
 import PropTypes from "prop-types";
@@ -14,7 +15,15 @@ import { makeStyles } from "@material-ui/core/styles";
 import CloseIcon from "@material-ui/icons/Close";
 import DoneIcon from "@material-ui/icons/Done";
 
+import CircularProgress from '@material-ui/core/CircularProgress';
+
+
 const styles = theme => ({
+	// MuiButton: {
+	// 	"&$buttonDisabled": {
+	// 		color: theme.palette.grey[900]
+	// 	}
+	// },
 	h1: {
 		paddingTop: "2.4rem",
 		paddingBottom: "0.3rem"
@@ -30,22 +39,54 @@ const styles = theme => ({
 	submitBtn: {
 		borderRadius: "0.6rem",
 		fontSize: "1.4rem",
-		fontWeight: 600
+		fontWeight: 600,
+
+		"&:disabled": {
+			backgroundColor: "#aaaaaa",
+			color: '#6d6d6d'
+		},
+
+		"&:hover": {
+			"&:disabled": {
+				backgroundColor: "#aaaaaa",
+				color: '#6d6d6d'
+			},
+		}
+
 	},
 	btncon: {
+		position: 'relative',
 		marginTop: "1.5rem"
-	}
+	},
+	errorSpan: {
+		fontFamily: "Open Sans",
+		fontSize: '11px',
+		fontWeight: 'normal',
+		fontWeight: '300',
+		fontStyle: 'normal',
+		fontStretch: 'normal',
+		lineHeight: 'normal',
+		letterSpacing: 'normal',
+		color: '#cf6679',
+		marginLeft: '2rem'
+	},
+	buttonProgress: {
+		color: '#ff007f',
+		position: 'absolute',
+		left: '45%',
+		marginTop: 8,
+	},
 });
 
 const CssTextField = withStyles({
 	root: {
 		"& .MuiOutlinedInput-root": {
 			"&.Mui-focused fieldset": {
-				borderColor: "white"
+				borderColor: ({ color }) => color
 			}
 		},
 		"& .MuiFormLabel-root.Mui-focused": {
-			color: "white"
+			color: ({ color }) => color
 		}
 	}
 })(TextField);
@@ -136,14 +177,20 @@ class ChangePassword extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			buttonText: 'change password',
 			currentPassword: "",
 			newPassword: "",
-			open: false
+			open: false,
+			currPwdError: '',
+			newPwdError: '',
+			textFieldColor: 'white',
+			loading: false
 		};
+		this.curPwdRef = React.createRef();
 	}
 
 	handleClickOpen = () => {
-		this.setState({ open: true });
+		this.setState({ autoFocus: true });
 	};
 
 	handleClose = value => {
@@ -159,101 +206,160 @@ class ChangePassword extends Component {
 		});
 	};
 
+
+	clearError = (e) => {
+
+		let errorName = e.target.name;
+
+		if (errorName === 'currPwdError') {
+			this.setState({ currPwdError: '', textFieldColor: 'white' })
+		}
+		if (errorName === 'newPwdError') {
+			this.setState({ newPwdError: '', textFieldColor: 'white' })
+		}
+	}
+
+	inputValid = () => {
+		let formIsValid = true;
+		const color = '#cf6679'
+		let { currentPassword, newPassword, currPwdError, newPwdError, autoFocus, textFieldColor } = this.state;
+
+		if (!currentPassword) {
+			formIsValid = false
+			this.curPwdRef.current.focus()
+			textFieldColor = color
+			currPwdError = 'current password is required'
+		}
+
+		if (!newPassword || newPassword.length < 6) {
+			formIsValid = false
+			textFieldColor = color
+			newPwdError = 'new password must have at least 6 characters'
+		}
+
+		if (currentPassword && currentPassword.toLowerCase() === newPassword.toLowerCase()) {
+			formIsValid = false
+			textFieldColor = color
+			newPwdError = 'You used this password recently. Please enter different one'
+		}
+
+		this.setState({ currPwdError, newPwdError, autoFocus, textFieldColor })
+		return formIsValid
+	}
+
 	submitPassword = () => {
+		let { currentPassword, currPwdError } = this.state;
 		//change password
-		var user = window.firebase.auth().currentUser;
-		var credentials = window.firebase.auth.EmailAuthProvider.credential(
-			user.email,
-			this.state.currentPassword
-		);
-		user
-			.reauthenticateWithCredential(credentials)
-			.then((response) => {
-				// User re-authenticated.
-				if (this.state.newPassword.length === 0) {
-					// #Todo change the alert to a real error message popup
-					alert("Please enter a valid New Password");
-				} else {
+		const valid = this.inputValid()
+		if (valid) {
+
+			this.setState({ loading: true, buttonText: 'updating password', currPwdError: '', newPwdError: '' })
+			var user = window.firebase.auth().currentUser;
+			var credentials = window.firebase.auth.EmailAuthProvider.credential(
+				user.email,
+				currentPassword
+			);
+			user
+				.reauthenticateWithCredential(credentials)
+				.then((response) => {
+					// User re-authenticated.
 					//changing Password
 					user
 						.updatePassword(this.state.newPassword)
 						.then(() => {
+							this.setState({ loading: false, buttonText: 'change password', currentPassword: '', newPassword: '' })
 							// Update successful.
 							this.handleClickOpen();
+							this.props.dispatch(message('pwd_change_success'));
+							this.props.history.push('/account')
 						})
-						.catch(function(error) {
+						.catch(function (error) {
 							// An error happened.
 							// #Todo change the alert to a real error message popup
+							this.setState({ loading: false, buttonText: 'Change password' })
 							alert(error.message);
 						});
-				}
-			})
-			.catch(function(error) {
-				// An error happened.
-				// #Todo change the alert to a real error message popup
-				alert(error.message);
-			});
+				})
+				.catch((error) => {
+					currPwdError = 'Current password is incorrect'
+					this.curPwdRef.current.focus()
+					this.setState({ textFieldColor: '#cf6679', currPwdError, loading: false, buttonText: 'Change password' })
+				});
+		}
 	};
 
 	render() {
 		const { classes } = this.props;
+		const { currentPassword, newPassword, textFieldColor, currPwdError, newPwdError, loading, buttonText } = this.state
 		const labelsProps = {
 			className: classes.textFieldLabel
 		};
 		return (
-			<Box>
-				<h1 className={classes.h1}>
-					<IconButton
-						aria-label="Go Back"
-						onClick={() => {
-							this.props.history.push("/account");
-						}}
-					>
-						<BackIcon className={classes.backIcon} />
+			<div>
+				<div className='iconBox' onClick={() => this.props.history.goBack()}>
+					<IconButton aria-label="Close">
+						<CloseIcon className='closeIcon' />
 					</IconButton>
-					CHANGE PASSWORD
-				</h1>
-				<Box width="100%" pl="2.4rem" pr="2.4rem">
+				</div>
+				<div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', width: '100%', height: '100vh', alignItems: 'center', alignContent: 'center', paddingLeft: '2.4rem', paddingRight: '2.4rem', }}>
+					<h1 className={classes.h1} style={{ alignSelf: 'flex-start' }}>
+						CHANGE PASSWORD
+								</h1>
 					<form onSubmit={this.submitPassword}>
 						<CssTextField
 							id="currentPassword"
 							label="Current password"
 							type="password"
+							value={currentPassword}
+							onFocus={this.clearError}
+							name='currPwdError'
 							className={classes.textField}
 							margin="normal"
 							onChange={this.handleChange}
 							InputLabelProps={labelsProps}
 							variant="outlined"
 							fullWidth={true}
+							color={textFieldColor}
+							inputRef={this.curPwdRef}
 						/>
+						{currPwdError ? <span className={classes.errorSpan}>{currPwdError}</span> : ''}
+
+
 						<CssTextField
 							id="newPassword"
 							label="New password"
 							type="password"
+							value={newPassword}
+							onFocus={this.clearError}
+							name='newPwdError'
 							className={classes.textField}
 							margin="normal"
 							onChange={this.handleChange}
 							InputLabelProps={labelsProps}
 							variant="outlined"
 							fullWidth={true}
+							color={textFieldColor}
 						/>
+						{newPwdError ? <span className={classes.errorSpan}>{newPwdError}</span> : ''}
 						<Box className={classes.btncon}>
 							<Button
 								variant="contained"
 								className={classes.submitBtn}
-								color="primary"
+								color='primary'
 								onClick={this.submitPassword}
+								disabled={loading}
 							>
-								change password
+								{buttonText}
 							</Button>
+							{loading && <CircularProgress className={classes.buttonProgress} />}
 						</Box>
 					</form>
-				</Box>
+				</div >
 				<PasswordChangedDialog
 					open={this.state.open}
 					onClose={this.handleClose}
 				/>
-			</Box>
+			</div>
 		);
 	}
 }

@@ -4,8 +4,11 @@ import ActionTypes from '../ActionTypes'
 const defaultState = {
     userProfile: null,
     isLogin: null,
-    userMetadata: null
+    userMetadata: null,
+    message_type: ''
 }
+
+const defaulmessage = ''
 
 const receivedUserMetadata = (state = defaultState, action) => {
     if (action.type === ActionTypes.USER_RECEIVE_METADATA) {
@@ -59,8 +62,18 @@ const authStat = (state = defaultState, action) => {
     }
 }
 
+const message = (state = defaulmessage, action) => {
+    switch (action.type) {
+        case ActionTypes.MESSAGE_TYPE:
+            return { state, message_type: action.message }
+        default:
+            return state
+    }
+}
+
 const userReducer = combineReducers({
-    authStat
+    authStat,
+    message
 })
 
 export default userReducer;

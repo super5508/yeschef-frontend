@@ -29,3 +29,10 @@ export const updateUserProfile = (user) => ({
 export const signout = () => ({
     type: ActionTypes.USER_SIGNOUT
 });
+
+
+export const message = (message) => ({
+    type: ActionTypes.MESSAGE_TYPE,
+    message
+});
+
