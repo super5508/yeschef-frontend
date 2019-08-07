@@ -14,6 +14,8 @@ import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import CloseIcon from "@material-ui/icons/Close";
 import DoneIcon from "@material-ui/icons/Done";
+import FormControl from '@material-ui/core/FormControl';
+import FormHelperText from '@material-ui/core/FormHelperText';
 
 import CircularProgress from '@material-ui/core/CircularProgress';
 
@@ -51,7 +53,7 @@ const styles = theme => ({
 	},
 	btncon: {
 		position: 'relative',
-		marginTop: "1rem"
+		marginTop: "1.5rem"
 	},
 	errorSpan: {
 		fontFamily: "Open Sans",
@@ -76,13 +78,17 @@ const CssTextField = withStyles({
 	root: {
 		"& .MuiOutlinedInput-root": {
 			"&.Mui-focused fieldset": {
-				borderColor: ({ color }) => color
-			}
+				borderColor: 'White'
+			},
+			"&.Mui-error fieldset": {
+				borderColor: '#cf6679',
+			},
 		},
 		"& .MuiFormLabel-root.Mui-focused": {
-			color: ({ color }) => color
-		}
+			color: 'White'
+		},
 	}
+
 })(TextField);
 
 const useStyles = makeStyles({
@@ -177,7 +183,6 @@ class ChangePassword extends Component {
 			open: false,
 			currPwdError: '',
 			newPwdError: '',
-			textFieldColor: 'rgba(255, 255, 255, 0.7)',
 			loading: false
 		};
 		this.curPwdRef = React.createRef();
@@ -194,56 +199,43 @@ class ChangePassword extends Component {
 	};
 
 	handleChange = event => {
+		if (event.target.id === 'currentPassword') {
+			this.setState({ currPwdError: '' })
+		}
+		if (event.target.id === 'newPassword') {
+			this.setState({ newPwdError: '' })
+		}
+
 		this.setState({
-			...this.state,
 			[event.target.id]: event.target.value
 		});
 	};
 
-
-	clearError = (e) => {
-
-		let errorName = e.target.name;
-
-		if (errorName === 'currPwdError') {
-			this.setState({ currPwdError: '', textFieldColor: 'white' })
-		}
-		if (errorName === 'newPwdError') {
-			this.setState({ newPwdError: '', textFieldColor: 'white' })
-		}
-	}
-
 	inputValid = () => {
 		let formIsValid = true;
-		const color = '#cf6679'
-		let { currentPassword, newPassword, currPwdError, newPwdError, autoFocus, textFieldColor } = this.state;
+		let { currentPassword, newPassword, currPwdError, newPwdError } = this.state;
 
 		if (!currentPassword) {
 			formIsValid = false
-			this.curPwdRef.current.focus()
-			textFieldColor = color
 			currPwdError = 'Current password is required'
 		}
 
 		else if (!newPassword) {
 			formIsValid = false
-			textFieldColor = color
 			newPwdError = 'New password is required'
 		}
 
 		else if (newPassword.length < 6) {
 			formIsValid = false
-			textFieldColor = color
 			newPwdError = 'new password must have at least 6 characters'
 		}
 
 		else if (currentPassword && currentPassword.toLowerCase() === newPassword.toLowerCase()) {
 			formIsValid = false
-			textFieldColor = color
 			newPwdError = 'You used this password recently. Please enter different one'
 		}
 
-		this.setState({ currPwdError, newPwdError, autoFocus, textFieldColor })
+		this.setState({ currPwdError, newPwdError })
 		return formIsValid
 	}
 
@@ -282,15 +274,14 @@ class ChangePassword extends Component {
 				})
 				.catch((error) => {
 					currPwdError = 'Current password is incorrect'
-					this.curPwdRef.current.focus()
-					this.setState({ textFieldColor: '#cf6679', currPwdError, loading: false, buttonText: 'Change password' })
+					this.setState({ currPwdError, loading: false, buttonText: 'Change password' })
 				});
 		}
 	};
 
 	render() {
 		const { classes } = this.props;
-		const { currentPassword, newPassword, textFieldColor, currPwdError, newPwdError, loading, buttonText } = this.state
+		const { currentPassword, newPassword, currPwdError, newPwdError, loading, buttonText } = this.state
 		const labelsProps = {
 			className: classes.textFieldLabel
 		};
@@ -310,8 +301,10 @@ class ChangePassword extends Component {
 							id="currentPassword"
 							label="Current password"
 							type="password"
+							helperText={currPwdError ? currPwdError : <span className="classes.errorSpan"></span>}
+							error={currPwdError !== ''}
+							FormHelperTextProps={{ error: currPwdError !== '' }}
 							value={currentPassword}
-							onFocus={this.clearError}
 							name='currPwdError'
 							className={classes.textField}
 							margin="normal"
@@ -319,14 +312,14 @@ class ChangePassword extends Component {
 							InputLabelProps={labelsProps}
 							variant="outlined"
 							fullWidth={true}
-							color={textFieldColor}
-							inputRef={this.curPwdRef}
 						/>
-						<span className={classes.errorSpan}>{currPwdError}</span>
 
 
 						<CssTextField
 							id="newPassword"
+							helperText={newPwdError ? newPwdError : <span className="classes.errorSpan"></span>}
+							error={newPwdError !== ''}
+							FormHelperTextProps={{ error: newPwdError !== '' }}
 							label="New password"
 							type="password"
 							value={newPassword}
@@ -338,10 +331,7 @@ class ChangePassword extends Component {
 							InputLabelProps={labelsProps}
 							variant="outlined"
 							fullWidth={true}
-							color={textFieldColor}
 						/>
-						{/* {newPwdError ?  */}
-						<span className={classes.errorSpan}>{newPwdError}</span>
 						<Box className={classes.btncon}>
 							<Button
 								variant="contained"
@@ -360,7 +350,7 @@ class ChangePassword extends Component {
 					open={this.state.open}
 					onClose={this.handleClose}
 				/>
-			</div>
+			</div >
 		);
 	}
 }

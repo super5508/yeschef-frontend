@@ -34,10 +34,29 @@ const styles = theme => ({
 
 const theme = createMuiTheme({
   overrides: {
-    MuiFormControl: {
-      marginNormal: {
-        marginTop: '8px',
-        marginBottom: '0px'
+    MuiFormHelperText: {
+      root: {
+        fontFamily: "Open Sans",
+        fontSize: '11px',
+        fontWeight: '600',
+        fontStyle: 'normal',
+        fontStretch: 'normal',
+        lineHeight: 'normal',
+        letterSpacing: 'normal',
+        color: '#cf6679',
+        "&$error": {
+          color: '#cf6679'
+        }
+      },
+      contained: {
+        margin: '5px 12px -19px'
+      }
+    },
+    "MuiFormLabel": {
+      root: {
+        "&.Mui-error": {
+          color: '#cf6679'
+        }
       }
     },
     MuiSnackbar: {
