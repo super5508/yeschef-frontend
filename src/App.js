@@ -34,6 +34,52 @@ const styles = theme => ({
 
 const theme = createMuiTheme({
   overrides: {
+    MuiFormHelperText: {
+      root: {
+        fontFamily: "Open Sans",
+        fontSize: '11px',
+        fontWeight: '600',
+        fontStyle: 'normal',
+        fontStretch: 'normal',
+        lineHeight: 'normal',
+        letterSpacing: 'normal',
+        color: '#cf6679',
+        "&$error": {
+          color: '#cf6679'
+        }
+      },
+      contained: {
+        margin: '5px 12px -19px'
+      }
+    },
+    "MuiFormLabel": {
+      root: {
+        "&.Mui-error": {
+          color: '#cf6679'
+        }
+      }
+    },
+    MuiSnackbar: {
+      anchorOriginBottomCenter: {
+        bottom: '60px'
+      }
+    },
+    MuiSnackbarContent: {
+      root: {
+        backgroundColor: '#ffffff',
+        fontFamily: "Open Sans",
+        fontSize: '14px',
+        fontWeight: '300',
+        fontStyle: 'normal',
+        fontStretch: 'normal',
+        lineHeight: 'normal',
+        letterSpacing: 'normal',
+        color: 'rgba(0, 0, 0, 0.8)',
+        boxShadow: '2px 2px 4px 0 rgba(0, 0, 0, 0.5)'
+      },
+
+    },
+
     MuiButton: { // Name of the component ⚛️ / style sheet
       root: { // Name of the rule
         width: '100%',
@@ -48,7 +94,7 @@ const theme = createMuiTheme({
         // letterSpacing: 'normal',
         // textAlign: 'center',
         // color: '#ffffff',
-      },
+      }
     },
 
     MuiPaper: {

@@ -7,17 +7,23 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
+import { message } from "../store/actionCreators/UserActionCreators";
 import BackIcon from "@material-ui/icons/ArrowBackIosRounded";
 import Dialog from "@material-ui/core/Dialog";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import CloseIcon from "@material-ui/icons/Close";
 import DoneIcon from "@material-ui/icons/Done";
+import FormControl from '@material-ui/core/FormControl';
+import FormHelperText from '@material-ui/core/FormHelperText';
+
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 
 const styles = theme => ({
 	h1: {
-		paddingTop: "2.4rem",
-		paddingBottom: "0.3rem"
+		// paddingTop: "2.4rem",
+		paddingBottom: "2rem"
 	},
 	textFieldLabel: {
 		fontSize: "1.4rem",
@@ -30,24 +36,59 @@ const styles = theme => ({
 	submitBtn: {
 		borderRadius: "0.6rem",
 		fontSize: "1.4rem",
-		fontWeight: 600
+		fontWeight: 600,
+
+		"&:disabled": {
+			backgroundColor: "#aaaaaa",
+			color: '#6d6d6d'
+		},
+
+		"&:hover": {
+			"&:disabled": {
+				backgroundColor: "#aaaaaa",
+				color: '#6d6d6d'
+			},
+		}
+
 	},
 	btncon: {
+		position: 'relative',
 		marginTop: "1.5rem"
-	}
+	},
+	// errorSpan: {
+	// 	fontFamily: "Open Sans",
+	// 	fontSize: '11px',
+	// 	fontWeight: '600',
+	// 	fontStyle: 'normal',
+	// 	fontStretch: 'normal',
+	// 	lineHeight: 'normal',
+	// 	letterSpacing: 'normal',
+	// 	color: '#cf6679',
+	// 	marginLeft: '1.2rem',
+	// },
+	buttonProgress: {
+		color: '#ff007f',
+		position: 'absolute',
+		left: '45%',
+		marginTop: 8,
+	},
 });
 
 const CssTextField = withStyles({
 	root: {
 		"& .MuiOutlinedInput-root": {
 			"&.Mui-focused fieldset": {
-				borderColor: "white"
-			}
+				borderColor: 'White'
+			},
+			"&.Mui-error fieldset": {
+				borderColor: '#cf6679',
+			},
 		},
 		"& .MuiFormLabel-root.Mui-focused": {
-			color: "white"
-		}
+			color: 'White'
+		},
 	}
+
 })(TextField);
 
 const useStyles = makeStyles({
@@ -88,7 +129,7 @@ const useStyles = makeStyles({
 		backgroundColor: "#ff007f",
 		margin: "0rem auto",
 		paddingTop: "0.1rem"
-	}
+	},
 });
 
 function PasswordChangedDialog(props) {
@@ -136,10 +177,16 @@ class ChangePassword extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			email: "",
+			buttonText: 'change password',
 			currentPassword: "",
 			newPassword: "",
-			open: false
+			open: false,
+			currPwdError: '',
+			newPwdError: '',
+			loading: false
 		};
+		this.curPwdRef = React.createRef();
 	}
 
 	handleClickOpen = () => {
@@ -153,72 +200,121 @@ class ChangePassword extends Component {
 	};
 
 	handleChange = event => {
+		if (event.target.id === 'currentPassword') {
+			this.setState({ currPwdError: '' })
+		}
+		if (event.target.id === 'newPassword' && event.target.value.length > 5) {
+			this.setState({ newPwdError: '' })
+		}
+
 		this.setState({
-			...this.state,
 			[event.target.id]: event.target.value
 		});
 	};
 
+	inputValid = () => {
+		let formIsValid = true;
+		let { currentPassword, newPassword, currPwdError, newPwdError } = this.state;
+
+		if (!currentPassword) {
+			formIsValid = false
+			currPwdError = 'Current password is required'
+		}
+
+		if (!newPassword) {
+			formIsValid = false
+			newPwdError = 'New password is required'
+		}
+
+		else if (newPassword.length < 6) {
+			formIsValid = false
+			newPwdError = 'new password must have at least 6 characters'
+		}
+
+		// else if (currentPassword && currentPassword.toLowerCase() === newPassword.toLowerCase()) {
+		// 	formIsValid = false
+		// 	newPwdError = 'You used this password recently. Please enter different one'
+		// }
+
+		this.setState({ currPwdError, newPwdError })
+		return formIsValid
+	}
+
 	submitPassword = () => {
+		let { currentPassword, currPwdError } = this.state;
 		//change password
-		var user = window.firebase.auth().currentUser;
-		var credentials = window.firebase.auth.EmailAuthProvider.credential(
-			user.email,
-			this.state.currentPassword
-		);
-		user
-			.reauthenticateWithCredential(credentials)
-			.then((response) => {
-				// User re-authenticated.
-				if (this.state.newPassword.length === 0) {
-					// #Todo change the alert to a real error message popup
-					alert("Please enter a valid New Password");
-				} else {
+		const valid = this.inputValid()
+		if (valid) {
+
+			var user = window.firebase.auth().currentUser;
+			this.setState({ loading: true, buttonText: 'updating password', currPwdError: '', newPwdError: '', email: user.email })
+			var credentials = window.firebase.auth.EmailAuthProvider.credential(
+				user.email,
+				currentPassword
+			);
+			user
+				.reauthenticateWithCredential(credentials)
+				.then((response) => {
+					// User re-authenticated.
 					//changing Password
 					user
 						.updatePassword(this.state.newPassword)
 						.then(() => {
+							this.setState({ loading: false, buttonText: 'change password', currentPassword: '', newPassword: '' })
 							// Update successful.
 							this.handleClickOpen();
+							this.props.dispatch(message('pwd_change_success'));
+							this.props.history.push('/account')
 						})
-						.catch(function(error) {
+						.catch(function (error) {
 							// An error happened.
 							// #Todo change the alert to a real error message popup
+							this.setState({ loading: false, buttonText: 'Change password' })
 							alert(error.message);
 						});
-				}
-			})
-			.catch(function(error) {
-				// An error happened.
-				// #Todo change the alert to a real error message popup
-				alert(error.message);
-			});
+				})
+				.catch((error) => {
+					currPwdError = 'Current password is incorrect'
+					this.setState({ currPwdError, loading: false, buttonText: 'Change password' })
+				});
+		}
 	};
 
 	render() {
 		const { classes } = this.props;
+		const { currentPassword, newPassword, currPwdError, newPwdError, loading, buttonText, email } = this.state
 		const labelsProps = {
 			className: classes.textFieldLabel
 		};
 		return (
 			<Box>
-				<h1 className={classes.h1}>
-					<IconButton
-						aria-label="Go Back"
-						onClick={() => {
-							this.props.history.push("/account");
-						}}
-					>
-						<BackIcon className={classes.backIcon} />
+				<div className='iconBox' onClick={() => this.props.history.goBack()}>
+					<IconButton aria-label="Close">
+						<CloseIcon className='closeIcon' />
 					</IconButton>
-					CHANGE PASSWORD
-				</h1>
-				<Box width="100%" pl="2.4rem" pr="2.4rem">
+				</div>
+				<Box style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', width: '100%', height: '100vh', alignItems: 'center', alignContent: 'center', paddingLeft: '2.4rem', paddingRight: '2.4rem', }}>
+					<h1 className={classes.h1} style={{ alignSelf: 'flex-start' }}>
+						CHANGE PASSWORD
+								</h1>
 					<form onSubmit={this.submitPassword}>
+						<CssTextField
+							id="email"
+							label="email"
+							type="email"
+							value={email}
+							style={{ display: 'none' }}
+						/>
+
 						<CssTextField
 							id="currentPassword"
 							label="Current password"
 							type="password"
+							helperText={currPwdError ? currPwdError : ""}
+							error={currPwdError !== ''}
+							FormHelperTextProps={{ error: currPwdError !== '' }}
+							value={currentPassword}
+							name='currPwdError'
 							className={classes.textField}
 							margin="normal"
 							onChange={this.handleChange}
@@ -226,10 +322,18 @@ class ChangePassword extends Component {
 							variant="outlined"
 							fullWidth={true}
 						/>
+
+
 						<CssTextField
 							id="newPassword"
+							helperText={newPwdError ? newPwdError : ""}
+							error={newPwdError !== ''}
+							FormHelperTextProps={{ error: newPwdError !== '' }}
 							label="New password"
 							type="password"
+							value={newPassword}
+							onFocus={this.clearError}
+							name='newPwdError'
 							className={classes.textField}
 							margin="normal"
 							onChange={this.handleChange}
@@ -241,11 +345,13 @@ class ChangePassword extends Component {
 							<Button
 								variant="contained"
 								className={classes.submitBtn}
-								color="primary"
+								color='primary'
 								onClick={this.submitPassword}
+								disabled={loading}
 							>
-								change password
+								{buttonText}
 							</Button>
+							{loading && <CircularProgress className={classes.buttonProgress} />}
 						</Box>
 					</form>
 				</Box>
