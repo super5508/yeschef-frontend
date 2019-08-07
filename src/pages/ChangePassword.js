@@ -202,7 +202,7 @@ class ChangePassword extends Component {
 		if (event.target.id === 'currentPassword') {
 			this.setState({ currPwdError: '' })
 		}
-		if (event.target.id === 'newPassword' && event.target.value.length > 6) {
+		if (event.target.id === 'newPassword' && event.target.value.length > 5) {
 			this.setState({ newPwdError: '' })
 		}
 
