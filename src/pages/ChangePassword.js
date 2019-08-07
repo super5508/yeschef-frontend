@@ -55,17 +55,17 @@ const styles = theme => ({
 		position: 'relative',
 		marginTop: "1.5rem"
 	},
-	errorSpan: {
-		fontFamily: "Open Sans",
-		fontSize: '11px',
-		fontWeight: '600',
-		fontStyle: 'normal',
-		fontStretch: 'normal',
-		lineHeight: 'normal',
-		letterSpacing: 'normal',
-		color: '#cf6679',
-		marginLeft: '1.2rem',
-	},
+	// errorSpan: {
+	// 	fontFamily: "Open Sans",
+	// 	fontSize: '11px',
+	// 	fontWeight: '600',
+	// 	fontStyle: 'normal',
+	// 	fontStretch: 'normal',
+	// 	lineHeight: 'normal',
+	// 	letterSpacing: 'normal',
+	// 	color: '#cf6679',
+	// 	marginLeft: '1.2rem',
+	// },
 	buttonProgress: {
 		color: '#ff007f',
 		position: 'absolute',
@@ -190,7 +190,7 @@ class ChangePassword extends Component {
 	}
 
 	handleClickOpen = () => {
-		this.setState({ autoFocus: true });
+		this.setState({ open: true });
 	};
 
 	handleClose = value => {
@@ -245,7 +245,7 @@ class ChangePassword extends Component {
 		//change password
 		const valid = this.inputValid()
 		if (valid) {
-			
+
 			var user = window.firebase.auth().currentUser;
 			this.setState({ loading: true, buttonText: 'updating password', currPwdError: '', newPwdError: '', email: user.email })
 			var credentials = window.firebase.auth.EmailAuthProvider.credential(
@@ -282,18 +282,18 @@ class ChangePassword extends Component {
 
 	render() {
 		const { classes } = this.props;
-		const { currentPassword, newPassword, currPwdError, newPwdError, loading, buttonText,email } = this.state
+		const { currentPassword, newPassword, currPwdError, newPwdError, loading, buttonText, email } = this.state
 		const labelsProps = {
 			className: classes.textFieldLabel
 		};
 		return (
-			<div>
+			<Box>
 				<div className='iconBox' onClick={() => this.props.history.goBack()}>
 					<IconButton aria-label="Close">
 						<CloseIcon className='closeIcon' />
 					</IconButton>
 				</div>
-				<div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', width: '100%', height: '100vh', alignItems: 'center', alignContent: 'center', paddingLeft: '2.4rem', paddingRight: '2.4rem', }}>
+				<Box style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', width: '100%', height: '100vh', alignItems: 'center', alignContent: 'center', paddingLeft: '2.4rem', paddingRight: '2.4rem', }}>
 					<h1 className={classes.h1} style={{ alignSelf: 'flex-start' }}>
 						CHANGE PASSWORD
 								</h1>
@@ -310,7 +310,7 @@ class ChangePassword extends Component {
 							id="currentPassword"
 							label="Current password"
 							type="password"
-							helperText={currPwdError ? currPwdError : <span className="classes.errorSpan"></span>}
+							helperText={currPwdError ? currPwdError : ""}
 							error={currPwdError !== ''}
 							FormHelperTextProps={{ error: currPwdError !== '' }}
 							value={currentPassword}
@@ -326,7 +326,7 @@ class ChangePassword extends Component {
 
 						<CssTextField
 							id="newPassword"
-							helperText={newPwdError ? newPwdError : <span className="classes.errorSpan"></span>}
+							helperText={newPwdError ? newPwdError : ""}
 							error={newPwdError !== ''}
 							FormHelperTextProps={{ error: newPwdError !== '' }}
 							label="New password"
@@ -354,12 +354,12 @@ class ChangePassword extends Component {
 							{loading && <CircularProgress className={classes.buttonProgress} />}
 						</Box>
 					</form>
-				</div >
+				</Box>
 				<PasswordChangedDialog
 					open={this.state.open}
 					onClose={this.handleClose}
 				/>
-			</div >
+			</Box>
 		);
 	}
 }

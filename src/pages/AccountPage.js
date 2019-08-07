@@ -50,11 +50,6 @@ class AccountPage extends Component {
         }
     }
 
-
-    handleClick = () => {
-        this.setState({ open: true });
-    };
-
     handleClose = () => {
         this.setState({ open: false });
     }
@@ -79,7 +74,7 @@ class AccountPage extends Component {
 
     render() {
         const { classes } = this.props;
-        
+
         return (
             <Box>
                 <Header />

@@ -65,7 +65,7 @@ const authStat = (state = defaultState, action) => {
 const message = (state = defaulmessage, action) => {
     switch (action.type) {
         case ActionTypes.MESSAGE_TYPE:
-            return { state, message_type: action.message }
+            return { ...state, message_type: action.message }
         default:
             return state
     }
