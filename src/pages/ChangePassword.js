@@ -220,7 +220,7 @@ class ChangePassword extends Component {
 			currPwdError = 'Current password is required'
 		}
 
-		else if (!newPassword) {
+		if (!newPassword) {
 			formIsValid = false
 			newPwdError = 'New password is required'
 		}
@@ -230,10 +230,10 @@ class ChangePassword extends Component {
 			newPwdError = 'new password must have at least 6 characters'
 		}
 
-		else if (currentPassword && currentPassword.toLowerCase() === newPassword.toLowerCase()) {
-			formIsValid = false
-			newPwdError = 'You used this password recently. Please enter different one'
-		}
+		// else if (currentPassword && currentPassword.toLowerCase() === newPassword.toLowerCase()) {
+		// 	formIsValid = false
+		// 	newPwdError = 'You used this password recently. Please enter different one'
+		// }
 
 		this.setState({ currPwdError, newPwdError })
 		return formIsValid
