@@ -177,6 +177,7 @@ class ChangePassword extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			email: "",
 			buttonText: 'change password',
 			currentPassword: "",
 			newPassword: "",
@@ -244,9 +245,9 @@ class ChangePassword extends Component {
 		//change password
 		const valid = this.inputValid()
 		if (valid) {
-
-			this.setState({ loading: true, buttonText: 'updating password', currPwdError: '', newPwdError: '' })
+			
 			var user = window.firebase.auth().currentUser;
+			this.setState({ loading: true, buttonText: 'updating password', currPwdError: '', newPwdError: '', email: user.email })
 			var credentials = window.firebase.auth.EmailAuthProvider.credential(
 				user.email,
 				currentPassword
@@ -281,7 +282,7 @@ class ChangePassword extends Component {
 
 	render() {
 		const { classes } = this.props;
-		const { currentPassword, newPassword, currPwdError, newPwdError, loading, buttonText } = this.state
+		const { currentPassword, newPassword, currPwdError, newPwdError, loading, buttonText,email } = this.state
 		const labelsProps = {
 			className: classes.textFieldLabel
 		};
@@ -297,6 +298,14 @@ class ChangePassword extends Component {
 						CHANGE PASSWORD
 								</h1>
 					<form onSubmit={this.submitPassword}>
+						<CssTextField
+							id="email"
+							label="email"
+							type="email"
+							value={email}
+							style={{ display: 'none' }}
+						/>
+
 						<CssTextField
 							id="currentPassword"
 							label="Current password"
