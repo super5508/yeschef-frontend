@@ -9,13 +9,18 @@ import { withRouter, Link } from "react-router-dom";
 import fbLogo from "../assets/images/fbLogo.svg";
 import googleLogo from "../assets/images/googleLogo.svg";
 import auth from "./../common/auth";
+import FormControl from '@material-ui/core/FormControl';
+import FormHelperText from '@material-ui/core/FormHelperText';
 
 const CssTextField = withStyles({
 	root: {
 		"& .MuiOutlinedInput-root": {
 			"&.Mui-focused fieldset": {
 				borderColor: "white"
-			}
+			},
+			"&.Mui-error fieldset": {
+				borderColor: '#cf6679',
+			},
 		},
 		"& .MuiFormLabel-root.Mui-focused": {
 			color: "white"
@@ -69,21 +74,25 @@ const styles = theme => ({
 		backgroundColor: "white",
 		paddingRight: "1.5rem",
 		paddingLeft: "1.5rem",
-		marginTop: '1.6rem'
+		marginTop: '2.4rem'
 	},
 	signUpBtn: {
-		marginTop: '1.6rem',
+		marginTop: '2.4rem',
 		width: '100%',
 	},
 	tos_ppContainer: {
 		marginTop: "2.6rem",
-		fontSize: "1.2rem",
-		color: "#929292",
-		display: "flex",
-		justifyContent: "center",
-		flexWrap: "wrap",
 		marginRight: "4rem",
-		marginLeft: "4rem"
+		marginLeft: "4rem",
+		fontFamily: "Open Sans",
+		fontSize: '1.4rem',
+		fontWeight: '300',
+		fontStyle: 'normal',
+		fontStretch: 'normal',
+		lineHeight: 'normal',
+		letterSpacing: 'normal',
+		textAlign: 'center',
+		color: 'rgba(255, 255, 255, 0.8)',
 	},
 	input: {
 		fontFamily: 'Open Sans',
@@ -96,7 +105,7 @@ const styles = theme => ({
 		color: '#ffffff',
 	},
 	grayText: {
-		color: "#929292"
+		color: 'rgba(255, 255, 255, 0.8)',
 	},
 });
 
@@ -106,40 +115,132 @@ class SignUp extends Component {
 		this.state = {
 			name: "",
 			email: "",
-			password: ""
+			password: "",
+			nameError: "",
+			emailError: "",
+			pwdError: ""
 		};
 	}
 
 	handleChange = event => {
+
+		let email_patt = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+		let { name, email, password, nameError, emailError, pwdError } = this.state
+
+		if (event.target.id === 'name' && event.target.value.length > 2) {
+			this.setState({ nameError: '' })
+		}
+
+		if (event.target.id === 'email' && email_patt.test(email)) {
+			this.setState({ emailError: '' })
+		}
+
+		if (event.target.id === 'password' && event.target.value.length > 5) {
+			this.setState({ pwdError: '' })
+		}
+
+
 		this.setState({
-			...this.state,
 			[event.target.id]: event.target.value
 		});
 	};
 
+
+	inputValid = () => {
+
+		let email_patt = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+		let formIsValid = true;
+		let { name, email, password, nameError, emailError, pwdError } = this.state
+
+		if (!name || name.length < 3) {
+			formIsValid = false
+			nameError = 'Name is required'
+		}
+
+		if (!email_patt.test(email)) {
+			formIsValid = false
+			emailError = 'Please enter a valid email address'
+		}
+
+		if (!password) {
+			formIsValid = false
+			pwdError = 'Password is required'
+		}
+
+		else if (password.length < 6) {
+			formIsValid = false
+			pwdError = 'Password needs to be at least 6 characters long'
+		}
+
+		this.setState({ nameError, emailError, pwdError })
+		return formIsValid
+	}
+
+	inputValidBlur = (event) => {
+
+		let email_patt = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+		let formIsValid = true;
+		let { name, email, password, nameError, emailError, pwdError } = this.state
+
+		if (event.target.id === 'name') {
+			if (!name || name.length < 3) {
+				formIsValid = false
+				nameError = 'Name is required'
+			}
+		}
+
+		if (event.target.id === 'email') {
+			if (!email_patt.test(email)) {
+				formIsValid = false
+				emailError = 'Please enter a valid email address'
+			}
+		}
+
+		if (event.target.id === 'password') {
+			if (!password) {
+				formIsValid = false
+				pwdError = 'Password is required'
+			}
+
+			else if (password.length < 6) {
+				formIsValid = false
+				pwdError = 'Password needs to be at least 6 characters long'
+			}
+		}
+
+		this.setState({ nameError, emailError, pwdError })
+		return formIsValid
+	}
+
+
 	submitSignUp = event => {
 		event.preventDefault();
+		const that = this
+		const valid = this.inputValid()
+		if (valid) {
+			var firebaseAuthPromise = window.firebaseAuth.createUserWithEmailAndPassword(
+				this.state.email,
+				this.state.password
+			);
 
-		var firebaseAuthPromise = window.firebaseAuth.createUserWithEmailAndPassword(
-			this.state.email,
-			this.state.password
-		);
-
-		firebaseAuthPromise.catch(function (error) {
-			// Handle Errors here.
-			//var errorCode = error.code;
-			var errorMessage = error.message;
-			// #Todo change the alert to a real error message popup
-			alert(errorMessage);
-		});
-
-		firebaseAuthPromise.then(response => {
-			if (!response) return;
-
-			response.user.updateProfile({
-				displayName: this.state.name
+			firebaseAuthPromise.catch(function (error) {
+				// Handle Errors here.
+				//var errorCode = error.code;
+				var errorMessage = error.message;
+				if (errorMessage === 'The email address is already in use by another account.') {
+					that.setState({ emailError: 'The email address is already in use by another account' })
+				}
+				// #Todo change the alert to a real error message popup
 			});
-		});
+
+			firebaseAuthPromise.then(response => {
+				if (!response) return;
+
+				response.user.updateProfile({
+					displayName: this.state.name
+				});
+			});
+		}
 	};
 
 	signUpWith = provider => {
@@ -171,6 +272,7 @@ class SignUp extends Component {
 		const labelsProps = {
 			className: classes.textFieldLabel
 		};
+		const { name, email, password, nameError, emailError, pwdError } = this.state
 
 		return (
 			<Box
@@ -211,31 +313,42 @@ class SignUp extends Component {
 					justifyContent="space-between"
 					alignItems="center"
 					fontWeight="600"
-					mb="1.9rem"
+					mb="1rem"
+					mt='-1rem'
 				>
 					<Divider width="40%" className={classes.boldDivider} />
 					<span className='Button-text'>OR</span>
 					<Divider width="40%" className={classes.boldDivider} />
 				</Box>
 				<form
-					className={classes.container}
+					className={classes.loginWith}
 					autoComplete="on"
 					onSubmit={this.submitSignUp}
 				>
 					<CssTextField
 						id="name"
 						label="Name"
+						helperText={nameError ? nameError : ""}
+						error={nameError !== ''}
+						FormHelperTextProps={{ error: nameError !== '' }}
+						value={name}
 						InputLabelProps={labelsProps}
 						margin="normal"
 						variant="outlined"
+						onBlur={this.inputValidBlur}
 						fullWidth={true}
 						onChange={this.handleChange}
 					/>
 					<CssTextField
 						id="email"
 						label="Email"
+						helperText={emailError ? emailError : ""}
+						error={emailError !== ''}
+						FormHelperTextProps={{ error: emailError !== '' }}
+						value={email}
 						InputLabelProps={labelsProps}
 						type="email"
+						onBlur={this.inputValidBlur}
 						autoComplete="email"
 						className={classes.textField}
 						margin="normal"
@@ -246,6 +359,11 @@ class SignUp extends Component {
 					<CssTextField
 						id="password"
 						label="Password"
+						helperText={pwdError ? pwdError : "At least 6 characters"}
+						error={pwdError !== ''}
+						FormHelperTextProps={{ error: pwdError !== '' }}
+						value={password}
+						onBlur={this.inputValidBlur}
 						InputLabelProps={labelsProps}
 						type="password"
 						autoComplete="current-password"
@@ -268,7 +386,7 @@ class SignUp extends Component {
 					</Button>
 				</form>
 				<Box className={classes.tos_ppContainer}>
-					By signing up, you agree to our &nbsp;
+					By signing up, you agree to our <br />
 					<Link
 						to="/privacy-policy"
 						underline="always"

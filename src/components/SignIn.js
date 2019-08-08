@@ -62,21 +62,27 @@ const styles = theme => ({
     backgroundColor: "white",
     paddingRight: "1.5rem",
     paddingLeft: "1.5rem",
-    marginTop: '1.6rem'
+    marginTop: '2.4rem'
   },
   signInBtn: {
-    marginTop: "1.6rem",
+    marginTop: "2.4rem",
     width: "100%",
   },
   bottomText: {
-    marginTop: "1.6rem",
-    fontSize: "1.4rem",
-    color: "#929292",
-    textAlign: 'center',
-    textDecoration: "underline"
+    textDecoration: "underline",
+    marginTop: "-0.5rem",
+		fontFamily: "Open Sans",
+		fontSize: '1.4rem',
+		fontWeight: '300',
+		fontStyle: 'normal',
+		fontStretch: 'normal',
+		lineHeight: 'normal',
+		letterSpacing: 'normal',
+		textAlign: 'center',
+		color: 'rgba(255, 255, 255, 0.8)',
   },
   grayText: {
-    color: "#929292"
+    color: 'rgba(255, 255, 255, 0.8)',
   }
 });
 
@@ -193,14 +199,15 @@ class SignIn extends Component {
           justifyContent="space-between"
           alignItems="center"
           fontWeight="600"
-          mb="1.9rem"
+          mb="1rem"
+          mt='-1rem'
         >
           <Divider width="40%" className={classes.boldDivider} />
           <span className='Button-text'>OR</span>
           <Divider width="40%" className={classes.boldDivider} />
         </Box>
         <form
-          className={classes.container}
+          className={classes.loginWith}
           autoComplete="on"
           onSubmit={this.submitLogin}
         >

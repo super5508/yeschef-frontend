@@ -10,13 +10,17 @@ import withWidth, { isWidthDown } from '@material-ui/core/withWidth';
 import SignIn from "../components/SignIn";
 import SignUp from "../components/SignUp";
 import Settings from '../components/Settings';
-import Header from '../components/Header'
+import Header from '../components/Header';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from "@material-ui/icons/CloseRounded";
 const styles = theme => ({
   signin_out_tabs: {
     flexGrow: 1,
-    backgroundColor: "black"
+    backgroundColor: "black",
+    marginTop: '15vw',
   },
   tabs: {
+
     borderBottom: "1px solid #8484836b"
   },
   h1: {
@@ -50,7 +54,16 @@ class MyProfilePage extends Component {
 
     return (
       <Box>
-        <Header />
+        <div className='fixTopCon'>
+          <h1>
+            My account
+          </h1>
+        </div>
+        <div className='iconBox' onClick={() => this.props.history.goBack()}>
+          <IconButton aria-label="Close">
+            <CloseIcon className='closeIcon' />
+          </IconButton>
+        </div>
         {/* if user logged out */}
         {!this.props.authStat.isLogin && (
           <Paper className={classes.signin_out_tabs}>
@@ -71,7 +84,12 @@ class MyProfilePage extends Component {
         )}
 
         {/* if user logged in */}
-        {this.props.authStat.isLogin && <Settings />}
+        {this.props.authStat.isLogin &&
+          <Box>
+            <Header />
+            <Settings />
+          </Box>
+        }
       </Box>
     );
   }
