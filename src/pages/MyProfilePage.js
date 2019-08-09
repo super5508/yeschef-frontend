@@ -17,7 +17,11 @@ const styles = theme => ({
   signin_out_tabs: {
     flexGrow: 1,
     backgroundColor: "black",
-    marginTop: '15vw',
+    [theme.breakpoints.down('sm')]: {
+      marginTop: '15%'
+    },
+
+    marginTop: '4.5%',
   },
   tabs: {
 
