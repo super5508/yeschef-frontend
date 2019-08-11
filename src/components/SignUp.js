@@ -122,23 +122,72 @@ class SignUp extends Component {
 		};
 	}
 
+
+	nameValid = () => {
+		let formIsValid = true;
+		let { name, nameError } = this.state
+
+		if (!name) {
+			formIsValid = false
+			nameError = 'Name is required'
+		}
+
+		this.setState({ nameError })
+		return formIsValid
+	}
+
+	emailValid = () => {
+		let email_patt = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+		let formIsValid = true;
+		let { email, emailError } = this.state
+
+		if (!email) {
+			formIsValid = false
+			emailError = 'Email is required'
+		}
+
+		else if (!email_patt.test(email)) {
+			formIsValid = false
+			emailError = 'Please enter a valid email address'
+		}
+		this.setState({ emailError })
+		return formIsValid
+	}
+
+
+	pwdValid = () => {
+		let formIsValid = true;
+		let { password, pwdError } = this.state
+
+		if (!password) {
+			formIsValid = false
+			pwdError = 'Password is required'
+		}
+
+		else if (password.length + 1 < 6) {
+			formIsValid = false
+			pwdError = 'Password needs to be at least 6 characters long'
+		}
+
+		this.setState({ pwdError })
+		return formIsValid
+	}
+
 	handleChange = event => {
 
-		let email_patt = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-		let { name, email, password, nameError, emailError, pwdError } = this.state
+		let { nameError, emailError, pwdError } = this.state
 
-		if (event.target.id === 'name' && event.target.value.length > 2) {
+		if (nameError && this.nameValid()) {
 			this.setState({ nameError: '' })
 		}
 
-		if (event.target.id === 'email' && email_patt.test(email)) {
+		if (emailError && this.emailValid()) {
 			this.setState({ emailError: '' })
 		}
 
-		if (event.target.id === 'password' && event.target.value.length > 5) {
+		if (pwdError && this.pwdValid()) {
 			this.setState({ pwdError: '' })
 		}
-
 
 		this.setState({
 			[event.target.id]: event.target.value
@@ -147,68 +196,16 @@ class SignUp extends Component {
 
 
 	inputValid = () => {
+		const nameValid = this.nameValid()
+		const emailValid = this.emailValid()
+		const pwdValid = this.pwdValid()
 
-		let email_patt = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 		let formIsValid = true;
-		let { name, email, password, nameError, emailError, pwdError } = this.state
 
-		if (!name || name.length < 3) {
+		if (!nameValid || !emailValid || !pwdValid) {
 			formIsValid = false
-			nameError = 'Name is required'
 		}
 
-		if (!email_patt.test(email)) {
-			formIsValid = false
-			emailError = 'Please enter a valid email address'
-		}
-
-		if (!password) {
-			formIsValid = false
-			pwdError = 'Password is required'
-		}
-
-		else if (password.length < 6) {
-			formIsValid = false
-			pwdError = 'Password needs to be at least 6 characters long'
-		}
-
-		this.setState({ nameError, emailError, pwdError })
-		return formIsValid
-	}
-
-	inputValidBlur = (event) => {
-
-		let email_patt = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-		let formIsValid = true;
-		let { name, email, password, nameError, emailError, pwdError } = this.state
-
-		if (event.target.id === 'name') {
-			if (!name || name.length < 3) {
-				formIsValid = false
-				nameError = 'Name is required'
-			}
-		}
-
-		if (event.target.id === 'email') {
-			if (!email_patt.test(email)) {
-				formIsValid = false
-				emailError = 'Please enter a valid email address'
-			}
-		}
-
-		if (event.target.id === 'password') {
-			if (!password) {
-				formIsValid = false
-				pwdError = 'Password is required'
-			}
-
-			else if (password.length < 6) {
-				formIsValid = false
-				pwdError = 'Password needs to be at least 6 characters long'
-			}
-		}
-
-		this.setState({ nameError, emailError, pwdError })
 		return formIsValid
 	}
 
@@ -229,6 +226,9 @@ class SignUp extends Component {
 				var errorMessage = error.message;
 				if (errorMessage === 'The email address is already in use by another account.') {
 					that.setState({ emailError: 'The email address is already in use by another account' })
+				}
+				if (errorMessage === 'Password should be at least 6 characters') {
+					that.setState({ emailError: 'Password needs to be at least 6 characters long' })
 				}
 				// #Todo change the alert to a real error message popup
 			});
@@ -335,7 +335,7 @@ class SignUp extends Component {
 						InputLabelProps={labelsProps}
 						margin="normal"
 						variant="outlined"
-						onBlur={this.inputValidBlur}
+						onBlur={this.nameValid}
 						fullWidth={true}
 						onChange={this.handleChange}
 					/>
@@ -348,7 +348,7 @@ class SignUp extends Component {
 						value={email}
 						InputLabelProps={labelsProps}
 						type="email"
-						onBlur={this.inputValidBlur}
+						onBlur={this.emailValid}
 						autoComplete="email"
 						className={classes.textField}
 						margin="normal"
@@ -363,7 +363,7 @@ class SignUp extends Component {
 						error={pwdError !== ''}
 						FormHelperTextProps={{ error: pwdError !== '' }}
 						value={password}
-						onBlur={this.inputValidBlur}
+						onBlur={this.pwdValid}
 						InputLabelProps={labelsProps}
 						type="password"
 						autoComplete="current-password"
