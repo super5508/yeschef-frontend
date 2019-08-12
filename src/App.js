@@ -38,12 +38,12 @@ const theme = createMuiTheme({
       root: {
         fontFamily: "Open Sans",
         fontSize: '11px',
-        fontWeight: '600',
+        fontWeight: 'normal',
         fontStyle: 'normal',
         fontStretch: 'normal',
         lineHeight: 'normal',
         letterSpacing: 'normal',
-        color: '#cf6679',
+        color: 'rgba(255, 255, 255, 0.8)',
         "&$error": {
           color: '#cf6679'
         }
