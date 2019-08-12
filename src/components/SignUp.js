@@ -164,7 +164,7 @@ class SignUp extends Component {
 			pwdError = 'Password is required'
 		}
 
-		else if (password.length + 1 < 6) {
+		else if (password.length < 6) {
 			formIsValid = false
 			pwdError = 'Password needs to be at least 6 characters long'
 		}
@@ -202,8 +202,18 @@ class SignUp extends Component {
 
 		let formIsValid = true;
 
-		if (!nameValid || !emailValid || !pwdValid) {
+		if (!nameValid) {
 			formIsValid = false
+
+		}
+		if (!emailValid) {
+			formIsValid = false
+
+		}
+
+		if (!pwdValid) {
+			formIsValid = false
+
 		}
 
 		return formIsValid
@@ -228,7 +238,7 @@ class SignUp extends Component {
 					that.setState({ emailError: 'The email address is already in use by another account' })
 				}
 				if (errorMessage === 'Password should be at least 6 characters') {
-					that.setState({ emailError: 'Password needs to be at least 6 characters long' })
+					that.setState({ pwdError: 'Password needs to be at least 6 characters long' })
 				}
 				// #Todo change the alert to a real error message popup
 			});
