@@ -200,8 +200,6 @@ class SignUp extends Component {
 		const emailValid = this.emailValid()
 		const pwdValid = this.pwdValid()
 
-		let formIsValid = true;
-
 		return (nameValid && emailValid && pwdValid)
 	}
 
