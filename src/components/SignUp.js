@@ -202,21 +202,7 @@ class SignUp extends Component {
 
 		let formIsValid = true;
 
-		if (!nameValid) {
-			formIsValid = false
-
-		}
-		if (!emailValid) {
-			formIsValid = false
-
-		}
-
-		if (!pwdValid) {
-			formIsValid = false
-
-		}
-
-		return formIsValid
+		return (nameValid && emailValid && pwdValid)
 	}
 
 
