@@ -23,6 +23,7 @@ import ClosedBetaSignInPage from './pages/ClosedBetaSignInPage'
 import BetaRedirectTOLogin from './pages/BetaRedirectTOLogin'
 import LPHomePage from './pages/lp/LPHomePage'
 import AccountPage from './pages/AccountPage'
+import ChangeEmail from './pages/ChangeEmail'
 
 const APP_ID = 'h6twy30k'
 
@@ -43,7 +44,7 @@ const theme = createMuiTheme({
         fontStretch: 'normal',
         lineHeight: 'normal',
         letterSpacing: 'normal',
-        color: '#cf6679',
+        color: 'rgba(255, 255, 255, 0.8)',
         "&$error": {
           color: '#cf6679'
         }
@@ -180,7 +181,7 @@ class App extends Component {
     }
     //const chefsData = this.state || {};
     const pathname = window.location.pathname;
-    const isBottomBarVisible = pathname.slice(0, 6) !== "/class" && pathname.slice(0, 7) !== "/lesson" && pathname !== "/" && pathname !== "/change-password" && pathname !== "/reset-password";
+    const isBottomBarVisible = pathname.slice(0, 6) !== "/class" && pathname.slice(0, 7) !== "/lesson" && pathname !== "/" && pathname !== "/change-password" && pathname !== "/reset-password" && pathname !== "/change-email";
 
     return (
       <BrowserRouter>
@@ -200,6 +201,7 @@ class App extends Component {
             <Route exact path="/signin" component={SignIn}></Route>
             <Route exact path="/signout" component={SignOut}></Route>
             <Route exact path="/myProfile" component={MyProfilePage}></Route>
+            <Route exact path="/change-email" component={ChangeEmail}></Route>
             <Route exact path="/reset-password" component={ResetPassword}></Route>
             <Route exact path="/change-password" component={ChangePassword}></Route>
             <Route exact path="/community" component={CommunityPage}></Route>
