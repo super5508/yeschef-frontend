@@ -9,8 +9,7 @@ import { withRouter, Link } from "react-router-dom";
 import fbLogo from "../assets/images/fbLogo.svg";
 import googleLogo from "../assets/images/googleLogo.svg";
 import auth from "./../common/auth";
-import FormControl from '@material-ui/core/FormControl';
-import FormHelperText from '@material-ui/core/FormHelperText';
+import FieldsValidation from "../common/FieldsValidation";
 
 const CssTextField = withStyles({
 	root: {
@@ -135,26 +134,7 @@ class SignUp extends Component {
 		this.setState({ nameError })
 		return formIsValid
 	}
-
-	emailValid = () => {
-		let email_patt = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-		let formIsValid = true;
-		let { email, emailError } = this.state
-
-		if (!email) {
-			formIsValid = false
-			emailError = 'Email is required'
-		}
-
-		else if (!email_patt.test(email)) {
-			formIsValid = false
-			emailError = 'Please enter a valid email address'
-		}
-		this.setState({ emailError })
-		return formIsValid
-	}
-
-
+  
 	pwdValid = () => {
 		let formIsValid = true;
 		let { password, pwdError } = this.state
@@ -164,12 +144,12 @@ class SignUp extends Component {
 			pwdError = 'Password is required'
 		}
 
-		else if (password.length < 6) {
+		else if (password.length + 1 < 6) {
 			formIsValid = false
 			pwdError = 'Password needs to be at least 6 characters long'
 		}
 
-		this.setState({ pwdError })
+    this.setState({ pwdError })
 		return formIsValid
 	}
 
@@ -181,9 +161,7 @@ class SignUp extends Component {
 			this.setState({ nameError: '' })
 		}
 
-		if (emailError && this.emailValid()) {
-			this.setState({ emailError: '' })
-		}
+		emailError && this.setState({ emailError: FieldsValidation.checkEmailValid(this.state.email).emailError });
 
 		if (pwdError && this.pwdValid()) {
 			this.setState({ pwdError: '' })
@@ -197,10 +175,16 @@ class SignUp extends Component {
 
 	inputValid = () => {
 		const nameValid = this.nameValid()
-		const emailValid = this.emailValid()
+		const isEmailValid = FieldsValidation.checkEmailValid(this.state.email).isValid;
 		const pwdValid = this.pwdValid()
 
-		return (nameValid && emailValid && pwdValid)
+		let formIsValid = true;
+
+		if (!nameValid || !isEmailValid || !pwdValid) {
+			formIsValid = false
+		}
+
+		return formIsValid
 	}
 
 
@@ -236,6 +220,11 @@ class SignUp extends Component {
 			});
 		}
 	};
+
+	validateEmail = () => {
+		const { emailError } = FieldsValidation.checkEmailValid(this.state.email);
+		this.setState({ emailError });
+	}
 
 	signUpWith = provider => {
 		let signUpPromise;
@@ -342,7 +331,7 @@ class SignUp extends Component {
 						value={email}
 						InputLabelProps={labelsProps}
 						type="email"
-						onBlur={this.emailValid}
+						onBlur={this.validateEmail}
 						autoComplete="email"
 						className={classes.textField}
 						margin="normal"

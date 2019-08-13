@@ -27,7 +27,7 @@ import AccountPage from './pages/AccountPage'
 const APP_ID = 'h6twy30k'
 
 const styles = theme => ({
-  App: {
+  buttomBarPadding: {
     paddingBottom: '8rem'
   },
 })
@@ -43,7 +43,7 @@ const theme = createMuiTheme({
         fontStretch: 'normal',
         lineHeight: 'normal',
         letterSpacing: 'normal',
-        color: 'rgba(255, 255, 255, 0.8)',
+        color: '#cf6679',
         "&$error": {
           color: '#cf6679'
         }
@@ -179,12 +179,14 @@ class App extends Component {
       });
     }
     //const chefsData = this.state || {};
+    const pathname = window.location.pathname;
+    const isBottomBarVisible = pathname.slice(0, 6) !== "/class" && pathname.slice(0, 7) !== "/lesson" && pathname !== "/" && pathname !== "/change-password" && pathname !== "/reset-password";
 
     return (
       <BrowserRouter>
         <MuiThemeProvider theme={theme}>
           <CssBaseline />
-          <div className={classes.App}>
+          <div className={isBottomBarVisible ? classes.buttomBarPadding : ""}>
             <Route path="/" render={(routerProps) => (<BetaRedirectTOLogin {...routerProps} />)}></Route>
 
             <Route exact path="/class/:classId/lesson/:lessonNum" render={(routeProps) => (<LessonPage {...routeProps} />)}></Route>
@@ -205,7 +207,7 @@ class App extends Component {
             <Route exact path="/account" component={AccountPage}></Route>
             <Route exact path="/lp/lp1" component={LPHomePage}></Route>
 
-            <BottomBar> </BottomBar>
+            <BottomBar visible={isBottomBarVisible}> </BottomBar>
           </div>
         </MuiThemeProvider>
       </BrowserRouter>
