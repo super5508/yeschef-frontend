@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 class BetaRedirectTOLogin extends Component {
   render() {
     //perform the check for redirect only if we're not at the "/" of in a landing page
-    if (window.location.pathname !== "/" && !window.location.pathname.startsWith("/lp/")) {
+    if (window.location.pathname !== "/" && window.location.pathname !== "/reset-password" && !window.location.pathname.startsWith("/lp/")) {
       if (this.props.authStat.isLogin === false) {
         this.props.history.push("/");
       } else {

@@ -188,7 +188,7 @@ class ResetPassword extends Component {
 
 	handleClose = value => {
 		this.setState({ open: false }, () => {
-			this.props.history.push("/myProfile");
+			this.props.history.push("/");
 		});
 	};
 
@@ -246,7 +246,7 @@ class ResetPassword extends Component {
 				<IconButton
 					aria-label="Go Back"
 					onClick={() => {
-						this.props.history.push("/myProfile");
+						this.props.history.goBack();
 					}}
 				>
 					<BackIcon className={classes.backIcon} />
