@@ -9,8 +9,7 @@ import Dialog from "@material-ui/core/Dialog";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import CloseIcon from "@material-ui/icons/Close";
-import FormControl from '@material-ui/core/FormControl';
-import FormHelperText from '@material-ui/core/FormHelperText';
+import FieldsValidation from "../common/FieldsValidation";
 
 const CssTextField = withStyles({
 	root: {
@@ -93,7 +92,6 @@ function PasswordResetDialog(props) {
 
 	function goToEmail() {
 		onClose();
-		window.location.href = 'mailto:""';
 	}
 
 	return (
@@ -163,19 +161,15 @@ class ResetPassword extends Component {
 		super(props);
 		this.state = {
 			open: false,
-			Email: "",
+			email: "",
 			emailError: ""
 		};
 	}
 
 	handleChange = event => {
+		let { emailError } = this.state
 
-		let email_patt = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-		let { Email } = this.state
-
-		if (email_patt.test(Email)) {
-			this.setState({ emailError: '' })
-		}
+		emailError && this.setState({ emailError: FieldsValidation.checkEmailValid(this.state.email).emailError });
 
 		this.setState({
 			[event.target.id]: event.target.value
@@ -188,28 +182,14 @@ class ResetPassword extends Component {
 
 	handleClose = value => {
 		this.setState({ open: false }, () => {
-			this.props.history.push("/");
+			this.props.history.goBack()
 		});
 	};
 
 	inputValid = () => {
-
-		let email_patt = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-		let formIsValid = true;
-		let { Email, emailError } = this.state
-
-		if (!Email) {
-			formIsValid = false
-			emailError = 'Email is required'
-		}
-
-		else if (!email_patt.test(Email)) {
-			formIsValid = false
-			emailError = 'Please enter a valid email address'
-		}
-
-		this.setState({ emailError })
-		return formIsValid
+		const { isValid, emailError } = FieldsValidation.checkEmailValid(this.state.email);
+		this.setState({ emailError });
+		return isValid;
 	}
 
 	resetPassword = () => {
@@ -219,7 +199,7 @@ class ResetPassword extends Component {
 		var auth = window.firebase.auth();
 		if (valid) {
 
-			auth.sendPasswordResetEmail(this.state.Email)
+			auth.sendPasswordResetEmail(this.state.email)
 				.then((response) => {
 					console.log(response)
 					// Update successful.
@@ -240,11 +220,12 @@ class ResetPassword extends Component {
 		const labelsProps = {
 			className: classes.textFieldLabel
 		};
-		const { Email, emailError } = this.state
+		const { email, emailError } = this.state
 		return (
 			<Box>
 				<IconButton
 					aria-label="Go Back"
+					style={{ position: 'absolute' }}
 					onClick={() => {
 						this.props.history.goBack();
 					}}
@@ -261,8 +242,8 @@ class ResetPassword extends Component {
 								helperText={emailError ? emailError : ""}
 								error={emailError !== ''}
 								FormHelperTextProps={{ error: emailError !== '' }}
-								value={Email}
-								id="Email"
+								value={email}
+								id="email"
 								label="Email"
 								type="email"
 								className={classes.textField}
@@ -279,7 +260,7 @@ class ResetPassword extends Component {
 									color="primary"
 									onClick={this.resetPassword}
 								>
-									RESET PASSWORD
+									OK
 							</Button>
 							</Box>
 						</form>
