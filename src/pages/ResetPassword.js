@@ -192,6 +192,11 @@ class ResetPassword extends Component {
 		return isValid;
 	}
 
+	validateEmail = () => {
+		const { emailError } = FieldsValidation.checkEmailValid(this.state.email);
+		this.setState({ emailError });
+	}
+
 	resetPassword = () => {
 		//reset password
 		const valid = this.inputValid()
@@ -246,6 +251,7 @@ class ResetPassword extends Component {
 								id="email"
 								label="Email"
 								type="email"
+								onBlur={this.validateEmail}
 								className={classes.textField}
 								margin="normal"
 								onChange={this.handleChange}
