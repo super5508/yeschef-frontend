@@ -134,7 +134,7 @@ class SignUp extends Component {
 		this.setState({ nameError })
 		return formIsValid
 	}
-
+  
 	pwdValid = () => {
 		let formIsValid = true;
 		let { password, pwdError } = this.state
@@ -148,7 +148,8 @@ class SignUp extends Component {
 			formIsValid = false
 			pwdError = 'Password needs to be at least 6 characters long'
 		}
-		this.setState({ pwdError })
+
+    this.setState({ pwdError })
 		return formIsValid
 	}
 
@@ -205,7 +206,7 @@ class SignUp extends Component {
 					that.setState({ emailError: 'The email address is already in use by another account' })
 				}
 				if (errorMessage === 'Password should be at least 6 characters') {
-					that.setState({ emailError: 'Password needs to be at least 6 characters long' })
+					that.setState({ pwdError: 'Password needs to be at least 6 characters long' })
 				}
 				// #Todo change the alert to a real error message popup
 			});
