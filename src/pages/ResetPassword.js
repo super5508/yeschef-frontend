@@ -9,13 +9,18 @@ import Dialog from "@material-ui/core/Dialog";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import CloseIcon from "@material-ui/icons/Close";
+import FormControl from '@material-ui/core/FormControl';
+import FormHelperText from '@material-ui/core/FormHelperText';
 
 const CssTextField = withStyles({
 	root: {
 		"& .MuiOutlinedInput-root": {
 			"&.Mui-focused fieldset": {
 				borderColor: "white"
-			}
+			},
+			"&.Mui-error fieldset": {
+				borderColor: '#cf6679',
+			},
 		},
 		"& .MuiFormLabel-root.Mui-focused": {
 			color: "white"
@@ -27,32 +32,42 @@ const useStyles = makeStyles({
 	//dialog styles come here
 	dialogCon: {
 		backgroundColor: "#ffffff",
-		height: "27.9rem",
+		height: "24.9rem",
 		width: "27.9rem",
 		borderRadius: "0.8rem",
 		"& h5": {
-			fontSize: "1.4rem",
-			fontWeight: 300,
-			color: "#333333",
-			textAlign: "center",
-			margin: "0.8em 0rem 5rem 0rem"
+			fontFamily: "Open Sans",
+			fontSize: '1.6rem',
+			fontWeight: '300',
+			fontStyle: 'normal',
+			fontStretch: 'normal',
+			lineHeight: 'normal',
+			letterSpacing: 'normal',
+			color: '#000000',
+			alignSelf: 'center',
+			margin: "3rem 0rem 4rem 0rem"
 		}
 	},
 	closeIcon: {
 		color: "#333333",
-		fontSize: "1.4rem",
-		margin: "1.2rem 0rem 0rem 1.6rem"
+		fontSize: "2.4rem",
+		position: 'absolute',
+		left: '24rem',
+		top: '1rem',
 	},
 	dialogBtn: {
 		height: "4.4rem",
 		borderRadius: "0.6rem",
 		width: "24.7rem",
 		fontSize: "1.4rem",
-		fontWeight: 600
+		fontWeight: 600,
+		alignSelf: 'center',
 	},
 	dialogContent: {
-		textAlign: "center",
-		marginTop: "3rem"
+		display: 'flex',
+		flexDirection: 'column',
+		justifyContent: 'center',
+		marginTop: "3rem",
 	},
 	circle: {
 		width: "3rem",
@@ -76,6 +91,11 @@ function PasswordResetDialog(props) {
 		onClose();
 	}
 
+	function goToEmail() {
+		onClose();
+		window.location.href = 'mailto:""';
+	}
+
 	return (
 		<Dialog onClose={handleClose} aria-labelledby="alertDialog" {...other}>
 			<Box className={classes.dialogCon}>
@@ -87,21 +107,21 @@ function PasswordResetDialog(props) {
 					<CloseIcon className={classes.closeIcon} />
 				</IconButton>
 				<div className={classes.dialogContent}>
-					<div className={classes.circle}>
-						<span className={classes.textIcon}>i</span>
-					</div>
+					{/* <div className={classes.circle}>
+							<span className={classes.textIcon}>i</span>
+						</div> */}
 					<h5>
 						You'll receive an email shortly. <br />
-						Please check your inbox <br />
-						and follow the instructions.
+						Please check your inbox and <br />
+						follow the instructions.
 					</h5>
 					<Button
 						variant="contained"
 						className={classes.dialogBtn}
 						color="primary"
-						onClick={handleClose}
+						onClick={goToEmail}
 					>
-						OK
+						GO TO MY EMAIL
 					</Button>
 				</div>
 			</Box>
@@ -117,7 +137,7 @@ PasswordResetDialog.propTypes = {
 const styles = theme => ({
 	h1: {
 		paddingTop: "2.4rem",
-		paddingBottom: "0.3rem"
+		paddingBottom: "1.5rem"
 	},
 	backIcon: {
 		fontSize: "2.0rem",
@@ -134,7 +154,8 @@ const styles = theme => ({
 	},
 	btncon: {
 		marginTop: "1.5rem"
-	}
+	},
+
 });
 
 class ResetPassword extends Component {
@@ -142,13 +163,21 @@ class ResetPassword extends Component {
 		super(props);
 		this.state = {
 			open: false,
-			Email: ""
+			Email: "",
+			emailError: ""
 		};
 	}
 
 	handleChange = event => {
+
+		let email_patt = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+		let { Email } = this.state
+
+		if (email_patt.test(Email)) {
+			this.setState({ emailError: '' })
+		}
+
 		this.setState({
-			...this.state,
 			[event.target.id]: event.target.value
 		});
 	};
@@ -163,20 +192,47 @@ class ResetPassword extends Component {
 		});
 	};
 
+	inputValid = () => {
+
+		let email_patt = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+		let formIsValid = true;
+		let { Email, emailError } = this.state
+
+		if (!Email) {
+			formIsValid = false
+			emailError = 'Email is required'
+		}
+
+		else if (!email_patt.test(Email)) {
+			formIsValid = false
+			emailError = 'Please enter a valid email address'
+		}
+
+		this.setState({ emailError })
+		return formIsValid
+	}
+
 	resetPassword = () => {
 		//reset password
+		const valid = this.inputValid()
+
 		var auth = window.firebase.auth();
-		auth.sendPasswordResetEmail(this.state.Email)
-			.then((response) => {
-				// Update successful.
-				this.handleClickOpen();
-			})
-			.catch(function (error) {
-				// An error happened.
-				// @Todo change the alert to a real error message popup
-				alert(error.message);
-			});
-		//
+		if (valid) {
+
+			auth.sendPasswordResetEmail(this.state.Email)
+				.then((response) => {
+					console.log(response)
+					// Update successful.
+					this.handleClickOpen();
+				})
+				.catch((error) => {
+					// An error happened.
+					// @Todo change the alert to a real error message popup
+					if (error.message === 'There is no user record corresponding to this identifier. The user may have been deleted.') {
+						this.setState({ emailError: "There's no Yeschef account with the following email" })
+					}
+				});
+		}
 	};
 
 	render() {
@@ -184,48 +240,55 @@ class ResetPassword extends Component {
 		const labelsProps = {
 			className: classes.textFieldLabel
 		};
+		const { Email, emailError } = this.state
 		return (
 			<Box>
-				<h1 className={classes.h1}>
-					<IconButton
-						aria-label="Go Back"
-						onClick={() => {
-							this.props.history.push("/myProfile");
-						}}
-					>
-						<BackIcon className={classes.backIcon} />
-					</IconButton>
-					RESET YOUR PASSWORD
+				<IconButton
+					aria-label="Go Back"
+					onClick={() => {
+						this.props.history.push("/myProfile");
+					}}
+				>
+					<BackIcon className={classes.backIcon} />
+				</IconButton>
+				<Box style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', width: '100%', height: '90vh', alignItems: 'center', alignContent: 'center', paddingLeft: '2.4rem', paddingRight: '2.4rem', }}>
+					<h1 className={classes.h1} style={{ alignSelf: 'flex-start' }}>
+						RESET YOUR PASSWORD
 				</h1>
-				<Box width="100%" pl="2.4rem" pr="2.4rem">
-					<form onSubmit={this.resetPassword}>
-						<CssTextField
-							id="Email"
-							label="Email"
-							type="email"
-							className={classes.textField}
-							margin="normal"
-							onChange={this.handleChange}
-							InputLabelProps={labelsProps}
-							variant="outlined"
-							fullWidth={true}
-						/>
-						<Box className={classes.btncon}>
-							<Button
-								variant="contained"
-								className={classes.resetBtn}
-								color="primary"
-								onClick={this.resetPassword}
-							>
-								RESET PASSWORD
+					<Box width="100%">
+						<form onSubmit={this.resetPassword}>
+							<CssTextField
+								helperText={emailError ? emailError : ""}
+								error={emailError !== ''}
+								FormHelperTextProps={{ error: emailError !== '' }}
+								value={Email}
+								id="Email"
+								label="Email"
+								type="email"
+								className={classes.textField}
+								margin="normal"
+								onChange={this.handleChange}
+								InputLabelProps={labelsProps}
+								variant="outlined"
+								fullWidth={true}
+							/>
+							<Box className={classes.btncon}>
+								<Button
+									variant="contained"
+									className={classes.resetBtn}
+									color="primary"
+									onClick={this.resetPassword}
+								>
+									RESET PASSWORD
 							</Button>
-						</Box>
-					</form>
+							</Box>
+						</form>
+					</Box>
+					<PasswordResetDialog
+						open={this.state.open}
+						onClose={this.handleClose}
+					/>
 				</Box>
-				<PasswordResetDialog
-					open={this.state.open}
-					onClose={this.handleClose}
-				/>
 			</Box>
 		);
 	}

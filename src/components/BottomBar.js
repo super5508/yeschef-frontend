@@ -52,7 +52,7 @@ class BottomBar extends Component {
             navValue = 'myProfile'
         }
 
-        if (this.props.mainMenu.visible && this.props.location.pathname.slice(0, 6) !== "/class" && this.props.location.pathname.slice(0, 7) !== "/lesson" && this.props.location.pathname !== "/" && this.props.location.pathname !== "/change-password") {
+        if (this.props.mainMenu.visible && this.props.location.pathname.slice(0, 6) !== "/class" && this.props.location.pathname.slice(0, 7) !== "/lesson" && this.props.location.pathname !== "/" && this.props.location.pathname !== "/change-password" && this.props.location.pathname !== "/reset-password") {
             dom = (
                 <BottomNavigation
                     value={navValue}
