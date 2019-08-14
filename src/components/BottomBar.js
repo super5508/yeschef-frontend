@@ -9,6 +9,7 @@ import HomeIcon from '@material-ui/icons/HomeRounded'
 import PersonIcon from '@material-ui/icons/PersonRounded'
 import CommunityIcon from '@material-ui/icons/Forum'
 import BetaIcon from '@material-ui/icons/ChatBubble'
+import Box from '@material-ui/core/Box';
 
 const styles = theme => ({
     root: {
@@ -46,46 +47,49 @@ class BottomBar extends Component {
     render() {
         const { classes } = this.props;
         let dom;
-        const path = window.location.pathname;
-        let navValue = path === '/' ? 'home' : path.slice(1)
+        const pathname = this.props.location.pathname;
+        const isBottomBarVisible = pathname.slice(0, 6) !== "/class" && pathname.slice(0, 7) !== "/lesson" && pathname !== "/" && pathname !== "/change-password" && pathname !== "/reset-password" && pathname !== "/change-email";
+        let navValue = pathname === '/' ? 'home' : pathname.slice(1)
         if (navValue === 'account') {
             navValue = 'myProfile'
         }
 
-        if (this.props.visible) {
+        if (isBottomBarVisible) {
             dom = (
-                <BottomNavigation
-                    value={navValue}
-                    showLabels
-                    className={classes.root}
-                >
-                    <BottomNavigationAction
-                        label="Home"
-                        value='home'
-                        icon={<HomeIcon />}
-                        component={Link}
-                        to="/home" />
+                <Box pb="7.2rem">
+                    <BottomNavigation
+                        value={navValue}
+                        showLabels
+                        className={classes.root}
+                    >
+                        <BottomNavigationAction
+                            label="Home"
+                            value='home'
+                            icon={<HomeIcon />}
+                            component={Link}
+                            to="/home" />
 
-                    <BottomNavigationAction
-                        label="Community"
-                        value='community'
-                        icon={<CommunityIcon />}
-                        component={Link}
-                        to="/community" />
+                        <BottomNavigationAction
+                            label="Community"
+                            value='community'
+                            icon={<CommunityIcon />}
+                            component={Link}
+                            to="/community" />
 
-                    <BottomNavigationAction
-                        label="Beta"
-                        value='beta'
-                        icon={<BetaIcon />}
-                        component={Link}
-                        to="/beta" />
-                    <BottomNavigationAction
-                        label="Me"
-                        value='myProfile'
-                        icon={<PersonIcon />}
-                        component={Link}
-                        to="/myProfile" />
-                </BottomNavigation>
+                        <BottomNavigationAction
+                            label="Beta"
+                            value='beta'
+                            icon={<BetaIcon />}
+                            component={Link}
+                            to="/beta" />
+                        <BottomNavigationAction
+                            label="Me"
+                            value='myProfile'
+                            icon={<PersonIcon />}
+                            component={Link}
+                            to="/myProfile" />
+                    </BottomNavigation>
+                </Box>
             )
         } else {
             dom = <div></div>;
