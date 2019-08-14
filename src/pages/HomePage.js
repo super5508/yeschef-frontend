@@ -23,12 +23,16 @@ const styles = theme => ({
         paddingTop: "3.4rem",
         marginBottom: "3.1rem",
         [theme.breakpoints.down('sm')]: {
+            backgroundImage: "url('https://d21w8rrhzkhqhr.cloudfront.net/images/hero1_m.jpg')",
             width: "100%",
             height: "177.777vw",
-            backgroundImage: "url('https://d21w8rrhzkhqhr.cloudfront.net/images/hero1_m.jpg')",
         },
-        [theme.breakpoints.up('sm')]: {
-
+        [`${theme.breakpoints.up('sm')}`]: {
+            height: 'calc((9/16)*100vw)',
+            backgroundImage: "url('https://d21w8rrhzkhqhr.cloudfront.net/images/hero1.jpg')",
+        },
+        [`${theme.breakpoints.down('sm')} and (orientation: landscape)`]: {
+            height: 'calc((9/16)*100vw)',
             backgroundImage: "url('https://d21w8rrhzkhqhr.cloudfront.net/images/hero1.jpg')",
         },
         margin: "auto"
