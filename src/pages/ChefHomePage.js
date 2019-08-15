@@ -184,7 +184,7 @@ class ChefHomePage extends Component {
 				<Header gradientBackground />
 				<ClassInfo {...this.state.chefsData} showTrailer={true} noLinkTag fixed />
 				{/* //left arrow button */}
-				<BackButton redirect='/home' />
+				<BackButton />
 
 				{/* //'start the class' button  */}
 				<Box className={classes.btncon}>

@@ -57,7 +57,7 @@ class AccountPage extends Component {
                 <Header />
 
                 {/* //left arrow button */}
-                <BackButton redirect='/myProfile' />
+                <BackButton />
 
                 {/* if user logged in */}
                 {this.props.authStat.isLogin && <AccountComponent />}

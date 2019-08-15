@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import IconButton from "@material-ui/core/IconButton";
 import LeftIcon from "@material-ui/icons/KeyboardArrowLeft";
 import { withStyles } from "@material-ui/core/styles";
@@ -62,16 +62,14 @@ class BackButton extends React.Component {
             className += classes.hiddenIconBox;
         }
         return (
-            <div className={className}>
-                <Link to={this.props.redirect} underline="none">
-                    <IconButton aria-label="Close">
-                        <LeftIcon className={classes.leftIcon} />
-                    </IconButton>
-                </Link>
+            <div className={className} onClick={() => this.props.history.goBack()}>
+                <IconButton aria-label="Close">
+                    <LeftIcon className={classes.leftIcon} />
+                </IconButton>
             </div>
         )
     }
 }
 
 
-export default (withStyles(styles)(BackButton));
+export default withRouter((withStyles(styles)(BackButton)));
