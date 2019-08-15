@@ -58,33 +58,35 @@ class MyProfilePage extends Component {
 
     return (
       <Box>
-        <div className='fixTopCon'>
-          <h1>
-            My account
-          </h1>
-        </div>
-        <div className='iconBox' onClick={() => this.props.history.goBack()}>
-          <IconButton aria-label="Close">
-            <CloseIcon className='closeIcon' />
-          </IconButton>
-        </div>
         {/* if user logged out */}
         {!this.props.authStat.isLogin && (
-          <Paper className={classes.signin_out_tabs}>
-            <Tabs
-              value={this.state.value}
-              onChange={this.handleChange}
-              indicatorColor="primary"
-              textColor="inherit"
-              {...additionalProps}
-              // centered
-              className={classes.tabs}
-            >
-              <Tab value="signup" className='Button-text' label="Sign Up" />
-              <Tab value="signin" label="Sign In" />
-            </Tabs>
-            {this.state.value === "signin" ? <SignIn history={this.props.history} /> : <SignUp history={this.props.history} />}
-          </Paper>
+          <Box>
+            <div className='fixTopCon'>
+              <h1>
+                My account
+          </h1>
+            </div>
+            <div className='iconBox' onClick={() => this.props.history.goBack()}>
+              <IconButton aria-label="Close">
+                <CloseIcon className='closeIcon' />
+              </IconButton>
+            </div>
+            <Paper className={classes.signin_out_tabs}>
+              <Tabs
+                value={this.state.value}
+                onChange={this.handleChange}
+                indicatorColor="primary"
+                textColor="inherit"
+                {...additionalProps}
+                // centered
+                className={classes.tabs}
+              >
+                <Tab value="signup" className='Button-text' label="Sign Up" />
+                <Tab value="signin" label="Sign In" />
+              </Tabs>
+              {this.state.value === "signin" ? <SignIn history={this.props.history} /> : <SignUp history={this.props.history} />}
+            </Paper>
+          </Box>
         )}
 
         {/* if user logged in */}
