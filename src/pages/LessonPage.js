@@ -12,6 +12,9 @@ import SwipeableViews from "react-swipeable-views";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import PropTypes from "prop-types";
+import PlayButton from "../assets/images/play-btn.svg";
+import Header from "../components/Header";
+import BackButton from "../components/BackButton";
 
 function TabContainer({ children, dir }) {
 	return (
@@ -30,6 +33,40 @@ const styles = theme => ({
 	video_container: {
 		position: "relative",
 		height: "57vw"
+	},
+	video_overlay: {
+		position: "absolute",
+		height: "100%",
+		width: "100%",
+		top: 0,
+		left: 0,
+		padding: "2.3rem",
+		display: "flex",
+		"& h3": {
+			fontSize: "14px",
+			fontWeight: 300,
+			textTransform: "none",
+			lineHeight: "normal",
+			marginBottom: "0.4rem"
+		},
+		"& h1": {
+			fontSize: "16px",
+			lineHeight: "20px",
+			fontWeight: 600,
+		},
+	},
+	video_overlay_darkened: {
+		backgroundColor: "rgba(27, 26, 26, 0.7)",
+	},
+	video_overlay_text: {
+		flex: 1,
+		alignSelf: 'flex-end',
+	},
+	video_overlay_play: {
+		position: "absolute",
+		top: "50%",
+		left: "50%",
+		transform: "translate(-50%, -50%)"
 	},
 	container2: {
 		position: "fixed",
@@ -163,6 +200,7 @@ class LessonPage extends Component {
 				description: {}
 			},
 			videoSrc: undefined,
+			isPlaying: false,
 			skillsText: "",
 			value: 0,
 			ingredientsArray: [],
@@ -273,11 +311,17 @@ class LessonPage extends Component {
 		});
 	};
 
+	toggleVideo = () => {
+		this.setState({
+			isPlaying: ! this.state.isPlaying
+		});
+	}
+
 	render() {
 		const { classes, theme } = this.props;
 		const videoJsOptions = {
 			autoplay: false,
-			controls: true,
+			controls: false,
 			sources: [
 				{
 					src: this.state.videoSrc
@@ -287,10 +331,24 @@ class LessonPage extends Component {
 		return (
 			<Box>
 				<Paper className={classes.container2}>
-					<div className={classes.video_container}>{this.state.videoSrc && <VideoPlayer {...videoJsOptions} classId={this.props.match.params.classId} lessonNum={this.props.match.params.lessonNum} />}</div>
+					<div className={classes.video_container}>
+						{this.state.videoSrc && <VideoPlayer {...videoJsOptions} isPlaying={this.state.isPlaying} classId={this.props.match.params.classId} lessonNum={this.props.match.params.lessonNum} />}
+						<div className={`${classes.video_overlay} ${this.state.isPlaying ? '' : classes.video_overlay_darkened}`}
+								 onClick={this.toggleVideo}>
+							{!this.state.isPlaying &&
+								<div className={classes.video_overlay_play}>
+									<img src={PlayButton}/>
+								</div>
+							}
+							<div className={classes.video_overlay_text}>
+								<h3>Lesson {this.props.match.params.lessonNum}</h3>
+								<h1>{this.state.chefsData.title.stringValue.toUpperCase()}</h1>
+							</div>
+						</div>
+					</div>
 				</Paper>
 				<div className={classes.lessonContentCon}>
-					<div className={classes.iconBox}>
+					{ /*<div className={classes.iconBox}>
 						<IconButton
 							aria-label="Close"
 							onClick={() => {
@@ -302,7 +360,9 @@ class LessonPage extends Component {
 						>
 							<BackIcon className={classes.backIcon} />
 						</IconButton>
-					</div>
+					</div>*/ }
+					{ !this.state.isPlaying &&  <BackButton /> }
+					{ !this.state.isPlaying && <Header gradientBackground/> }
 
 					{/* lessonInfo */}
 					<div className={classes.contentCon}>

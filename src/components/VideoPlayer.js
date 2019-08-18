@@ -50,6 +50,15 @@ export default class VideoPlayer extends React.Component {
 		}
 	}
 
+	shouldComponentUpdate(nextProps, nextState, nextContext) {
+		if (nextProps.isPlaying && !this.props.isPlaying) {
+			this.player.play()
+		} else if (!nextProps.isPlaying && this.props.isPlaying) {
+			this.player.pause()
+		}
+		return false
+	}
+
 	getLastRecordedTime = async () => {
 		if (this.constants.IS_INDEXEDDB) {
 			const recordedTime = await indexeddbTools.getObject(this.ycDB, indexeddbTools.constants.PLAYER_STATUS_STORE_NAME, this.videoId);

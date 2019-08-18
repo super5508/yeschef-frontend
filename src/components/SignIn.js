@@ -9,6 +9,7 @@ import googleLogo from "../assets/images/googleLogo.svg";
 import Box from "@material-ui/core/Box";
 import auth from "./../common/auth";
 import { Link, withRouter } from 'react-router-dom'
+import { connect } from "react-redux";
 const CssTextField = withStyles({
   root: {
     "& .MuiOutlinedInput-root": {
@@ -259,4 +260,4 @@ class SignIn extends Component {
 SignIn.propTypes = {
   classes: PropTypes.object.isRequired
 };
-export default withRouter(withStyles(styles)(SignIn));
+export default withRouter(connect()(withStyles(styles)(SignIn)));
