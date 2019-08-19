@@ -183,6 +183,15 @@ class LessonPage extends Component {
 			if (this.state.chefsData.ingredients) {
 				this.getIngredients();
 			}
+
+			if (this.state.chefsData.dietary) {
+				this.getDietary();
+			}
+
+			if (this.state.chefsData.cuisine) {
+				this.getCuisine();
+			}
+
 		});
 	}
 
@@ -233,6 +242,26 @@ class LessonPage extends Component {
 		});
 	};
 
+	getCuisine = () => {
+		let data = this.state.chefsData.cuisine.arrayValue.values;
+
+		const cuisineString = data.map((lessonData, id) => this.firstLetterToCapital(lessonData.stringValue)).join(' | ');
+		this.setState({
+			cuisineText: cuisineString
+		});
+	};
+
+	getDietary = () => {
+		let data = this.state.chefsData.dietary.arrayValue.values;
+
+		const dietaryString = data.map((lessonData, id) => this.firstLetterToCapital(lessonData.stringValue)).join(' | ');
+		this.setState({
+			dietaryText: dietaryString
+		});
+	};
+
+
+
 	handleChange = (event, value) => {
 		this.setState({ value });
 	};
@@ -277,6 +306,7 @@ class LessonPage extends Component {
 
 	render() {
 		const { classes, theme } = this.props;
+		const { chefsData } = this.state
 		const videoJsOptions = {
 			autoplay: false,
 			controls: true,
@@ -381,6 +411,17 @@ class LessonPage extends Component {
 											<h2 style={{ paddingRight: '1.2rem' }}>skills</h2>
 											<p className='body-text'>{this.state.skillsText}</p>
 										</div>
+										{chefsData.cuisine &&
+											<div>
+												<h2 style={{ paddingRight: '1.2rem' }}>cuisine</h2>
+												<p className='body-text'>{this.state.cuisineText}</p>
+											</div>}
+
+										{chefsData.dietary &&
+											<div>
+												<h2 style={{ paddingRight: '1.2rem' }}>dietary</h2>
+												<p className='body-text'>{this.state.dietaryText}</p>
+											</div>}
 									</div>
 								</Box>
 							</TabContainer>
