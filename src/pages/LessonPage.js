@@ -42,6 +42,8 @@ const styles = theme => ({
 		left: 0,
 		padding: "2.3rem",
 		display: "flex",
+		transition: '0.6s',
+		backgroundColor: "rgba(27, 26, 26, 0.7)",
 		"& h3": {
 			fontSize: "14px",
 			fontWeight: 300,
@@ -54,9 +56,9 @@ const styles = theme => ({
 			lineHeight: "20px",
 			fontWeight: 600,
 		},
-	},
-	video_overlay_darkened: {
-		backgroundColor: "rgba(27, 26, 26, 0.7)",
+		"&.hide_on_play": {
+			backgroundColor: "transparent",
+		}
 	},
 	video_overlay_text: {
 		flex: 1,
@@ -66,7 +68,11 @@ const styles = theme => ({
 		position: "absolute",
 		top: "50%",
 		left: "50%",
-		transform: "translate(-50%, -50%)"
+		transform: "translate(-50%, -50%)",
+		transition: '0.6s',
+		"&.hide_on_play": {
+			opacity: 0
+		}
 	},
 	container2: {
 		position: "fixed",
@@ -315,7 +321,11 @@ class LessonPage extends Component {
 		this.setState({
 			isPlaying: ! this.state.isPlaying
 		});
-	}
+	};
+
+	addHideOnPlayClass = classes => {
+		return classes + (this.state.isPlaying ? ' hide_on_play' : '');
+	};
 
 	render() {
 		const { classes, theme } = this.props;
@@ -333,13 +343,11 @@ class LessonPage extends Component {
 				<Paper className={classes.container2}>
 					<div className={classes.video_container}>
 						{this.state.videoSrc && <VideoPlayer {...videoJsOptions} isPlaying={this.state.isPlaying} classId={this.props.match.params.classId} lessonNum={this.props.match.params.lessonNum} />}
-						<div className={`${classes.video_overlay} ${this.state.isPlaying ? '' : classes.video_overlay_darkened}`}
+						<div className={this.addHideOnPlayClass(classes.video_overlay)}
 								 onClick={this.toggleVideo}>
-							{!this.state.isPlaying &&
-								<div className={classes.video_overlay_play}>
+								<div className={this.addHideOnPlayClass(classes.video_overlay_play)}>
 									<img src={PlayButton}/>
 								</div>
-							}
 							<div className={classes.video_overlay_text}>
 								<h3>Lesson {this.props.match.params.lessonNum}</h3>
 								<h1>{this.state.chefsData.title.stringValue.toUpperCase()}</h1>
@@ -361,8 +369,8 @@ class LessonPage extends Component {
 							<BackIcon className={classes.backIcon} />
 						</IconButton>
 					</div>*/ }
-					{ !this.state.isPlaying &&  <BackButton /> }
-					{ !this.state.isPlaying && <Header gradientBackground/> }
+					<BackButton visible={!this.state.isPlaying}/>
+					<Header gradientBackground visible={!this.state.isPlaying}/>
 
 					{/* lessonInfo */}
 					<div className={classes.contentCon}>

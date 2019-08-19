@@ -51,12 +51,17 @@ export default class VideoPlayer extends React.Component {
 	}
 
 	shouldComponentUpdate(nextProps, nextState, nextContext) {
-		if (nextProps.isPlaying && !this.props.isPlaying) {
-			this.player.play()
-		} else if (!nextProps.isPlaying && this.props.isPlaying) {
-			this.player.pause()
-		}
-		return false
+	  let changeDetected = false;
+	  for (let propName of Object.getOwnPropertyNames(nextProps)) {
+	    if (this.props[propName] !== nextProps[propName]) {
+        if (propName === 'isPlaying') {
+          nextProps.isPlaying ? this.player.play() : this.player.pause();
+        } else {
+          changeDetected = true;
+        }
+      }
+    }
+	  return changeDetected;
 	}
 
 	getLastRecordedTime = async () => {
