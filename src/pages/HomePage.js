@@ -17,6 +17,7 @@ const styles = theme => ({
     },
     cta_wrapper: {
         backgroundSize: "cover",
+        backgroundPosition: 'center',
         paddingRight: 0,
         paddingLeft: 0,
         paddingBottom: 0,
@@ -24,15 +25,10 @@ const styles = theme => ({
         marginBottom: "3.1rem",
         [theme.breakpoints.down('sm')]: {
             backgroundImage: "url('https://d21w8rrhzkhqhr.cloudfront.net/images/hero1_m.jpg')",
-            width: "100%",
-            height: "177.777vw",
+            width: "100vw",
+            height: '133.33vw',
         },
         [`${theme.breakpoints.up('sm')}`]: {
-            height: 'calc((9/16)*100vw)',
-            backgroundImage: "url('https://d21w8rrhzkhqhr.cloudfront.net/images/hero1.jpg')",
-        },
-        [`${theme.breakpoints.down('sm')} and (orientation: landscape)`]: {
-            height: 'calc((9/16)*100vw)',
             backgroundImage: "url('https://d21w8rrhzkhqhr.cloudfront.net/images/hero1.jpg')",
         },
         margin: "auto"
@@ -98,6 +94,7 @@ class LPHomePage extends Component {
             }
         }
         const { classes } = this.props;
+        console.log(this.state.chefsDataArray)
         return (
             <Box >
                 <Header gradientBackground />
