@@ -25,7 +25,11 @@ export default class VideoPlayer extends React.Component {
 	dbOpened = async (event) => {
 		this.ycDB = event.target.result;
 		var tmp = await this.getLastRecordedTime();
-		this.lastRecordedTime = tmp || 0;
+		const time = tmp || 0;
+		/* this.setState({
+			initTime: time
+		}); */ //Commented out to prevent fixation of video player on specific time during pause on LessonPage
+		this.lastRecordedTime = time;
 	}
 
 	componentDidMount() {
