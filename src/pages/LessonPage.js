@@ -41,20 +41,13 @@ const styles = theme => ({
 		top: 0,
 		left: 0,
 		padding: "2.3rem",
+		paddingBottom: "1.6rem",
 		display: "flex",
 		transition: '0.6s',
 		backgroundColor: "rgba(27, 26, 26, 0.7)",
-		"& h3": {
-			fontSize: "14px",
-			fontWeight: 300,
+		"& .Sub-h1": {
 			textTransform: "none",
-			lineHeight: "normal",
 			marginBottom: "0.4rem"
-		},
-		"& h1": {
-			fontSize: "16px",
-			lineHeight: "20px",
-			fontWeight: 600,
 		},
 		"&.hide_on_play": {
 			backgroundColor: "transparent",
@@ -63,6 +56,10 @@ const styles = theme => ({
 	video_overlay_text: {
 		flex: 1,
 		alignSelf: 'flex-end',
+		transition: '0.6s',
+		"&.hide_on_play": {
+			opacity: 0
+		}
 	},
 	video_overlay_play: {
 		position: "absolute",
@@ -348,9 +345,9 @@ class LessonPage extends Component {
 								<div className={this.addHideOnPlayClass(classes.video_overlay_play)}>
 									<img src={PlayButton}/>
 								</div>
-							<div className={classes.video_overlay_text}>
-								<h3>Lesson {this.props.match.params.lessonNum}</h3>
-								<h1>{this.state.chefsData.title.stringValue.toUpperCase()}</h1>
+							<div className={this.addHideOnPlayClass(classes.video_overlay_text)}>
+								<h1 className="Sub-h1">Lesson {this.props.match.params.lessonNum}</h1>
+								<h2>{this.state.chefsData.title.stringValue.toUpperCase()}</h2>
 							</div>
 						</div>
 					</div>
