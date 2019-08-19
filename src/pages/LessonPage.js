@@ -353,19 +353,6 @@ class LessonPage extends Component {
 					</div>
 				</Paper>
 				<div className={classes.lessonContentCon}>
-					{ /*<div className={classes.iconBox}>
-						<IconButton
-							aria-label="Close"
-							onClick={() => {
-								this.props.history.push({
-									pathname: `/class/${this.props.match.params.classId}/`,
-									state: this.props.match.params.lessonNum
-								});
-							}}
-						>
-							<BackIcon className={classes.backIcon} />
-						</IconButton>
-					</div>*/ }
 					<BackButton visible={!this.state.isPlaying}/>
 					<Header gradientBackground visible={!this.state.isPlaying}/>
 
