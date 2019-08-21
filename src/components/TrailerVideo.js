@@ -45,7 +45,7 @@ export default class TrailerVideo extends React.Component {
         <video style={{
           height: '100%',
           width: '100%',
-          objectFit: 'fill'
+          objectFit: 'cover'
         }} ref={node => this.videoNode = node} poster={this.state.poster} className="video-js" ></video>
       </div>
     )
