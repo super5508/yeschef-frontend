@@ -326,6 +326,7 @@ class LessonPage extends Component {
 				'timestamp': this.formatTime(this.state.currentVideoTime),
 				'comment': this.state.feedbackText
 			});
+			this.setState({feedbackText: ''});
 		}
 	};
 
