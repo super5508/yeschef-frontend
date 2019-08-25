@@ -176,7 +176,7 @@ class AccountComponent extends Component {
                         </h4>
                     </div>
                     }
-                    {(this.getProviderId() === 'facebook.com' || this.getProviderId() === 'google.com') &&
+                    {false && (this.getProviderId() === 'facebook.com' || this.getProviderId() === 'google.com') &&
                         <div className={classes.lstItem} onClick={() => { this.props.history.push('/change-login') }}>
                             <h4 className='body-text'>Change login</h4>
                         </div>
