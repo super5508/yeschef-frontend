@@ -23,6 +23,7 @@ import ClosedBetaSignInPage from './pages/ClosedBetaSignInPage'
 import BetaRedirectTOLogin from './pages/BetaRedirectTOLogin'
 import LPHomePage from './pages/lp/LPHomePage'
 import AccountPage from './pages/AccountPage'
+import ChangeEmail from './pages/ChangeEmail'
 
 const APP_ID = 'h6twy30k'
 
@@ -175,7 +176,6 @@ class App extends Component {
       });
     }
     //const chefsData = this.state || {};
-
     return (
       <BrowserRouter>
         <MuiThemeProvider theme={theme}>
@@ -194,6 +194,7 @@ class App extends Component {
             <Route exact path="/signin" component={SignIn}></Route>
             <Route exact path="/signout" component={SignOut}></Route>
             <Route exact path="/myProfile" component={MyProfilePage}></Route>
+            <Route exact path="/change-email" component={ChangeEmail}></Route>
             <Route exact path="/reset-password" component={ResetPassword}></Route>
             <Route exact path="/change-password" component={ChangePassword}></Route>
             <Route exact path="/community" component={CommunityPage}></Route>

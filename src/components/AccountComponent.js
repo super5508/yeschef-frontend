@@ -20,7 +20,7 @@ const styles = theme => ({
         alignItems: 'center',
         marginTop: '7.5rem',
         "& h2": {
-            marginTop: "0.5rem"
+            marginTop: "0.7rem"
         }
     },
     setImg: {
@@ -32,14 +32,16 @@ const styles = theme => ({
         backgroundColor: "#ff007f"
     },
     userIcon: {
-        color: "#f2f2f2",
-        fontSize: "3.0rem"
+        color: "#c20a65",
+        fontSize: "7.1rem"
     },
     userEmail: {
-        textTransform: 'lowercase'
+        textTransform: 'lowercase',
+        marginTop: "0.5rem",
+        display: "block"
     },
     listCon: {
-        margin: '2rem 0rem',
+        margin: '2.5rem 0rem',
         "& h4": {
             cursor: "pointer"
         },
@@ -54,8 +56,8 @@ const styles = theme => ({
         borderTop: '1px solid #7f7f7f',
         paddingLeft: '2.4rem',
         paddingRight: '2.4rem',
-        paddingTop: '1.56rem',
-        paddingBottom: '1.56rem'
+        paddingTop: '1.7rem',
+        paddingBottom: '1.7rem'
 
     },
     bottomBorder: {
@@ -147,7 +149,7 @@ class AccountComponent extends Component {
                 <Box className={classes.listCon}>
                     <h1>Account</h1>
                     {this.getProviderId() === 'password' &&
-                    <div className={classes.lstItem}>
+                    <div className={classes.lstItem} onClick={() => { this.props.history.push('/change-email') }}>
                         <h4 className='body-text'>Change account email</h4>
                     </div>
                     }

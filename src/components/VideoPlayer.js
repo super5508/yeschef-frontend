@@ -26,9 +26,9 @@ export default class VideoPlayer extends React.Component {
 		this.ycDB = event.target.result;
 		var tmp = await this.getLastRecordedTime();
 		const time = tmp || 0;
-		this.setState({
-			initTime: time
-		});
+		if (time) {
+			this.player.currentTime(time);
+		}
 		this.lastRecordedTime = time;
 	}
 
@@ -48,6 +48,20 @@ export default class VideoPlayer extends React.Component {
 		if (this.player) {
 			this.player.dispose();
 		}
+	}
+
+	shouldComponentUpdate(nextProps, nextState, nextContext) {
+	  let changeDetected = false;
+	  for (let propName of Object.getOwnPropertyNames(nextProps)) {
+	    if (this.props[propName] !== nextProps[propName]) {
+        if (propName === 'isPlaying') {
+          nextProps.isPlaying ? this.player.play() : this.player.pause();
+        } else {
+          changeDetected = true;
+        }
+      }
+    }
+	  return changeDetected;
 	}
 
 	getLastRecordedTime = async () => {
@@ -92,10 +106,6 @@ export default class VideoPlayer extends React.Component {
 	}
 
 	render() {
-		if (this.state.initTime) {
-			console.log("update player to second: " + this.state.initTime);
-			this.player.currentTime(this.state.initTime);
-		}
 		return (
 			<div data-vjs-player className="vjs-big-play-centered" style={{
 				width: "100%",

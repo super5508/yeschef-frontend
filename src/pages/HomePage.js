@@ -17,18 +17,18 @@ const styles = theme => ({
     },
     cta_wrapper: {
         backgroundSize: "cover",
+        backgroundPosition: 'center',
         paddingRight: 0,
         paddingLeft: 0,
         paddingBottom: 0,
         paddingTop: "3.4rem",
         marginBottom: "3.1rem",
         [theme.breakpoints.down('sm')]: {
-            width: "100%",
-            height: "177.777vw",
             backgroundImage: "url('https://d21w8rrhzkhqhr.cloudfront.net/images/hero1_m.jpg')",
+            width: "100vw",
+            height: '133.33vw',
         },
-        [theme.breakpoints.up('sm')]: {
-
+        [`${theme.breakpoints.up('sm')}`]: {
             backgroundImage: "url('https://d21w8rrhzkhqhr.cloudfront.net/images/hero1.jpg')",
         },
         margin: "auto"

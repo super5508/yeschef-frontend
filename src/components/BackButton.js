@@ -43,6 +43,13 @@ class BackButton extends React.Component {
         window.removeEventListener("scroll", this.handleScroll);
     }
 
+    shouldComponentUpdate(nextProps, nextState, nextContext) {
+        if (nextProps.visible !== this.state.visible) {
+            this.setState({visible: nextProps.visible});
+        }
+        return true
+    }
+
     handleScroll = () => {
         const { prevScrollpos } = this.state;
 

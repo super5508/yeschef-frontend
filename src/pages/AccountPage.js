@@ -25,6 +25,11 @@ class AccountPage extends Component {
             this.setState({ open: true, message: 'Password changed successfully' })
             this.props.dispatch(message(''));
         }
+        if (this.props.message.message_type === 'email_change_success') {
+
+            this.setState({ open: true, message: 'Email changed successfully' })
+            this.props.dispatch(message(''));
+        }
     }
 
     handleClose = () => {

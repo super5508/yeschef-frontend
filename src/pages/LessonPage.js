@@ -12,6 +12,9 @@ import SwipeableViews from "react-swipeable-views";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import PropTypes from "prop-types";
+import PlayButton from "../assets/images/play-btn.svg";
+import Header from "../components/Header";
+import BackButton from "../components/BackButton";
 
 function TabContainer({ children, dir }) {
 	return (
@@ -30,6 +33,43 @@ const styles = theme => ({
 	video_container: {
 		position: "relative",
 		height: "57vw"
+	},
+	video_overlay: {
+		position: "absolute",
+		height: "100%",
+		width: "100%",
+		top: 0,
+		left: 0,
+		padding: "2.3rem",
+		paddingBottom: "1.6rem",
+		display: "flex",
+		transition: '0.6s',
+		backgroundColor: "rgba(27, 26, 26, 0.7)",
+		"& .Sub-h1": {
+			textTransform: "none",
+			marginBottom: "0.4rem"
+		},
+		"&.hide_on_play": {
+			backgroundColor: "transparent",
+		}
+	},
+	video_overlay_text: {
+		flex: 1,
+		alignSelf: 'flex-end',
+		transition: '0.6s',
+		"&.hide_on_play": {
+			opacity: 0
+		}
+	},
+	video_overlay_play: {
+		position: "absolute",
+		top: "50%",
+		left: "50%",
+		transform: "translate(-50%, -50%)",
+		transition: '0.6s',
+		"&.hide_on_play": {
+			opacity: 0
+		}
 	},
 	container2: {
 		position: "fixed",
@@ -84,6 +124,11 @@ const styles = theme => ({
 			fontSize: "1.6rem",
 			fontWeight: 300,
 			margin: 0
+		},
+
+		"& p": {
+			marginTop: '2.4rem',
+			marginBottom: '2.4rem'
 		}
 	},
 	icon: {
@@ -93,13 +138,10 @@ const styles = theme => ({
 	iconsCon: {
 		marginTop: "1.5rem",
 		marginBottom: "0.8rem",
-		padding: "1.2rem 2.3rem 0.2rem 2.3rem",
-		borderTop: "0.2px solid rgba(255, 255, 255, 0.7)",
-		borderBottom: "0.2px solid rgba(255, 255, 255, 0.7)",
+		padding: "2.2rem 2.3rem 0.2rem 2.3rem",
+		borderTop: "0.3px solid rgba(255, 255, 255, 0.7)",
 
 		"& p": {
-			fontSize: "1.4rem",
-			fontWeight: 300,
 			margin: 0,
 			display: "flex",
 			justifyContent: "center",
@@ -163,6 +205,7 @@ class LessonPage extends Component {
 				description: {}
 			},
 			videoSrc: undefined,
+			isPlaying: false,
 			skillsText: "",
 			value: 0,
 			ingredientsArray: [],
@@ -181,6 +224,15 @@ class LessonPage extends Component {
 			if (this.state.chefsData.ingredients) {
 				this.getIngredients();
 			}
+
+			if (this.state.chefsData.dietary) {
+				this.getDietary();
+			}
+
+			if (this.state.chefsData.cuisine) {
+				this.getCuisine();
+			}
+
 		});
 	}
 
@@ -231,6 +283,26 @@ class LessonPage extends Component {
 		});
 	};
 
+	getCuisine = () => {
+		let data = this.state.chefsData.cuisine.arrayValue.values;
+
+		const cuisineString = data.map((lessonData, id) => this.firstLetterToCapital(lessonData.stringValue)).join(' | ');
+		this.setState({
+			cuisineText: cuisineString
+		});
+	};
+
+	getDietary = () => {
+		let data = this.state.chefsData.dietary.arrayValue.values;
+
+		const dietaryString = data.map((lessonData, id) => this.firstLetterToCapital(lessonData.stringValue)).join(' | ');
+		this.setState({
+			dietaryText: dietaryString
+		});
+	};
+
+
+
 	handleChange = (event, value) => {
 		this.setState({ value });
 	};
@@ -273,11 +345,22 @@ class LessonPage extends Component {
 		});
 	};
 
+	toggleVideo = () => {
+		this.setState({
+			isPlaying: ! this.state.isPlaying
+		});
+	};
+
+	addHideOnPlayClass = classes => {
+		return classes + (this.state.isPlaying ? ' hide_on_play' : '');
+	};
+
 	render() {
 		const { classes, theme } = this.props;
+		const { chefsData } = this.state
 		const videoJsOptions = {
 			autoplay: false,
-			controls: true,
+			controls: false,
 			sources: [
 				{
 					src: this.state.videoSrc
@@ -287,43 +370,23 @@ class LessonPage extends Component {
 		return (
 			<Box>
 				<Paper className={classes.container2}>
-					<div className={classes.video_container}>{this.state.videoSrc && <VideoPlayer {...videoJsOptions} classId={this.props.match.params.classId} lessonNum={this.props.match.params.lessonNum} />}</div>
+					<div className={classes.video_container}>
+						{this.state.videoSrc && <VideoPlayer {...videoJsOptions} isPlaying={this.state.isPlaying} classId={this.props.match.params.classId} lessonNum={this.props.match.params.lessonNum} />}
+						<div className={this.addHideOnPlayClass(classes.video_overlay)}
+								 onClick={this.toggleVideo}>
+								<div className={this.addHideOnPlayClass(classes.video_overlay_play)}>
+									<img src={PlayButton}/>
+								</div>
+							<div className={this.addHideOnPlayClass(classes.video_overlay_text)}>
+								<h1 className="Sub-h1">Lesson {this.props.match.params.lessonNum}</h1>
+								<h2>{this.state.chefsData.title.stringValue.toUpperCase()}</h2>
+							</div>
+						</div>
+					</div>
 				</Paper>
 				<div className={classes.lessonContentCon}>
-					<div className={classes.iconBox}>
-						<IconButton
-							aria-label="Close"
-							onClick={() => {
-								this.props.history.push({
-									pathname: `/class/${this.props.match.params.classId}/`,
-									state: this.props.match.params.lessonNum
-								});
-							}}
-						>
-							<BackIcon className={classes.backIcon} />
-						</IconButton>
-					</div>
-
-					{/* lessonInfo */}
-					<div className={classes.contentCon}>
-						<div className={classes.titleCon}>
-							<h3>{this.props.match.params.lessonNum}</h3>
-							<h1>{this.state.chefsData.title.stringValue.toUpperCase()}</h1>
-						</div>
-						<p className='body-text'>{this.state.chefsData.description.stringValue}</p>
-					</div>
-					<div className={classes.iconsCon}>
-						<div>
-							<WatchLaterIcon className={classes.icon} />
-							<p>
-								Hands-on: {this.state.handsonText} | Total: {this.state.TotalText}
-							</p>
-						</div>
-						<div>
-							<CheckIcon className={classes.icon} />
-							<p>{this.state.skillsText}</p>
-						</div>
-					</div>
+					<BackButton visible={!this.state.isPlaying}/>
+					<Header gradientBackground visible={!this.state.isPlaying}/>
 
 					{/* //tabs */}
 					<div>
@@ -333,14 +396,23 @@ class LessonPage extends Component {
 							indicatorColor="primary"
 							variant="fullWidth"
 							classes={{ root: classes.tabsRoot }}
+							variant="scrollable"
+							scrollButtons="auto"
 							style={{
 								position: "-webkit-sticky",
 								position: "sticky",
 								zIndex: 20,
-								top: "57vw",
+								top: "56vw",
 								backgroundColor: "#000"
 							}}
 						>
+							<Tab
+								classes={{
+									root: classes.tabRoot,
+									selected: classes.tabSelected
+								}}
+								label="OVERVIEW"
+							/>
 							{/* dynamic tabs */}
 							{this.state.chefsData.ingredients && (
 								<Tab
@@ -375,6 +447,37 @@ class LessonPage extends Component {
 							index={this.state.value}
 							onChangeIndex={this.handleChangeIndex}
 						>
+							<TabContainer dir={theme.direction}>
+								<Box>
+									<div className={classes.contentCon}>
+										<p className='body-text'>{this.state.chefsData.description.stringValue}</p>
+									</div>
+									<div className={classes.iconsCon}>
+										<div>
+											<h2 style={{ paddingRight: '1.2rem' }}>time</h2>
+											<p className='body-text'>
+												Hands-on: {this.state.handsonText} | Total: {this.state.TotalText}
+											</p>
+										</div>
+										<div>
+											<h2 style={{ paddingRight: '1.2rem' }}>skills</h2>
+											<p className='body-text'>{this.state.skillsText}</p>
+										</div>
+										{chefsData.cuisine &&
+											<div>
+												<h2 style={{ paddingRight: '1.2rem' }}>cuisine</h2>
+												<p className='body-text'>{this.state.cuisineText}</p>
+											</div>}
+
+										{chefsData.dietary &&
+											<div>
+												<h2 style={{ paddingRight: '1.2rem' }}>dietary</h2>
+												<p className='body-text'>{this.state.dietaryText}</p>
+											</div>}
+									</div>
+								</Box>
+							</TabContainer>
+
 							{this.state.chefsData.ingredients && (
 								<TabContainer dir={theme.direction}>
 									<Box className={classes.subTabsCon}>
