@@ -120,7 +120,7 @@ class AccountComponent extends Component {
                 {/* //list */}
                 <Box className={classes.listCon}>
                     <h1>Account</h1>
-                    <div className={classes.lstItem}>
+                    <div className={classes.lstItem} onClick={() => { this.props.history.push('/change-email') }}>
                         <h4 className='body-text'>Change account email</h4>
                     </div>
 
