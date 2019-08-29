@@ -14,6 +14,8 @@ export default class TrailerVideo extends React.Component {
     // instantiate Video.js
     this.player = videojs(this.videoNode, this.props, function onPlayerReady() {
     });
+
+    this.player.on('touchstart', this.playPauseVideo)
   }
 
   static getDerivedStateFromProps(props) {
@@ -32,6 +34,15 @@ export default class TrailerVideo extends React.Component {
     }
   }
 
+  playPauseVideo = () => {
+    if (this.player.paused()) {
+      this.player.play()
+    }
+    else {
+      this.player.pause()
+    }
+  }
+
   render() {
     if (this.player) {
       this.player.muted(this.props.muted || false)
@@ -45,7 +56,7 @@ export default class TrailerVideo extends React.Component {
         <video style={{
           height: '100%',
           width: '100%',
-          objectFit: 'fill'
+          objectFit: 'cover'
         }} ref={node => this.videoNode = node} poster={this.state.poster} className="video-js" ></video>
       </div>
     )

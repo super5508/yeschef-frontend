@@ -28,9 +28,6 @@ import ChangeEmail from './pages/ChangeEmail'
 const APP_ID = 'h6twy30k'
 
 const styles = theme => ({
-  buttomBarPadding: {
-    paddingBottom: '8rem'
-  },
 })
 
 const theme = createMuiTheme({
@@ -167,7 +164,6 @@ class App extends Component {
 
   render() {
     const { classes } = this.props;
-
     if (this.props.authStat.userProfile) {
 
       window.Intercom('update', {
@@ -180,14 +176,11 @@ class App extends Component {
       });
     }
     //const chefsData = this.state || {};
-    const pathname = window.location.pathname;
-    const isBottomBarVisible = pathname.slice(0, 6) !== "/class" && pathname.slice(0, 7) !== "/lesson" && pathname !== "/" && pathname !== "/change-password" && pathname !== "/reset-password" && pathname !== "/change-email";
-
     return (
       <BrowserRouter>
         <MuiThemeProvider theme={theme}>
           <CssBaseline />
-          <div className={isBottomBarVisible ? classes.buttomBarPadding : ""}>
+          <div>
             <Route path="/" render={(routerProps) => (<BetaRedirectTOLogin {...routerProps} />)}></Route>
 
             <Route exact path="/class/:classId/lesson/:lessonNum" render={(routeProps) => (<LessonPage {...routeProps} />)}></Route>
@@ -209,7 +202,7 @@ class App extends Component {
             <Route exact path="/account" component={AccountPage}></Route>
             <Route exact path="/lp/lp1" component={LPHomePage}></Route>
 
-            <BottomBar visible={isBottomBarVisible}> </BottomBar>
+            <BottomBar > </BottomBar>
           </div>
         </MuiThemeProvider>
       </BrowserRouter>
