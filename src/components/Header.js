@@ -82,6 +82,13 @@ class Header extends Component {
         });
     };
 
+    shouldComponentUpdate(nextProps, nextState, nextContext) {
+      if (nextProps.visible !== this.state.visible) {
+        this.setState({visible: nextProps.visible});
+      }
+      return true
+    }
+
     render() {
         const { classes } = this.props;
         let className = classes.header + " ";

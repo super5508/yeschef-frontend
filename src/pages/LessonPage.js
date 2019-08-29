@@ -12,6 +12,9 @@ import SwipeableViews from "react-swipeable-views";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import PropTypes from "prop-types";
+import PlayButton from "../assets/images/play-btn.svg";
+import Header from "../components/Header";
+import BackButton from "../components/BackButton";
 
 function TabContainer({ children, dir }) {
 	return (
@@ -30,6 +33,43 @@ const styles = theme => ({
 	video_container: {
 		position: "relative",
 		height: "57vw"
+	},
+	video_overlay: {
+		position: "absolute",
+		height: "100%",
+		width: "100%",
+		top: 0,
+		left: 0,
+		padding: "2.3rem",
+		paddingBottom: "1.6rem",
+		display: "flex",
+		transition: '0.6s',
+		backgroundColor: "rgba(27, 26, 26, 0.7)",
+		"& .Sub-h1": {
+			textTransform: "none",
+			marginBottom: "0.4rem"
+		},
+		"&.hide_on_play": {
+			backgroundColor: "transparent",
+		}
+	},
+	video_overlay_text: {
+		flex: 1,
+		alignSelf: 'flex-end',
+		transition: '0.6s',
+		"&.hide_on_play": {
+			opacity: 0
+		}
+	},
+	video_overlay_play: {
+		position: "absolute",
+		top: "50%",
+		left: "50%",
+		transform: "translate(-50%, -50%)",
+		transition: '0.6s',
+		"&.hide_on_play": {
+			opacity: 0
+		}
 	},
 	container2: {
 		position: "fixed",
@@ -165,6 +205,7 @@ class LessonPage extends Component {
 				description: {}
 			},
 			videoSrc: undefined,
+			isPlaying: false,
 			skillsText: "",
 			value: 0,
 			ingredientsArray: [],
@@ -304,12 +345,22 @@ class LessonPage extends Component {
 		});
 	};
 
+	toggleVideo = () => {
+		this.setState({
+			isPlaying: ! this.state.isPlaying
+		});
+	};
+
+	addHideOnPlayClass = classes => {
+		return classes + (this.state.isPlaying ? ' hide_on_play' : '');
+	};
+
 	render() {
 		const { classes, theme } = this.props;
 		const { chefsData } = this.state
 		const videoJsOptions = {
 			autoplay: false,
-			controls: true,
+			controls: false,
 			sources: [
 				{
 					src: this.state.videoSrc
@@ -319,22 +370,23 @@ class LessonPage extends Component {
 		return (
 			<Box>
 				<Paper className={classes.container2}>
-					<div className={classes.video_container}>{this.state.videoSrc && <VideoPlayer {...videoJsOptions} classId={this.props.match.params.classId} lessonNum={this.props.match.params.lessonNum} />}</div>
+					<div className={classes.video_container}>
+						{this.state.videoSrc && <VideoPlayer {...videoJsOptions} isPlaying={this.state.isPlaying} classId={this.props.match.params.classId} lessonNum={this.props.match.params.lessonNum} />}
+						<div className={this.addHideOnPlayClass(classes.video_overlay)}
+								 onClick={this.toggleVideo}>
+								<div className={this.addHideOnPlayClass(classes.video_overlay_play)}>
+									<img src={PlayButton}/>
+								</div>
+							<div className={this.addHideOnPlayClass(classes.video_overlay_text)}>
+								<h1 className="Sub-h1">Lesson {this.props.match.params.lessonNum}</h1>
+								<h2>{this.state.chefsData.title.stringValue.toUpperCase()}</h2>
+							</div>
+						</div>
+					</div>
 				</Paper>
 				<div className={classes.lessonContentCon}>
-					<div className={classes.iconBox}>
-						<IconButton
-							aria-label="Close"
-							onClick={() => {
-								this.props.history.push({
-									pathname: `/class/${this.props.match.params.classId}/`,
-									state: this.props.match.params.lessonNum
-								});
-							}}
-						>
-							<BackIcon className={classes.backIcon} />
-						</IconButton>
-					</div>
+					<BackButton visible={!this.state.isPlaying}/>
+					<Header gradientBackground visible={!this.state.isPlaying}/>
 
 					{/* //tabs */}
 					<div>
