@@ -27,7 +27,6 @@ export default class VideoPlayer extends React.Component {
 		var tmp = await this.getLastRecordedTime();
 		const time = tmp || 0;
 		if (time) {
-			console.log("update player to second: " + time);
 			this.player.currentTime(time);
 		}
 		this.lastRecordedTime = time;
