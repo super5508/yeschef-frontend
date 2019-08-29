@@ -94,7 +94,6 @@ class LPHomePage extends Component {
             }
         }
         const { classes } = this.props;
-        console.log(this.state.chefsDataArray)
         return (
             <Box >
                 <Header gradientBackground />
