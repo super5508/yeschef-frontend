@@ -84,6 +84,11 @@ const styles = theme => ({
 			fontSize: "1.6rem",
 			fontWeight: 300,
 			margin: 0
+		},
+
+		"& p": {
+			marginTop: '2.4rem',
+			marginBottom: '2.4rem'
 		}
 	},
 	icon: {
@@ -93,13 +98,10 @@ const styles = theme => ({
 	iconsCon: {
 		marginTop: "1.5rem",
 		marginBottom: "0.8rem",
-		padding: "1.2rem 2.3rem 0.2rem 2.3rem",
-		borderTop: "0.2px solid rgba(255, 255, 255, 0.7)",
-		borderBottom: "0.2px solid rgba(255, 255, 255, 0.7)",
+		padding: "2.2rem 2.3rem 0.2rem 2.3rem",
+		borderTop: "0.3px solid rgba(255, 255, 255, 0.7)",
 
 		"& p": {
-			fontSize: "1.4rem",
-			fontWeight: 300,
 			margin: 0,
 			display: "flex",
 			justifyContent: "center",
@@ -181,6 +183,15 @@ class LessonPage extends Component {
 			if (this.state.chefsData.ingredients) {
 				this.getIngredients();
 			}
+
+			if (this.state.chefsData.dietary) {
+				this.getDietary();
+			}
+
+			if (this.state.chefsData.cuisine) {
+				this.getCuisine();
+			}
+
 		});
 	}
 
@@ -231,6 +242,26 @@ class LessonPage extends Component {
 		});
 	};
 
+	getCuisine = () => {
+		let data = this.state.chefsData.cuisine.arrayValue.values;
+
+		const cuisineString = data.map((lessonData, id) => this.firstLetterToCapital(lessonData.stringValue)).join(' | ');
+		this.setState({
+			cuisineText: cuisineString
+		});
+	};
+
+	getDietary = () => {
+		let data = this.state.chefsData.dietary.arrayValue.values;
+
+		const dietaryString = data.map((lessonData, id) => this.firstLetterToCapital(lessonData.stringValue)).join(' | ');
+		this.setState({
+			dietaryText: dietaryString
+		});
+	};
+
+
+
 	handleChange = (event, value) => {
 		this.setState({ value });
 	};
@@ -275,6 +306,7 @@ class LessonPage extends Component {
 
 	render() {
 		const { classes, theme } = this.props;
+		const { chefsData } = this.state
 		const videoJsOptions = {
 			autoplay: false,
 			controls: true,
@@ -304,27 +336,6 @@ class LessonPage extends Component {
 						</IconButton>
 					</div>
 
-					{/* lessonInfo */}
-					<div className={classes.contentCon}>
-						<div className={classes.titleCon}>
-							<h3>{this.props.match.params.lessonNum}</h3>
-							<h1>{this.state.chefsData.title.stringValue.toUpperCase()}</h1>
-						</div>
-						<p className='body-text'>{this.state.chefsData.description.stringValue}</p>
-					</div>
-					<div className={classes.iconsCon}>
-						<div>
-							<WatchLaterIcon className={classes.icon} />
-							<p>
-								Hands-on: {this.state.handsonText} | Total: {this.state.TotalText}
-							</p>
-						</div>
-						<div>
-							<CheckIcon className={classes.icon} />
-							<p>{this.state.skillsText}</p>
-						</div>
-					</div>
-
 					{/* //tabs */}
 					<div>
 						<Tabs
@@ -333,14 +344,23 @@ class LessonPage extends Component {
 							indicatorColor="primary"
 							variant="fullWidth"
 							classes={{ root: classes.tabsRoot }}
+							variant="scrollable"
+							scrollButtons="auto"
 							style={{
 								position: "-webkit-sticky",
 								position: "sticky",
 								zIndex: 20,
-								top: "57vw",
+								top: "56vw",
 								backgroundColor: "#000"
 							}}
 						>
+							<Tab
+								classes={{
+									root: classes.tabRoot,
+									selected: classes.tabSelected
+								}}
+								label="OVERVIEW"
+							/>
 							{/* dynamic tabs */}
 							{this.state.chefsData.ingredients && (
 								<Tab
@@ -375,6 +395,37 @@ class LessonPage extends Component {
 							index={this.state.value}
 							onChangeIndex={this.handleChangeIndex}
 						>
+							<TabContainer dir={theme.direction}>
+								<Box>
+									<div className={classes.contentCon}>
+										<p className='body-text'>{this.state.chefsData.description.stringValue}</p>
+									</div>
+									<div className={classes.iconsCon}>
+										<div>
+											<h2 style={{ paddingRight: '1.2rem' }}>time</h2>
+											<p className='body-text'>
+												Hands-on: {this.state.handsonText} | Total: {this.state.TotalText}
+											</p>
+										</div>
+										<div>
+											<h2 style={{ paddingRight: '1.2rem' }}>skills</h2>
+											<p className='body-text'>{this.state.skillsText}</p>
+										</div>
+										{chefsData.cuisine &&
+											<div>
+												<h2 style={{ paddingRight: '1.2rem' }}>cuisine</h2>
+												<p className='body-text'>{this.state.cuisineText}</p>
+											</div>}
+
+										{chefsData.dietary &&
+											<div>
+												<h2 style={{ paddingRight: '1.2rem' }}>dietary</h2>
+												<p className='body-text'>{this.state.dietaryText}</p>
+											</div>}
+									</div>
+								</Box>
+							</TabContainer>
+
 							{this.state.chefsData.ingredients && (
 								<TabContainer dir={theme.direction}>
 									<Box className={classes.subTabsCon}>
