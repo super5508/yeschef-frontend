@@ -26,9 +26,10 @@ export default class VideoPlayer extends React.Component {
 		this.ycDB = event.target.result;
 		var tmp = await this.getLastRecordedTime();
 		const time = tmp || 0;
-		/* this.setState({
-			initTime: time
-		}); */ //Commented out to prevent fixation of video player on specific time during pause on LessonPage
+		if (time) {
+			console.log("update player to second: " + time);
+			this.player.currentTime(time);
+		}
 		this.lastRecordedTime = time;
 	}
 
@@ -106,10 +107,6 @@ export default class VideoPlayer extends React.Component {
 	}
 
 	render() {
-		if (this.state.initTime) {
-			console.log("update player to second: " + this.state.initTime);
-			this.player.currentTime(this.state.initTime);
-		}
 		return (
 			<div data-vjs-player className="vjs-big-play-centered" style={{
 				width: "100%",
