@@ -57,36 +57,15 @@ class Header extends Component {
         super(props);
 
         this.state = {
-            prevScrollpos: window.pageYOffset,
             visible: true
         };
     }
 
-    componentDidMount() {
-        window.addEventListener("scroll", this.handleScroll);
-    }
-
-    componentWillUnmount() {
-        window.removeEventListener("scroll", this.handleScroll);
-    }
-
-    handleScroll = () => {
-        const { prevScrollpos } = this.state;
-
-        const currentScrollPos = window.pageYOffset;
-        const visible = prevScrollpos > currentScrollPos;
-
-        this.setState({
-            prevScrollpos: currentScrollPos,
-            visible
-        });
-    };
-
     shouldComponentUpdate(nextProps, nextState, nextContext) {
-      if (nextProps.visible !== this.state.visible) {
-        this.setState({visible: nextProps.visible});
-      }
-      return true
+        if (typeof nextProps.visible !== 'undefined' && nextProps.visible !== this.state.visible) {
+            this.setState({visible: nextProps.visible});
+        }
+        return true;
     }
 
     render() {

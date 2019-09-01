@@ -108,6 +108,23 @@ const styles = theme => ({
 		display: "flex",
 		justifyContent: "center"
 	},
+	fixedBtncon: {
+		position: 'fixed',
+		left: 0,
+		width: 'calc(100% - 4.8rem)',
+		marginTop: 0,
+		background: 'black',
+		zIndex: 1000,
+		paddingBottom: '0.8rem',
+		marginBottom: 0
+	},
+	fixedTabsRoot: {
+		position: 'fixed',
+		left: 0,
+		width: '100%',
+		background: 'black',
+		zIndex: 1000
+	}
 });
 class ChefHomePage extends Component {
 	constructor(props, context) {
@@ -125,7 +142,16 @@ class ChefHomePage extends Component {
 			comingSoonLessons: [],
 			lessons: [],
 			value: 0,
+			fixedHeading: false,
+			tabsRootTop: 0,
+			btnconTop: 0,
+			tabsMarginTop: 0,
 		};
+
+		this.btncon = React.createRef();
+		this.tabsRoot = React.createRef();
+		this.tabContainer = React.createRef();
+
 		const classId = this.props.match.params.id;
 		indexeddbTools.getYCIndexedDB((event) => {
 			const ycDB = event.target.result;
@@ -157,7 +183,12 @@ class ChefHomePage extends Component {
 	}
 
 	componentDidMount() {
-		window.scrollTo(0, 0)
+		window.scrollTo(0, 0);
+		window.addEventListener("scroll", this.handleScroll);
+	}
+
+	componentWillUnmount() {
+		window.removeEventListener("scroll", this.handleScroll);
 	}
 
 	handleChange = (event, value) => {
@@ -166,6 +197,20 @@ class ChefHomePage extends Component {
 
 	handleChangeIndex = index => {
 		this.setState({ value: index });
+	};
+
+	handleScroll = () => {
+    const fixedHeading = window.pageYOffset > window.innerWidth - 100;
+    if (fixedHeading !== this.state.fixedHeading) {
+    	const state = {
+				fixedHeading,
+				tabsRootTop: this.tabsRoot.current.offsetTop - this.btncon.current.offsetTop
+										 + this.btncon.current.offsetHeight + 67,
+				btnconTop: 100,
+				tabsMarginTop: this.tabsRoot.current.offsetTop + this.tabsRoot.current.offsetHeight,
+			};
+			this.setState(state);
+		}
 	};
 
 	scrollToLesson = () => {
@@ -185,18 +230,22 @@ class ChefHomePage extends Component {
 
 		return (
 			<div>
-				<Header gradientBackground />
-				<ClassInfo {...this.state.chefsData} showTrailer={true} noLinkTag fixed />
+				<Header gradientBackground={!this.state.fixedHeading} />
+				<ClassInfo {...this.state.chefsData} showTrailer={true} noLinkTag fixed fixScroll={this.state.fixedHeading}/>
 				{/* //left arrow button */}
 				<BackButton />
 
 				{/* //'start the class' button  */}
-				<Box className={classes.btncon}>
+				<Box
+						className={classes.btncon + ' ' + (this.state.fixedHeading ? classes.fixedBtncon : '')}
+						style={this.state.fixedHeading ? {top: this.state.btnconTop} : {}}
+				>
 					<Link to={this.state.continueWatching ? "lesson/" + this.state.continueWatching : "lesson/1"} style={{ textDecoration: "none" }}>
 						<Button
 							variant="contained"
 							className={classes.startBtn}
 							color="primary"
+							ref={this.btncon}
 						// onClick={#}
 						>
 							{this.state.continueWatching ? "CONTINUE WATCHING" : "START THE CLASS"}
@@ -209,7 +258,9 @@ class ChefHomePage extends Component {
 						onChange={this.handleChange}
 						indicatorColor="primary"
 						variant="fullWidth"
-						classes={{ root: classes.tabsRoot }}
+						classes={{ root: classes.tabsRoot + ' ' + (this.state.fixedHeading ? classes.fixedTabsRoot : '') }}
+						style={this.state.fixedHeading ? {top: this.state.tabsRootTop} : {}}
+						ref={this.tabsRoot}
 					>
 						<Tab
 							classes={{
@@ -232,6 +283,7 @@ class ChefHomePage extends Component {
 						axis={theme.direction === "rtl" ? "x-reverse" : "x"}
 						index={this.state.value}
 						onChangeIndex={this.handleChangeIndex}
+						style={this.state.fixedHeading ? {marginTop: this.state.tabsMarginTop} : {}}
 					>
 						<TabContainer dir={theme.direction}>
 							{/* //class tab */}
