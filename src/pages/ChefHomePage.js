@@ -111,12 +111,12 @@ const styles = theme => ({
 	fixedBtncon: {
 		position: 'fixed',
 		left: 0,
-		width: 'calc(100% - 4.8rem)',
+		width: '100%',
 		marginTop: 0,
 		background: 'black',
 		zIndex: 1000,
-		paddingBottom: '0.8rem',
-		marginBottom: 0
+		padding: '2.4rem',
+		margin: 0
 	},
 	fixedTabsRoot: {
 		position: 'fixed',
@@ -143,14 +143,21 @@ class ChefHomePage extends Component {
 			lessons: [],
 			value: 0,
 			fixedHeading: false,
-			tabsRootTop: 0,
-			btnconTop: 0,
-			tabsMarginTop: 0,
+			fixedPositions: {
+				tabsRootTop: 0,
+				btnconTop: 0,
+				tabsMarginTop: 0,
+			}
 		};
 
-		this.btncon = React.createRef();
-		this.tabsRoot = React.createRef();
-		this.tabContainer = React.createRef();
+		this.scrollElementsRefs = {
+			header: React.createRef(),
+			classTitle: React.createRef(),
+			btncon: React.createRef(),
+			tabsRoot: React.createRef(),
+		};
+
+		this.forwardRefs = this.forwardRefs.bind(this);
 
 		const classId = this.props.match.params.id;
 		indexeddbTools.getYCIndexedDB((event) => {
@@ -184,11 +191,14 @@ class ChefHomePage extends Component {
 
 	componentDidMount() {
 		window.scrollTo(0, 0);
+		this.setFixedHeaderAt();
 		window.addEventListener("scroll", this.handleScroll);
+		window.addEventListener("resize", this.setFixedHeaderAt);
 	}
 
 	componentWillUnmount() {
 		window.removeEventListener("scroll", this.handleScroll);
+		window.removeEventListener("resize", this.setFixedHeaderAt);
 	}
 
 	handleChange = (event, value) => {
@@ -200,17 +210,46 @@ class ChefHomePage extends Component {
 	};
 
 	handleScroll = () => {
-    const fixedHeading = window.pageYOffset > window.innerWidth - 100;
+    const fixedHeading = window.pageYOffset > this.fixedHeaderAt;
     if (fixedHeading !== this.state.fixedHeading) {
-    	const state = {
-				fixedHeading,
-				tabsRootTop: this.tabsRoot.current.offsetTop - this.btncon.current.offsetTop
-										 + this.btncon.current.offsetHeight + 67,
-				btnconTop: 100,
-				tabsMarginTop: this.tabsRoot.current.offsetTop + this.tabsRoot.current.offsetHeight,
-			};
-			this.setState(state);
+    	if (fixedHeading) {
+    		const rem = this.getRem();
+				const headerHeight = this.scrollElementsRefs.header.current.offsetHeight;
+				const classTitleHeight = this.scrollElementsRefs.classTitle.current.offsetHeight;
+				const tabRootsTop = this.scrollElementsRefs.tabsRoot.current.offsetTop;
+				const tabRootsHeight = this.scrollElementsRefs.tabsRoot.current.offsetHeight;
+				const btnconTop = this.scrollElementsRefs.btncon.current.offsetTop;
+				this.setState({
+					fixedHeading,
+					fixedPositions: {
+						tabsRootTop: headerHeight + classTitleHeight + (tabRootsTop - btnconTop) + 0.6 * rem,
+						btnconTop: headerHeight + classTitleHeight - 1.8 * rem,
+						tabsMarginTop: tabRootsTop + tabRootsHeight,
+					},
+				});
+			} else {
+				this.setState({
+					fixedHeading
+				});
+			}
+
 		}
+	};
+
+	forwardRefs = refs => {
+		this.scrollElementsRefs = {...this.scrollElementsRefs, ...refs}
+	};
+
+	getRem = () => {
+		return parseFloat(getComputedStyle(document.documentElement).fontSize);
+	};
+
+	setFixedHeaderAt = () => {
+		this.fixedHeaderAt = window.innerWidth - this.scrollElementsRefs.classTitle.current.offsetHeight
+				- this.scrollElementsRefs.header.current.offsetTop
+				- this.scrollElementsRefs.header.current.offsetHeight
+				- 0.6 * this.getRem();
+		console.log(this.fixedHeaderAt);
 	};
 
 	scrollToLesson = () => {
@@ -230,22 +269,22 @@ class ChefHomePage extends Component {
 
 		return (
 			<div>
-				<Header gradientBackground={!this.state.fixedHeading} />
-				<ClassInfo {...this.state.chefsData} showTrailer={true} noLinkTag fixed fixScroll={this.state.fixedHeading}/>
+				<Header gradientBackground={!this.state.fixedHeading} forwardRefs={this.forwardRefs}/>
+				<ClassInfo {...this.state.chefsData} showTrailer={true} noLinkTag fixed fixScroll={this.state.fixedHeading} forwardRefs={this.forwardRefs}/>
 				{/* //left arrow button */}
 				<BackButton />
 
 				{/* //'start the class' button  */}
 				<Box
-						className={classes.btncon + ' ' + (this.state.fixedHeading ? classes.fixedBtncon : '')}
-						style={this.state.fixedHeading ? {top: this.state.btnconTop} : {}}
+						className={classes.btncon + ' ' + (this.state.fixedHeading && classes.fixedBtncon)}
+						style={this.state.fixedHeading ? {top: this.state.fixedPositions.btnconTop} : {}}
 				>
 					<Link to={this.state.continueWatching ? "lesson/" + this.state.continueWatching : "lesson/1"} style={{ textDecoration: "none" }}>
 						<Button
 							variant="contained"
 							className={classes.startBtn}
 							color="primary"
-							ref={this.btncon}
+							ref={this.scrollElementsRefs.btncon}
 						// onClick={#}
 						>
 							{this.state.continueWatching ? "CONTINUE WATCHING" : "START THE CLASS"}
@@ -259,8 +298,8 @@ class ChefHomePage extends Component {
 						indicatorColor="primary"
 						variant="fullWidth"
 						classes={{ root: classes.tabsRoot + ' ' + (this.state.fixedHeading ? classes.fixedTabsRoot : '') }}
-						style={this.state.fixedHeading ? {top: this.state.tabsRootTop} : {}}
-						ref={this.tabsRoot}
+						style={this.state.fixedHeading ? {top: this.state.fixedPositions.tabsRootTop} : {}}
+						ref={this.scrollElementsRefs.tabsRoot}
 					>
 						<Tab
 							classes={{
@@ -283,7 +322,7 @@ class ChefHomePage extends Component {
 						axis={theme.direction === "rtl" ? "x-reverse" : "x"}
 						index={this.state.value}
 						onChangeIndex={this.handleChangeIndex}
-						style={this.state.fixedHeading ? {marginTop: this.state.tabsMarginTop} : {}}
+						style={this.state.fixedHeading ? {marginTop: this.state.fixedPositions.tabsMarginTop} : {}}
 					>
 						<TabContainer dir={theme.direction}>
 							{/* //class tab */}

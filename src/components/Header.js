@@ -59,6 +59,10 @@ class Header extends Component {
         this.state = {
             visible: true
         };
+
+        this.scrollElementRefs = {
+            header:  React.createRef(),
+        }
     }
 
     shouldComponentUpdate(nextProps, nextState, nextContext) {
@@ -66,6 +70,12 @@ class Header extends Component {
             this.setState({visible: nextProps.visible});
         }
         return true;
+    }
+
+    componentDidMount() {
+        if (this.props.forwardRefs) {
+            this.props.forwardRefs(this.scrollElementRefs);
+        }
     }
 
     render() {
@@ -77,7 +87,7 @@ class Header extends Component {
             className += classes.hiddenHeader;
         }
         return (
-            <Paper className={className}>
+            <Paper className={className} ref={this.scrollElementRefs.header}>
                 <Link className={classes.link} to="/home">
                     <span className={classes.yesWord}>yes</span><span className={classes.chefWord}>Chef</span>
                 </Link>

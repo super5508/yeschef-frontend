@@ -39,6 +39,7 @@ class BackButton extends React.Component {
             this.setState({visible: nextProps.visible});
             return true;
         }
+        return false;
     }
 
     render() {
