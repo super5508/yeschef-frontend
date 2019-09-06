@@ -1,13 +1,10 @@
+/* eslint-disable react/jsx-no-duplicate-props */
 import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import Axios from "../common/AxiosMiddleware";
 import Box from "@material-ui/core/Box";
-import BackIcon from "@material-ui/icons/ArrowBackIosRounded";
-import IconButton from "@material-ui/core/IconButton";
 import VideoPlayer from "../components/VideoPlayer";
 import { Paper } from "@material-ui/core";
-import WatchLaterIcon from "@material-ui/icons/WatchLaterRounded";
-import CheckIcon from "@material-ui/icons/CheckCircleRounded";
 import SwipeableViews from "react-swipeable-views";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
@@ -15,6 +12,8 @@ import PropTypes from "prop-types";
 import PlayButton from "../assets/images/play-btn.svg";
 import Header from "../components/Header";
 import BackButton from "../components/BackButton";
+import SupplyInfo from '../components/Supplies';
+
 
 function TabContainer({ children, dir }) {
 	return (
@@ -167,7 +166,7 @@ const styles = theme => ({
 	},
 	tabSelected: {},
 	subTabsCon: {
-		margin: "0rem 2.3rem",
+		margin: "2.3rem 2.3rem",
 		"& h4": {
 			fontSize: "1.6rem",
 			fontWeight: 600,
@@ -179,15 +178,13 @@ const styles = theme => ({
 			fontSize: "1.6rem",
 			fontWeight: 300,
 			padding: 0,
-			margin: "0rem 0rem 0rem 1.6rem"
 		},
 		"& li": {
 			marginTop: "0.5rem"
+		},
+		wrapper: {
+			padding: 16
 		}
-	},
-	gearul: {
-		margin: "2rem 0rem 0rem 1rem !important"
-
 	}
 });
 
@@ -264,13 +261,17 @@ class LessonPage extends Component {
 		});
 	};
 
+	firstLetterToCapital = str => {
+		return str.replace(/\w\S*/g, function (txt) {
+			return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+		});
+	};
+
 	getIngredients = () => {
 		//sorting ingredients
 		let ingredients = this.state.chefsData.ingredients.mapValue.fields;
 		let ingredientsArray = [];
-		Object.keys(ingredients).map((value, index) => {
-			ingredientsArray.push(value);
-		});
+		Object.keys(ingredients).map((value, index) => ingredientsArray.push(value));
 		this.setState({ ingredientsArray: ingredientsArray });
 	};
 
@@ -301,53 +302,13 @@ class LessonPage extends Component {
 		});
 	};
 
-
-
 	handleChange = (event, value) => {
 		this.setState({ value });
 	};
 
-	decimalToFraction = amount => {
-		// This is a whole number and doesn't need modification.
-		if (parseFloat(amount) === parseInt(amount)) {
-			return amount;
-		}
-		// Next 12 lines are cribbed from https://stackoverflow.com/a/23575406.
-		var gcd = function (a, b) {
-			if (b < 0.0000001) {
-				return a;
-			}
-			return gcd(b, Math.floor(a % b));
-		};
-		var len = amount.toString().length - 2;
-		var denominator = Math.pow(10, len);
-		var numerator = amount * denominator;
-		var divisor = gcd(numerator, denominator);
-		numerator /= divisor;
-		denominator /= divisor;
-		var base = 0;
-		// In a scenario like 3/2, convert to 1 1/2
-		// by pulling out the base number and reducing the numerator.
-		if (numerator > denominator) {
-			base = Math.floor(numerator / denominator);
-			numerator -= base * denominator;
-		}
-		amount = Math.floor(numerator) + "/" + Math.floor(denominator);
-		if (base) {
-			amount = base + " " + amount;
-		}
-		return amount;
-	};
-
-	firstLetterToCapital = str => {
-		return str.replace(/\w\S*/g, function (txt) {
-			return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-		});
-	};
-
 	toggleVideo = () => {
 		this.setState({
-			isPlaying: ! this.state.isPlaying
+			isPlaying: !this.state.isPlaying
 		});
 	};
 
@@ -373,10 +334,10 @@ class LessonPage extends Component {
 					<div className={classes.video_container}>
 						{this.state.videoSrc && <VideoPlayer {...videoJsOptions} isPlaying={this.state.isPlaying} classId={this.props.match.params.classId} lessonNum={this.props.match.params.lessonNum} />}
 						<div className={this.addHideOnPlayClass(classes.video_overlay)}
-								 onClick={this.toggleVideo}>
-								<div className={this.addHideOnPlayClass(classes.video_overlay_play)}>
-									<img src={PlayButton}/>
-								</div>
+							onClick={this.toggleVideo}>
+							<div className={this.addHideOnPlayClass(classes.video_overlay_play)}>
+								<img src={PlayButton} lat="playbutton" alt="img-product" />
+							</div>
 							<div className={this.addHideOnPlayClass(classes.video_overlay_text)}>
 								<h1 className="Sub-h1">Lesson {this.props.match.params.lessonNum}</h1>
 								<h2>{this.state.chefsData.title.stringValue.toUpperCase()}</h2>
@@ -385,8 +346,8 @@ class LessonPage extends Component {
 					</div>
 				</Paper>
 				<div className={classes.lessonContentCon}>
-					<BackButton visible={!this.state.isPlaying}/>
-					<Header gradientBackground visible={!this.state.isPlaying}/>
+					<BackButton visible={!this.state.isPlaying} />
+					<Header gradientBackground visible={!this.state.isPlaying} />
 
 					{/* //tabs */}
 					<div>
@@ -399,7 +360,6 @@ class LessonPage extends Component {
 							variant="scrollable"
 							scrollButtons="auto"
 							style={{
-								position: "-webkit-sticky",
 								position: "sticky",
 								zIndex: 20,
 								top: "56vw",
@@ -414,22 +374,13 @@ class LessonPage extends Component {
 								label="OVERVIEW"
 							/>
 							{/* dynamic tabs */}
-							{this.state.chefsData.ingredients && (
+							{(this.state.chefsData.ingredients || this.state.chefsData.gear) && (
 								<Tab
 									classes={{
 										root: classes.tabRoot,
 										selected: classes.tabSelected
 									}}
-									label="INGREDIENTS"
-								/>
-							)}
-							{this.state.chefsData.gear && (
-								<Tab
-									classes={{
-										root: classes.tabRoot,
-										selected: classes.tabSelected
-									}}
-									label="GEAR"
+									label="SUPPLIES"
 								/>
 							)}
 							{this.state.chefsData.shorthand && (
@@ -478,96 +429,24 @@ class LessonPage extends Component {
 								</Box>
 							</TabContainer>
 
-							{this.state.chefsData.ingredients && (
+							{(this.state.chefsData.ingredients || this.state.chefsData.gears) && (
 								<TabContainer dir={theme.direction}>
 									<Box className={classes.subTabsCon}>
 										{this.state.ingredientsArray.map((head, id) => {
 											return (
-												<div key={`${head}-${id}`}>
-													<h4>{head.toUpperCase()}</h4>
-													<div>
-														{
-															Object.keys(this.state.chefsData.ingredients.mapValue.fields[head].mapValue.fields).map(
-																(value, index) => {
-																	let comment = "";
-																	if (
-																		this.state.chefsData.ingredients.mapValue.fields[head].mapValue.fields[value]
-																			.mapValue.fields.comment
-																	) {
-																		comment = this.state.chefsData.ingredients.mapValue.fields[head].mapValue.fields[
-																			value
-																		].mapValue.fields.comment.stringValue;
-																		comment = "- " + comment;
-																	}
-
-																	let unit = "";
-																	if (
-																		this.state.chefsData.ingredients.mapValue.fields[head].mapValue.fields[value]
-																			.mapValue.fields.unit
-																	) {
-																		unit = this.state.chefsData.ingredients.mapValue.fields[head].mapValue.fields[
-																			value
-																		].mapValue.fields.unit.stringValue;
-																	}
-
-																	let quantity = "";
-																	if (
-																		this.state.chefsData.ingredients.mapValue.fields[head].mapValue.fields[value]
-																			.mapValue.fields.quantity
-																	) {
-																		quantity = Object.values(
-																			this.state.chefsData.ingredients.mapValue.fields[head].mapValue.fields[value]
-																				.mapValue.fields.quantity
-																		)[0];
-																	}
-
-																	return (
-																		<ul key={value}>
-																			<li key={`li${value}-${index}`}>
-																				<span
-																					style={{
-																						color: "#ffffff"
-																					}}
-																				>
-																					{this.decimalToFraction(quantity)} {unit} {value} {comment}
-																				</span>
-																			</li>
-																		</ul>
-																	);
-																}
-															)}
-													</div>
-												</div>
+												<SupplyInfo
+													key={id}
+													head={head}
+													id={id}
+													ingredients={this.state.chefsData.ingredients}
+													gears={this.state.chefsData.gear}
+												/>
 											);
 										})}
 									</Box>
 								</TabContainer>
 							)}
-							{this.state.chefsData.gear && (
-								<TabContainer dir={theme.direction}>
-									<Box className={classes.subTabsCon}>
-										<ul className={classes.gearul}>
-											{
-												Object.keys(this.state.chefsData.gear.mapValue.fields).map(
-													(data, index) => {
-														return (
 
-															<li key={`ligear-${index}`} >
-																<span
-																	style={{
-																		color: "#ffffff"
-																	}}
-																>
-																	{this.firstLetterToCapital(data)}																				</span>
-															</li>
-														)
-													}
-												)
-											}
-										</ul>
-									</Box>
-								</TabContainer>
-							)}
 							{this.state.chefsData.shorthand && (
 								<TabContainer dir={theme.direction}>
 									<Box />
