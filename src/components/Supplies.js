@@ -8,12 +8,14 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 const ExpansionPanel = withStyles({
   root: {
-    border: '1px solid rgba(0, 0, 0, .125)',
     boxShadow: 'none',
-    marginBottom: '16px'
+    marginBottom: '2.3rem',
+    '&:before': {
+      display: 'none',
+    },
   },
   expanded: {
-    marginBottom: '16px'
+    marginBottom: '2.3rem'
   },
 })(MuiExpansionPanel);
 
@@ -39,12 +41,12 @@ const ExpansionPanelDetails = withStyles({
     backgroundColor: '#1E1E1E',
     borderBottomLeftRadius: 6,
     borderBottomRightRadius: 6,
-    marginBottom: '16px',
+    marginBottom: '2.3rem',
     display: 'flex',
     flexDirection: 'column'
   },
   expanded: {
-    marginBottom: '16px'
+    marginBottom: '2.3rem'
   }
 })(MuiExpansionPanelDetails);
 
@@ -190,6 +192,7 @@ class SupplyInfo extends Component {
               {
                 Object.keys(gears.mapValue.fields).map(
                   (data, index) => {
+                    console.log(gears);
                     return (
                       <li key={`ligear-${index}`} >
                         <span style={detailStyle}>
