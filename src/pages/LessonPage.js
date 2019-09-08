@@ -15,6 +15,7 @@ import PropTypes from "prop-types";
 import PlayButton from "../assets/images/play-btn.svg";
 import Header from "../components/Header";
 import BackButton from "../components/BackButton";
+import ShortHandDesc from '../components/ShortHandDesc';
 
 function TabContainer({ children, dir }) {
 	return (
@@ -347,7 +348,7 @@ class LessonPage extends Component {
 
 	toggleVideo = () => {
 		this.setState({
-			isPlaying: ! this.state.isPlaying
+			isPlaying: !this.state.isPlaying
 		});
 	};
 
@@ -373,10 +374,10 @@ class LessonPage extends Component {
 					<div className={classes.video_container}>
 						{this.state.videoSrc && <VideoPlayer {...videoJsOptions} isPlaying={this.state.isPlaying} classId={this.props.match.params.classId} lessonNum={this.props.match.params.lessonNum} />}
 						<div className={this.addHideOnPlayClass(classes.video_overlay)}
-								 onClick={this.toggleVideo}>
-								<div className={this.addHideOnPlayClass(classes.video_overlay_play)}>
-									<img src={PlayButton}/>
-								</div>
+							onClick={this.toggleVideo}>
+							<div className={this.addHideOnPlayClass(classes.video_overlay_play)}>
+								<img src={PlayButton} />
+							</div>
 							<div className={this.addHideOnPlayClass(classes.video_overlay_text)}>
 								<h1 className="Sub-h1">Lesson {this.props.match.params.lessonNum}</h1>
 								<h2>{this.state.chefsData.title.stringValue.toUpperCase()}</h2>
@@ -385,8 +386,8 @@ class LessonPage extends Component {
 					</div>
 				</Paper>
 				<div className={classes.lessonContentCon}>
-					<BackButton visible={!this.state.isPlaying}/>
-					<Header gradientBackground visible={!this.state.isPlaying}/>
+					<BackButton visible={!this.state.isPlaying} />
+					<Header gradientBackground visible={!this.state.isPlaying} />
 
 					{/* //tabs */}
 					<div>
@@ -570,7 +571,20 @@ class LessonPage extends Component {
 							)}
 							{this.state.chefsData.shorthand && (
 								<TabContainer dir={theme.direction}>
-									<Box />
+									<Box>
+										{
+											Object.keys(this.state.chefsData.shorthand.mapValue.fields).map(
+												(head, index) => {
+													return (
+														<ShortHandDesc
+															key={index}
+															head={head}
+															shorthand={this.state.chefsData.shorthand}
+														/>
+													)
+												})
+										}
+									</Box>
 								</TabContainer>
 							)}
 						</SwipeableViews>
