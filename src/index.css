@@ -185,6 +185,24 @@ ul li::before {
   vertical-align: middle;
 }
 
+.numbering {
+  counter-reset: item;
+  list-style: none;
+  padding-left: 10px;
+}
+.numbering li {
+  counter-increment: item;
+  position: relative;
+}
+.numbering li::before {
+  position: absolute;
+  left: -1.8rem;
+  content: counter(item) ".";
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+}
+
 .h2-light {
   font-weight: 300;
 }

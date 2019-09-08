@@ -2,12 +2,8 @@ import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import Axios from "../common/AxiosMiddleware";
 import Box from "@material-ui/core/Box";
-import BackIcon from "@material-ui/icons/ArrowBackIosRounded";
-import IconButton from "@material-ui/core/IconButton";
 import VideoPlayer from "../components/VideoPlayer";
 import { Paper } from "@material-ui/core";
-import WatchLaterIcon from "@material-ui/icons/WatchLaterRounded";
-import CheckIcon from "@material-ui/icons/CheckCircleRounded";
 import SwipeableViews from "react-swipeable-views";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
@@ -571,7 +567,7 @@ class LessonPage extends Component {
 							)}
 							{this.state.chefsData.shorthand && (
 								<TabContainer dir={theme.direction}>
-									<Box>
+									<Box className={classes.subTabsCon}>
 										{
 											Object.keys(this.state.chefsData.shorthand.mapValue.fields).map(
 												(head, index) => {
