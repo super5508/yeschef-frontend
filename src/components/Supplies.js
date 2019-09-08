@@ -192,7 +192,6 @@ class SupplyInfo extends Component {
               {
                 Object.keys(gears.mapValue.fields).map(
                   (data, index) => {
-                    console.log(gears);
                     return (
                       <li key={`ligear-${index}`} >
                         <span style={detailStyle}>
