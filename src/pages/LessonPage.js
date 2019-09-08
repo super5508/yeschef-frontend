@@ -429,7 +429,7 @@ class LessonPage extends Component {
 								</Box>
 							</TabContainer>
 
-							{(this.state.chefsData.ingredients || this.state.chefsData.gears) && (
+							{(this.state.chefsData.ingredients || this.state.chefsData.gear) && (
 								<TabContainer dir={theme.direction}>
 									<Box className={classes.subTabsCon}>
 										{this.state.ingredientsArray.map((head, id) => {
