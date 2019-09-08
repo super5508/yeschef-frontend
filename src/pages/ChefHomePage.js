@@ -248,8 +248,7 @@ class ChefHomePage extends Component {
 		this.fixedHeaderAt = window.innerWidth - this.scrollElementsRefs.classTitle.current.offsetHeight
 				- this.scrollElementsRefs.header.current.offsetTop
 				- this.scrollElementsRefs.header.current.offsetHeight
-				- 0.6 * this.getRem();
-		console.log(this.fixedHeaderAt);
+				- 0.8 * this.getRem();
 	};
 
 	scrollToLesson = () => {

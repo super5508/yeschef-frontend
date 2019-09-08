@@ -101,8 +101,8 @@ const styles = theme => ({
         top: '4.2rem',
         paddingTop: 0,
         backgroundColor: '#171717',
-        height: 'fit-content',
         zIndex: 100,
+        maxHeight: '10rem',
     }
 });
 
