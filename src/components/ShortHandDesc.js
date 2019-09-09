@@ -14,10 +14,6 @@ const ExpansionPanel = withStyles({
     },
   },
   expanded: {
-    '&:not(:first-child)': {
-      marginTop: 0,
-    }
-    // marginBottom: '2.3rem'
   },
 })(MuiExpansionPanel);
 
@@ -50,7 +46,6 @@ const ExpansionPanelDetails = withStyles({
     padding: '24px'
   },
   expanded: {
-    // marginBottom: '2.3rem'
   }
 })(MuiExpansionPanelDetails);
 
