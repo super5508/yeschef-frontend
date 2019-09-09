@@ -9,13 +9,15 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 const ExpansionPanel = withStyles({
   root: {
     boxShadow: 'none',
-    marginBottom: '2.3rem',
     '&:before': {
       display: 'none',
     },
   },
   expanded: {
-    marginBottom: '2.3rem'
+    '&:not(:first-child)': {
+      marginTop: 0,
+    }
+    // marginBottom: '2.3rem'
   },
 })(MuiExpansionPanel);
 
@@ -48,7 +50,7 @@ const ExpansionPanelDetails = withStyles({
     padding: '24px'
   },
   expanded: {
-    marginBottom: '2.3rem'
+    // marginBottom: '2.3rem'
   }
 })(MuiExpansionPanelDetails);
 
