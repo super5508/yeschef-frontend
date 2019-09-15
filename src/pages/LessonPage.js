@@ -164,7 +164,7 @@ const styles = theme => ({
 	},
 	tabSelected: {},
 	subTabsCon: {
-		margin: "0rem 2.3rem",
+		margin: "2.3rem 2.3rem",
 		"& h4": {
 			fontSize: "1.6rem",
 			fontWeight: 600,
