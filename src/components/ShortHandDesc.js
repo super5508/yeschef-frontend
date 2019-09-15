@@ -9,50 +9,52 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 const ExpansionPanel = withStyles({
   root: {
     boxShadow: 'none',
+    '&:not(:last-child)': {
+      borderBottom: 0,
+      marginBottom: '2.3rem',
+    },
     '&:before': {
       display: 'none',
     },
+    '&$expanded': {
+      margin: 'auto',
+      marginBottom: '2.3rem'
+    },
   },
-  expanded: {
-    '&:not(:first-child)': {
-      marginTop: 0,
-    }
-    // marginBottom: '2.3rem'
-  },
+  expanded: {},
 })(MuiExpansionPanel);
 
 const ExpansionPanelSummary = withStyles({
   root: {
     backgroundColor: '#262626',
-    borderRadius: '6px',
+    marginBottom: -1,
     minHeight: 56,
-    marginTop: '2.3rem',
+    borderRadius: 6,
     '&$expanded': {
-      marginBottom: '0px',
       minHeight: 56,
-      borderBottomLeftRadius: 0,
-      borderBottomRightRadius: 0,
+      borderRadius: 0,
+      borderTopLeftRadius: 6,
+      borderTopRightRadius: 6,
     },
   },
   content: {
+    '&$expanded': {
+      margin: '12px 0',
+    },
   },
   expanded: {},
 })(MuiExpansionPanelSummary);
 
-const ExpansionPanelDetails = withStyles({
+const ExpansionPanelDetails = withStyles(theme => ({
   root: {
+    padding: theme.spacing(2),
     backgroundColor: '#1E1E1E',
-    borderBottomLeftRadius: 6,
-    borderBottomRightRadius: 6,
-    marginBottom: '2.3rem',
     display: 'flex',
     flexDirection: 'column',
-    padding: '24px'
+    borderBottomLeftRadius: 6,
+    borderBottomRightRadius: 6,
   },
-  expanded: {
-    // marginBottom: '2.3rem'
-  }
-})(MuiExpansionPanelDetails);
+}))(MuiExpansionPanelDetails);
 
 const titleStyle = {
   fontSize: 16,
