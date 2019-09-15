@@ -13,7 +13,7 @@ import PlayButton from "../assets/images/play-btn.svg";
 import Header from "../components/Header";
 import BackButton from "../components/BackButton";
 import SupplyInfo from '../components/Supplies';
-
+import ShortHandDesc from '../components/ShortHandDesc';
 
 function TabContainer({ children, dir }) {
 	return (
@@ -449,7 +449,20 @@ class LessonPage extends Component {
 
 							{this.state.chefsData.shorthand && (
 								<TabContainer dir={theme.direction}>
-									<Box />
+									<Box className={classes.subTabsCon}>
+										{
+											Object.keys(this.state.chefsData.shorthand.mapValue.fields).map(
+												(head, index) => {
+													return (
+														<ShortHandDesc
+															key={index}
+															head={head}
+															shorthand={this.state.chefsData.shorthand}
+														/>
+													)
+												})
+										}
+									</Box>
 								</TabContainer>
 							)}
 						</SwipeableViews>
