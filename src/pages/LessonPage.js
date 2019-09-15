@@ -2,12 +2,8 @@ import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import Axios from "../common/AxiosMiddleware";
 import Box from "@material-ui/core/Box";
-import BackIcon from "@material-ui/icons/ArrowBackIosRounded";
-import IconButton from "@material-ui/core/IconButton";
 import VideoPlayer from "../components/VideoPlayer";
 import { Paper } from "@material-ui/core";
-import WatchLaterIcon from "@material-ui/icons/WatchLaterRounded";
-import CheckIcon from "@material-ui/icons/CheckCircleRounded";
 import SwipeableViews from "react-swipeable-views";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
@@ -15,6 +11,7 @@ import PropTypes from "prop-types";
 import PlayButton from "../assets/images/play-btn.svg";
 import Header from "../components/Header";
 import BackButton from "../components/BackButton";
+import ShortHandDesc from '../components/ShortHandDesc';
 
 function TabContainer({ children, dir }) {
 	return (
@@ -167,7 +164,7 @@ const styles = theme => ({
 	},
 	tabSelected: {},
 	subTabsCon: {
-		margin: "0rem 2.3rem",
+		margin: "2.3rem 2.3rem",
 		"& h4": {
 			fontSize: "1.6rem",
 			fontWeight: 600,
@@ -347,7 +344,7 @@ class LessonPage extends Component {
 
 	toggleVideo = () => {
 		this.setState({
-			isPlaying: ! this.state.isPlaying
+			isPlaying: !this.state.isPlaying
 		});
 	};
 
@@ -373,10 +370,10 @@ class LessonPage extends Component {
 					<div className={classes.video_container}>
 						{this.state.videoSrc && <VideoPlayer {...videoJsOptions} isPlaying={this.state.isPlaying} classId={this.props.match.params.classId} lessonNum={this.props.match.params.lessonNum} />}
 						<div className={this.addHideOnPlayClass(classes.video_overlay)}
-								 onClick={this.toggleVideo}>
-								<div className={this.addHideOnPlayClass(classes.video_overlay_play)}>
-									<img src={PlayButton}/>
-								</div>
+							onClick={this.toggleVideo}>
+							<div className={this.addHideOnPlayClass(classes.video_overlay_play)}>
+								<img src={PlayButton} />
+							</div>
 							<div className={this.addHideOnPlayClass(classes.video_overlay_text)}>
 								<h1 className="Sub-h1">Lesson {this.props.match.params.lessonNum}</h1>
 								<h2>{this.state.chefsData.title.stringValue.toUpperCase()}</h2>
@@ -385,8 +382,8 @@ class LessonPage extends Component {
 					</div>
 				</Paper>
 				<div className={classes.lessonContentCon}>
-					<BackButton visible={!this.state.isPlaying}/>
-					<Header gradientBackground visible={!this.state.isPlaying}/>
+					<BackButton visible={!this.state.isPlaying} />
+					<Header gradientBackground visible={!this.state.isPlaying} />
 
 					{/* //tabs */}
 					<div>
@@ -570,7 +567,20 @@ class LessonPage extends Component {
 							)}
 							{this.state.chefsData.shorthand && (
 								<TabContainer dir={theme.direction}>
-									<Box />
+									<Box className={classes.subTabsCon}>
+										{
+											Object.keys(this.state.chefsData.shorthand.mapValue.fields).map(
+												(head, index) => {
+													return (
+														<ShortHandDesc
+															key={index}
+															head={head}
+															shorthand={this.state.chefsData.shorthand}
+														/>
+													)
+												})
+										}
+									</Box>
 								</TabContainer>
 							)}
 						</SwipeableViews>
