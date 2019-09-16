@@ -315,12 +315,13 @@ class LessonPage extends Component {
 
 	getCuisine = () => {
 		let data = this.state.chefsData.cuisine.arrayValue.values;
-    const cuisineString = data.map((lessonData, id) => this.firstLetterToCapital(lessonData.stringValue)).join(' | ');
+		const cuisineString = data.map((lessonData, id) => this.firstLetterToCapital(lessonData.stringValue)).join(' | ');
 		this.setState({
 			cuisineText: cuisineString
-	});
+		});
+	}
 
-    
+
 	handleFeedbackTextChange = (event) => {
 		const feedbackText = event.target.value;
 		if (this.state.isPlaying) {
@@ -349,40 +350,8 @@ class LessonPage extends Component {
 				'timestamp': this.state.currentVideoTime,
 				'comment': this.state.feedbackText
 			});
-			this.setState({feedbackText: ''});
+			this.setState({ feedbackText: '' });
 		}
-	};
-
-	decimalToFraction = amount => {
-		// This is a whole number and doesn't need modification.
-		if (parseFloat(amount) === parseInt(amount)) {
-			return amount;
-		}
-		// Next 12 lines are cribbed from https://stackoverflow.com/a/23575406.
-		var gcd = function (a, b) {
-			if (b < 0.0000001) {
-				return a;
-			}
-			return gcd(b, Math.floor(a % b));
-		};
-		var len = amount.toString().length - 2;
-		var denominator = Math.pow(10, len);
-		var numerator = amount * denominator;
-		var divisor = gcd(numerator, denominator);
-		numerator /= divisor;
-		denominator /= divisor;
-		var base = 0;
-		// In a scenario like 3/2, convert to 1 1/2
-		// by pulling out the base number and reducing the numerator.
-		if (numerator > denominator) {
-			base = Math.floor(numerator / denominator);
-			numerator -= base * denominator;
-		}
-		amount = Math.floor(numerator) + "/" + Math.floor(denominator);
-		if (base) {
-			amount = base + " " + amount;
-		}
-		return amount;
 	};
 
 	getDietary = () => {
@@ -408,7 +377,7 @@ class LessonPage extends Component {
 		return classes + (this.state.isPlaying ? ' hide_on_play' : '');
 	};
 
-	render() {
+	render = () => {
 		const { classes, theme } = this.props;
 		const { chefsData } = this.state
 		const videoJsOptions = {
@@ -426,10 +395,10 @@ class LessonPage extends Component {
 					<div className={classes.video_container}>
 						{this.state.videoSrc &&
 							<VideoPlayer {...videoJsOptions}
-													 isPlaying={this.state.isPlaying}
-													 classId={this.props.match.params.classId}
-													 lessonNum={this.props.match.params.lessonNum}
-													 updateTime={this.updateTime}/>}
+								isPlaying={this.state.isPlaying}
+								classId={this.props.match.params.classId}
+								lessonNum={this.props.match.params.lessonNum}
+								updateTime={this.updateTime} />}
 						<div className={this.addHideOnPlayClass(classes.video_overlay)}
 							onClick={this.toggleVideo}>
 							<div className={this.addHideOnPlayClass(classes.video_overlay_play)}>
@@ -463,18 +432,18 @@ class LessonPage extends Component {
 							}}
 						>
 							<Tab
-									classes={{
-										root: classes.tabRoot,
-										selected: classes.tabSelected
-									}}
-									label="OVERVIEW"
+								classes={{
+									root: classes.tabRoot,
+									selected: classes.tabSelected
+								}}
+								label="OVERVIEW"
 							/>
 							<Tab
-									classes={{
-										root: classes.tabRoot,
-										selected: classes.tabSelected
-									}}
-									label="FEEDBACK"
+								classes={{
+									root: classes.tabRoot,
+									selected: classes.tabSelected
+								}}
+								label="FEEDBACK"
 							/>
 							{/* dynamic tabs */}
 							{(this.state.chefsData.ingredients || this.state.chefsData.gear) && (
@@ -502,7 +471,7 @@ class LessonPage extends Component {
 							onChangeIndex={this.handleChangeIndex}
 						>
 							<TabContainer dir={theme.direction}>
-																<Box>
+								<Box>
 									<div className={classes.contentCon}>
 										<p className='body-text'>{this.state.chefsData.description.stringValue}</p>
 									</div>
@@ -536,16 +505,16 @@ class LessonPage extends Component {
 								<Box className={classes.subTabsCon}>
 									<h2 className={classes.feedbackH2}>Tell us what you think about this video</h2>
 									<textarea
-											name="feedbackText"
-											value={this.state.feedbackText}
-											onChange={this.handleFeedbackTextChange}
-											className={classes.feedbackTextarea}
-											placeholder={"Write your feedback here"}></textarea>
+										name="feedbackText"
+										value={this.state.feedbackText}
+										onChange={this.handleFeedbackTextChange}
+										className={classes.feedbackTextarea}
+										placeholder={"Write your feedback here"}></textarea>
 									<Button
-											variant="contained"
-											color="primary"
-											className={classes.sendFeebackButton}
-											onClick={this.submitFeedback}>
+										variant="contained"
+										color="primary"
+										className={classes.sendFeebackButton}
+										onClick={this.submitFeedback}>
 										SEND
 									</Button>
 								</Box>
