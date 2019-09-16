@@ -32,8 +32,11 @@ const styles = theme => ({
 
         '& .Mui-selected': {
             fontWeight: '600'
-        }
+        },
 
+        '& .beta-icon': {
+            width: 32
+        }
     },
 
 });
@@ -88,7 +91,7 @@ class BottomBar extends Component {
                             label="Beta"
                             value='beta'
                             icon={
-                                this.state.beta ? <img src={BetaIcon} alt='beta'></img> : <img src={BetaIconWhite} alt='beta'></img>
+                                this.state.beta ? <img src={BetaIcon} className="beta-icon" alt='beta'></img> : <img src={BetaIconWhite} className="beta-icon" alt='beta'></img>
                             }
                             component={Link}
                             to="/beta" />
