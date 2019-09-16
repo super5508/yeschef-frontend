@@ -313,17 +313,18 @@ class LessonPage extends Component {
 
 	formatTime = timestamp => {
 		const minutes = Math.floor(timestamp / 60);
-		const seconds = Math.floor(timestamp - minutes * 60);
+		const seconds = Math.floor(timestamp % 60);
 		return `${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`
 	};
 
 	submitFeedback = () => {
 		if (this.state.feedbackText.trim()) {
 			console.log({
-				'user-name': window.firebaseAuth.currentUser.displayName,
-				'user-id': window.firebaseAuth.currentUser.uid,
-				'created-at': (new Date()).toISOString(),
-				'timestamp': this.formatTime(this.state.currentVideoTime),
+				'userName': window.firebaseAuth.currentUser.displayName,
+				'userId': window.firebaseAuth.currentUser.uid,
+				'createdAt': (new Date()).toISOString(),
+				'videoTime': this.formatTime(this.state.currentVideoTime),
+				'timestamp': this.state.currentVideoTime,
 				'comment': this.state.feedbackText
 			});
 			this.setState({feedbackText: ''});
