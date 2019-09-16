@@ -23,7 +23,7 @@ const styles = theme => ({
         },
     },
     container2: {
-        position: 'fixed',
+        position: 'absolute',
         top: '0',
         zIndex: '20',
         [theme.breakpoints.down('sm')]: {
@@ -95,6 +95,14 @@ const styles = theme => ({
         letterSpacing: 'normal',
         color: '#ffffff',
         textTransform: 'uppercase'
+    },
+    fixedUnderTitle: {
+        position: 'fixed',
+        top: '4.2rem',
+        paddingTop: 0,
+        backgroundColor: '#171717',
+        zIndex: 100,
+        maxHeight: '10rem',
     }
 });
 
@@ -104,7 +112,11 @@ class ClassInfo extends Component {
         this.state = {
             src: null,
             poster: null,
-            muted: true
+            muted: true,
+            fixScroll: false,
+        }
+        this.scrollElementRefs = {
+            classTitle:  React.createRef(),
         }
     }
 
@@ -116,6 +128,12 @@ class ClassInfo extends Component {
             }
         }
         return {};
+    }
+
+    componentDidMount() {
+        if (this.props.forwardRefs) {
+            this.props.forwardRefs(this.scrollElementRefs);
+        }
     }
 
     render() {
@@ -134,7 +152,9 @@ class ClassInfo extends Component {
         const { classes } = this.props;
 
         const textContent = (
-            <Box className={this.props.showTrailer ? classes.info_container2 : classes.info_container}>
+            <Box className={(this.props.showTrailer ? classes.info_container2 : classes.info_container)
+                            + ' ' + (this.props.fixScroll ? classes.fixedUnderTitle : '')}
+                ref={this.scrollElementRefs.classTitle}>
                 <Box className={classes.ChefHeading}>Chef {this.props.chefName}</Box>
                 <Box className='body-text' style={{ textTransform: 'uppercase' }}>{this.props.classTitle}</Box>
             </Box>

@@ -57,36 +57,25 @@ class Header extends Component {
         super(props);
 
         this.state = {
-            prevScrollpos: window.pageYOffset,
             visible: true
         };
+
+        this.scrollElementRefs = {
+            header:  React.createRef(),
+        }
+    }
+
+    shouldComponentUpdate(nextProps, nextState, nextContext) {
+        if (typeof nextProps.visible !== 'undefined' && nextProps.visible !== this.state.visible) {
+            this.setState({visible: nextProps.visible});
+        }
+        return true;
     }
 
     componentDidMount() {
-        window.addEventListener("scroll", this.handleScroll);
-    }
-
-    componentWillUnmount() {
-        window.removeEventListener("scroll", this.handleScroll);
-    }
-
-    handleScroll = () => {
-        const { prevScrollpos } = this.state;
-
-        const currentScrollPos = window.pageYOffset;
-        const visible = prevScrollpos > currentScrollPos;
-
-        this.setState({
-            prevScrollpos: currentScrollPos,
-            visible
-        });
-    };
-
-    shouldComponentUpdate(nextProps, nextState, nextContext) {
-      if (nextProps.visible !== this.state.visible) {
-        this.setState({visible: nextProps.visible});
-      }
-      return true
+        if (this.props.forwardRefs) {
+            this.props.forwardRefs(this.scrollElementRefs);
+        }
     }
 
     render() {
@@ -98,7 +87,7 @@ class Header extends Component {
             className += classes.hiddenHeader;
         }
         return (
-            <Paper className={className}>
+            <Paper className={className} ref={this.scrollElementRefs.header}>
                 <Link className={classes.link} to="/home">
                     <span className={classes.yesWord}>yes</span><span className={classes.chefWord}>Chef</span>
                 </Link>
