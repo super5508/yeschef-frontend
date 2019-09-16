@@ -3,6 +3,9 @@ import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import Axios from "../common/AxiosMiddleware";
 import Box from "@material-ui/core/Box";
+import Button from "@material-ui/core/Button";
+import BackIcon from "@material-ui/icons/ArrowBackIosRounded";
+import IconButton from "@material-ui/core/IconButton";
 import VideoPlayer from "../components/VideoPlayer";
 import { Paper } from "@material-ui/core";
 import SwipeableViews from "react-swipeable-views";
@@ -185,6 +188,30 @@ const styles = theme => ({
 		wrapper: {
 			padding: 16
 		}
+	},
+	gearul: {
+		margin: "2rem 0rem 0rem 1rem !important"
+	},
+	feedbackH2: {
+		textTransform: 'none',
+		marginTop: '1.7rem'
+	},
+	feedbackTextarea: {
+		marginTop: '1.1rem',
+		marginBottom: '1.1rem',
+		width: '32.7rem',
+		height: '9.4rem',
+		borderRadius: 6,
+		border: 'solid 0.5px rgba(255, 255, 255, 0.7)',
+		background: 'transparent',
+		color: 'white',
+		fontSize: '1.4rem',
+		padding: '1.2rem',
+	},
+	sendFeebackButton: {
+		width: '8.1rem',
+		height: '3.6rem',
+		float: 'right',
 	}
 });
 
@@ -208,6 +235,8 @@ class LessonPage extends Component {
 			ingredientsArray: [],
 			handsonText: "",
 			TotalText: "",
+			feedbackText: "",
+			currentVideoTime: 0
 		};
 
 		Axios.get(`/api/class/${this.props.match.params.classId}/lesson/${this.props.match.params.lessonNum - 1}`).then(chefInfoResponse => {
@@ -286,11 +315,43 @@ class LessonPage extends Component {
 
 	getCuisine = () => {
 		let data = this.state.chefsData.cuisine.arrayValue.values;
-
 		const cuisineString = data.map((lessonData, id) => this.firstLetterToCapital(lessonData.stringValue)).join(' | ');
 		this.setState({
 			cuisineText: cuisineString
 		});
+	}
+
+
+	handleFeedbackTextChange = (event) => {
+		const feedbackText = event.target.value;
+		if (this.state.isPlaying) {
+			this.toggleVideo();
+		}
+		this.setState({ feedbackText });
+	};
+
+	updateTime = currentVideoTime => {
+		this.setState({ currentVideoTime });
+	};
+
+	formatTime = timestamp => {
+		const minutes = Math.floor(timestamp / 60);
+		const seconds = Math.floor(timestamp % 60);
+		return `${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`
+	};
+
+	submitFeedback = () => {
+		if (this.state.feedbackText.trim()) {
+			console.log({
+				'userName': window.firebaseAuth.currentUser.displayName,
+				'userId': window.firebaseAuth.currentUser.uid,
+				'createdAt': (new Date()).toISOString(),
+				'videoTime': this.formatTime(this.state.currentVideoTime),
+				'timestamp': this.state.currentVideoTime,
+				'comment': this.state.feedbackText
+			});
+			this.setState({ feedbackText: '' });
+		}
 	};
 
 	getDietary = () => {
@@ -316,7 +377,7 @@ class LessonPage extends Component {
 		return classes + (this.state.isPlaying ? ' hide_on_play' : '');
 	};
 
-	render() {
+	render = () => {
 		const { classes, theme } = this.props;
 		const { chefsData } = this.state
 		const videoJsOptions = {
@@ -332,7 +393,12 @@ class LessonPage extends Component {
 			<Box>
 				<Paper className={classes.container2}>
 					<div className={classes.video_container}>
-						{this.state.videoSrc && <VideoPlayer {...videoJsOptions} isPlaying={this.state.isPlaying} classId={this.props.match.params.classId} lessonNum={this.props.match.params.lessonNum} />}
+						{this.state.videoSrc &&
+							<VideoPlayer {...videoJsOptions}
+								isPlaying={this.state.isPlaying}
+								classId={this.props.match.params.classId}
+								lessonNum={this.props.match.params.lessonNum}
+								updateTime={this.updateTime} />}
 						<div className={this.addHideOnPlayClass(classes.video_overlay)}
 							onClick={this.toggleVideo}>
 							<div className={this.addHideOnPlayClass(classes.video_overlay_play)}>
@@ -348,7 +414,6 @@ class LessonPage extends Component {
 				<div className={classes.lessonContentCon}>
 					<BackButton visible={!this.state.isPlaying} />
 					<Header gradientBackground visible={!this.state.isPlaying} />
-
 					{/* //tabs */}
 					<div>
 						<Tabs
@@ -373,6 +438,13 @@ class LessonPage extends Component {
 								}}
 								label="OVERVIEW"
 							/>
+							<Tab
+								classes={{
+									root: classes.tabRoot,
+									selected: classes.tabSelected
+								}}
+								label="FEEDBACK"
+							/>
 							{/* dynamic tabs */}
 							{(this.state.chefsData.ingredients || this.state.chefsData.gear) && (
 								<Tab
@@ -382,7 +454,7 @@ class LessonPage extends Component {
 									}}
 									label="SUPPLIES"
 								/>
-							)}
+							)} */}
 							{this.state.chefsData.shorthand && (
 								<Tab
 									classes={{
@@ -429,6 +501,24 @@ class LessonPage extends Component {
 								</Box>
 							</TabContainer>
 
+							<TabContainer dir={theme.direction}>
+								<Box className={classes.subTabsCon}>
+									<h2 className={classes.feedbackH2}>Tell us what you think about this video</h2>
+									<textarea
+										name="feedbackText"
+										value={this.state.feedbackText}
+										onChange={this.handleFeedbackTextChange}
+										className={classes.feedbackTextarea}
+										placeholder={"Write your feedback here"}></textarea>
+									<Button
+										variant="contained"
+										color="primary"
+										className={classes.sendFeebackButton}
+										onClick={this.submitFeedback}>
+										SEND
+									</Button>
+								</Box>
+							</TabContainer>
 							{(this.state.chefsData.ingredients || this.state.chefsData.gear) && (
 								<TabContainer dir={theme.direction}>
 									<Box className={classes.subTabsCon}>
@@ -446,7 +536,6 @@ class LessonPage extends Component {
 									</Box>
 								</TabContainer>
 							)}
-
 							{this.state.chefsData.shorthand && (
 								<TabContainer dir={theme.direction}>
 									<Box className={classes.subTabsCon}>
