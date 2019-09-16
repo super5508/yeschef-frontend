@@ -24,6 +24,30 @@ const checkEmailValid = (obj) => {
     }
 }
 
+
+const checkPwdValid = (obj) => {
+    let password;
+    if (typeof obj === "string") {
+        password = obj;
+    } else {
+        password = obj.target.value;
+    }
+
+    let isPwdValid = true;
+    let pwdError = '';
+
+    if (!password) {
+        isPwdValid = false
+        pwdError = 'Password is required'
+    }
+
+    return {
+        isPwdValid,
+        pwdError
+    }
+}
+
 export default {
     checkEmailValid,
+    checkPwdValid
 }

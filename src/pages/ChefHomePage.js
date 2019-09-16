@@ -156,6 +156,10 @@ class ChefHomePage extends Component {
 		});
 	}
 
+	componentDidMount() {
+		window.scrollTo(0, 0)
+	}
+
 	handleChange = (event, value) => {
 		this.setState({ value });
 	};
@@ -171,7 +175,7 @@ class ChefHomePage extends Component {
 				duration: 0,
 				delay: 0,
 				smooth: "false",
-				offset: -300,
+				offset: -400,
 			});
 		}
 	};

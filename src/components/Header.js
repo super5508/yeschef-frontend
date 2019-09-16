@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 
@@ -44,6 +45,9 @@ const styles = theme => ({
     },
     colorHeader: {
         backgroundColor: "#171717"
+    },
+    link: {
+        textDecoration: 'none'
     }
 });
 
@@ -95,7 +99,9 @@ class Header extends Component {
         }
         return (
             <Paper className={className}>
-                <span className={classes.yesWord}>yes</span><span className={classes.chefWord}>Chef</span>
+                <Link className={classes.link} to="/home">
+                    <span className={classes.yesWord}>yes</span><span className={classes.chefWord}>Chef</span>
+                </Link>
             </Paper>
         );
     }

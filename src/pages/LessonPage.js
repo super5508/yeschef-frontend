@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-duplicate-props */
 import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import Axios from "../common/AxiosMiddleware";
@@ -7,8 +8,6 @@ import BackIcon from "@material-ui/icons/ArrowBackIosRounded";
 import IconButton from "@material-ui/core/IconButton";
 import VideoPlayer from "../components/VideoPlayer";
 import { Paper } from "@material-ui/core";
-import WatchLaterIcon from "@material-ui/icons/WatchLaterRounded";
-import CheckIcon from "@material-ui/icons/CheckCircleRounded";
 import SwipeableViews from "react-swipeable-views";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
@@ -16,6 +15,8 @@ import PropTypes from "prop-types";
 import PlayButton from "../assets/images/play-btn.svg";
 import Header from "../components/Header";
 import BackButton from "../components/BackButton";
+import SupplyInfo from '../components/Supplies';
+import ShortHandDesc from '../components/ShortHandDesc';
 
 function TabContainer({ children, dir }) {
 	return (
@@ -125,6 +126,11 @@ const styles = theme => ({
 			fontSize: "1.6rem",
 			fontWeight: 300,
 			margin: 0
+		},
+
+		"& p": {
+			marginTop: '2.4rem',
+			marginBottom: '2.4rem'
 		}
 	},
 	icon: {
@@ -134,13 +140,10 @@ const styles = theme => ({
 	iconsCon: {
 		marginTop: "1.5rem",
 		marginBottom: "0.8rem",
-		padding: "1.2rem 2.3rem 0.2rem 2.3rem",
-		borderTop: "0.2px solid rgba(255, 255, 255, 0.7)",
-		borderBottom: "0.2px solid rgba(255, 255, 255, 0.7)",
+		padding: "2.2rem 2.3rem 0.2rem 2.3rem",
+		borderTop: "0.3px solid rgba(255, 255, 255, 0.7)",
 
 		"& p": {
-			fontSize: "1.4rem",
-			fontWeight: 300,
 			margin: 0,
 			display: "flex",
 			justifyContent: "center",
@@ -166,7 +169,7 @@ const styles = theme => ({
 	},
 	tabSelected: {},
 	subTabsCon: {
-		margin: "0rem 2.3rem",
+		margin: "2.3rem 2.3rem",
 		"& h4": {
 			fontSize: "1.6rem",
 			fontWeight: 600,
@@ -178,10 +181,12 @@ const styles = theme => ({
 			fontSize: "1.6rem",
 			fontWeight: 300,
 			padding: 0,
-			margin: "0rem 0rem 0rem 1.6rem"
 		},
 		"& li": {
 			marginTop: "0.5rem"
+		},
+		wrapper: {
+			padding: 16
 		}
 	},
 	gearul: {
@@ -245,6 +250,15 @@ class LessonPage extends Component {
 			if (this.state.chefsData.ingredients) {
 				this.getIngredients();
 			}
+
+			if (this.state.chefsData.dietary) {
+				this.getDietary();
+			}
+
+			if (this.state.chefsData.cuisine) {
+				this.getCuisine();
+			}
+
 		});
 	}
 
@@ -276,13 +290,17 @@ class LessonPage extends Component {
 		});
 	};
 
+	firstLetterToCapital = str => {
+		return str.replace(/\w\S*/g, function (txt) {
+			return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+		});
+	};
+
 	getIngredients = () => {
 		//sorting ingredients
 		let ingredients = this.state.chefsData.ingredients.mapValue.fields;
 		let ingredientsArray = [];
-		Object.keys(ingredients).map((value, index) => {
-			ingredientsArray.push(value);
-		});
+		Object.keys(ingredients).map((value, index) => ingredientsArray.push(value));
 		this.setState({ ingredientsArray: ingredientsArray });
 	};
 
@@ -295,10 +313,14 @@ class LessonPage extends Component {
 		});
 	};
 
-	handleChange = (event, value) => {
-		this.setState({ value });
-	};
+	getCuisine = () => {
+		let data = this.state.chefsData.cuisine.arrayValue.values;
+    const cuisineString = data.map((lessonData, id) => this.firstLetterToCapital(lessonData.stringValue)).join(' | ');
+		this.setState({
+			cuisineText: cuisineString
+	});
 
+    
 	handleFeedbackTextChange = (event) => {
 		const feedbackText = event.target.value;
 		if (this.state.isPlaying) {
@@ -363,15 +385,22 @@ class LessonPage extends Component {
 		return amount;
 	};
 
-	firstLetterToCapital = str => {
-		return str.replace(/\w\S*/g, function (txt) {
-			return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+	getDietary = () => {
+		let data = this.state.chefsData.dietary.arrayValue.values;
+
+		const dietaryString = data.map((lessonData, id) => this.firstLetterToCapital(lessonData.stringValue)).join(' | ');
+		this.setState({
+			dietaryText: dietaryString
 		});
+	};
+
+	handleChange = (event, value) => {
+		this.setState({ value });
 	};
 
 	toggleVideo = () => {
 		this.setState({
-			isPlaying: ! this.state.isPlaying
+			isPlaying: !this.state.isPlaying
 		});
 	};
 
@@ -381,6 +410,7 @@ class LessonPage extends Component {
 
 	render() {
 		const { classes, theme } = this.props;
+		const { chefsData } = this.state
 		const videoJsOptions = {
 			autoplay: false,
 			controls: false,
@@ -401,10 +431,10 @@ class LessonPage extends Component {
 													 lessonNum={this.props.match.params.lessonNum}
 													 updateTime={this.updateTime}/>}
 						<div className={this.addHideOnPlayClass(classes.video_overlay)}
-								 onClick={this.toggleVideo}>
-								<div className={this.addHideOnPlayClass(classes.video_overlay_play)}>
-									<img src={PlayButton}/>
-								</div>
+							onClick={this.toggleVideo}>
+							<div className={this.addHideOnPlayClass(classes.video_overlay_play)}>
+								<img src={PlayButton} lat="playbutton" alt="img-product" />
+							</div>
 							<div className={this.addHideOnPlayClass(classes.video_overlay_text)}>
 								<h1 className="Sub-h1">Lesson {this.props.match.params.lessonNum}</h1>
 								<h2>{this.state.chefsData.title.stringValue.toUpperCase()}</h2>
@@ -413,31 +443,8 @@ class LessonPage extends Component {
 					</div>
 				</Paper>
 				<div className={classes.lessonContentCon}>
-					<BackButton visible={!this.state.isPlaying}/>
-					<Header gradientBackground visible={!this.state.isPlaying}/>
-
-					{/* lessonInfo */}
-					{/*
-					<div className={classes.contentCon}>
-						<div className={classes.titleCon}>
-							<h3>{this.props.match.params.lessonNum}</h3>
-							<h1>{this.state.chefsData.title.stringValue.toUpperCase()}</h1>
-						</div>
-						<p className='body-text'>{this.state.chefsData.description.stringValue}</p>
-					</div>
-					<div className={classes.iconsCon}>
-						<div>
-							<WatchLaterIcon className={classes.icon} />
-							<p>
-								Hands-on: {this.state.handsonText} | Total: {this.state.TotalText}
-							</p>
-						</div>
-						<div>
-							<CheckIcon className={classes.icon} />
-							<p>{this.state.skillsText}</p>
-						</div>
-					</div> */}
-
+					<BackButton visible={!this.state.isPlaying} />
+					<Header gradientBackground visible={!this.state.isPlaying} />
 					{/* //tabs */}
 					<div>
 						<Tabs
@@ -446,11 +453,12 @@ class LessonPage extends Component {
 							indicatorColor="primary"
 							variant="fullWidth"
 							classes={{ root: classes.tabsRoot }}
+							variant="scrollable"
+							scrollButtons="auto"
 							style={{
-								position: "-webkit-sticky",
 								position: "sticky",
 								zIndex: 20,
-								top: "57vw",
+								top: "56vw",
 								backgroundColor: "#000"
 							}}
 						>
@@ -468,25 +476,14 @@ class LessonPage extends Component {
 									}}
 									label="FEEDBACK"
 							/>
-
 							{/* dynamic tabs */}
-							{this.state.chefsData.ingredients && (
+							{(this.state.chefsData.ingredients || this.state.chefsData.gear) && (
 								<Tab
 									classes={{
 										root: classes.tabRoot,
 										selected: classes.tabSelected
 									}}
 									label="SUPPLIES"
-								/>
-							)}
-							{/* Not present in the updated mockup
-							{this.state.chefsData.gear && (
-								<Tab
-									classes={{
-										root: classes.tabRoot,
-										selected: classes.tabSelected
-									}}
-									label="GEAR"
 								/>
 							)} */}
 							{this.state.chefsData.shorthand && (
@@ -505,10 +502,36 @@ class LessonPage extends Component {
 							onChangeIndex={this.handleChangeIndex}
 						>
 							<TabContainer dir={theme.direction}>
-								<Box className={classes.subTabsCon}>
-									overview tab
+																<Box>
+									<div className={classes.contentCon}>
+										<p className='body-text'>{this.state.chefsData.description.stringValue}</p>
+									</div>
+									<div className={classes.iconsCon}>
+										<div>
+											<h2 style={{ paddingRight: '1.2rem' }}>time</h2>
+											<p className='body-text'>
+												Hands-on: {this.state.handsonText} | Total: {this.state.TotalText}
+											</p>
+										</div>
+										<div>
+											<h2 style={{ paddingRight: '1.2rem' }}>skills</h2>
+											<p className='body-text'>{this.state.skillsText}</p>
+										</div>
+										{chefsData.cuisine &&
+											<div>
+												<h2 style={{ paddingRight: '1.2rem' }}>cuisine</h2>
+												<p className='body-text'>{this.state.cuisineText}</p>
+											</div>}
+
+										{chefsData.dietary &&
+											<div>
+												<h2 style={{ paddingRight: '1.2rem' }}>dietary</h2>
+												<p className='body-text'>{this.state.dietaryText}</p>
+											</div>}
+									</div>
 								</Box>
 							</TabContainer>
+
 							<TabContainer dir={theme.direction}>
 								<Box className={classes.subTabsCon}>
 									<h2 className={classes.feedbackH2}>Tell us what you think about this video</h2>
@@ -527,100 +550,39 @@ class LessonPage extends Component {
 									</Button>
 								</Box>
 							</TabContainer>
-							{this.state.chefsData.ingredients && (
+							{(this.state.chefsData.ingredients || this.state.chefsData.gear) && (
 								<TabContainer dir={theme.direction}>
 									<Box className={classes.subTabsCon}>
 										{this.state.ingredientsArray.map((head, id) => {
 											return (
-												<div key={`${head}-${id}`}>
-													<h4>{head.toUpperCase()}</h4>
-													<div>
-														{
-															Object.keys(this.state.chefsData.ingredients.mapValue.fields[head].mapValue.fields).map(
-																(value, index) => {
-																	let comment = "";
-																	if (
-																		this.state.chefsData.ingredients.mapValue.fields[head].mapValue.fields[value]
-																			.mapValue.fields.comment
-																	) {
-																		comment = this.state.chefsData.ingredients.mapValue.fields[head].mapValue.fields[
-																			value
-																		].mapValue.fields.comment.stringValue;
-																		comment = "- " + comment;
-																	}
-
-																	let unit = "";
-																	if (
-																		this.state.chefsData.ingredients.mapValue.fields[head].mapValue.fields[value]
-																			.mapValue.fields.unit
-																	) {
-																		unit = this.state.chefsData.ingredients.mapValue.fields[head].mapValue.fields[
-																			value
-																		].mapValue.fields.unit.stringValue;
-																	}
-
-																	let quantity = "";
-																	if (
-																		this.state.chefsData.ingredients.mapValue.fields[head].mapValue.fields[value]
-																			.mapValue.fields.quantity
-																	) {
-																		quantity = Object.values(
-																			this.state.chefsData.ingredients.mapValue.fields[head].mapValue.fields[value]
-																				.mapValue.fields.quantity
-																		)[0];
-																	}
-
-																	return (
-																		<ul key={value}>
-																			<li key={`li${value}-${index}`}>
-																				<span
-																					style={{
-																						color: "#ffffff"
-																					}}
-																				>
-																					{this.decimalToFraction(quantity)} {unit} {value} {comment}
-																				</span>
-																			</li>
-																		</ul>
-																	);
-																}
-															)}
-													</div>
-												</div>
+												<SupplyInfo
+													key={id}
+													head={head}
+													id={id}
+													ingredients={this.state.chefsData.ingredients}
+													gears={this.state.chefsData.gear}
+												/>
 											);
 										})}
 									</Box>
 								</TabContainer>
 							)}
-							{/* This tab is absent in the updated mockup
-							{this.state.chefsData.gear && (
-								<TabContainer dir={theme.direction}>
-									<Box className={classes.subTabsCon}>
-										<ul className={classes.gearul}>
-											{
-												Object.keys(this.state.chefsData.gear.mapValue.fields).map(
-													(data, index) => {
-														return (
-
-															<li key={`ligear-${index}`} >
-																<span
-																	style={{
-																		color: "#ffffff"
-																	}}
-																>
-																	{this.firstLetterToCapital(data)}																				</span>
-															</li>
-														)
-													}
-												)
-											}
-										</ul>
-									</Box>
-								</TabContainer>
-							)} */}
 							{this.state.chefsData.shorthand && (
 								<TabContainer dir={theme.direction}>
-									<Box />
+									<Box className={classes.subTabsCon}>
+										{
+											Object.keys(this.state.chefsData.shorthand.mapValue.fields).map(
+												(head, index) => {
+													return (
+														<ShortHandDesc
+															key={index}
+															head={head}
+															shorthand={this.state.chefsData.shorthand}
+														/>
+													)
+												})
+										}
+									</Box>
 								</TabContainer>
 							)}
 						</SwipeableViews>
