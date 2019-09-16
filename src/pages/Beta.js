@@ -76,6 +76,11 @@ const styles = theme => ({
         textAlign: 'left',
         margin: 0,
         color: 'rgba(255, 255, 255, 0.9)',
+        '& a': {
+            borderBottom: '1px solid rgba(255, 255, 255, 0.8)',
+            textDecoration: 'none',
+            color: 'rgba(255, 255, 255, 0.9)',
+        }
     },
     closeBtn: {
         backgroundColor: '#FF007F',
@@ -104,7 +109,11 @@ const cardData = [
     {
         createdDate: 'August 8th, 2019',
         title: 'CHEF EDWARD LEE’S FIRST LESSON IS LIVE!',
-        content: '<span>We are very excited to share our very first lesson with you! You can now go to chef Edward Lee’s class and watch his first lesson, where he teaches how to make oysters and grits!</span> <span>Watch the lesson and tell us what you think!</span>',
+        content: '<span>We are very excited to share our very first lesson with you! You can now go to <a href="#">chef Edward Lee’s class</a> and watch his first lesson, where he teaches how to make oysters and grits!</span> <span><a href="#">Watch the lesson</a> and tell us what you think!</span>',
+        hyperlinks: [
+            { url: '#', text: "chef Edward Lee's class" },
+            { url: '#', text: "Watch the lesson" }
+        ],
         portfolio: 'assets/images/portfolio1.png',
         portfolioDescription: 'See how cool it looks behind the scenes',
         closeable: true,
@@ -199,12 +208,16 @@ class BetaPage extends Component {
 
                             <TabContainer dir={theme.direction}>
                                 <Box>
-                                    Hello1
-								</Box>
+                                    <div className={classes.tabContent}>
+                                        FEEDBACK
+                                    </div>
+                                </Box>
                             </TabContainer>
                             <TabContainer dir={theme.direction}>
                                 <Box>
-                                    Hello2
+                                    <div className={classes.tabContent}>
+                                        VOTING
+                                    </div>
                                 </Box>
                             </TabContainer>
                         </SwipeableViews>
