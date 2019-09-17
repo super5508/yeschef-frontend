@@ -109,7 +109,7 @@ const cardData = [
     {
         createdDate: 'August 8th, 2019',
         title: 'CHEF EDWARD LEE’S FIRST LESSON IS LIVE!',
-        content: '<span>We are very excited to share our very first lesson with you! You can now go to <a href="#">chef Edward Lee’s class</a> and watch his first lesson, where he teaches how to make oysters and grits!</span> <span><a href="#">Watch the lesson</a> and tell us what you think!</span>',
+        content: '<span>We are very excited to share our very first lesson with you! You can now go to <a href="#" target="_blank">chef Edward Lee’s class</a> and watch his first lesson, where he teaches how to make oysters and grits!</span> <span><a href="#" target="_blank">Watch the lesson</a> and tell us what you think!</span>',
         hyperlinks: [
             { url: '#', text: "chef Edward Lee's class" },
             { url: '#', text: "Watch the lesson" }
