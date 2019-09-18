@@ -26,34 +26,34 @@ import BeforeScene from '../components/BeforeScene'
 const beforeSceneContent = [
 	{
 		id: 1,
-		type: 'horizontal',
+		type: 'image',
 		src: '/images/image1.png',
 		description: 'Ed making bla bla for his lesson',
 		video: null
 	},
 	{
 		id: 2,
-		type: 'horizontal',
+		type: 'image',
 		src: '/images/image2.png',
 		description: 'Chopping something',
 		video: null
 	},
 	{
 		id: 3,
-		type: 'vertical',
+		type: 'image',
 		src: '/images/image3.png',
 		video: null
 	},
 	{
 		id: 4,
 		type: 'video',
-		src: '/images/image4.png',
-		video: '#',
+		poster: '/images/image4.png',
+		src: 'assets/lessons/l01.mp4',
 		description: 'Edward in action',
 	},
 	{
 		id: 5,
-		type: 'horizontal',
+		type: 'image',
 		description: 'Steve is making fire',
 		src: '/images/image5.png',
 	}
