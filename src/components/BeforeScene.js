@@ -22,7 +22,7 @@ const styles = theme => ({
   }
 });
 
-class VideoPlayer extends React.Component {
+class VideoPlayer extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -74,9 +74,9 @@ class VideoPlayer extends React.Component {
         height: "99%",
       }}>
         <video style={{
-          height: '100%',
+          height: '300px',
           width: '100%',
-          objectFit: 'cover'
+          objectFit: 'contain'
         }} ref={node => this.videoNode = node} poster={this.state.poster} className="video-js" ></video>
       </div>
     )
@@ -103,12 +103,18 @@ class BeforeScene extends Component {
                   ) : (
                       <div>
                         <VideoPlayer
-                          poster={item.poster}
-                          autoplay={true}
-                          controls={true}
-                          sources={{
-                            src: item.src,
-                          }}
+                          {
+                          ...{
+                            controls: true,
+                            muted: false,
+                            loadingSpinner: true,
+                            errorDisplay: false,
+                            poster: item.poster,
+                            sources: [{
+                              src: 'https://d1pg94pboqi6wp.cloudfront.net/trailer/index.m3u8'
+                            }],
+                          }
+                          }
                         />
                       </div>
                     )
