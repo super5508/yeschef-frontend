@@ -17,10 +17,47 @@ import InstagramIcon from "../assets/images/instagram-icon.png";
 import FacebookIcon from "../assets/images/facebook-icon.svg";
 import TwitterIcon from "../assets/images/twitter-icon.svg";
 import LessonInfo from "../components/LessonInfo";
-import { Element, animateScroll as scroll, scroller } from "react-scroll";
+import { Element, animateScroll as scroller } from "react-scroll";
 import Header from '../components/Header'
 import indexeddbTools from "./../common/indexeddbTools";
 import BackButton from '../components/BackButton'
+import BeforeScene from '../components/BeforeScene'
+
+const beforeSceneContent = [
+	{
+		id: 1,
+		type: 'horizontal',
+		src: '/images/image1.png',
+		description: 'Ed making bla bla for his lesson',
+		video: null
+	},
+	{
+		id: 2,
+		type: 'horizontal',
+		src: '/images/image2.png',
+		description: 'Chopping something',
+		video: null
+	},
+	{
+		id: 3,
+		type: 'vertical',
+		src: '/images/image3.png',
+		video: null
+	},
+	{
+		id: 4,
+		type: 'video',
+		src: '/images/image4.png',
+		video: '#',
+		description: 'Edward in action',
+	},
+	{
+		id: 5,
+		type: 'horizontal',
+		description: 'Steve is making fire',
+		src: '/images/image5.png',
+	}
+]
 
 function TabContainer({ children, dir }) {
 	return (
@@ -49,6 +86,9 @@ const styles = theme => ({
 			display: "inline-block",
 			margin: 0
 		}
+	},
+	swipeable: {
+		height: 'fit-content'
 	},
 	lessonsContainer: {
 		margin: "3rem 2.4rem"
@@ -210,10 +250,10 @@ class ChefHomePage extends Component {
 	};
 
 	handleScroll = () => {
-    const fixedHeading = window.pageYOffset > this.fixedHeaderAt;
-    if (fixedHeading !== this.state.fixedHeading) {
-    	if (fixedHeading) {
-    		const rem = this.getRem();
+		const fixedHeading = window.pageYOffset > this.fixedHeaderAt;
+		if (fixedHeading !== this.state.fixedHeading) {
+			if (fixedHeading) {
+				const rem = this.getRem();
 				const headerHeight = this.scrollElementsRefs.header.current.offsetHeight;
 				const classTitleHeight = this.scrollElementsRefs.classTitle.current.offsetHeight;
 				const tabRootsTop = this.scrollElementsRefs.tabsRoot.current.offsetTop;
@@ -237,7 +277,7 @@ class ChefHomePage extends Component {
 	};
 
 	forwardRefs = refs => {
-		this.scrollElementsRefs = {...this.scrollElementsRefs, ...refs}
+		this.scrollElementsRefs = { ...this.scrollElementsRefs, ...refs }
 	};
 
 	getRem = () => {
@@ -246,9 +286,9 @@ class ChefHomePage extends Component {
 
 	setFixedHeaderAt = () => {
 		this.fixedHeaderAt = window.innerWidth - this.scrollElementsRefs.classTitle.current.offsetHeight
-				- this.scrollElementsRefs.header.current.offsetTop
-				- this.scrollElementsRefs.header.current.offsetHeight
-				- 0.8 * this.getRem();
+			- this.scrollElementsRefs.header.current.offsetTop
+			- this.scrollElementsRefs.header.current.offsetHeight
+			- 0.8 * this.getRem();
 	};
 
 	scrollToLesson = () => {
@@ -268,15 +308,15 @@ class ChefHomePage extends Component {
 
 		return (
 			<div>
-				<Header gradientBackground={!this.state.fixedHeading} forwardRefs={this.forwardRefs}/>
-				<ClassInfo {...this.state.chefsData} showTrailer={true} noLinkTag fixed fixScroll={this.state.fixedHeading} forwardRefs={this.forwardRefs}/>
+				<Header gradientBackground={!this.state.fixedHeading} forwardRefs={this.forwardRefs} />
+				<ClassInfo {...this.state.chefsData} showTrailer={true} noLinkTag fixed fixScroll={this.state.fixedHeading} forwardRefs={this.forwardRefs} />
 				{/* //left arrow button */}
 				<BackButton />
 
 				{/* //'start the class' button  */}
 				<Box
-						className={classes.btncon + ' ' + (this.state.fixedHeading && classes.fixedBtncon)}
-						style={this.state.fixedHeading ? {top: this.state.fixedPositions.btnconTop} : {}}
+					className={classes.btncon + ' ' + (this.state.fixedHeading && classes.fixedBtncon)}
+					style={this.state.fixedHeading ? { top: this.state.fixedPositions.btnconTop } : {}}
 				>
 					<Link to={this.state.continueWatching ? "lesson/" + this.state.continueWatching : "lesson/1"} style={{ textDecoration: "none" }}>
 						<Button
@@ -295,9 +335,8 @@ class ChefHomePage extends Component {
 						value={this.state.value}
 						onChange={this.handleChange}
 						indicatorColor="primary"
-						variant="fullWidth"
 						classes={{ root: classes.tabsRoot + ' ' + (this.state.fixedHeading ? classes.fixedTabsRoot : '') }}
-						style={this.state.fixedHeading ? {top: this.state.fixedPositions.tabsRootTop} : {}}
+						style={this.state.fixedHeading ? { top: this.state.fixedPositions.tabsRootTop } : {}}
 						ref={this.scrollElementsRefs.tabsRoot}
 					>
 						<Tab
@@ -315,13 +354,20 @@ class ChefHomePage extends Component {
 							}}
 							label="ABOUT"
 						/>
+						<Tab
+							classes={{
+								root: classes.tabRoot,
+								selected: classes.tabSelected
+							}}
+							label="BEFORE THE SCENES"
+						/>
 					</Tabs>
 
 					<SwipeableViews
 						axis={theme.direction === "rtl" ? "x-reverse" : "x"}
 						index={this.state.value}
 						onChangeIndex={this.handleChangeIndex}
-						style={this.state.fixedHeading ? {marginTop: this.state.fixedPositions.tabsMarginTop} : {}}
+						style={this.state.fixedHeading ? { marginTop: this.state.fixedPositions.tabsMarginTop } : {}}
 					>
 						<TabContainer dir={theme.direction}>
 							{/* //class tab */}
@@ -434,7 +480,7 @@ class ChefHomePage extends Component {
 							}
 						</TabContainer>
 
-						<TabContainer dir={theme.direction}>
+						<TabContainer dir={theme.direction} className={classes.swipeable}>
 							{/* //about tab */}
 							{/* //Class description */}
 							<Box className={classes.classDesc}>
@@ -493,6 +539,9 @@ class ChefHomePage extends Component {
 									</IconButton>
 								)}
 							</Box>
+						</TabContainer>
+						<TabContainer dir={theme.direction} className={classes.swipeable}>
+							<BeforeScene section={beforeSceneContent} />
 						</TabContainer>
 					</SwipeableViews>
 				</div>
