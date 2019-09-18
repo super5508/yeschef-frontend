@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 import { withRouter, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
@@ -8,7 +7,8 @@ import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import HomeIcon from '@material-ui/icons/HomeRounded'
 import PersonIcon from '@material-ui/icons/PersonRounded'
 import CommunityIcon from '@material-ui/icons/Forum'
-import BetaIcon from '@material-ui/icons/ChatBubble'
+import BetaIcon from '../assets/images/beta.svg'
+import BetaIconWhite from '../assets/images/beta-white.svg'
 import Box from '@material-ui/core/Box';
 
 const styles = theme => ({
@@ -32,8 +32,11 @@ const styles = theme => ({
 
         '& .Mui-selected': {
             fontWeight: '600'
-        }
+        },
 
+        '& .beta-icon': {
+            width: 32
+        }
     },
 
 });
@@ -41,8 +44,15 @@ const styles = theme => ({
 class BottomBar extends Component {
     constructor(props) {
         super(props);
+        this.state = { beta: false };
     }
 
+    handleChange = (event, value) => {
+        if (value === 'beta')
+            this.setState({ beta: true });
+        else
+            this.setState({ beta: false });
+    };
 
     render() {
         const { classes } = this.props;
@@ -61,6 +71,7 @@ class BottomBar extends Component {
                         value={navValue}
                         showLabels
                         className={classes.root}
+                        onChange={this.handleChange}
                     >
                         <BottomNavigationAction
                             label="Home"
@@ -79,7 +90,9 @@ class BottomBar extends Component {
                         <BottomNavigationAction
                             label="Beta"
                             value='beta'
-                            icon={<BetaIcon />}
+                            icon={
+                                this.state.beta ? <img src={BetaIcon} className="beta-icon" alt='beta'></img> : <img src={BetaIconWhite} className="beta-icon" alt='beta'></img>
+                            }
                             component={Link}
                             to="/beta" />
                         <BottomNavigationAction
