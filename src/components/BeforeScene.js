@@ -39,6 +39,10 @@ class VideoPlayer extends Component {
     });
     console.log(this.player);
 
+    this.player.on('ended', () => {
+      this.player.load();
+    })
+
     this.player.on('touchstart', this.playPauseVideo)
   }
 
