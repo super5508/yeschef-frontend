@@ -21,9 +21,9 @@ import { Element, animateScroll as scroller } from "react-scroll";
 import Header from '../components/Header'
 import indexeddbTools from "./../common/indexeddbTools";
 import BackButton from '../components/BackButton'
-import BeforeScene from '../components/BeforeScene'
+import BehindScene from '../components/BehindScene'
 
-const beforeSceneContent = [
+const behindSceneContent = [
 	{
 		id: 1,
 		type: 'image',
@@ -128,7 +128,10 @@ const styles = theme => ({
 		marginTop: 0
 	},
 	tabsRoot: {
-		borderBottom: "0.01rem solid #929292"
+		borderBottom: "0.01rem solid #929292",
+		"& .MuiTabs-flexContainer": {
+			justifyContent: "space-evenly"
+		}
 	},
 	tabRoot: {
 		color: "#929292",
@@ -356,7 +359,7 @@ class ChefHomePage extends Component {
 								root: classes.tabRoot,
 								selected: classes.tabSelected
 							}}
-							label="BEFORE THE SCENES"
+							label="BEHIND THE SCENES"
 						/>
 					</Tabs>
 
@@ -538,7 +541,7 @@ class ChefHomePage extends Component {
 							</Box>
 						</TabContainer>
 						<TabContainer dir={theme.direction} className={classes.swipeable}>
-							<BeforeScene section={beforeSceneContent} />
+							<BehindScene section={behindSceneContent} />
 						</TabContainer>
 					</SwipeableViews>
 				</div>
