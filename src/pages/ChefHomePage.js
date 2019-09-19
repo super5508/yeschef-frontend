@@ -29,20 +29,17 @@ const beforeSceneContent = [
 		type: 'image',
 		src: '/images/image1.png',
 		description: 'Ed making bla bla for his lesson',
-		video: null
 	},
 	{
 		id: 2,
 		type: 'image',
 		src: '/images/image2.png',
 		description: 'Chopping something',
-		video: null
 	},
 	{
 		id: 3,
 		type: 'image',
 		src: '/images/image3.png',
-		video: null
 	},
 	{
 		id: 4,
