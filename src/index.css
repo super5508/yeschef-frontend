@@ -232,3 +232,23 @@ ul li::before {
   right: 2.4rem;
   z-index: 15;
 }
+
+.vjs-poster {
+  background-size: cover;
+  height: 100%;
+  filter: brightness(0.4);
+}
+
+div[data-vjs-player] {
+  margin-top: 1px;
+}
+
+.vjs-big-play-button {
+  font-size: 6em !important;
+  line-height: 1.5em !important;
+  top: calc(50% - 3rem) !important;
+  left: calc(50% - 3rem) !important;
+  border: none !important;
+  background: none !important;
+  width: unset !important;
+}

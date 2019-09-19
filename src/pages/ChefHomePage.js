@@ -48,7 +48,7 @@ const beforeSceneContent = [
 		id: 4,
 		type: 'video',
 		poster: '/images/image4.png',
-		src: 'assets/lessons/l01.mp4',
+		src: '/assets/lessons/l01.mp4',
 		description: 'Edward in action',
 	},
 	{

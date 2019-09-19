@@ -14,6 +14,9 @@ const styles = theme => ({
   itemContainer: {
     paddingTop: '2.3rem',
     fontSize: 16,
+    '.vjs-container': {
+      backgroundSize: 'cover'
+    }
   },
   description: {
     color: '#FFFFFF',
@@ -34,6 +37,7 @@ class VideoPlayer extends Component {
     // instantiate Video.js
     this.player = videojs(this.videoNode, this.props, function onPlayerReady() {
     });
+    console.log(this.player);
 
     this.player.on('touchstart', this.playPauseVideo)
   }
@@ -71,12 +75,13 @@ class VideoPlayer extends Component {
     return (
       <div data-vjs-player style={{
         width: "100%",
-        height: "99%",
+        height: "240px",
+        backgroundSize: "cover",
       }}>
         <video style={{
-          height: '300px',
+          height: '240px',
           width: '100%',
-          objectFit: 'contain'
+          objectFit: 'cover'
         }} ref={node => this.videoNode = node} poster={this.state.poster} className="video-js" ></video>
       </div>
     )
@@ -111,7 +116,7 @@ class BeforeScene extends Component {
                             errorDisplay: false,
                             poster: item.poster,
                             sources: [{
-                              src: 'https://d1pg94pboqi6wp.cloudfront.net/trailer/index.m3u8'
+                              src: item.src
                             }],
                           }
                           }
