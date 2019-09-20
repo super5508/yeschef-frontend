@@ -92,7 +92,7 @@ class VideoPlayer extends Component {
   }
 }
 
-class BeforeScene extends Component {
+class BehindScene extends Component {
 
   render() {
     const { classes, section } = this.props;
@@ -144,4 +144,4 @@ class BeforeScene extends Component {
   }
 }
 
-export default withStyles(styles, { withTheme: true })(BeforeScene);
+export default withStyles(styles, { withTheme: true })(BehindScene);
