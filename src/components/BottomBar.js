@@ -6,7 +6,6 @@ import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import HomeIcon from '@material-ui/icons/HomeRounded'
 import PersonIcon from '@material-ui/icons/PersonRounded'
-import CommunityIcon from '@material-ui/icons/Forum'
 import BetaIcon from '../assets/images/beta.svg'
 import BetaIconWhite from '../assets/images/beta-white.svg'
 import Box from '@material-ui/core/Box';
@@ -79,13 +78,6 @@ class BottomBar extends Component {
                             icon={<HomeIcon />}
                             component={Link}
                             to="/home" />
-
-                        <BottomNavigationAction
-                            label="Community"
-                            value='community'
-                            icon={<CommunityIcon />}
-                            component={Link}
-                            to="/community" />
 
                         <BottomNavigationAction
                             label="Beta"
