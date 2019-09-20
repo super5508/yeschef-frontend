@@ -7,75 +7,83 @@ import CardContent from '@material-ui/core/CardContent';
 const cardStyle = {
   backgroundColor: '#1E1E1E',
   borderRadius: 8,
-  margin: '2.4rem 1.2rem'
+  margin: '2.4rem 1.2rem',
+  height: 'calc(100vh - 266px - 4.8rem)',
+  display: 'flex',
+  flexDirection: 'column'
 }
 
 const cardContent = {
   padding: '2.3rem',
+  flex: 1,
+  overflow: 'auto',
+}
+
+const cardTitle = {
+  fontSize: 20,
+  fontWeight: 600
 }
 
 const cardAction = {
+  height: 'auto',
   backgroundColor: '#262626',
-  padding: '2.3rem'
+  padding: '2.3rem',
+  flexDirection: 'column',
+  alignItems: 'flex-start',
+}
+
+const proTipStyle = {
+  margin: 0,
+  fontSize: 14,
+  color: 'rgba(255,255,255)',
+}
+
+const proTipcontentStyle = {
+  margin: 0,
+  fontSize: 20,
+  color: '#fff',
+  fontWeight: 300
 }
 
 class StepCard extends Component {
 
-  handleMouseDown = (evt) => {
-    console.log('Down')
-  }
-
   render() {
     const settings = {
-      infinite: true,
+      infinite: false,
       dots: false,
       slidesToShow: 1,
       centerMode: true,
-      centerPadding: '40px',
+      centerPadding: '30px',
     };
-    const { onSwipe } = this.props;
+
+    const { items } = this.props;
+
     return (
-      <Slider {...settings} onMouseDown={() => onSwipe(true)} onMouseUp={() => onSwipe(false)}>
-        <div>
-          <Card style={cardStyle}>
-            <CardContent style={cardContent}>
-              Word of the Day #1
-            </CardContent>
-            <CardActions style={cardAction}>
-              Actions
-            </CardActions>
-          </Card>
-        </div>
-        <div>
-          <Card style={cardStyle}>
-            <CardContent style={cardContent}>
-              Word of the Day #2
-            </CardContent>
-            <CardActions style={cardAction}>
-              Actions
-            </CardActions>
-          </Card>
-        </div>
-        <div>
-          <Card style={cardStyle}>
-            <CardContent style={cardContent}>
-              Word of the Day #3
-            </CardContent>
-            <CardActions style={cardAction}>
-              Actions
-            </CardActions>
-          </Card>
-        </div>
-        <div>
-          <Card style={cardStyle}>
-            <CardContent style={cardContent}>
-              Word of the Day #4
-            </CardContent>
-            <CardActions style={cardAction}>
-              Actions
-            </CardActions>
-          </Card>
-        </div>
+      <Slider {...settings}>
+        {
+          items.map(item => {
+            return (
+              <div key={item.id}>
+                <Card style={cardStyle}>
+                  <CardContent style={cardContent}>
+                    <h2 style={cardTitle}>{item.title}</h2>
+                    <p style={proTipcontentStyle}>
+                      {item.content}
+                    </p>
+                  </CardContent>
+                  {
+                    item.proTip ? (
+                      <CardActions style={cardAction}>
+                        <h4 style={proTipStyle}>PRO-TIP</h4>
+                        <span style={proTipcontentStyle}>{item.proTip}</span>
+                      </CardActions>
+                    ) : null
+                  }
+                </Card>
+              </div>
+            )
+          })
+        }
       </Slider>
     )
   }

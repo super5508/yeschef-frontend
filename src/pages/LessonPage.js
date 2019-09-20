@@ -210,11 +210,38 @@ const styles = theme => ({
 		padding: '1.2rem',
 	},
 	sendFeebackButton: {
-		width: '8.1rem',
+		width: '2.3rem',
 		height: '3.6rem',
 		float: 'right',
 	}
 });
+
+const receipeItems =
+	[
+		{
+			id: 0,
+			title: 'Scrape ginger with a spoon',
+			content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+			proTip: 'Hold spoon with first finger and thumbs at base of ginger then scrape.',
+		},
+		{
+			id: 1,
+			title: 'Scrape ginger with 2 spoons',
+			content: '2nd step'
+		},
+		{
+			id: 2,
+			title: 'Scrape ginger with 3 spoons',
+			content: '3rd step',
+			proTip: 'Hold spoon with first finger and thumbs at base of ginger then scrape. #3',
+		},
+		{
+			id: 3,
+			title: 'Scrape ginger with 4 spoons',
+			content: '4th step',
+			proTip: 'Hold spoon with first finger and thumbs at base of ginger then scrape. #4',
+		}
+	];
 
 class LessonPage extends Component {
 	constructor(props, context) {
@@ -367,6 +394,28 @@ class LessonPage extends Component {
 
 	handleChange = (event, value) => {
 		this.setState({ value });
+		if (value === 4) {
+			console.log('Right', value)
+			this.setState({
+				swipeDisabled: true
+			});
+		} else {
+			this.setState({
+				swipeDisabled: false
+			});
+		}
+	};
+
+	handleChangeIndex = (event, value) => {
+		if (value === 3) {
+			this.setState({
+				swipeDisabled: true
+			});
+		} else {
+			this.setState({
+				swipeDisabled: false
+			});
+		}
 	};
 
 	toggleVideo = () => {
@@ -378,14 +427,6 @@ class LessonPage extends Component {
 	addHideOnPlayClass = classes => {
 		return classes + (this.state.isPlaying ? ' hide_on_play' : '');
 	};
-
-	setSwipeable = (disabled) => {
-		console.log("============")
-		this.setState({
-			swipeDisabled: disabled
-		});
-		console.log(this.state.swipeDisabled)
-	}
 
 	render = () => {
 		const { classes, theme } = this.props;
@@ -575,7 +616,7 @@ class LessonPage extends Component {
 
 							<TabContainer dir={theme.direction}>
 								<Box>
-									<StepCard onSwipe={(swipeable) => console.log(swipeable)} />
+									<StepCard items={receipeItems} />
 								</Box>
 							</TabContainer>
 						</SwipeableViews>
