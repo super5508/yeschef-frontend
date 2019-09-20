@@ -7,6 +7,8 @@ import * as serviceWorker from './serviceWorker';
 import store from './store/Store'
 import { signin, signout } from './store/actionCreators/UserActionCreators';
 
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 ReactDOM.render(
   <Provider store={store}>

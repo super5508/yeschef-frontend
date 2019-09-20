@@ -232,3 +232,15 @@ ul li::before {
   right: 2.4rem;
   z-index: 15;
 }
+
+.react-swipeable-view-container > div[aria-hidden="false"] {
+  height: 100%;
+}
+
+.react-swipeable-view-container > div[aria-hidden="true"] {
+  height: 0;
+}
+
+div[tabindex~="-1"] {
+  outline: 0;
+}

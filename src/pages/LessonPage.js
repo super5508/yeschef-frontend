@@ -17,6 +17,7 @@ import Header from "../components/Header";
 import BackButton from "../components/BackButton";
 import SupplyInfo from '../components/Supplies';
 import ShortHandDesc from '../components/ShortHandDesc';
+import StepCard from '../components/StepCard';
 
 function TabContainer({ children, dir }) {
 	return (
@@ -236,7 +237,8 @@ class LessonPage extends Component {
 			handsonText: "",
 			TotalText: "",
 			feedbackText: "",
-			currentVideoTime: 0
+			currentVideoTime: 0,
+			swipeDisabled: false,
 		};
 
 		Axios.get(`/api/class/${this.props.match.params.classId}/lesson/${this.props.match.params.lessonNum - 1}`).then(chefInfoResponse => {
@@ -377,6 +379,14 @@ class LessonPage extends Component {
 		return classes + (this.state.isPlaying ? ' hide_on_play' : '');
 	};
 
+	setSwipeable = (disabled) => {
+		console.log("============")
+		this.setState({
+			swipeDisabled: disabled
+		});
+		console.log(this.state.swipeDisabled)
+	}
+
 	render = () => {
 		const { classes, theme } = this.props;
 		const { chefsData } = this.state
@@ -464,11 +474,19 @@ class LessonPage extends Component {
 									label="SHORTHAND"
 								/>
 							)}
+							<Tab
+								classes={{
+									root: classes.tabRoot,
+									selected: classes.tabSelected
+								}}
+								label="STEPS"
+							/>
 						</Tabs>
 						<SwipeableViews
 							axis={theme.direction === "rtl" ? "x-reverse" : "x"}
 							index={this.state.value}
 							onChangeIndex={this.handleChangeIndex}
+							disabled={this.state.swipeDisabled}
 						>
 							<TabContainer dir={theme.direction}>
 								<Box>
@@ -554,6 +572,12 @@ class LessonPage extends Component {
 									</Box>
 								</TabContainer>
 							)}
+
+							<TabContainer dir={theme.direction}>
+								<Box>
+									<StepCard onSwipe={(swipeable) => console.log(swipeable)} />
+								</Box>
+							</TabContainer>
 						</SwipeableViews>
 					</div>
 				</div>
