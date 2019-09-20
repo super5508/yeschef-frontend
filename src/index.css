@@ -248,3 +248,8 @@ div[tabindex~="-1"] {
 .slick-arrow {
   display: none !important;
 }
+
+.slick-active .MuiPaper-root {
+  margin: 1.2rem 1.2rem !important;
+  height: calc((100vh - 266px) - 2.4rem) !important;
+}
