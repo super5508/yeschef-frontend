@@ -395,7 +395,6 @@ class LessonPage extends Component {
 	handleChange = (event, value) => {
 		this.setState({ value });
 		if (value === 4) {
-			console.log('Right', value)
 			this.setState({
 				swipeDisabled: true
 			});
