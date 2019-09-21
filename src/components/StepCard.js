@@ -8,7 +8,7 @@ const cardStyle = {
   backgroundColor: '#1E1E1E',
   borderRadius: 8,
   margin: '2.4rem 1.2rem',
-  height: 'calc(100vh - 272px - 4.8rem)',
+  height: 'calc(100vh - 276px - 4.8rem)',
   display: 'flex',
   flexDirection: 'column'
 }
