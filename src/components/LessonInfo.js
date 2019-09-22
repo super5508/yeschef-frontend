@@ -82,7 +82,7 @@ class LessonInfo extends Component {
 		const min = parseInt(duration.split(':')[0], 10);
 		const sec = parseInt(duration.split(':')[1], 10);
 		const total = min * 60 + sec;
-		const now = parseInt(progress.split(':')[0], 10) * 60 + parseInt(progress.split(':')[0], 10);
+		const now = parseInt(progress.split(':')[0], 10) * 60 + parseInt(progress.split(':')[1], 10);
 		return 100 * now / total;
 	}
 
