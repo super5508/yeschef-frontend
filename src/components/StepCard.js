@@ -8,7 +8,6 @@ const cardStyle = {
   backgroundColor: '#1E1E1E',
   borderRadius: 8,
   margin: '2.4rem 1.2rem',
-  height: 'calc(100vh - 276px - 4.8rem)',
   display: 'flex',
   flexDirection: 'column'
 }
@@ -47,6 +46,23 @@ const proTipcontentStyle = {
 
 class StepCard extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      videoHeight: 0,
+    };
+  }
+
+  resizeVideoContainer = () => {
+    const node = document.getElementsByClassName("LessonPage-video_overlay-4")[0];
+    this.setState({ videoHeight: node.clientHeight });
+  }
+
+  componentDidMount() {
+    this.resizeVideoContainer();
+    window.addEventListener('resize', this.resizeVideoContainer);
+  }
+
   render() {
     const settings = {
       infinite: false,
@@ -57,6 +73,7 @@ class StepCard extends Component {
     };
 
     const { items } = this.props;
+    const { videoHeight } = this.state;
 
     return (
       <Slider {...settings}>
@@ -64,7 +81,7 @@ class StepCard extends Component {
           items.map(item => {
             return (
               <div key={item.id}>
-                <Card style={cardStyle}>
+                <Card style={{ ...cardStyle, height: `calc(100vh - ` + videoHeight + `px - 60px - 4.8rem)` }}>
                   <CardContent style={cardContent}>
                     <h2 style={cardTitle}>{item.title}</h2>
                     <p style={proTipcontentStyle}>
