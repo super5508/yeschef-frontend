@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 const styles = theme => ({
 	lessonInfoCon: {
 		display: "flex",
 		marginBottom: "0.9rem",
+		position: 'relative',
 		"& img": {
 			width: "16.7rem",
 			height: "9.5rem",
@@ -17,7 +19,12 @@ const styles = theme => ({
 		},
 		"& h3": {
 			margin: "0rem"
-		}
+		},
+	},
+	progress: {
+		width: '16.7rem',
+		top: 'calc(9.5rem - 4px)',
+		position: 'absolute',
 	},
 	duration: {
 		position: "relative",
@@ -67,7 +74,7 @@ class LessonInfo extends Component {
 	}
 
 	render() {
-		const { classes } = this.props;
+		const { classes, curProgress } = this.props;
 		return (
 			<Box
 				className={classes.lessonInfoCon}
@@ -101,6 +108,9 @@ class LessonInfo extends Component {
 							{this.props.duration}
 						</div>
 					)}
+					<div className={classes.progress}>
+						<LinearProgress value="10" variant="determinate" />
+					</div>
 				</div>
 				<div>
 					<p className={classes.lessonListLabel}>Lesson {this.props.lessonNum}</p>

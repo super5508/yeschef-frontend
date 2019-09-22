@@ -56,6 +56,13 @@ const behindSceneContent = [
 	}
 ]
 
+const curProgresses = [
+	{
+		min: 7,
+		sec: 30
+	}
+];
+
 function TabContainer({ children, dir }) {
 	return (
 		<div component="div" dir={dir}>
@@ -434,6 +441,7 @@ class ChefHomePage extends Component {
 													}
 													history={this.props.history}
 													match={this.props.match}
+													curProgress={curProgresses[id]}
 												/>
 											</Element>
 										);
