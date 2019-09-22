@@ -57,10 +57,7 @@ const behindSceneContent = [
 ]
 
 const curProgresses = [
-	{
-		min: 7,
-		sec: 30
-	}
+	"7:30"
 ];
 
 function TabContainer({ children, dir }) {

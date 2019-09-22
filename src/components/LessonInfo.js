@@ -59,6 +59,11 @@ const styles = theme => ({
 		lineHeight: 'normal',
 		letterSpacing: 'normal',
 		color: '#ffffff',
+	},
+
+	loadingBar: {
+		color: '#FF007F',
+		backgroundColor: '#FFFFFF',
 	}
 });
 
@@ -73,8 +78,16 @@ class LessonInfo extends Component {
 		};
 	}
 
+	getCurProgress = (duration, progress) => {
+		const min = parseInt(duration.split(':')[0], 10);
+		const sec = parseInt(duration.split(':')[1], 10);
+		const total = min * 60 + sec;
+		const now = parseInt(progress.split(':')[0], 10) * 60 + parseInt(progress.split(':')[0], 10);
+		return 100 * now / total;
+	}
+
 	render() {
-		const { classes, curProgress } = this.props;
+		const { classes, curProgress, duration } = this.props;
 		return (
 			<Box
 				className={classes.lessonInfoCon}
@@ -109,7 +122,7 @@ class LessonInfo extends Component {
 						</div>
 					)}
 					<div className={classes.progress}>
-						<LinearProgress value="10" variant="determinate" />
+						<LinearProgress value={this.getCurProgress(duration, curProgress)} variant="determinate" className={classes.loadingBar} />
 					</div>
 				</div>
 				<div>
