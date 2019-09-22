@@ -121,9 +121,13 @@ class LessonInfo extends Component {
 							{this.props.duration}
 						</div>
 					)}
-					<div className={classes.progress}>
-						<LinearProgress value={this.getCurProgress(duration, curProgress)} variant="determinate" className={classes.loadingBar} />
-					</div>
+					{
+						this.getCurProgress(duration, curProgress) !== 0 && (
+							<div className={classes.progress}>
+								<LinearProgress value={this.getCurProgress(duration, curProgress)} variant="determinate" className={classes.loadingBar} />
+							</div>
+						)
+					}
 				</div>
 				<div>
 					<p className={classes.lessonListLabel}>Lesson {this.props.lessonNum}</p>
