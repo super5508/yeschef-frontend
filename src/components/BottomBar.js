@@ -6,7 +6,6 @@ import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import HomeIcon from '@material-ui/icons/HomeRounded'
 import PersonIcon from '@material-ui/icons/PersonRounded'
-import CommunityIcon from '@material-ui/icons/Forum'
 import BetaIcon from '../assets/images/beta.svg'
 import BetaIconWhite from '../assets/images/beta-white.svg'
 import Box from '@material-ui/core/Box';
@@ -58,7 +57,7 @@ class BottomBar extends Component {
         const { classes } = this.props;
         let dom;
         const pathname = this.props.location.pathname;
-        const isBottomBarVisible = pathname.slice(0, 6) !== "/class" && pathname.slice(0, 7) !== "/lesson" && pathname !== "/" && pathname !== "/change-password" && pathname !== "/reset-password" && pathname !== "/change-email";
+        const isBottomBarVisible = pathname.slice(0, 7) !== "/lesson" && pathname !== "/" && pathname !== "/change-password" && pathname !== "/reset-password" && pathname !== "/change-email";
         let navValue = pathname === '/' ? 'home' : pathname.slice(1)
         if (navValue === 'account') {
             navValue = 'myProfile'
@@ -79,13 +78,6 @@ class BottomBar extends Component {
                             icon={<HomeIcon />}
                             component={Link}
                             to="/home" />
-
-                        <BottomNavigationAction
-                            label="Community"
-                            value='community'
-                            icon={<CommunityIcon />}
-                            component={Link}
-                            to="/community" />
 
                         <BottomNavigationAction
                             label="Beta"
