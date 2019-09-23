@@ -98,7 +98,7 @@ const styles = theme => ({
     "& strong": {
       fontWeight: 600
     },
-    borderBottom: '1px solid #FFFFFF',
+    borderBottom: '1px solid #FFFFFF55',
     "& h4": {
       paddingLeft: 12,
       marginLeft: 8,
@@ -202,7 +202,7 @@ class BillingComponent extends Component {
                 {
                   user.annuals.map((annual, idx) => {
                     return (
-                      <div className={classes.annual} key={idx} style={{ borderBottom: '1px solid #FFFFFF55' }}>
+                      <div className={classes.annual} key={idx}>
                         <span><strong>{annual.date}</strong> <h4>{annual.title}</h4></span>
                         <strong>${annual.price}</strong>
                       </div>
