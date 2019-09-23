@@ -1,12 +1,15 @@
 import React, { Component } from "react";
+import { Link } from 'react-router-dom';
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
+import Card from '@material-ui/core/Card';
 import UserIcon from "@material-ui/icons/Person";
 import Avatar from "@material-ui/core/Avatar";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import clsx from "clsx";
+import Button from "@material-ui/core/Button";
 
 const styles = theme => ({
   setCon: {
@@ -16,7 +19,8 @@ const styles = theme => ({
     marginTop: '7.5rem',
     "& h2": {
       marginTop: "0.7rem"
-    }
+    },
+    height: 'auto',
   },
   setImg: {
     height: "10rem",
@@ -35,55 +39,47 @@ const styles = theme => ({
     marginTop: "0.5rem",
     display: "block"
   },
-  listCon: {
-    margin: '2.5rem 0rem',
-    "& h4": {
-      cursor: "pointer"
+  subscribed: {
+    padding: '2.4rem',
+    position: 'relative',
+    flex: 1,
+    paddingBottom: 0,
+  },
+  subscriptionCard: {
+    backgroundColor: '#1E1E1E',
+    borderRadius: 8,
+    padding: '2.4rem',
+    display: 'flex',
+    flexDirection: 'column',
+    margin: '2.4rem 0',
+    "& h3": {
+      color: '#FFFFFF',
+      fontSize: 16,
+      fontWeight: 300,
     },
-    "& h1": {
-      paddingLeft: '2.4rem',
-      paddingBottom: '1.6rem'
+    "& h4": {
+      color: '#FFFFFF',
+      fontSize: 16,
+      fontWeight: 600
     }
   },
-  lstItem: {
+  submitButton: {
+    position: 'relative',
+  },
+  wrapper: {
+    display: 'flex',
+    height: 'calc(100vh - 72px)',
+    flexDirection: 'column',
+  },
+  flexBetween: {
     display: 'flex',
     justifyContent: 'space-between',
-    borderTop: '1px solid #7f7f7f',
-    paddingLeft: '2.4rem',
-    paddingRight: '2.4rem',
-    paddingTop: '1.7rem',
-    paddingBottom: '1.7rem'
-  },
-  bottomBorder: {
-    borderBottom: '0.09rem solid #7f7f7f',
-  },
-  forwardIcon: {
-    fontSize: '1.2rem'
-  },
-  providerIconWrapper: {
-    float: 'left',
-    width: '3.5rem',
-    height: '3.5rem',
-    borderRadius: '50%',
-    marginTop: '-0.7rem',
-    position: 'absolute',
-    '&.white-bg': {
-      backgroundColor: 'white',
-    },
-  },
-  facebookLogo: {
-    width: '100%',
+    flexDirection: 'column',
     height: '100%',
-  },
-  googleLogo: {
-    width: '50%',
-    height: '50%',
-    margin: '25%'
-  },
-  loggedInWithText: {
-    marginLeft: '4.7rem'
   }
 });
+
+const subScriptionState = 0;
 
 class AccountComponent extends Component {
   constructor(props) {
@@ -95,7 +91,7 @@ class AccountComponent extends Component {
     const { classes } = this.props;
 
     return (
-      <Box>
+      <Box className={classes.wrapper}>
         {this.props.authStat && this.props.authStat.userProfile && (
           <Box className={classes.setCon}>
             {this.props.authStat.userProfile.photoURL ? (
@@ -126,8 +122,21 @@ class AccountComponent extends Component {
             </div>
           </Box>
         )}
-        <Box className={classes.listCon}>
-          <h1>Billing Details</h1>
+        <Box className={classes.subscribed}>
+          <div className={classes.flexBetween}>
+            <div>
+              <h1>Billing Details</h1>
+              <Card className={classes.subscriptionCard}>
+                <h3>YOUR SUBSCRIPTION</h3>
+                <h4>You don't have a YesChef subscription yet</h4>
+              </Card>
+            </div>
+            <Button component={Link} to={'/'} size="large" variant="contained" color="primary" className={classes.submitButton}>
+              <Box fontWeight="fontWeightBold" fontSize="1.4rem">
+                CHECK OUT EARLY BIRD PLANS
+              </Box>
+            </Button>
+          </div>
         </Box>
       </Box>
     );
