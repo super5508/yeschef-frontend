@@ -45,6 +45,10 @@ const styles = theme => ({
     flex: 1,
     paddingBottom: 0,
   },
+  pageContent: {
+    padding: '2.4rem',
+    paddingBottom: 0,
+  },
   subscriptionCard: {
     backgroundColor: '#1E1E1E',
     borderRadius: 8,
@@ -56,11 +60,18 @@ const styles = theme => ({
       color: '#FFFFFF',
       fontSize: 16,
       fontWeight: 300,
+      marginBottom: 6,
     },
     "& h4": {
       color: '#FFFFFF',
       fontSize: 16,
-      fontWeight: 600
+      fontWeight: 600,
+      marginBottom: 6,
+    },
+    "& h5": {
+      color: '#929292',
+      fontSize: 14,
+      fontWeight: 300,
     }
   },
   submitButton: {
@@ -76,10 +87,43 @@ const styles = theme => ({
     justifyContent: 'space-between',
     flexDirection: 'column',
     height: '100%',
+  },
+  annual: {
+    padding: '2.4rem',
+    display: 'flex',
+    justifyContent: 'space-between',
+    fontSize: 16,
+    color: '#FFFFFF',
+    fontWeight: 300,
+    "& strong": {
+      fontWeight: 600
+    },
+    borderBottom: '1px solid #FFFFFF',
+    "& h4": {
+      paddingLeft: 12,
+      marginLeft: 8,
+      display: 'inline-block',
+      fontSize: 14,
+      borderLeft: '1px solid #FFFFFF55',
+      fontWeight: 300
+    }
   }
 });
 
-const subScriptionState = 0;
+const user = {
+  annuals: [
+    {
+      title: 'Annual - Early Bird',
+      date: '10/09/2019',
+      price: 49.99,
+    },
+    {
+      title: 'Annual',
+      date: '10/09/2020',
+      price: 99.99,
+    }
+  ]
+}
 
 class AccountComponent extends Component {
   constructor(props) {
@@ -122,22 +166,52 @@ class AccountComponent extends Component {
             </div>
           </Box>
         )}
-        <Box className={classes.subscribed}>
-          <div className={classes.flexBetween}>
-            <div>
-              <h1>Billing Details</h1>
-              <Card className={classes.subscriptionCard}>
-                <h3>YOUR SUBSCRIPTION</h3>
-                <h4>You don't have a YesChef subscription yet</h4>
-              </Card>
+        {user.annuals.length === 0 ? (
+          <Box className={classes.subscribed}>
+            <div className={classes.flexBetween}>
+              <div>
+                <h1>Billing Details</h1>
+                <Card className={classes.subscriptionCard}>
+                  <h3>YOUR SUBSCRIPTION</h3>
+                  <h4>You don't have a YesChef subscription yet</h4>
+                </Card>
+              </div>
+              <a href={'https://yeschef.me/early-bird/plans'} target="_blank" style={{ textDecoration: 'none' }}>
+                <Button size="large" variant="contained" color="primary" className={classes.submitButton}>
+                  <Box fontWeight="fontWeightBold" fontSize="1.4rem">
+                    CHECK OUT EARLY BIRD PLANS
+                  </Box>
+                </Button>
+              </a>
             </div>
-            <Button component={Link} to={'/'} size="large" variant="contained" color="primary" className={classes.submitButton}>
-              <Box fontWeight="fontWeightBold" fontSize="1.4rem">
-                CHECK OUT EARLY BIRD PLANS
+          </Box>
+        ) : (
+            <>
+              <Box className={classes.pageContent}>
+                <h1>Billing Details</h1>
+                <Card className={classes.subscriptionCard}>
+                  <h3>YOUR SUBSCRIPTION</h3>
+                  <h4>{user.annuals[user.annuals.length - 1].title}</h4>
+                  <h5>{
+                    user.annuals.length === 1 ? "* Your subscription doesn't start until we launch"
+                      : `Renewal Date: ${user.annuals[user.annuals.length - 1].date}`
+                  }</h5>
+                </Card>
               </Box>
-            </Button>
-          </div>
-        </Box>
+              <Box className={classes.annualContent} style={{ borderTop: '1px solid #FFFFFF55' }}>
+                {
+                  user.annuals.map((annual, idx) => {
+                    return (
+                      <div className={classes.annual} key={idx} style={{ borderBottom: '1px solid #FFFFFF55' }}>
+                        <span><strong>{annual.date}</strong> <h4>{annual.title}</h4></span>
+                        <strong>${annual.price}</strong>
+                      </div>
+                    )
+                  })
+                }
+              </Box>
+            </>
+          )}
       </Box>
     );
   }
