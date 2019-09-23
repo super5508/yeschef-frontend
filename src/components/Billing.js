@@ -107,6 +107,10 @@ const styles = theme => ({
       borderLeft: '1px solid #FFFFFF55',
       fontWeight: 300
     }
+  },
+  annualContent: {
+    display: 'flex',
+    flexDirection: 'column-reverse',
   }
 });
 
