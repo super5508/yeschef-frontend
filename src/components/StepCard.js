@@ -54,8 +54,8 @@ class StepCard extends Component {
   }
 
   resizeVideoContainer = () => {
-    const node = document.getElementsByClassName("LessonPage-video_overlay-4")[0];
-    this.setState({ videoHeight: node.clientHeight });
+    const node = document.getElementById("hero-video");
+    this.setState({ videoHeight: node.clientHeight || 0 });
   }
 
   componentDidMount() {

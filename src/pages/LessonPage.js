@@ -442,7 +442,7 @@ class LessonPage extends Component {
 		return (
 			<Box>
 				<Paper className={classes.container2}>
-					<div className={classes.video_container}>
+					<div className={classes.video_container} id="hero-video">
 						{this.state.videoSrc &&
 							<VideoPlayer {...videoJsOptions}
 								isPlaying={this.state.isPlaying}
