@@ -8,7 +8,7 @@ import Billing from '../components/Billing'
 import Snackbar from '@material-ui/core/Snackbar';
 import BackButton from '../components/BackButton'
 
-class AccountPage extends Component {
+class BillingPage extends Component {
   constructor() {
     super();
     this.state = {
@@ -78,4 +78,4 @@ const mapStateToProps = (state, ownProps) => {
     ...state.user
   };
 };
-export default withRouter(connect(mapStateToProps)(AccountPage));
+export default withRouter(connect(mapStateToProps)(BillingPage));

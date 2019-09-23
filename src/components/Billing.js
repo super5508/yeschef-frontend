@@ -125,7 +125,7 @@ const user = {
   ]
 }
 
-class AccountComponent extends Component {
+class BillingComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -217,7 +217,7 @@ class AccountComponent extends Component {
   }
 }
 
-AccountComponent.propTypes = {
+BillingComponent.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
@@ -228,5 +228,5 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 export default withRouter(
-  connect(mapStateToProps)(withStyles(styles)(AccountComponent))
+  connect(mapStateToProps)(withStyles(styles)(BillingComponent))
 );
