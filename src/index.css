@@ -188,7 +188,7 @@ ul li::before {
 .numbering {
   counter-reset: item;
   list-style: none;
-  padding-left: 10px;
+  padding-left: 1em !important;
 }
 .numbering li {
   counter-increment: item;
