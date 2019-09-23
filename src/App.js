@@ -24,6 +24,7 @@ import BetaRedirectTOLogin from './pages/BetaRedirectTOLogin'
 import LPHomePage from './pages/lp/LPHomePage'
 import AccountPage from './pages/AccountPage'
 import ChangeEmail from './pages/ChangeEmail'
+import BillingDetails from './pages/BillingDetails'
 
 const APP_ID = 'h6twy30k'
 
@@ -201,6 +202,7 @@ class App extends Component {
             <Route exact path="/beta" component={BetaPage}></Route>
             <Route exact path="/account" component={AccountPage}></Route>
             <Route exact path="/lp/lp1" component={LPHomePage}></Route>
+            <Route exact path="/billing-details" component={BillingDetails}></Route>
 
             <BottomBar > </BottomBar>
           </div>

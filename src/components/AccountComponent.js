@@ -149,9 +149,9 @@ class AccountComponent extends Component {
                 <Box className={classes.listCon}>
                     <h1>Account</h1>
                     {this.getProviderId() === 'password' &&
-                    <div className={classes.lstItem} onClick={() => { this.props.history.push('/change-email') }}>
-                        <h4 className='body-text'>Change account email</h4>
-                    </div>
+                        <div className={classes.lstItem} onClick={() => { this.props.history.push('/change-email') }}>
+                            <h4 className='body-text'>Change account email</h4>
+                        </div>
                     }
                     {this.getProviderId() === 'password' &&
                         <div className={classes.lstItem} onClick={() => { this.props.history.push('/change-password') }}>
@@ -162,21 +162,21 @@ class AccountComponent extends Component {
                         <div className={classes.lstItem}>
                             <h4 className='body-text'>
                                 <div className={classes.providerIconWrapper}>
-                                    <img className={classes.facebookLogo} src={FacebookIcon}/>
+                                    <img className={classes.facebookLogo} src={FacebookIcon} />
                                 </div>
                                 <span className={classes.loggedInWithText}>You are logged in with Facebook</span>
                             </h4>
                         </div>
                     }
                     {this.getProviderId() === 'google.com' &&
-                    <div className={classes.lstItem}>
-                        <h4 className='body-text'>
-                            <div className={classes.providerIconWrapper + ' white-bg'}>
-                                <img className={classes.googleLogo} src={GoogleLogo}/>
-                            </div>
-                            <span className={classes.loggedInWithText}>You are logged in with Google</span>
-                        </h4>
-                    </div>
+                        <div className={classes.lstItem}>
+                            <h4 className='body-text'>
+                                <div className={classes.providerIconWrapper + ' white-bg'}>
+                                    <img className={classes.googleLogo} src={GoogleLogo} />
+                                </div>
+                                <span className={classes.loggedInWithText}>You are logged in with Google</span>
+                            </h4>
+                        </div>
                     }
                     {false && (this.getProviderId() === 'facebook.com' || this.getProviderId() === 'google.com') &&
                         <div className={classes.lstItem} onClick={() => { this.props.history.push('/change-login') }}>
@@ -184,7 +184,7 @@ class AccountComponent extends Component {
                         </div>
                     }
 
-                    <div className={clsx(classes.lstItem, classes.bottomBorder)}>
+                    <div className={clsx(classes.lstItem, classes.bottomBorder)} onClick={() => { this.props.history.push('/billing-details') }}>
                         <h4 className='body-text'>Billing details</h4>
                     </div>
                 </Box>
