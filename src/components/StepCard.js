@@ -81,7 +81,7 @@ class StepCard extends Component {
           items.map(item => {
             return (
               <div key={item.id}>
-                <Card style={{ ...cardStyle, height: `calc(100vh - ` + videoHeight + `px - 60px - 4.8rem)` }}>
+                <Card style={{ ...cardStyle, height: `calc(100vh - ` + videoHeight + `px - 38px - 4.8rem)` }}>
                   <CardContent style={cardContent}>
                     <h2 style={cardTitle}>{item.title}</h2>
                     <p style={proTipcontentStyle}>

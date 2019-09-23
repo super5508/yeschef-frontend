@@ -486,7 +486,8 @@ class LessonPage extends Component {
 								position: "sticky",
 								zIndex: 20,
 								top: "56vw",
-								backgroundColor: "#000"
+								backgroundColor: "#000",
+								marginTop: -15,
 							}}
 						>
 							<Tab
