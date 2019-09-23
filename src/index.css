@@ -233,6 +233,21 @@ ul li::before {
   z-index: 15;
 }
 
+.react-swipeable-view-container > div[aria-hidden="false"] {
+  height: 100%;
+}
+
+.react-swipeable-view-container > div[aria-hidden="true"] {
+  height: 0;
+}
+
+div[tabindex~="-1"] {
+  outline: 0;
+}
+
+.slick-arrow {
+  display: none !important;
+}
 .vjs-poster {
   background-size: cover;
   height: 100%;

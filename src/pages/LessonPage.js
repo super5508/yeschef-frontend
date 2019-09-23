@@ -17,6 +17,7 @@ import Header from "../components/Header";
 import BackButton from "../components/BackButton";
 import SupplyInfo from '../components/Supplies';
 import ShortHandDesc from '../components/ShortHandDesc';
+import StepCard from '../components/StepCard';
 
 function TabContainer({ children, dir }) {
 	return (
@@ -209,11 +210,38 @@ const styles = theme => ({
 		padding: '1.2rem',
 	},
 	sendFeebackButton: {
-		width: '8.1rem',
+		width: '2.3rem',
 		height: '3.6rem',
 		float: 'right',
 	}
 });
+
+const receipeItems =
+	[
+		{
+			id: 0,
+			title: 'Scrape ginger with a spoon',
+			content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+			proTip: 'Hold spoon with first finger and thumbs at base of ginger then scrape.',
+		},
+		{
+			id: 1,
+			title: 'Scrape ginger with 2 spoons',
+			content: '2nd step'
+		},
+		{
+			id: 2,
+			title: 'Scrape ginger with 3 spoons',
+			content: '3rd step',
+			proTip: 'Hold spoon with first finger and thumbs at base of ginger then scrape. #3',
+		},
+		{
+			id: 3,
+			title: 'Scrape ginger with 4 spoons',
+			content: '4th step',
+			proTip: 'Hold spoon with first finger and thumbs at base of ginger then scrape. #4',
+		}
+	];
 
 class LessonPage extends Component {
 	constructor(props, context) {
@@ -236,7 +264,8 @@ class LessonPage extends Component {
 			handsonText: "",
 			TotalText: "",
 			feedbackText: "",
-			currentVideoTime: 0
+			currentVideoTime: 0,
+			swipeDisabled: false,
 		};
 
 		Axios.get(`/api/class/${this.props.match.params.classId}/lesson/${this.props.match.params.lessonNum - 1}`).then(chefInfoResponse => {
@@ -365,6 +394,27 @@ class LessonPage extends Component {
 
 	handleChange = (event, value) => {
 		this.setState({ value });
+		if (value === 4) {
+			this.setState({
+				swipeDisabled: true
+			});
+		} else {
+			this.setState({
+				swipeDisabled: false
+			});
+		}
+	};
+
+	handleChangeIndex = (event, value) => {
+		if (value === 3) {
+			this.setState({
+				swipeDisabled: true
+			});
+		} else {
+			this.setState({
+				swipeDisabled: false
+			});
+		}
 	};
 
 	toggleVideo = () => {
@@ -464,11 +514,19 @@ class LessonPage extends Component {
 									label="SHORTHAND"
 								/>
 							)}
+							<Tab
+								classes={{
+									root: classes.tabRoot,
+									selected: classes.tabSelected
+								}}
+								label="STEPS"
+							/>
 						</Tabs>
 						<SwipeableViews
 							axis={theme.direction === "rtl" ? "x-reverse" : "x"}
 							index={this.state.value}
 							onChangeIndex={this.handleChangeIndex}
+							disabled={this.state.swipeDisabled}
 						>
 							<TabContainer dir={theme.direction}>
 								<Box>
@@ -554,6 +612,12 @@ class LessonPage extends Component {
 									</Box>
 								</TabContainer>
 							)}
+
+							<TabContainer dir={theme.direction}>
+								<Box>
+									<StepCard items={receipeItems} />
+								</Box>
+							</TabContainer>
 						</SwipeableViews>
 					</div>
 				</div>
