@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 const styles = theme => ({
 	lessonInfoCon: {
 		display: "flex",
 		marginBottom: "0.9rem",
+		position: 'relative',
 		"& img": {
 			width: "16.7rem",
 			height: "9.5rem",
@@ -17,7 +19,12 @@ const styles = theme => ({
 		},
 		"& h3": {
 			margin: "0rem"
-		}
+		},
+	},
+	progress: {
+		width: '16.7rem',
+		top: 'calc(9.5rem - 4px)',
+		position: 'absolute',
 	},
 	duration: {
 		position: "relative",
@@ -52,6 +59,11 @@ const styles = theme => ({
 		lineHeight: 'normal',
 		letterSpacing: 'normal',
 		color: '#ffffff',
+	},
+
+	loadingBar: {
+		color: '#FF007F',
+		backgroundColor: '#FFFFFF',
 	}
 });
 
@@ -66,8 +78,16 @@ class LessonInfo extends Component {
 		};
 	}
 
+	getCurProgress = (duration, progress) => {
+		const min = parseInt(duration.split(':')[0], 10);
+		const sec = parseInt(duration.split(':')[1], 10);
+		const total = min * 60 + sec;
+		const now = parseInt(progress.split(':')[0], 10) * 60 + parseInt(progress.split(':')[1], 10);
+		return 100 * now / total;
+	}
+
 	render() {
-		const { classes } = this.props;
+		const { classes, curProgress, duration } = this.props;
 		return (
 			<Box
 				className={classes.lessonInfoCon}
@@ -101,6 +121,13 @@ class LessonInfo extends Component {
 							{this.props.duration}
 						</div>
 					)}
+					{
+						this.getCurProgress(duration, curProgress) !== 0 && (
+							<div className={classes.progress}>
+								<LinearProgress value={this.getCurProgress(duration, curProgress)} variant="determinate" className={classes.loadingBar} />
+							</div>
+						)
+					}
 				</div>
 				<div>
 					<p className={classes.lessonListLabel}>Lesson {this.props.lessonNum}</p>
