@@ -191,7 +191,9 @@ class ChefHomePage extends Component {
 				tabsRootTop: 0,
 				btnconTop: 0,
 				tabsMarginTop: 0,
-			}
+			},
+			scrollPos: [0, 0, 500, 0, 0],
+			prevTab: 0,
 		};
 
 		this.scrollElementsRefs = {
@@ -247,6 +249,13 @@ class ChefHomePage extends Component {
 
 	handleChange = (event, value) => {
 		this.setState({ value });
+
+		let pos = this.state.scrollPos;
+		pos[this.state.prevTab] = window.pageYOffset;
+		this.setState({ scrollPos: pos, prevTab: value });
+		console.log(this.state.scrollPos[value])
+		setTimeout(() => window.scrollTo(0, this.state.scrollPos[value]), 100);
+		console.log(this.state.scrollPos)
 	};
 
 	handleChangeIndex = index => {

@@ -266,6 +266,8 @@ class LessonPage extends Component {
 			feedbackText: "",
 			currentVideoTime: 0,
 			swipeDisabled: false,
+			scrollPos: [0, 0, 500, 0, 0],
+			prevTab: 0,
 		};
 
 		Axios.get(`/api/class/${this.props.match.params.classId}/lesson/${this.props.match.params.lessonNum - 1}`).then(chefInfoResponse => {
@@ -394,6 +396,14 @@ class LessonPage extends Component {
 
 	handleChange = (event, value) => {
 		this.setState({ value });
+
+		let pos = this.state.scrollPos;
+		pos[this.state.prevTab] = window.pageYOffset;
+		this.setState({ scrollPos: pos, prevTab: value });
+		console.log(this.state.scrollPos[value])
+		setTimeout(() => window.scrollTo(0, this.state.scrollPos[value]), 100);
+		console.log(this.state.scrollPos)
+
 		if (value === 4) {
 			this.setState({
 				swipeDisabled: true
@@ -597,18 +607,16 @@ class LessonPage extends Component {
 							{this.state.chefsData.shorthand && (
 								<TabContainer dir={theme.direction}>
 									<Box className={classes.subTabsCon}>
-										{
-											Object.keys(this.state.chefsData.shorthand.mapValue.fields).map(
-												(head, index) => {
-													return (
-														<ShortHandDesc
-															key={index}
-															head={head}
-															shorthand={this.state.chefsData.shorthand}
-														/>
-													)
-												})
-										}
+										{Object.keys(this.state.chefsData.shorthand.mapValue.fields).map(
+											(head, index) => {
+												return (
+													<ShortHandDesc
+														key={index}
+														head={head}
+														shorthand={this.state.chefsData.shorthand}
+													/>
+												)
+											})}
 									</Box>
 								</TabContainer>
 							)}
