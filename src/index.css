@@ -188,16 +188,20 @@ ul li::before {
 .numbering {
   counter-reset: item;
   list-style: none;
-  padding-left: 1em !important;
+  margin: 0;
+  padding-left: 1.2em !important;
 }
 .numbering li {
   counter-increment: item;
   position: relative;
 }
+.numbering li:first {
+  margin-top: 0 !important;
+}
 .numbering li::before {
   position: absolute;
-  left: -1.8rem;
-  content: counter(item) ".";
+  left: -2rem;
+  content: counter(item);
   color: white;
   font-size: 16px;
   font-weight: bold;

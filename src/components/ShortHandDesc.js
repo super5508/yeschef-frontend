@@ -30,6 +30,7 @@ const ExpansionPanelSummary = withStyles({
     marginBottom: -1,
     minHeight: 56,
     borderRadius: 6,
+    fontWeight: 600,
     '&$expanded': {
       minHeight: 56,
       borderRadius: 0,
@@ -47,7 +48,7 @@ const ExpansionPanelSummary = withStyles({
 
 const ExpansionPanelDetails = withStyles(theme => ({
   root: {
-    padding: theme.spacing(2),
+    padding: '2.3rem',
     backgroundColor: '#1E1E1E',
     display: 'flex',
     flexDirection: 'column',
@@ -82,10 +83,22 @@ const shortStyle = {
 }
 
 class ShortHandDesc extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = { expanded: false };
+  }
+
+  componentDidMount() {
+    if (this.props.isFirst) {
+      this.setState({ expanded: true });
+    }
+  }
+
   render() {
-    const { head, id, shorthand } = this.props;
+    const { head, id, shorthand, isFirst } = this.props;
     return (
-      <ExpansionPanel key={`${head}-${id}`}>
+      <ExpansionPanel key={`${head}-${id}`} expanded={this.state.expanded} onChange={() => this.setState({ expanded: !this.state.expanded })}>
         <ExpansionPanelSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls={`panel${id}-content`}
@@ -97,12 +110,10 @@ class ShortHandDesc extends Component {
         >
           <div>
             <div style={titleStyle}>
-              {
-                shorthand.mapValue.fields[head].mapValue.fields.title.stringValue
-              }
+              {shorthand.mapValue.fields[head].mapValue.fields.title.stringValue}
             </div>
           </div>
-          <div style={separator} />
+          {shorthand.mapValue.fields[head].mapValue.fields.title.stringValue.length !== 0 && (<div style={separator} />)}
           <div>
             <ul className='numbering'>
               {

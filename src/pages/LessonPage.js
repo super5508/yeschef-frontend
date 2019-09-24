@@ -613,6 +613,7 @@ class LessonPage extends Component {
 														key={index}
 														head={head}
 														shorthand={this.state.chefsData.shorthand}
+														isFirst={index === 0 ? true : false}
 													/>
 												)
 											})}
