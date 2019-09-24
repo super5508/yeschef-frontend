@@ -31,12 +31,19 @@ const ExpansionPanelSummary = withStyles({
     minHeight: 56,
     borderRadius: 6,
     fontWeight: 600,
+    fontSize: 16,
     '&$expanded': {
       minHeight: 56,
       borderRadius: 0,
       borderTopLeftRadius: 6,
       borderTopRightRadius: 6,
     },
+    "& .MuiExpansionPanelSummary-expandIcon.Mui-expanded": {
+      transform: 'rotate(0deg)'
+    },
+    "& .MuiExpansionPanelSummary-expandIcon": {
+      transform: 'rotate(270deg)'
+    }
   },
   content: {
     '&$expanded': {
@@ -48,7 +55,7 @@ const ExpansionPanelSummary = withStyles({
 
 const ExpansionPanelDetails = withStyles(theme => ({
   root: {
-    padding: '2.3rem',
+    padding: 24,
     backgroundColor: '#1E1E1E',
     display: 'flex',
     flexDirection: 'column',
@@ -98,7 +105,11 @@ class ShortHandDesc extends Component {
   render() {
     const { head, id, shorthand, isFirst } = this.props;
     return (
-      <ExpansionPanel key={`${head}-${id}`} expanded={this.state.expanded} onChange={() => this.setState({ expanded: !this.state.expanded })}>
+      <ExpansionPanel
+        key={`${head}-${id}`}
+        expanded={this.state.expanded}
+        onChange={() => this.setState({ expanded: !this.state.expanded })}
+      >
         <ExpansionPanelSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls={`panel${id}-content`}
