@@ -7,7 +7,7 @@ class ycAxios {
             if (process.env.NODE_ENV === 'production') {
                 console.log("working with real BE");
                 this.axiosInstance = Axios.create({
-                    baseURL: 'http://yc-be-1744308311.us-east-1.elb.amazonaws.com',
+                    baseURL: 'https://diuuj59mdu49n.cloudfront.net',
                     timeout: 5000
                 });
                 res();
@@ -22,7 +22,7 @@ class ycAxios {
                 }).catch(err => {
                     console.log("working with real BE");
                     this.axiosInstance = Axios.create({
-                        baseURL: 'http://yc-be-1744308311.us-east-1.elb.amazonaws.com',
+                        baseURL: 'https://diuuj59mdu49n.cloudfront.net',
                         timeout: 5000
                     });
                     res();
