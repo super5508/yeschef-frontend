@@ -42,7 +42,7 @@ const ExpansionPanelSummary = withStyles({
       transform: 'rotate(0deg)'
     },
     "& .MuiExpansionPanelSummary-expandIcon": {
-      transform: 'rotate(270deg)'
+      transform: 'rotate(-90deg)'
     }
   },
   content: {
