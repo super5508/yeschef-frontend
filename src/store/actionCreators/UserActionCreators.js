@@ -5,7 +5,7 @@ export const signin = (user) => {
     return (dispatch) => {
         dispatch(updateUserProfile(user));
         window.firebaseAuth.currentUser.getIdToken().then(function (token) {
-            Axios.get('/api/user/',
+            Axios.get('/user/',
                 { headers: { authToken: token } }
             ).then(usersMetaData => {
                 dispatch(receivedMetadata(usersMetaData.data));

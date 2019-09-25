@@ -210,7 +210,7 @@ class LessonPage extends Component {
 			TotalText: "",
 		};
 
-		Axios.get(`/api/class/${this.props.match.params.classId}/lesson/${this.props.match.params.lessonNum - 1}`).then(chefInfoResponse => {
+		Axios.get(`/class/${this.props.match.params.classId}/lesson/${this.props.match.params.lessonNum - 1}`).then(chefInfoResponse => {
 			this.setState({
 				...this.state,
 				chefsData: chefInfoResponse.data._fieldsProto,

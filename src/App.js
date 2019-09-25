@@ -157,9 +157,6 @@ class App extends Component {
     this.state = {}
   }
   componentDidMount() {
-    // Axios.get('/api/chef/edward_lee/info').then(chefInfoResponse => {
-    //   this.setState(chefInfoResponse.data);
-    // })
   }
 
   render() {

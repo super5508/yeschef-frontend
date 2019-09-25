@@ -78,7 +78,7 @@ class LessonInfo extends Component {
 				onClick={() => {
 					if (!this.props.commingSoon) {
 						this.props.history.push(
-							"/class/" + this.props.match.params.id + "/lesson/" + this.props.lessonNum
+							`/class/${this.props.match.params.id}/lesson/${this.props.lessonNum}`
 
 							// this.props.history.push("/class/"+this.props.match.params.id+"/lesson/"+this.props.lessonNum
 							// this.props.history.push("/lesson/" + this.props.match.params.id + "/" + this.props.lessonNum
