@@ -195,9 +195,6 @@ ul li::before {
   counter-increment: item;
   position: relative;
 }
-.numbering li:first {
-  margin-top: 0 !important;
-}
 .numbering li::before {
   position: absolute;
   left: -2rem;
@@ -205,6 +202,10 @@ ul li::before {
   color: white;
   font-size: 16px;
   font-weight: bold;
+}
+
+.numbering li:not:first-child {
+  margin-top: 8px !important;
 }
 
 .h2-light {

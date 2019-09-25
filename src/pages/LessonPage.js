@@ -184,7 +184,10 @@ const styles = theme => ({
 			padding: 0,
 		},
 		"& li": {
-			marginTop: "0.5rem"
+			marginTop: 8
+		},
+		"& li:first-child": {
+			marginTop: 0
 		},
 		wrapper: {
 			padding: 16
@@ -605,7 +608,7 @@ class LessonPage extends Component {
 							)}
 							{this.state.chefsData.shorthand && (
 								<TabContainer dir={theme.direction}>
-									<Box className={classes.subTabsCon}>
+									<Box className={classes.subTabsCon} style={{ margin: 24, marginTop: 32 }}>
 										{Object.keys(this.state.chefsData.shorthand.mapValue.fields).map(
 											(head, index) => {
 												return (
