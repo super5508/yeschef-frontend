@@ -53,7 +53,7 @@ class MyProfilePage extends Component {
     if (isWidthDown('sm', this.props.width)) {
       additionalProps.variant = "fullWidth";
     } else {
-      additionalProps.centered = "true";
+      additionalProps.centered = true;
     }
 
     return (

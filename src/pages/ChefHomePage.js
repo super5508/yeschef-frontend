@@ -219,11 +219,11 @@ class ChefHomePage extends Component {
 
 
 		Axios.get(
-			`/api/class/${this.props.match.params.id}?prefetch=true`
+			`/class/${this.props.match.params.id}?prefetch=true`
 		).then(chefInfoResponse => {
 			// console.log("d2", chefInfoResponse);
-			const availableLessons = chefInfoResponse.data.lessons.filter(classObj => !classObj.commingSoon);
-			const comingSoonLessons = chefInfoResponse.data.lessons.filter(classObj => classObj.commingSoon);
+			const availableLessons = chefInfoResponse.data.lessons.filter(classObj => classObj && !classObj.commingSoon);
+			const comingSoonLessons = chefInfoResponse.data.lessons.filter(classObj => classObj && classObj.commingSoon);
 
 			this.setState({
 				...this.state,

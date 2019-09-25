@@ -44,14 +44,14 @@ class ClosedBetaSignInPage extends Component {
     if (isWidthDown('sm', this.props.width)) {
       additionalProps.variant = "fullWidth";
     } else {
-      additionalProps.centered = "true";
+      additionalProps.centered = true;
     }
 
     if (this.state.value !== "signin") {
       window.location.href = "https://www.yeschef.me";
     }
     const isBetaUserLoggedIn = this.props.authStat.isLogin && this.props.authStat.userMetadata && this.props.authStat.userMetadata.isBeta;
-    
+
     return (
       <Box>
         <Box display="flex" justifyContent="center" mt="2.4rem">

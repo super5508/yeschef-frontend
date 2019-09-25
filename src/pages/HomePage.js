@@ -65,7 +65,7 @@ class LPHomePage extends Component {
     constructor(props) {
         super(props);
 
-        Axios.get('/api/classes').then(chefInfoResponse => {
+        Axios.get('/classes').then(chefInfoResponse => {
             // console.log(chefInfoResponse);
             const classes = chefInfoResponse.data.filter(classObj => !classObj.comingSoon);
             const comingSoon = chefInfoResponse.data.filter(classObj => classObj.comingSoon);

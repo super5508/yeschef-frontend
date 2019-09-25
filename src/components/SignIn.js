@@ -4,6 +4,7 @@ import TextField from "@material-ui/core/TextField";
 import { withStyles } from "@material-ui/core/styles";
 import { signin } from "../store/actionCreators/UserActionCreators";
 import { Button, Divider } from "@material-ui/core";
+import { connect } from "react-redux";
 import fbLogo from "../assets/images/fbLogo.svg";
 import googleLogo from "../assets/images/googleLogo.svg";
 import Box from "@material-ui/core/Box";
@@ -71,15 +72,15 @@ const styles = theme => ({
   bottomText: {
     textDecoration: "underline",
     marginTop: "-0.5rem",
-		fontFamily: "Open Sans",
-		fontSize: '1.4rem',
-		fontWeight: '300',
-		fontStyle: 'normal',
-		fontStretch: 'normal',
-		lineHeight: 'normal',
-		letterSpacing: 'normal',
-		textAlign: 'center',
-		color: 'rgba(255, 255, 255, 0.8)',
+    fontFamily: "Open Sans",
+    fontSize: '1.4rem',
+    fontWeight: '300',
+    fontStyle: 'normal',
+    fontStretch: 'normal',
+    lineHeight: 'normal',
+    letterSpacing: 'normal',
+    textAlign: 'center',
+    color: 'rgba(255, 255, 255, 0.8)',
   },
   grayText: {
     color: 'rgba(255, 255, 255, 0.8)',
@@ -102,6 +103,19 @@ class SignIn extends Component {
     });
   };
 
+  successfulLogin = (response) => {
+    if (!response) return;
+    // Intercom('update', {
+    //     email: response.user.email,
+    //     name: response.user.displayName
+    // });
+    //window.setTimeout(function(){
+    this.props.dispatch(signin(response.user));
+    //Is success signup, redirect to home
+    this.props.history.push("/home");
+    //}, 1000);
+  }
+
   submitLogin = event => {
     var firebaseAuthPromise = window.firebaseAuth.signInWithEmailAndPassword(
       this.state.email,
@@ -115,18 +129,7 @@ class SignIn extends Component {
       alert(errorMessage);
     });
 
-    firebaseAuthPromise.then(response => {
-      if (!response) return;
-      // Intercom('update', {
-      //     email: response.user.email,
-      //     name: response.user.displayName
-      // });
-      //window.setTimeout(function(){
-      this.props.dispatch(signin(response.user));
-      //Is success signup, redirect to home
-      this.props.history.push("/home");
-      //}, 1000);
-    });
+    firebaseAuthPromise.then(this.successfulLogin);
 
     event.preventDefault();
   };
@@ -259,4 +262,9 @@ class SignIn extends Component {
 SignIn.propTypes = {
   classes: PropTypes.object.isRequired
 };
-export default withRouter(withStyles(styles)(SignIn));
+const mapStateToProps = (state, ownProps) => {
+  return {
+    ...state.user
+  };
+};
+export default withRouter(connect(mapStateToProps)(withStyles(styles)(SignIn)));
