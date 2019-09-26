@@ -6,6 +6,7 @@ import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import HomeIcon from '@material-ui/icons/HomeRounded'
 import PersonIcon from '@material-ui/icons/PersonRounded'
+import PlayIcon from '@material-ui/icons/PlayCircleFilled'
 import BetaIcon from '../assets/images/beta.svg'
 import BetaIconWhite from '../assets/images/beta-white.svg'
 import Box from '@material-ui/core/Box';
@@ -34,7 +35,8 @@ const styles = theme => ({
         },
 
         '& .beta-icon': {
-            width: 32
+            width: 24,
+            height: 26.19
         }
     },
 
@@ -73,9 +75,9 @@ class BottomBar extends Component {
                         onChange={this.handleChange}
                     >
                         <BottomNavigationAction
-                            label="Home"
+                            label="Classes"
                             value='home'
-                            icon={<HomeIcon />}
+                            icon={<PlayIcon />}
                             component={Link}
                             to="/home" />
 
