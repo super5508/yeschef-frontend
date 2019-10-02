@@ -76,11 +76,15 @@ class LPHomePage extends Component {
                 comingSoonArray: comingSoon
             });
         })
+
+        Axios.get('/history/123').then(historyRes => {
+            console.log(historyRes);
+        })
     }
 
 
     render() {
-
+        console.log(this.props.authStat);
         let buttonProp;
         if (this.props.authStat.isLogin) {
             buttonProp = {
