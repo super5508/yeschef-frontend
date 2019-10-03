@@ -376,14 +376,19 @@ class LessonPage extends Component {
 
 	submitFeedback = () => {
 		if (this.state.feedbackText.trim()) {
-			console.log({
+			const feedbackData = {
 				'userName': window.firebaseAuth.currentUser.displayName,
 				'userId': window.firebaseAuth.currentUser.uid,
 				'createdAt': (new Date()).toISOString(),
 				'videoTime': this.formatTime(this.state.currentVideoTime),
 				'timestamp': this.state.currentVideoTime,
 				'comment': this.state.feedbackText
+			};
+
+			Axios.post('/feedback', feedbackData).then(res => {
+				console.log(res);
 			});
+
 			this.setState({ feedbackText: '' });
 		}
 	};
