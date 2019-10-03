@@ -147,8 +147,9 @@ class SignIn extends Component {
     }
 
     signInPromise.then(
-      () => {
+      (res) => {
         //Is success signup, redirect to home
+        localStorage.setItem("uid", res.uid);
         this.props.history.push("/home");
       },
       msg => {

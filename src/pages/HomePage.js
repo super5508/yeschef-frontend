@@ -61,7 +61,7 @@ const styles = theme => ({
     }
 });
 class LPHomePage extends Component {
-    state = { chefsDataArray: [], comingSoonArray: [] };
+    state = { chefsDataArray: [], comingSoonArray: [], fetched: false };
     constructor(props) {
         super(props);
 
@@ -76,20 +76,29 @@ class LPHomePage extends Component {
                 comingSoonArray: comingSoon
             });
         })
-
-        Axios.get('/history/123').then(historyRes => {
-            console.log(historyRes);
-        })
     }
 
-
     render() {
-        console.log(this.props.authStat);
+
+        const id = localStorage.getItem("uid");
+        if (this.state.fetched === false) {
+            Axios.get(`/history/${id}`).then(historyRes => {
+                this.setState({ watchHistory: historyRes.data, fetched: true });
+            })
+        }
+
         let buttonProp;
-        if (this.props.authStat.isLogin) {
-            buttonProp = {
-                text: "START EDWARD LEE'S CLASS",
-                link: "/class/c01/"
+        if (this.props.authStat.isLogin && this.state.watchHistory) {
+            if (this.state.watchHistory.lessonId === 'c01') {
+                buttonProp = {
+                    text: "START EDWARD LEE'S CLASS",
+                    link: "/class/c01/"
+                }
+            } else {
+                buttonProp = {
+                    text: `CONTINUE WATCHING`,
+                    link: `/class/${this.state.watchHistory.link}`
+                }
             }
         } else {
             buttonProp = {

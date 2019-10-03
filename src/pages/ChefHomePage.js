@@ -194,6 +194,7 @@ class ChefHomePage extends Component {
 			},
 			scrollPos: [0, 0, 500, 0, 0],
 			prevTab: 0,
+			fetched: false
 		};
 
 		this.scrollElementsRefs = {
@@ -315,6 +316,15 @@ class ChefHomePage extends Component {
 	};
 
 	render() {
+		const userData = {
+			id: localStorage.getItem("uid"),
+			lessonId: this.props.match.params.id,
+			progress: 0,
+		};
+
+		Axios.post(`/history`, userData).then(historyRes => {
+			this.setState({ fetched: true });
+		})
 		const { classes, theme } = this.props;
 
 		return (
