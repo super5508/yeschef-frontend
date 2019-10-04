@@ -276,6 +276,21 @@ class LessonPage extends Component {
 
 	componentDidMount() {
 		const { classId, lessonNum } = this.props.match.params;
+		const uid = localStorage.getItem("uid");
+		const historyData = {
+			userId: localStorage.getItem("uid"),
+			classId: classId,
+			lessonId: lessonNum,
+		}
+		Axios.post(`/history`, historyData).then(res => {
+			Axios.get(`/history/${uid}`).then(history => {
+				localStorage.setItem("classId", history.data.classId);
+				localStorage.setItem("lessonId", history.data.lessonId);
+				localStorage.setItem("lessonName", history.data.name);
+			})
+		}).catch(error => {
+			console.log(error);
+		})
 		Axios.get(`/class/${classId}/lesson/${lessonNum - 1}`).then(chefInfoResponse => {
 			this.setState({
 				...this.state,
