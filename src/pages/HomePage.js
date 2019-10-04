@@ -61,10 +61,12 @@ const styles = theme => ({
     }
 });
 class LPHomePage extends Component {
-    state = { chefsDataArray: [], comingSoonArray: [], fetched: false };
+    state = { chefsDataArray: [], comingSoonArray: [] };
     constructor(props) {
         super(props);
+    }
 
+    componentDidMount() {
         Axios.get('/classes').then(chefInfoResponse => {
             // console.log(chefInfoResponse);
             const classes = chefInfoResponse.data.filter(classObj => !classObj.comingSoon);
@@ -80,32 +82,14 @@ class LPHomePage extends Component {
 
     render() {
 
-        const id = localStorage.getItem("uid");
-        if (this.state.fetched === false) {
-            Axios.get(`/history/${id}`).then(historyRes => {
-                this.setState({ watchHistory: historyRes.data, fetched: true });
-            })
-        }
-
         let buttonProp;
-        if (this.props.authStat.isLogin && this.state.watchHistory) {
-            if (this.state.watchHistory.lessonId === 'c01') {
-                buttonProp = {
-                    text: "START EDWARD LEE'S CLASS",
-                    link: "/class/c01/"
-                }
-            } else {
-                buttonProp = {
-                    text: `CONTINUE WATCHING`,
-                    link: `/class/${this.state.watchHistory.link}`
-                }
-            }
-        } else {
-            buttonProp = {
-                text: "GET ACCESS",
-                link: "/signup"
-            }
+
+        buttonProp = {
+            text: localStorage.getItem("lessonId") ? 'CONTINUE WATCHING' : "START EDWARD LEE'S CLASS",
+            link: "/class/" + localStorage.getItem("lessonId")
         }
+        const heroTitle = localStorage.getItem("lessonName");
+        const heroSubTitle = 'TEACH HOME COOKING';
         const { classes } = this.props;
         return (
             <Box >
@@ -113,8 +97,10 @@ class LPHomePage extends Component {
                 {/* //if user is not loged in */}
                 <Box display="flex" flexDirection="column" justifyContent="flex-end" className={`${classes.cta_wrapper}`} p={2}>
                     <Box className={classes.cta_content_wrapper} display="flex" flexDirection="column" justifyContent="flex-end" alignItems="center">
-                        <Box className={classes.action_title} >the world’s best chefs</Box>
-                        <Box className={classes.action_subTitle} pb={1.1}>teach home cooking</Box>
+                        <Box className={classes.action_title} >
+                            {heroTitle}
+                        </Box>
+                        <Box className={classes.action_subTitle} pb={1.1}>{heroSubTitle}</Box>
                         <Button component={Link} to={buttonProp.link} size="large" variant="contained" color="primary" className={classes.button} >
                             <Box fontWeight="fontWeightBold" fontSize="1.4rem">
                                 {buttonProp.text}
