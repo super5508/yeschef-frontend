@@ -288,8 +288,6 @@ class LessonPage extends Component {
 				localStorage.setItem("lessonId", history.data.lessonId);
 				localStorage.setItem("lessonName", history.data.name);
 			})
-		}).catch(error => {
-			console.log(error);
 		})
 		Axios.get(`/class/${classId}/lesson/${lessonNum - 1}`).then(chefInfoResponse => {
 			this.setState({
