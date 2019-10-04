@@ -272,8 +272,11 @@ class LessonPage extends Component {
 			scrollPos: [0, 0, 500, 0, 0],
 			prevTab: 0,
 		};
+	}
 
-		Axios.get(`/class/${this.props.match.params.classId}/lesson/${this.props.match.params.lessonNum - 1}`).then(chefInfoResponse => {
+	componentDidMount() {
+		const { classId, lessonNum } = this.props.match.params;
+		Axios.get(`/class/${classId}/lesson/${lessonNum - 1}`).then(chefInfoResponse => {
 			this.setState({
 				...this.state,
 				chefsData: chefInfoResponse.data._fieldsProto,

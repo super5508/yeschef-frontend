@@ -83,10 +83,12 @@ class LPHomePage extends Component {
     render() {
 
         let buttonProp;
+        const classId = localStorage.getItem("classId");
+        const lessonId = localStorage.getItem("lessonId");
 
         buttonProp = {
-            text: localStorage.getItem("lessonId") ? 'CONTINUE WATCHING' : "START EDWARD LEE'S CLASS",
-            link: "/class/" + localStorage.getItem("lessonId")
+            text: classId ? 'CONTINUE WATCHING' : "START EDWARD LEE'S CLASS",
+            link: "/class/" + classId + "/lesson/" + lessonId
         }
         const heroTitle = localStorage.getItem("lessonName");
         const heroSubTitle = 'TEACH HOME COOKING';

@@ -153,6 +153,8 @@ class SignIn extends Component {
         console.log('success');
         localStorage.setItem("uid", res.uid);
         Axios.get(`/history/${res.uid}`).then(history => {
+          console.log(history);
+          localStorage.setItem("classId", history.data.classId);
           localStorage.setItem("lessonId", history.data.lessonId);
           localStorage.setItem("lessonName", history.data.name);
         }).finally(() => {
