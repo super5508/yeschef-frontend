@@ -67,6 +67,7 @@ class Settings extends Component {
 
 
 	signOut = () => {
+		localStorage.clear();
 		window.firebaseAuth.signOut();
 		this.props.dispatch(signout());
 		window.Intercom('shutdown')
