@@ -7,6 +7,7 @@ import Paper from '@material-ui/core/Paper';
 import Tab from '@material-ui/core/Tab';
 import SwipeableViews from 'react-swipeable-views';
 import PortfolioImage from '../assets/images/portfolio1.png';
+import Axios from 'axios';
 
 function TabContainer({ children, dir }) {
     return (
@@ -132,8 +133,15 @@ class BetaPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            value: 0
+            value: 0,
+            betaNews: []
         }
+    }
+
+    componentDidMount() {
+        Axios.get('/beta').then(res => {
+            this.setState({ betaNews: res });
+        })
     }
 
     handleChange = (event, value) => {
@@ -183,7 +191,7 @@ class BetaPage extends Component {
                                         <h2 className={classes.textTitle}>Hey there, awesome beta users</h2>
                                         <p className={classes.textContent}>This is your home for staying up to date on the YesChef beta. Find out what's new, give us your feedback and be an important part of the future of food! Plus vote on new features and submit your own ideas.</p>
                                         {
-                                            cardData.map(card => {
+                                            this.state.betaNews.map(card => {
                                                 return (
                                                     <Paper className={classes.summaryCard} key={card.key}>
                                                         {
