@@ -7,7 +7,7 @@ import Paper from '@material-ui/core/Paper';
 import Tab from '@material-ui/core/Tab';
 import SwipeableViews from 'react-swipeable-views';
 import PortfolioImage from '../assets/images/portfolio1.png';
-import Axios from 'axios';
+import Axios from '../common/AxiosMiddleware';
 
 function TabContainer({ children, dir }) {
     return (
@@ -140,7 +140,7 @@ class BetaPage extends Component {
 
     componentDidMount() {
         Axios.get('/beta').then(res => {
-            this.setState({ betaNews: res });
+            this.setState({ betaNews: res.data });
         })
     }
 
