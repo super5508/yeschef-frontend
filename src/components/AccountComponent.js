@@ -8,8 +8,6 @@ import Avatar from "@material-ui/core/Avatar";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import clsx from "clsx";
-import IconButton from "@material-ui/core/IconButton";
-import ForwardIcon from "@material-ui/icons/ArrowForwardIosRounded";
 import FacebookIcon from "../assets/images/facebook-icon.svg";
 import GoogleLogo from "../assets/images/googleLogo.svg";
 
@@ -162,7 +160,7 @@ class AccountComponent extends Component {
                         <div className={classes.lstItem}>
                             <h4 className='body-text'>
                                 <div className={classes.providerIconWrapper}>
-                                    <img className={classes.facebookLogo} src={FacebookIcon} />
+                                    <img className={classes.facebookLogo} src={FacebookIcon} alt="FaceBook" />
                                 </div>
                                 <span className={classes.loggedInWithText}>You are logged in with Facebook</span>
                             </h4>
@@ -172,7 +170,7 @@ class AccountComponent extends Component {
                         <div className={classes.lstItem}>
                             <h4 className='body-text'>
                                 <div className={classes.providerIconWrapper + ' white-bg'}>
-                                    <img className={classes.googleLogo} src={GoogleLogo} />
+                                    <img className={classes.googleLogo} src={GoogleLogo} alt="Google" />
                                 </div>
                                 <span className={classes.loggedInWithText}>You are logged in with Google</span>
                             </h4>

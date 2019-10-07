@@ -64,7 +64,9 @@ class LPHomePage extends Component {
     state = { chefsDataArray: [], comingSoonArray: [] };
     constructor(props) {
         super(props);
+    }
 
+    componentDidMount() {
         Axios.get('/classes').then(chefInfoResponse => {
             // console.log(chefInfoResponse);
             const classes = chefInfoResponse.data.filter(classObj => !classObj.comingSoon);
@@ -78,21 +80,18 @@ class LPHomePage extends Component {
         })
     }
 
-
     render() {
 
         let buttonProp;
-        if (this.props.authStat.isLogin) {
-            buttonProp = {
-                text: "START EDWARD LEE'S CLASS",
-                link: "/class/c01/"
-            }
-        } else {
-            buttonProp = {
-                text: "GET ACCESS",
-                link: "/signup"
-            }
+        const classId = localStorage.getItem("classId");
+        const lessonId = localStorage.getItem("lessonId");
+
+        buttonProp = {
+            text: classId ? 'CONTINUE WATCHING' : "START EDWARD LEE'S CLASS",
+            link: "/class/" + classId + "/lesson/" + lessonId
         }
+        const heroTitle = localStorage.getItem("lessonName");
+        const heroSubTitle = 'TEACH HOME COOKING';
         const { classes } = this.props;
         return (
             <Box >
@@ -100,8 +99,10 @@ class LPHomePage extends Component {
                 {/* //if user is not loged in */}
                 <Box display="flex" flexDirection="column" justifyContent="flex-end" className={`${classes.cta_wrapper}`} p={2}>
                     <Box className={classes.cta_content_wrapper} display="flex" flexDirection="column" justifyContent="flex-end" alignItems="center">
-                        <Box className={classes.action_title} >the world’s best chefs</Box>
-                        <Box className={classes.action_subTitle} pb={1.1}>teach home cooking</Box>
+                        <Box className={classes.action_title} >
+                            {heroTitle}
+                        </Box>
+                        <Box className={classes.action_subTitle} pb={1.1}>{heroSubTitle}</Box>
                         <Button component={Link} to={buttonProp.link} size="large" variant="contained" color="primary" className={classes.button} >
                             <Box fontWeight="fontWeightBold" fontSize="1.4rem">
                                 {buttonProp.text}

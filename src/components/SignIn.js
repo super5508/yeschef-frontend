@@ -10,6 +10,7 @@ import googleLogo from "../assets/images/googleLogo.svg";
 import Box from "@material-ui/core/Box";
 import auth from "./../common/auth";
 import { Link, withRouter } from 'react-router-dom'
+import Axios from '../common/AxiosMiddleware';
 const CssTextField = withStyles({
   root: {
     "& .MuiOutlinedInput-root": {
@@ -147,9 +148,16 @@ class SignIn extends Component {
     }
 
     signInPromise.then(
-      () => {
+      (res) => {
         //Is success signup, redirect to home
-        this.props.history.push("/home");
+        localStorage.setItem("uid", res.uid);
+        Axios.get(`/history/${res.uid}`).then(history => {
+          localStorage.setItem("classId", history.data.classId);
+          localStorage.setItem("lessonId", history.data.lessonId);
+          localStorage.setItem("lessonName", history.data.name);
+        }).finally(() => {
+          this.props.history.push("/home");
+        })
       },
       msg => {
         // @Todo change the alert to a real error message popup
