@@ -12,7 +12,7 @@ class ycAxios {
                 });
                 res();
             } else {
-                Axios.get("http://localhost:8080/hc").then(res => {
+                Axios.get("http://localhost:8080/hc").then(() => {
                     console.log("working with local BE");
                     this.axiosInstance = Axios.create({
                         baseURL: 'http://localhost:8080',
