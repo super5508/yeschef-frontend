@@ -65,6 +65,10 @@ class BottomBar extends Component {
             navValue = 'myProfile'
         }
 
+        if (navValue !== 'beta') {
+            window.Intercom('hide');
+        }
+
         if (isBottomBarVisible) {
             dom = (
                 <Box pb="7.2rem">

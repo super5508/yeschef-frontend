@@ -7,7 +7,8 @@ import Paper from '@material-ui/core/Paper';
 import Tab from '@material-ui/core/Tab';
 import SwipeableViews from 'react-swipeable-views';
 import PortfolioImage from '../assets/images/portfolio1.png';
-import Intercom from 'react-intercom';
+import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
 import Axios from '../common/AxiosMiddleware';
 
 function TabContainer({ children, dir }) {
@@ -104,6 +105,10 @@ const styles = theme => ({
         textAlign: 'left',
         margin: 0,
         color: 'rgba(255, 255, 255, 0.9)',
+    },
+    feedbackContent: {
+        height: 'calc(100vh - 144px)',
+        padding: '2.3rem'
     }
 });
 
@@ -146,20 +151,32 @@ class BetaPage extends Component {
         })
     }
 
+    componentWillReceiveProps() {
+        const { location } = this.props;
+        console.log("path", location);
+    }
+
     handleChange = (event, value) => {
         this.setState({ value });
         if (value === 1) {
             window.Intercom('show');
-            setTimeout(() => {
-                let node = document.getElementsByClassName('intercom-messenger-frame');
-                node[0].style.top = '96px';
-                node = document.getElementsByName('intercom-messenger-frame');
-                node[0].style.height = 'calc(100% - 145px)';
-            }, 1000);
+            this.handleFeedback();
         } else {
             window.Intercom('hide');
         }
     };
+
+    handleFeedback() {
+        window.Intercom('show');
+        setTimeout(() => {
+            let node = document.getElementsByClassName('intercom-messenger-frame');
+            if (node.length > 0) {
+                node[0].style.top = '96px';
+                node[0].style.height = 'calc(100% - 145px)';
+                console.log(node[0].children.children);
+            }
+        }, 100);
+    }
 
     render = () => {
         const { classes, theme } = this.props;
@@ -229,9 +246,15 @@ class BetaPage extends Component {
                             </TabContainer>
 
                             <TabContainer dir={theme.direction}>
-                                <Box>
-
-                                </Box>
+                                <Grid
+                                    container
+                                    direction="row"
+                                    justify="center"
+                                    alignItems="center"
+                                    className={classes.feedbackContent}
+                                >
+                                    <Button size="large" variant="contained" color="primary" onClick={() => this.handleFeedback()}>Click here for feedback...</Button>
+                                </Grid>
                             </TabContainer>
                             <TabContainer dir={theme.direction}>
                                 <Box>
