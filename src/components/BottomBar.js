@@ -58,11 +58,15 @@ class BottomBar extends Component {
     render() {
         const { classes } = this.props;
         let dom;
+        let isBeta = false;
         const pathname = this.props.location.pathname;
         const isBottomBarVisible = pathname.slice(0, 6) !== "/class" && pathname.slice(0, 7) !== "/lesson" && pathname !== "/" && pathname !== "/change-password" && pathname !== "/reset-password" && pathname !== "/change-email";
         let navValue = pathname === '/' ? 'home' : pathname.slice(1)
         if (navValue === 'account') {
             navValue = 'myProfile'
+        }
+        if (navValue === 'beta') {
+            isBeta = true;
         }
 
         if (isBottomBarVisible) {
@@ -85,7 +89,7 @@ class BottomBar extends Component {
                             label="Beta"
                             value='beta'
                             icon={
-                                this.state.beta ? <img src={BetaIcon} className="beta-icon" alt='beta'></img> : <img src={BetaIconWhite} className="beta-icon" alt='beta'></img>
+                                this.state.beta || isBeta ? <img src={BetaIcon} className="beta-icon" alt='beta'></img> : <img src={BetaIconWhite} className="beta-icon" alt='beta'></img>
                             }
                             component={Link}
                             to="/beta" />
