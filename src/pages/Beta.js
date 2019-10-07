@@ -7,6 +7,7 @@ import Paper from '@material-ui/core/Paper';
 import Tab from '@material-ui/core/Tab';
 import SwipeableViews from 'react-swipeable-views';
 import PortfolioImage from '../assets/images/portfolio1.png';
+import Intercom from 'react-intercom';
 import Axios from '../common/AxiosMiddleware';
 
 function TabContainer({ children, dir }) {
@@ -134,7 +135,8 @@ class BetaPage extends Component {
         super(props);
         this.state = {
             value: 0,
-            betaNews: []
+            betaNews: [],
+            isOpen: false
         }
     }
 
@@ -146,10 +148,22 @@ class BetaPage extends Component {
 
     handleChange = (event, value) => {
         this.setState({ value });
+        if (value === 1) {
+            window.Intercom('show');
+            setTimeout(() => {
+                let node = document.getElementsByClassName('intercom-messenger-frame');
+                node[0].style.top = '96px';
+                node = document.getElementsByName('intercom-messenger-frame');
+                node[0].style.height = 'calc(100% - 145px)';
+            }, 1000);
+        } else {
+            window.Intercom('hide');
+        }
     };
 
     render = () => {
         const { classes, theme } = this.props;
+
         return (
             <Box>
                 <div className={classes.betaContentCon}>
@@ -216,9 +230,7 @@ class BetaPage extends Component {
 
                             <TabContainer dir={theme.direction}>
                                 <Box>
-                                    <div className={classes.tabContent}>
-                                        FEEDBACK
-                                    </div>
+
                                 </Box>
                             </TabContainer>
                             <TabContainer dir={theme.direction}>
