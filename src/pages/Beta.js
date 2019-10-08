@@ -168,6 +168,11 @@ class BetaPage extends Component {
             if (node.length > 0) {
                 node[0].style.top = '96px';
                 node[0].style.height = 'calc(100% - 145px)';
+                setTimeout(() => {
+                    const iframe = document.getElementsByName("intercom-messenger-frame");
+                    const closeBtn = iframe[0].contentWindow.document.getElementsByTagName("div")[4];
+                    closeBtn.style.display = 'none';
+                }, 100);
             }
         }, 100);
     }
