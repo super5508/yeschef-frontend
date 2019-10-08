@@ -48,13 +48,6 @@ class BottomBar extends Component {
         this.state = { beta: false };
     }
 
-    handleChange = (event, value) => {
-        if (value === 'beta')
-            this.setState({ beta: true });
-        else
-            this.setState({ beta: false });
-    };
-
     render() {
         const { classes } = this.props;
         let dom;
@@ -68,6 +61,10 @@ class BottomBar extends Component {
         if (navValue === 'beta') {
             isBeta = true;
         }
+
+        const beta = navValue === 'beta';
+
+        console.log(navValue);
 
         if (navValue !== 'beta') {
             window.Intercom('hide');
@@ -93,7 +90,7 @@ class BottomBar extends Component {
                             label="Beta"
                             value='beta'
                             icon={
-                                this.state.beta || isBeta ? <img src={BetaIcon} className="beta-icon" alt='beta'></img> : <img src={BetaIconWhite} className="beta-icon" alt='beta'></img>
+                                beta ? <img src={BetaIcon} className="beta-icon" alt='beta'></img> : <img src={BetaIconWhite} className="beta-icon" alt='beta'></img>
                             }
                             component={Link}
                             to="/beta" />
