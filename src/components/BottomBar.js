@@ -51,11 +51,15 @@ class BottomBar extends Component {
     render() {
         const { classes } = this.props;
         let dom;
+        let isBeta = false;
         const pathname = this.props.location.pathname;
         const isBottomBarVisible = pathname.slice(0, 6) !== "/class" && pathname.slice(0, 7) !== "/lesson" && pathname !== "/" && pathname !== "/change-password" && pathname !== "/reset-password" && pathname !== "/change-email";
         let navValue = pathname === '/' ? 'home' : pathname.slice(1)
         if (navValue === 'account') {
             navValue = 'myProfile'
+        }
+        if (navValue === 'beta') {
+            isBeta = true;
         }
 
         const beta = navValue === 'beta';
