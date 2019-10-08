@@ -245,15 +245,6 @@ class BetaPage extends Component {
                             </TabContainer>
 
                             <TabContainer dir={theme.direction}>
-                                <Grid
-                                    container
-                                    direction="row"
-                                    justify="center"
-                                    alignItems="center"
-                                    className={classes.feedbackContent}
-                                >
-                                    <Button size="large" variant="contained" color="primary" onClick={() => this.handleFeedback()}>Click here for feedback...</Button>
-                                </Grid>
                             </TabContainer>
                             <TabContainer dir={theme.direction}>
                                 <Box>
