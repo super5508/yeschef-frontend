@@ -151,11 +151,6 @@ class BetaPage extends Component {
         })
     }
 
-    componentWillReceiveProps() {
-        const { location } = this.props;
-        console.log("path", location);
-    }
-
     handleChange = (event, value) => {
         this.setState({ value });
         if (value === 1) {
@@ -173,7 +168,6 @@ class BetaPage extends Component {
             if (node.length > 0) {
                 node[0].style.top = '96px';
                 node[0].style.height = 'calc(100% - 145px)';
-                console.log(node[0].children.children);
             }
         }, 100);
     }
