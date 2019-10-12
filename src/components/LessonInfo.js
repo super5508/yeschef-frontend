@@ -78,12 +78,23 @@ class LessonInfo extends Component {
 		};
 	}
 
+	getDurationAsText = () => {
+		let duration = this.props.duration;
+		const hours = Math.floor(duration / 3600);
+		duration = duration % 3600;
+		const minutes = Math.floor(duration / 60);
+		const sec = duration % 60;
+		let durationAsText = hours ? `${hours}:` : '';
+		durationAsText += `${minutes}:${sec}`;
+		return durationAsText;
+	}
+
 	getCurProgress = (duration, progress) => {
-		const min = parseInt(duration.split(':')[0], 10);
-		const sec = parseInt(duration.split(':')[1], 10);
-		const total = min * 60 + sec;
-		const now = parseInt(progress.split(':')[0], 10) * 60 + parseInt(progress.split(':')[1], 10);
-		return 100 * now / total;
+		// const min = parseInt(duration.split(':')[0], 10);
+		// const sec = parseInt(duration.split(':')[1], 10);
+		// const total = min * 60 + sec;
+		// const now = parseInt(progress.split(':')[0], 10) * 60 + parseInt(progress.split(':')[1], 10);
+		return 100 * progress / duration;
 	}
 
 	render() {
@@ -99,10 +110,8 @@ class LessonInfo extends Component {
 					if (!this.props.commingSoon) {
 						this.props.history.push(
 							`/class/${this.props.match.params.id}/lesson/${this.props.lessonNum}`
-
 							// this.props.history.push("/class/"+this.props.match.params.id+"/lesson/"+this.props.lessonNum
 							// this.props.history.push("/lesson/" + this.props.match.params.id + "/" + this.props.lessonNum
-
 						);
 					}
 				}}
@@ -118,7 +127,7 @@ class LessonInfo extends Component {
 
 					{!this.props.commingSoon && (
 						<div className={classes.duration + ' Tiny-text'}>
-							{this.props.duration}
+							{this.getDurationAsText()}
 						</div>
 					)}
 					{

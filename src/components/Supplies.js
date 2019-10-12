@@ -76,6 +76,7 @@ const separator = {
 class SupplyInfo extends Component {
 
   decimalToFraction = amount => {
+    if (amount === "") return 0;
     // This is a whole number and doesn't need modification.
     if (parseFloat(amount) === parseInt(amount)) {
       return amount;
@@ -107,50 +108,6 @@ class SupplyInfo extends Component {
     return amount;
   };
 
-  getComment = (head, value) => {
-    let comment = "";
-    const { ingredients } = this.props;
-    if (
-      ingredients.mapValue.fields[head].mapValue.fields[value]
-        .mapValue.fields.comment
-    ) {
-      comment = ingredients.mapValue.fields[head].mapValue.fields[
-        value
-      ].mapValue.fields.comment.stringValue;
-      comment = "- " + comment;
-    }
-    return comment;
-  }
-
-  getUnit = (head, value) => {
-    let unit = "";
-    const { ingredients } = this.props;
-    if (
-      ingredients.mapValue.fields[head].mapValue.fields[value]
-        .mapValue.fields.unit
-    ) {
-      unit = ingredients.mapValue.fields[head].mapValue.fields[
-        value
-      ].mapValue.fields.unit.stringValue;
-    }
-    return unit;
-  }
-
-  getQuantity = (head, value) => {
-    let quantity = "";
-    const { ingredients } = this.props;
-    if (
-      ingredients.mapValue.fields[head].mapValue.fields[value]
-        .mapValue.fields.quantity
-    ) {
-      quantity = Object.values(
-        ingredients.mapValue.fields[head].mapValue.fields[value]
-          .mapValue.fields.quantity
-      )[0];
-    }
-    return quantity;
-  }
-
   firstLetterToCapital = str => {
     return str.replace(/\w\S*/g, function (txt) {
       return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
@@ -158,7 +115,8 @@ class SupplyInfo extends Component {
   };
 
   render() {
-    const { head, id, ingredients, gears } = this.props;
+    const { id, supplies } = this.props;
+    const head = supplies.sectionName;
     return (
       <ExpansionPanel key={`${head}-${id}`} square={false}>
         <ExpansionPanelSummary
@@ -173,16 +131,13 @@ class SupplyInfo extends Component {
           <div>
             <h4 style={titleStyle}>INGREDIENTS</h4>
             {
-              Object.keys(ingredients.mapValue.fields[head].mapValue.fields).map(
-                (value, index) => {
-                  const quantity = this.getQuantity(head, value);
-                  const unit = this.getUnit(head, value);
-                  const comment = this.getComment(head, value);
+              supplies.ingredients.map(
+                (ingredient, index) => {
                   return (
-                    <ul key={value}>
-                      <li key={`li${value}-${index}`}>
+                    <ul key={ingredient.id}>
+                      <li key={`li${ingredient.id}`}>
                         <span style={detailStyle}>
-                          {this.decimalToFraction(quantity)} {unit} {value} {comment}
+                          {this.decimalToFraction(ingredient.quantity)} {ingredient.unit} {ingredient.name} {ingredient.details}
                         </span>
                       </li>
                     </ul>
@@ -196,12 +151,12 @@ class SupplyInfo extends Component {
             <h4 style={titleStyle}>GEAR</h4>
             <ul>
               {
-                Object.keys(gears.mapValue.fields).map(
-                  (data, index) => {
+                supplies.gear.map(
+                  (gear, index) => {
                     return (
                       <li key={`ligear-${index}`} >
                         <span style={detailStyle}>
-                          {this.firstLetterToCapital(data)}
+                          {gear.quantity > 1 && (gear.quantity)} {this.firstLetterToCapital(gear.name)}
                         </span>
                       </li>
                     )
