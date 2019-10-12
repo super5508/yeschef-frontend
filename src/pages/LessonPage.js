@@ -275,7 +275,7 @@ class LessonPage extends Component {
 			this.setState({
 				...this.state,
 				lessonData: lessonInfoResponse.data,
-				videoSrc: lessonInfoResponse.data.video || ""
+				videoSrc: lessonInfoResponse.data.videoUrl || ""
 			});
 			this.calcTimes();
 		});
