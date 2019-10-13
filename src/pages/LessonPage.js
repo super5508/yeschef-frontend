@@ -4,8 +4,6 @@ import { withStyles } from "@material-ui/core/styles";
 import Axios from "../common/AxiosMiddleware";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
-import BackIcon from "@material-ui/icons/ArrowBackIosRounded";
-import IconButton from "@material-ui/core/IconButton";
 import VideoPlayer from "../components/VideoPlayer";
 import { Paper } from "@material-ui/core";
 import SwipeableViews from "react-swipeable-views";
@@ -250,21 +248,19 @@ class LessonPage extends Component {
 	constructor(props, context) {
 		super(props);
 		this.state = {
-			chefsData: {
-				title: {
-					stringValue: ""
-				},
+			lessonData: {
+				title: "",
 				times: {},
-				skils: [],
+				skills: [],
 				ingredients: {},
-				description: {}
+				description: ""
 			},
 			videoSrc: undefined,
 			isPlaying: false,
 			skillsText: "",
 			value: 0,
 			ingredientsArray: [],
-			handsonText: "",
+			handsOnText: "",
 			TotalText: "",
 			feedbackText: "",
 			currentVideoTime: 0,
@@ -285,48 +281,36 @@ class LessonPage extends Component {
 
 		Axios.post(`/history`, historyData).then(res => {
 			Axios.get(`/history/${uid}`).then(history => {
+				debugger;
 				localStorage.setItem("classId", history.data.classId);
 				localStorage.setItem("lessonId", history.data.lessonId);
 				localStorage.setItem("lessonName", history.data.name);
 			})
 		})
 
-		Axios.get(`/class/${classId}/lesson/${lessonNum - 1}`).then(chefInfoResponse => {
+		Axios.get(`/class/${this.props.match.params.classId}/lesson/${this.props.match.params.lessonNum}`).then(lessonInfoResponse => {
 			this.setState({
 				...this.state,
-				chefsData: chefInfoResponse.data._fieldsProto,
-				videoSrc: chefInfoResponse.data._fieldsProto.video.stringValue
+				lessonData: lessonInfoResponse.data,
+				videoSrc: lessonInfoResponse.data.videoUrl || ""
 			});
-			this.getTimes();
-			this.getSkills();
-			if (this.state.chefsData.ingredients) {
-				this.getIngredients();
-			}
-
-			if (this.state.chefsData.dietary) {
-				this.getDietary();
-			}
-
-			if (this.state.chefsData.cuisine) {
-				this.getCuisine();
-			}
-
+			this.calcTimes();
 		});
 	}
 
-	getTimes = () => {
-		let data = this.state.chefsData.times.mapValue.fields;
-		let handsonText = Object.values(data.handsOn)[0];
-		let TotalText = Object.values(data.total)[0];
-		handsonText = Number(handsonText);
+	calcTimes = () => {
+		let times = this.state.lessonData.times;
+		let handsOnText = Object.values(times.handsOn || 0);
+		let TotalText = Object.values(times.total || 0);
+		handsOnText = Number(handsOnText);
 		TotalText = Number(TotalText);
 
-		if (handsonText >= 60) {
-			let hours = Math.floor(handsonText / 60);
-			let minutes = handsonText % 60;
-			handsonText = hours + " hrs " + minutes + " min";
+		if (handsOnText >= 60) {
+			let hours = Math.floor(handsOnText / 60);
+			let minutes = handsOnText % 60;
+			handsOnText = hours + " hrs " + minutes + " min";
 		} else {
-			handsonText = handsonText + " min";
+			handsOnText = handsOnText + " min";
 		}
 		if (TotalText >= 60) {
 			let hours = Math.floor(TotalText / 60);
@@ -337,7 +321,7 @@ class LessonPage extends Component {
 		}
 
 		this.setState({
-			handsonText: handsonText,
+			handsOnText: handsOnText,
 			TotalText: TotalText
 		});
 	};
@@ -347,32 +331,6 @@ class LessonPage extends Component {
 			return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
 		});
 	};
-
-	getIngredients = () => {
-		//sorting ingredients
-		let ingredients = this.state.chefsData.ingredients.mapValue.fields;
-		let ingredientsArray = [];
-		Object.keys(ingredients).map((value, index) => ingredientsArray.push(value));
-		this.setState({ ingredientsArray: ingredientsArray });
-	};
-
-	getSkills = () => {
-		let data = this.state.chefsData.skills.arrayValue.values;
-
-		const skillsString = data.map((lessonData, id) => this.firstLetterToCapital(lessonData.stringValue)).join(' | ');
-		this.setState({
-			skillsText: skillsString
-		});
-	};
-
-	getCuisine = () => {
-		let data = this.state.chefsData.cuisine.arrayValue.values;
-		const cuisineString = data.map((lessonData, id) => this.firstLetterToCapital(lessonData.stringValue)).join(' | ');
-		this.setState({
-			cuisineText: cuisineString
-		});
-	}
-
 
 	handleFeedbackTextChange = (event) => {
 		const feedbackText = event.target.value;
@@ -409,15 +367,6 @@ class LessonPage extends Component {
 
 			this.setState({ feedbackText: '' });
 		}
-	};
-
-	getDietary = () => {
-		let data = this.state.chefsData.dietary.arrayValue.values;
-
-		const dietaryString = data.map((lessonData, id) => this.firstLetterToCapital(lessonData.stringValue)).join(' | ');
-		this.setState({
-			dietaryText: dietaryString
-		});
 	};
 
 	handleChange = (event, value) => {
@@ -463,7 +412,7 @@ class LessonPage extends Component {
 
 	render = () => {
 		const { classes, theme } = this.props;
-		const { chefsData } = this.state
+		const { lessonData } = this.state
 		const videoJsOptions = {
 			autoplay: false,
 			controls: false,
@@ -490,7 +439,7 @@ class LessonPage extends Component {
 							</div>
 							<div className={this.addHideOnPlayClass(classes.video_overlay_text)}>
 								<h1 className="Sub-h1">Lesson {this.props.match.params.lessonNum}</h1>
-								<h2>{this.state.chefsData.title.stringValue.toUpperCase()}</h2>
+								<h2>{this.state.lessonData.title.toUpperCase()}</h2>
 							</div>
 						</div>
 					</div>
@@ -531,7 +480,7 @@ class LessonPage extends Component {
 								label="FEEDBACK"
 							/>
 							{/* dynamic tabs */}
-							{(this.state.chefsData.ingredients || this.state.chefsData.gear) && (
+							{(this.state.lessonData.supplies) && (
 								<Tab
 									classes={{
 										root: classes.tabRoot,
@@ -540,7 +489,7 @@ class LessonPage extends Component {
 									label="SUPPLIES"
 								/>
 							)} */}
-							{this.state.chefsData.shorthand && (
+							{this.state.lessonData.shorthand && (
 								<Tab
 									classes={{
 										root: classes.tabRoot,
@@ -566,29 +515,31 @@ class LessonPage extends Component {
 							<TabContainer dir={theme.direction}>
 								<Box>
 									<div className={classes.contentCon}>
-										<p className='body-text'>{this.state.chefsData.description.stringValue}</p>
+										<p className='body-text'>{this.state.lessonData.description}</p>
 									</div>
 									<div className={classes.iconsCon}>
 										<div>
 											<h2 style={{ paddingRight: '1.2rem' }}>time</h2>
 											<p className='body-text'>
-												Hands-on: {this.state.handsonText} | Total: {this.state.TotalText}
+												Hands-on: {this.state.handsOnText} | Total: {this.state.TotalText}
 											</p>
 										</div>
-										<div>
-											<h2 style={{ paddingRight: '1.2rem' }}>skills</h2>
-											<p className='body-text'>{this.state.skillsText}</p>
-										</div>
-										{chefsData.cuisine &&
+										{(lessonData.skills && lessonData.skills.length > 0) && (
+											<div>
+												<h2 style={{ paddingRight: '1.2rem' }}>skills</h2>
+												<p className='body-text'>{this.state.lessonData.skills.map((item, id) => this.firstLetterToCapital(item)).join(' | ')}</p>
+											</div>
+										)}
+										{lessonData.cuisine && lessonData.cuisine.length > 0 &&
 											<div>
 												<h2 style={{ paddingRight: '1.2rem' }}>cuisine</h2>
-												<p className='body-text'>{this.state.cuisineText}</p>
+												<p className='body-text'>{this.state.lessonData.cuisine.map((item, id) => this.firstLetterToCapital(item)).join(' | ')}</p>
 											</div>}
 
-										{chefsData.dietary &&
+										{lessonData.dietary && lessonData.dietary.length > 0 &&
 											<div>
 												<h2 style={{ paddingRight: '1.2rem' }}>dietary</h2>
-												<p className='body-text'>{this.state.dietaryText}</p>
+												<p className='body-text'>{this.state.lessonData.dietary.map((item, id) => this.firstLetterToCapital(item)).join(' | ')}</p>
 											</div>}
 									</div>
 								</Box>
@@ -612,33 +563,32 @@ class LessonPage extends Component {
 									</Button>
 								</Box>
 							</TabContainer>
-							{(this.state.chefsData.ingredients || this.state.chefsData.gear) && (
+							{(this.state.lessonData.supplies) && (
 								<TabContainer dir={theme.direction}>
 									<Box className={classes.subTabsCon}>
-										{this.state.ingredientsArray.map((head, id) => {
+										{lessonData.supplies.map((suppliesSegment, index) => {
 											return (
 												<SupplyInfo
-													key={id}
-													head={head}
-													id={id}
-													ingredients={this.state.chefsData.ingredients}
-													gears={this.state.chefsData.gear}
+													key={index}
+													id={`supplies-${index}`}
+													supplies={suppliesSegment}
 												/>
 											);
 										})}
 									</Box>
 								</TabContainer>
 							)}
-							{this.state.chefsData.shorthand && (
+							{this.state.lessonData.shorthand && (
 								<TabContainer dir={theme.direction}>
 									<Box className={classes.subTabsCon} style={{ margin: 24, marginTop: 32 }}>
-										{Object.keys(this.state.chefsData.shorthand.mapValue.fields).map(
+										{Object.keys(this.state.lessonData.shorthand).map(
 											(head, index) => {
+												debugger;
 												return (
 													<ShortHandDesc
 														key={index}
 														head={head}
-														shorthand={this.state.chefsData.shorthand}
+														shorthand={this.state.lessonData.shorthand}
 														isFirst={index === 0 ? true : false}
 													/>
 												)

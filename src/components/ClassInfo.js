@@ -7,6 +7,7 @@ import TrailerVideo from './TrailerVideo';
 import IconButton from "@material-ui/core/IconButton";
 import VolumeOff from "@material-ui/icons/VolumeMute";
 import VolumeOn from "@material-ui/icons/VolumeDown";
+import constants from './../common/constants';
 
 const styles = theme => ({
     container: {
@@ -116,7 +117,7 @@ class ClassInfo extends Component {
             fixScroll: false,
         }
         this.scrollElementRefs = {
-            classTitle:  React.createRef(),
+            classTitle: React.createRef(),
         }
     }
 
@@ -153,7 +154,7 @@ class ClassInfo extends Component {
 
         const textContent = (
             <Box className={(this.props.showTrailer ? classes.info_container2 : classes.info_container)
-                            + ' ' + (this.props.fixScroll ? classes.fixedUnderTitle : '')}
+                + ' ' + (this.props.fixScroll ? classes.fixedUnderTitle : '')}
                 ref={this.scrollElementRefs.classTitle}>
                 <Box className={classes.ChefHeading}>Chef {this.props.chefName}</Box>
                 <Box className='body-text' style={{ textTransform: 'uppercase' }}>{this.props.classTitle}</Box>
@@ -186,7 +187,7 @@ class ClassInfo extends Component {
                     </div>
                 </Paper>
                 :
-                <Paper className={(this.props.fixed && classes.fix_position_container) + ' ' + classes.container} style={{ backgroundImage: 'url(' + this.props.chefImg + ')' }}>
+                <Paper className={(this.props.fixed && classes.fix_position_container) + ' ' + classes.container} style={{ backgroundImage: `url(${constants.IMG_BASE_URL}/images/${this.props.id}/classInfoCover.jpg)` }}>
                     <Box className={classes.mask_container}>
                         {textContent}
                     </Box>

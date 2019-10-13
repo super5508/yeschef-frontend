@@ -57,7 +57,7 @@ const behindSceneContent = [
 ]
 
 const curProgresses = [
-	"12:30"
+	12 * 60 + 30
 ];
 
 function TabContainer({ children, dir }) {
@@ -241,6 +241,16 @@ class ChefHomePage extends Component {
 		this.setFixedHeaderAt();
 		window.addEventListener("scroll", this.handleScroll);
 		window.addEventListener("resize", this.setFixedHeaderAt);
+
+		//handle user history watching 
+		const userData = {
+			id: localStorage.getItem("uid"),
+			lessonId: this.props.match.params.id,
+			progress: 0,
+		};
+		Axios.post(`/history`, userData).then(historyRes => {
+			this.setState({ fetched: true });
+		})
 	}
 
 	componentWillUnmount() {
@@ -316,15 +326,6 @@ class ChefHomePage extends Component {
 	};
 
 	render() {
-		const userData = {
-			id: localStorage.getItem("uid"),
-			lessonId: this.props.match.params.id,
-			progress: 0,
-		};
-
-		Axios.post(`/history`, userData).then(historyRes => {
-			this.setState({ fetched: true });
-		})
 		const { classes, theme } = this.props;
 
 		return (
@@ -436,26 +437,27 @@ class ChefHomePage extends Component {
 									<h2>lessons</h2>
 								</Box>
 								{this.state.lessons.map(
-									(lessonData, id) => {
+									(lessonData, index) => {
 										return (
 											<Element
-												key={`lessonNum${id}`}
-												name={`lessonNum${id + 1}`}
+												key={`lessonNum${index}`}
+												name={`lessonNum${index + 1}`}
 												className="element"
 											>
 												<LessonInfo
-													key={`lessonNum${id}`}
-													lessonNum={id + 1}
+													key={`lessonNum${index}`}
+													lessonNum={index + 1}
 													duration={
 														lessonData.duration
 													}
+													lessonId={lessonData.id}
 													title={lessonData.title}
 													thumbnail={
 														lessonData.thimbnail
 													}
 													history={this.props.history}
 													match={this.props.match}
-													curProgress={curProgresses[id]}
+													curProgress={curProgresses[index]}
 												/>
 											</Element>
 										);
