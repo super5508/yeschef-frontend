@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import LinearProgress from '@material-ui/core/LinearProgress';
+import constants from './../common/constants';
 
 const styles = theme => ({
 	lessonInfoCon: {
@@ -118,7 +119,7 @@ class LessonInfo extends Component {
 			>
 				<div>
 					<img
-						src={this.props.thumbnail}
+						src={`${constants.IMG_BASE_URL}/images/${this.props.match.params.id}/${this.props.lessonId}/lessonInfoThumbnail.jpg`}
 						style={{
 							opacity: this.state.imgOpacity,
 							filter: this.state.filter

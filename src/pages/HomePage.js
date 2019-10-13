@@ -119,9 +119,11 @@ class LPHomePage extends Component {
                     </Box>
                 </Box>
                 <Box>
-                    <Box className={`${classes.margins}`} style={{ fontWeight: 300, paddingBottom: "1.6rem" }} component="h1">
-                        COMING SOON
+                    {this.state.comingSoonArray.length > 0 && (
+                        <Box className={`${classes.margins}`} style={{ fontWeight: 300, paddingBottom: "1.6rem" }} component="h1">
+                            COMING SOON
                     </Box>
+                    )}
                     <Box className={classes.class_infos_wrapper}>
                         {this.state.comingSoonArray.map(comingSoonData => <Box pb="2.4rem" key={comingSoonData.id}><ClassInfo key={comingSoonData.id} className={classes.class_info} {...comingSoonData}></ClassInfo></Box>)}
                     </Box>

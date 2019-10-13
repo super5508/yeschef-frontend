@@ -426,26 +426,27 @@ class ChefHomePage extends Component {
 									<h2>lessons</h2>
 								</Box>
 								{this.state.lessons.map(
-									(lessonData, id) => {
+									(lessonData, index) => {
 										return (
 											<Element
-												key={`lessonNum${id}`}
-												name={`lessonNum${id + 1}`}
+												key={`lessonNum${index}`}
+												name={`lessonNum${index + 1}`}
 												className="element"
 											>
 												<LessonInfo
-													key={`lessonNum${id}`}
-													lessonNum={id + 1}
+													key={`lessonNum${index}`}
+													lessonNum={index + 1}
 													duration={
 														lessonData.duration
 													}
+													lessonId={lessonData.id}
 													title={lessonData.title}
 													thumbnail={
 														lessonData.thimbnail
 													}
 													history={this.props.history}
 													match={this.props.match}
-													curProgress={curProgresses[id]}
+													curProgress={curProgresses[index]}
 												/>
 											</Element>
 										);

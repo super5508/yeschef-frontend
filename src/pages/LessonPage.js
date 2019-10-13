@@ -4,8 +4,6 @@ import { withStyles } from "@material-ui/core/styles";
 import Axios from "../common/AxiosMiddleware";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
-import BackIcon from "@material-ui/icons/ArrowBackIosRounded";
-import IconButton from "@material-ui/core/IconButton";
 import VideoPlayer from "../components/VideoPlayer";
 import { Paper } from "@material-ui/core";
 import SwipeableViews from "react-swipeable-views";
@@ -561,6 +559,7 @@ class LessonPage extends Component {
 									<Box className={classes.subTabsCon} style={{ margin: 24, marginTop: 32 }}>
 										{Object.keys(this.state.lessonData.shorthand).map(
 											(head, index) => {
+												debugger;
 												return (
 													<ShortHandDesc
 														key={index}
