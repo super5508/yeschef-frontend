@@ -593,11 +593,13 @@ class LessonPage extends Component {
 								</TabContainer>
 							)}
 
-							<TabContainer dir={theme.direction}>
-								<Box>
-									<StepCard items={receipeItems} />
-								</Box>
-							</TabContainer>
+							{this.state.lessonData.steps && (
+								<TabContainer dir={theme.direction}>
+									<Box>
+										<StepCard items={this.state.lessonData.steps} />
+									</Box>
+								</TabContainer>
+							)}
 						</SwipeableViews>
 					</div>
 				</div>
