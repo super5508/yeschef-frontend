@@ -580,14 +580,12 @@ class LessonPage extends Component {
 							{this.state.lessonData.shorthand && (
 								<TabContainer dir={theme.direction}>
 									<Box className={classes.subTabsCon} style={{ margin: 24, marginTop: 32 }}>
-										{Object.keys(this.state.lessonData.shorthand).map(
-											(head, index) => {
+										{this.state.lessonData.shorthand.map(
+											(section, index) => {
 												return (
 													<ShortHandDesc
 														key={index}
-														head={head}
-														shorthand={this.state.lessonData.shorthand}
-														isFirst={index === 0 ? true : false}
+														section={section}
 													/>
 												)
 											})}

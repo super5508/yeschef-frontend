@@ -103,10 +103,11 @@ class ShortHandDesc extends Component {
   }
 
   render() {
-    const { head, id, shorthand, isFirst } = this.props;
+    const { section, key } = this.props;
+    const id = section.sectionName.replace(/\s/g, '_');
     return (
       <ExpansionPanel
-        key={`${head}-${id}`}
+        key={`${section.key}-${id}`}
         expanded={this.state.expanded}
         onChange={() => this.setState({ expanded: !this.state.expanded })}
       >
@@ -115,24 +116,24 @@ class ShortHandDesc extends Component {
           aria-controls={`panel${id}-content`}
           id={`panel${id}-header`}
         >
-          {head.toUpperCase()}
+          {section.sectionName.toUpperCase()}
         </ExpansionPanelSummary>
         <ExpansionPanelDetails
         >
           <div>
             <div style={titleStyle}>
-              {shorthand.mapValue.fields[head].mapValue.fields.title.stringValue}
+              {section.title}
             </div>
           </div>
-          {shorthand.mapValue.fields[head].mapValue.fields.title.stringValue.length !== 0 && (<div style={separator} />)}
+          {section.items.length !== 0 && (<div style={separator} />)}
           <div>
             <ul className='numbering'>
               {
-                shorthand.mapValue.fields[head].mapValue.fields.instructions.arrayValue.values.map((each, index) => {
+                section.items.map((step, index) => {
                   return (
                     <li key={`lishort-${index}`} style={shortStyle}>
                       <span style={detailStyle}>
-                        {each.stringValue}
+                        {step.step}
                       </span>
                     </li>
                   )
