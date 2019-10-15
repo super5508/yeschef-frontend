@@ -281,7 +281,6 @@ class LessonPage extends Component {
 
 		Axios.post(`/history`, historyData).then(res => {
 			Axios.get(`/history/${uid}`).then(history => {
-				debugger;
 				localStorage.setItem("classId", history.data.classId);
 				localStorage.setItem("lessonId", history.data.lessonId);
 				localStorage.setItem("lessonName", history.data.name);
@@ -583,7 +582,6 @@ class LessonPage extends Component {
 									<Box className={classes.subTabsCon} style={{ margin: 24, marginTop: 32 }}>
 										{Object.keys(this.state.lessonData.shorthand).map(
 											(head, index) => {
-												debugger;
 												return (
 													<ShortHandDesc
 														key={index}

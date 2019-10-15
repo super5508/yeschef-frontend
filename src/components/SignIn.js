@@ -152,7 +152,6 @@ class SignIn extends Component {
         //Is success signup, redirect to home
         localStorage.setItem("uid", res.uid);
         Axios.get(`/history/${res.uid}`).then(history => {
-          debugger;
           localStorage.setItem("classId", history.data.classId);
           localStorage.setItem("lessonId", history.data.lessonId);
           localStorage.setItem("lessonName", history.data.name);
