@@ -9,8 +9,8 @@ class BetaRedirectTOLogin extends Component {
     if (window.location.pathname !== "/" && window.location.pathname !== "/reset-password" && !window.location.pathname.startsWith("/lp/")) {
       if (this.props.authStat.isLogin === false) {
         this.props.history.push("/");
-      } else {
-        if (this.props.authStat.userMetadata && !this.props.authStat.userMetadata.isBeta) {
+      } else if (this.props.authStat.isLogin === true) {
+        if (!this.props.authStat.userMetadata || !this.props.authStat.userMetadata.isBeta) {
           this.props.history.push("/");
         }
       }
