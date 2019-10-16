@@ -26,7 +26,7 @@ import AccountPage from './pages/AccountPage'
 import ChangeEmail from './pages/ChangeEmail'
 import BillingDetails from './pages/BillingDetails'
 
-const APP_ID = 'h6twy30k'
+const APP_ID = (process.env.NODE_ENV === 'production') ? 'j4tr2hf6' : 'h6twy30k';
 
 const styles = theme => ({
 })
@@ -162,10 +162,15 @@ class App extends Component {
 
   render() {
     const { classes } = this.props;
+    window.intercomSettings = {
+      app_id: APP_ID,
+      hide_default_launcher: false,
+      vertical_padding: 100
+    };
+    (function () { var w = window; var ic = w.Intercom; if (typeof ic === "function") { ic('reattach_activator'); ic('update', w.intercomSettings); } else { var d = document; var i = function () { i.c(arguments); }; i.q = []; i.c = function (args) { i.q.push(args); }; w.Intercom = i; var l = function () { var s = d.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = 'https://widget.intercom.io/widget/' + APP_ID; var x = d.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x); }; if (document.readyState === 'complete') { l(); } else if (w.attachEvent) { w.attachEvent('onload', l); } else { w.addEventListener('load', l, false); } } })();
     if (this.props.authStat.userProfile) {
 
       window.Intercom('update', {
-        app_id: APP_ID,
         user_id: this.props.authStat.userProfile.uid,
         name: this.props.authStat.userProfile.name,
         email: this.props.authStat.userProfile.email,
