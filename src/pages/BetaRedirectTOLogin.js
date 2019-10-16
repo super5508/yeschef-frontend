@@ -10,7 +10,7 @@ class BetaRedirectTOLogin extends Component {
       if (this.props.authStat.isLogin === false) {
         this.props.history.push("/");
       } else if (this.props.authStat.isLogin === true) {
-        if (!this.props.authStat.userMetadata || !this.props.authStat.userMetadata.isBeta) {
+        if ((this.props.authStat.userProfile.email.indexOf('yeschef.me') < 0) && (!this.props.authStat.userMetadata || !this.props.authStat.userMetadata.isBeta)) {
           this.props.history.push("/");
         }
       }
