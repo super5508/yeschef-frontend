@@ -263,7 +263,7 @@ div[data-vjs-player] {
   margin-top: 1px;
 }
 
-div[class^='BehindScene-itemContainer-'] .vjs-big-play-button {
+div[class^="BehindScene-itemContainer-"] .vjs-big-play-button {
   font-size: 6em !important;
   line-height: 1.5em !important;
   top: calc(50% - 3rem) !important;
@@ -271,4 +271,9 @@ div[class^='BehindScene-itemContainer-'] .vjs-big-play-button {
   border: none !important;
   background: none !important;
   width: unset !important;
+}
+
+.intercom-launcher-frame {
+  bottom: 58px !important;
+  right: 10px !important;
 }
